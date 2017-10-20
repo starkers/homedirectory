@@ -1,0 +1,213 @@
+zmodload zsh/zprof
+
+export TERM="xterm-256color"
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="default"
+
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+
+#The theme_change() function will link up a random theme..
+# it is however a manual thing.. if a user as NOT linked a default one yet do so myself
+#
+if [ ! -s "$HOME/.oh-my-zsh/themes/default.zsh-theme" ]; then
+  echo "You've not picked a theme yet, run 'theme_change' to pick a random one anytime"
+  ln -sfv "$HOME/.oh-my-zsh/themes/sonicradish.zsh-theme" "$HOME/.oh-my-zsh/themes/default.zsh-theme"
+fi
+
+
+theme_change(){
+  DEFAULT_THEME="$HOME/.oh-my-zsh/themes/default.zsh-theme"
+  NEW="$(find    $HOME/.oh-my-zsh/themes -type f -name "*-theme" | grep -v default | sort --random-sort | head -1)"
+  ln -sf $NEW "$DEFAULT_THEME"
+  echo "New theme: $NEW" | sed "s+$HOME/.oh-my-zsh/themes++g; s+.zsh-theme++g; s+/++g"
+  . "$DEFAULT_THEME"
+}
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+# plugins=(aws colorize docker docker-compose gem git git-extras golang gpg-agent httpie npm rbenv pip pyenv rsync rvm systemd vagrant virtualenv )
+plugins=(\
+    aws \
+    cheat \
+    # colorize \
+    docker\
+    docker-compose \
+    # gem \
+    git \
+    git-flow \
+    # git-extras \
+    # github \
+    golang \
+    gpg-agent \
+    httpie \
+    history \
+    # npm \
+    # rbenv \
+    pip \
+    # pyenv \
+    # rsync \
+    # rvm \
+    systemd \
+    vagrant \
+    virtualenv \
+    z \
+  )
+
+# PATH mods
+# my own ".bin"
+export PATH=$HOME/.bin:$PATH
+
+# /usr/local/bin
+export PATH=/usr/local/bin:$PATH
+
+# pip --user
+export PATH=$HOME/.local/bin:$PATH
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+unsetopt share_history
+
+if [ -s ~/.profile ] ; then
+  . ~/.profile
+fi
+if [ -s ~/.aliases ] ; then
+  . ~/.aliases
+fi
+if [ -s ~/.shell_functions ] ; then
+  . ~/.shell_functions
+fi
+
+export ANSIBLE_NOCOWS=1
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+#export "PATH=$PATH:$HOME/go/bin:/usr/local/go/bin"
+#
+zstyle ":completion:*:commands" rehash 1
+bindkey '^W' vi-backward-kill-word
+
+
+LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:';
+export LS_COLORS
+
+my_nvm_load(){
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+}
+
+# my_nvm_load
+
+
+#if I see the direnv binary in my path
+my_load_direnv(){
+  hash direnv 2>/dev/null && eval "$(direnv hook zsh)"
+}
+my_load_direnv
+
+
+if [ -s ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+my_k_autocomplete(){
+  source ~/.oh-my-zsh/zsh.k
+}
+my_k_autocomplete
+
+
+
+
+
+#load "hub" and other completions (see: https://github.com/github/hub/tree/master/etc)
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit compdef
+compinit
+
+
+foo="$(which kubectl 2>/dev/null)"
+if [ -f "$foo" ] ; then
+  source <(kubectl completion zsh)
+fi
+unset foo

@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+# Use "arandr" to arrange your screens and File > Save
+# the profile will go into "$HOME/.screenlayout
+
+# Save them with names that make sense to you
+
+
+# This script will:
+# - provide a list of settings in the screenlayout dir for you to choose
+# - do some "pre-work" (EG disable compton, see "prework" function)
+# - execute the script you select
+# - do some "post-work" load compton back, set keyboard layout etc
+
+
+# if the user passed "$1", just execute that without a choice dialog
+
+
+
+pre_work(){
+  echo ":: doing pre_work"
+  set +e
+  pkill compton
+  sleep 0.2
+  set -e
+}
+
+post_work(){
+  echo ":: doing post_work"
+  sleep 0.1
+  compton -b
+  feh --bg-fill $HOME/.config/i3/wallpapers/octocat.jpg
+  /usr/bin/setxkbmap gb
+  /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
+}
+
+
+SCRIPT_DIR="${HOME}/.screenlayout"
+if [ ! -d "${SCRIPT_DIR}" ]; then
+  echo "Sorry. no 'arandr' profiles saved in: ${SCRIPT_DIR}"
+  exit 1
+fi
+
+INPUT_1="$1"
+DIRECT="${SCRIPT_DIR}/${INPUT_1}"
+if [ -f "${DIRECT}" ] ; then
+  echo ":: found:${DIRECT}"
+  pre_work
+  echo ":: running ${DIRECT}"
+  bash "${DIRECT}"
+  post_work
+  exit $?
+fi
+
+
+set -e
+oldDIR="$(pwd)"
+cd "$SCRIPT_DIR"
+
+list="$( find * -maxdepth 1 -type f )"
+
+if [ "X$list" == "X" ]; then
+  echo "no options found in $SCRIPT_DIR"
+  exit 1
+fi
+
+
+
+oldIFS=$IFS
+IFS=$'\n'
+
+choices=( $list )
+IFS=$oldIFS
+PS3="Pick your settings: "
+
+set -e
+select answer in "${choices[@]}"; do
+  for item in "${choices[@]}"; do
+    if [[ $item == $answer ]]; then
+      # working_dir="$(cut -d " " -f 1 <<<"$item")"
+      # echo "cd $working_dir"
+      # cd "${working_dir}"
+      pre_work
+      echo ":: running ${item}"
+      bash "${SCRIPT_DIR}/${item}"
+      post_work
+      break 2
+    fi
+  done
+done
+cd "$oldDIR"

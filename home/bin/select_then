@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# when calling this it takes two variables
+# - first a path, this will then be indexed for files and present them as numbered options
+# - secondly a command.. eg "mplayer"
+
+# press the number of the file you want the EG mplayer will run against the file
+
+DEST_DIR="$1"
+ACTION="$2"
+
+
+if [ "X$ACTION" == X ]; then
+  echo "please provide an action to exectute on the file.. EG vim/mplayer or whatever"
+fi
+
+if [ ! -d "${DEST_DIR}" ]; then
+  echo "Sorry. no path called ${DEST_DIR}"
+  exit 1
+fi
+
+oldDIR="$(pwd)"
+cd "$DEST_DIR"
+
+list="$( find . -type f -maxdepth 3 | sort)"
+
+if [ "X$list" == X ]; then
+  echo "no options found in $DEST_DIR"
+  exit 1
+fi
+
+oldIFS=$IFS
+IFS=$'\n'
+
+choices=( $list )
+IFS=$oldIFS
+PS3="Pick your settings: "
+
+set -e
+while true; do
+  select answer in "${choices[@]}"; do
+    for item in "${choices[@]}"; do
+      if [[ $item == $answer ]]; then
+        # working_dir="$(cut -d " " -f 1 <<<"$item")"
+        # echo "cd $working_dir"
+        # cd "${working_dir}"
+        # pre_work
+        echo ":: running $ACTION ${item}"
+        $ACTION "${item}"
+        # bash "${DEST_DIR}/${item}"
+        # post_work
+        break 2
+      fi
+    done
+  done
+done
+cd "$oldDIR"
+

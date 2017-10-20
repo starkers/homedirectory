@@ -1,0 +1,49 @@
+term screen-256color
+startup_message off #disable default splash screen
+#shell -${SHELL}
+#shelltitle "$ |bash"n
+
+
+autodetach on               # Autodetach session on hangup instead of terminating screen completely
+
+
+defscrollback 30000         # Use a 30000-line scrollback buffer
+# default  colour on black
+#caption always "%{= kc}%t (%H load: %l)%-21=%{= .m}%D %d.%m.%Y %0c"
+#
+#caption always "%{= kb}%t (%H load: %l)%-21=%{= .m}%D %d.%m.%Y %0c"
+
+# yellow on black
+#caption always "%{= ky}%t (%H load: %l)%-21=%{= .m}%D %d.%m.%Y %0c"
+
+# black on yellow
+#caption always "%{= ck}%t (%H load: %l)%-21=%{= .m}%D %d.%m.%Y %0c"
+
+#caption always "%-Lw%{= kb}%50>%n%f* %t%{-}%+Lw%<"
+#caption always "%{= kw}%?%-Lw%?%{+b kw}%n*%t%f %?(%u)%?%{= kw}%?%+Lw%?"
+#caption always "%{= kg}%?%-Lw%?%{+b kg}%n*%t%f %?(%u)%?%{= kg}%?%+Lw%?"
+
+
+#caption always "%{= kg}%?%-Lw%?%{+b kg}%n*%t%f %?(%u)%?%{= kg}%?%+Lw%?   %-71=%{= kb}%H load: %l  %-23=%{= .m}%{= ky}  %D %d.%m.%Y %0c"
+caption always "%{= kg}%?%-Lw%?%{+b kg}%n*%t%f %?(%u)%?%{= kg}%?%+Lw%?    %-23=%{= .m}%{= ky}  %D %d.%m.%Y %0c"
+
+escape ^Xx                  # Instead of Control-a, make the escape/<command> character be Control-x
+bind ' ' windowlist -b      #<screen cmd> [space] will bring up a menu of windows inside screen
+
+
+
+#resize binds
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+
+
+# if you dont like the default ^a change it here... it looks uppercase but the trigger will be plain:
+#escape ^XX
+
+
+# F11 turns hardstatus off
+bindkey -k F1 hardstatus alwaysignore
+# # F12 turns hardstatus on
+bindkey -k F2 hardstatus alwayslastline

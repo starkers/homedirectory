@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+printf " Private  +   Shared  =  RAM used       Program\n"
+sudo ~/.bin/psmem_exec | tail -30
+

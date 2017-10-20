@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+file="$1"
+
+if [ -f "$1" ]; then
+  cat "$file" | /usr/bin/xclip -selection clipboard
+  echo "clipboard full of file: $file"
+else
+  echo "err, $file is not a file"
+fi

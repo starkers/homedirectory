@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+
+# generate a random 32 char pass, remove newline, insert into buffer
+pass="$(/usr/bin/pwgen 32 1)"
+
+trimmed="$(tr --delete '\n' <<<"${pass}")"
+
+printf "${trimmed}" | /usr/bin/xclip -selection clipboard
+

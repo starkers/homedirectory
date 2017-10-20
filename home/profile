@@ -1,0 +1,122 @@
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "${BASH_VERSION}" ]; then
+  # include .bashrc if it exists
+  if [ -f "${HOME}/.bashrc" ]; then
+    . "${HOME}/.bashrc"
+  fi
+fi
+
+export EDITOR="$(which nvim)"
+alias vim="$(which nvim)"
+MY_OS="$(uname -s)"
+
+#load gpg/ssh env
+my_load_gnome_keyring(){
+  if grep -q "Linux" <<<"$MY_OS" ; then
+    export $(gnome-keyring-daemon -s)
+    #NB: I expect to see summing like this after:
+    #    GNOME_KEYRING_CONTROL=/run/user/1000/keyring
+    #    GPG_AGENT_INFO=/home/dstark/.gnupg/S.gpg-agent:0:1
+    #    SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+
+  fi
+  # if grep -q "Darwin" <<<"$MY_OS" ; then
+    # export $(gnome-keyring-daemon -s)
+  # fi
+}
+
+
+
+# #I'm unsure this is helping.. f so maybe run within DESKTOP_SESSION check?
+# my_load_xstuff(){
+#   if [ "$SHELL" = "/usr/bin/zsh" ]; then
+#     if [ "${DISPLAY}" ]; then
+#       /usr/bin/setxkbmap gb
+#     fi
+#   fi
+# }
+# my_load_xstuff
+
+my_load_path_home_bin(){
+# set PATH so it includes user's private bin if it exists
+# also I have a .bin for stuff in my git repo
+# if [ -d "${HOME}/bin" ] ; then
+  # export PATH="${HOME}/bin:${PATH}"
+# fi
+if [ -d "${HOME}/.bin" ] ; then
+  export PATH="${HOME}/.bin:${HOME}/.bin/vendor/bin/:${PATH}"
+fi
+}
+
+
+
+
+my_load_path_rbenv(){
+  #load rbenv if exists
+  if [ -d "${HOME}/.rbenv/bin" ]; then
+    PATH="${HOME}/.rbenv/bin:${PATH}"
+  fi
+  # eval "$(rbenv init -)"
+}
+
+
+my_load_golang(){
+  export GOPATH="${HOME}/go"
+  if [ -d "${GOPATH}" ]; then
+    export PATH="${GOPATH}/bin:${PATH}"
+  fi
+  export "PATH=/usr/local/go/bin:${PATH}"
+}
+
+export CHEATCOLORS=true
+
+
+my_load_pip(){
+  ##Python virtualenv / pip path
+  export PIP_PATH="${HOME}/.local/bin"
+  if [ -d "${PIP_PATH}" ]; then
+    export PATH="${PIP_PATH}:${PATH}"
+  fi
+}
+
+my_load_virtualenvwrapper(){
+  #for virtualenwrapper (pip install --user virtualenvwrapper, see cheat virtualenv)
+  export WORKON_HOME="${HOME}/.virtualenvs"
+  mkdir -p "$WORKON_HOME"
+  if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
+    source ~/.local/bin/virtualenvwrapper.sh
+    # echo loaded ~/.local/bin/virtualenvwrapper.sh
+  elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+    # echo loaded /usr/local/bin/virtualenvwrapper.sh
+  fi
+}
+
+my_load_path_rbenv
+my_load_golang
+my_load_pip
+my_load_virtualenvwrapper
+my_load_path_home_bin
+
+
+#always load this if ! root
+if [ ! "X$USER" = "Xroot" ]; then
+  #and only if this is a desktop session
+  if [ -n "$DESKTOP_SESSION" ]; then
+    my_load_gnome_keyring
+  fi
+fi
+
+
+## store my encrypted cheats and notes in keybase
+export CHEATPATH="/keybase/private/starkers/cheats"

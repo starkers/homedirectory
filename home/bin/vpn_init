@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+### notes##
+# This script assumes your .ovpn files are under a subdirectory of "DIR"
+DIR="${HOME}/Documents/VPNs"
+
+# ## EG:
+# tree -f ~/Documents/VPNs/Data
+# /home/dstark/Documents/VPNs/Data
+# ├── /home/dstark/Documents/VPNs/Data/vpn.data-prd.jssearch.co.uk-david_stark.ovpn
+# ├── /home/dstark/Documents/VPNs/Data/vpn.data-stg.jssearch.co.uk-david_stark.ovpn
+# ├── /home/dstark/Documents/VPNs/Data/vpn-dmz.data-prd.jssearch.co.uk-david_stark.ovpn
+# └── /home/dstark/Documents/VPNs/Data/vpn-dmz.data-stg.jssearch.co.uk-david_stark.ovpn
+
+
+
+title="Select vpn connection"
+prompt="Pick an option:"
+cd "$DIR" || (echo error getting into dir: $DIR; exit 1)
+
+
+options=( $(find * -type f -name "*.ovpn" -print0 | xargs -0 | sed "s+.ovpn++g") )
+
+
+echo "$title"
+PS3="$prompt "
+select opt in "${options[@]}" ; do
+
+    case "$REPLY" in
+
+    * ) echo ":: You picked "$opt" which is option $REPLY]"
+        echo ":: press ^c to stop vpn"
+        DIR2="$(cut -d "/" -f 1 <<<"$opt")"
+        CONFIG="$(cut -d "/" -f 2 <<<"$opt")"
+        cd "$DIR2"
+        pwd
+        sudo openvpn "${CONFIG}.ovpn"
+        cd -
+        echo ":: stopping vpn=${opt}"
+        sleep 1
+      ;;
+
+    esac
+
+done
+

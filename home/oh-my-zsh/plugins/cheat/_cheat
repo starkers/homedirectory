@@ -1,0 +1,3 @@
+#compdef cheat
+
+_arguments "2: :($(cheat -l | grep '[a-zA-Z0-9]' | awk '{print $1}'))"

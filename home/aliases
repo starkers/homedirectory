@@ -1,0 +1,113 @@
+#####GIT
+
+alias ga="git add --all ."
+alias gps="git push"
+alias gpl="git pull"
+alias gs="git status"
+alias gc="my_git_commit"
+alias gd="git d"  #call git diff with vimdiff
+
+
+alias vim="nvim"
+# release any files vim thinks are +ro
+alias vim_swp_clear="rm -rvf ~/.vim/tmp/*.swp"
+
+alias vimdiff="nvim -d"
+#protip.. use vimdiff/meld
+# git config --global diff.tool nvim -d
+# git config --global difftool.prompt false
+# git config --global alias.d difftool
+
+
+
+alias ls="ls --color"
+alias ll="ls -l"
+alias lla="ls -la"
+alias ltr="ls -ltr"
+
+
+alias apts="apt-cache search"
+alias apti="sudo apt-get install"
+alias apt="sudo apt"
+alias ssh="ssh -A"
+alias pacman="sudo pacman"
+alias ssh-copy-id-work="ssh-copy-id -i ~/.ssh/id_rsa"
+alias ssh-copy-id-clovis="ssh-copy-id -i ~/.ssh/id_rsa_clovis"
+
+alias cdb="cd ~/bin"
+alias cdd="cd ~/dev"
+alias cdD="cd ~/Downloads"
+alias cds="cd ~/Seafile"
+# alias cdm="cd ~/master"
+alias cdw="cd ~/work"
+alias cdh="cd ~/dev/starkers/dotfiles/home"
+alias cdg="cd ~/.go"
+alias cdt="cd ~/Torrents"
+
+alias ansible_dev="cd ~/dev/ansible ; source ./hacking/env-setup -q"
+
+alias cdv="cd ~/files/vagrant"
+
+alias mtr="mtr --curses"
+
+alias docker="docker"
+
+alias lxc="sudo lxc"
+alias lxd="sudo lxd"
+
+alias nload="sudo nload wlan0 -u K"
+
+alias atop="sudo atop"
+
+
+# alias aws="awssudo sainsburys aws"
+
+
+alias openvpn="sudo openvpn"
+
+# mem(){
+#   printf " Private  +   Shared  =  RAM used       Program\n"
+#   sudo ~/.bin/psmem_exec | tail -30
+# }
+
+pf(){
+  peerflix "$1" --mplayer
+}
+
+
+# alias k="kubectl --kubeconfig=$KCONFIG"
+#
+alias systemctl="sudo systemctl"
+
+
+ghc(){
+  #takes github git URL EG: git@github.com:containous/traefik.git
+  #clones into ~/dev/containous/traefik (gostyle)
+  local DEV="$HOME/dev"
+  local GH_URL="$1"
+  if grep -q git@github.com <<<"$GH_URL" ; then
+    # echo found github url
+    local GH_USER="$(echo $GH_URL | cut -d ":" -f 2 | cut -d "/" -f 1)"
+    # echo U:$GH_USER
+    local GH_REPO="$(echo $GH_URL | cut -d ":" -f 2 | cut -d "/" -f 2 | sed "s+.git++g")"
+    # echo R:$GH_REPO
+    local CHECKOUT="${DEV}/${GH_USER}/${GH_REPO}"
+    if [ -d "$CHECKOUT" ]; then
+      echo "doing nothing, $CHECKOUT already exists"
+    else
+      echo "checking out $GH_URL -> $CHECKOUT"
+      set -x
+      mkdir "${DEV}/${GH_USER}" -p
+      git clone "$GH_URL" "$CHECKOUT"
+      set +x
+    fi
+    cd "$CHECKOUT"
+    unset GH_USER
+    unset GH_REPO
+    unset DEV
+    unset CHECKOUT
+  else
+    echo "err, not github (or an SSH repo): $GH_URL"
+  fi
+  unset GH_URL
+}

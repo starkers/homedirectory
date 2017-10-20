@@ -1,0 +1,30 @@
+#!/bin/sh
+
+
+normal="#393939,#ffffff,#393939,#268bd2,#ffffff"
+# OPTS="$OPTS -color-normal ${normal}"
+
+        #-color-normal "$normal"
+        #        #fdf6e3,#002b36,#eee8d5,#586e75,#eee8d5 (Default)
+        #-color-urgent [string]                  Color scheme for urgent row
+        #        #fdf6e3,#dc322f,#eee8d5,#dc322f,#fdf6e3 (Default)
+        #-color-active [string]                  Color scheme for active row
+        #        #fdf6e3,#268bd2,#eee8d5,#268bd2,#fdf6e3 (Default)
+        #-color-window [string]                  Color scheme window
+        #        #fdf6e3,#002b36 (Default)
+
+
+window="#393939,#393939,#268bd2"
+# OPTS="$OPTS -color-window ${normal}"
+
+active="#393939,#268bd2,#393939,#268bd2,#205171"
+# OPTS="$OPTS -color-active ${normal}"
+
+urgent="#393939,#f3843d,#393939,#268bd2,#ffc39c"
+# OPTS="$OPTS -color-urgent ${normal}"
+
+# font="'Hack 25'"
+# OPTS="$OPTS -font ${font}"
+
+set -x
+rofi -color-normal ${normal} -color-window ${window} -color-active ${active} -color-urgent ${urgent} -font "Hack 14" -show run */

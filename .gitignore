@@ -1,0 +1,25 @@
+**/*.swp
+home/mutt/cache
+home/oh-my-zsh/themes/default.zsh-theme
+home/vim/tmp/
+**/*.pyc
+**/.ropeproject
+#always changing
+home/ssh/known_hosts
+home/mc/ini
+
+#mutt cache etc
+home/mutt/cache/**
+home/vim/bundle/python-mode/**/*.pyc
+
+
+#aws cache
+home/aws/cli/cache/*.json
+
+
+home/kube/schema/**
+
+#I keep go binaries etc here
+home/bin/vendor/**
+
+home/nvim-share/shada/*.shada

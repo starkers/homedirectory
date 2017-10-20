@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=MPlayer
+GenericName=Media player
+Exec=mplayer %U
+TryExec=mplayer
+Icon=totem
+Type=Application
+Categories=AudioVideo;Player;
+NoDisplay=true

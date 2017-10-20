@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# v for vagrant  david@starkers.org
+
+#get a list of vagrant VMs..
+#...I know its ugly
+loremipsums="$(vagrant global-status | grep -A999 "^----" | grep -v "^----" | grep -B99 "The above shows information about all known Vagrant environments"  | grep -v "^ $" | grep -v "The above shows information about all known Vagrant environments" | awk '{print $5,$4}')"
+
+
+oldIFS=$IFS
+IFS=$'\n'
+
+choices=( $loremipsums )
+IFS=$oldIFS
+PS3="Pick a vagrant box: "
+
+set -e
+select answer in "${choices[@]}"; do
+  for item in "${choices[@]}"; do
+    if [[ $item == $answer ]]; then
+      working_dir="$(cut -d " " -f 1 <<<"$item")"
+      echo "cd $working_dir"
+      cd "${working_dir}"
+      break 2
+    fi
+  done
+done
+
+
+choices=( "up" "ssh" "suspend" "destroy -f" "resume" "provision" "halt" )
+PS3="choose you're weapon: "
+select answer in "${choices[@]}"; do
+  for item in "${choices[@]}"; do
+    if [[ $item == $answer ]]; then
+      echo "Running: vagrant $item"
+      vagrant $item
+      break 2
+    fi
+  done
+done

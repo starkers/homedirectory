@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+#
+# simple templating script for Generating CSR's -david@starkers.org 121001
+# .. this relies on having openssl availble in your path ..
+# Its not elegant but its easy to use..
+#
+# TODO: too much ugly wraping of whitespace into openssl commands
+#  (there is another way but I forgot and this works)
+
+# This program is free software. It comes without any warranty, to
+# the extent permitted by applicable law. You can redistribute it
+# and/or modify it under the terms of the Do What The Fuck You Want
+# To Public License, Version 2, as published by Sam Hocevar. See
+# http://sam.zoy.org/wtfpl/COPYING for more details. */ 
+
+DOMAIN="$1"
+COUNTRY="GB"
+STATE="England"
+LOCALITY="London"
+ORGANISATION="My company name"
+DEPARTMENT=""
+EMAIL="webmaster@yourdomain.com"
+
+shopt -q
+
+echo "-=[ Starting with the required quesions.. ]=-"
+
+unset INPUT
+echo "Domain: what domain are we making a CSR for? -blank for [$DOMAIN]?"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+		DOMAIN="$INPUT"
+fi
+
+FQDN="$DOMAIN"
+unset INPUT
+echo "Common Name: what will the FQDN for the live site be?  -blank for ["$DOMAIN"]"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+    FQDN="$INPUT"
+fi
+
+unset INPUT
+echo "email address?: -blank for ["$EMAIL"]"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+    EMAIL="$INPUT"
+fi
+
+unset INPUT
+echo "Country Name (2 letter code): Leave blank for ["$COUNTRY"]"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+    COUNTRY="$INPUT"
+fi
+
+unset INPUT
+echo "State/province: leave blank for ["$STATE"]"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+    STATE="$INPUT"
+fi
+
+unset INPUT
+echo "Locality/city: leave blank for ["$LOCALITY"]"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+    LOCALITY="$INPUT"
+fi
+
+unset INPUT
+echo "Organisation Name: leave blank for ["$ORGANISATION"]"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+    ORGANISATION="$INPUT"
+fi
+
+unset INPUT
+echo "Organisation Unit: IE Department name.. This is normally blank"
+read INPUT
+if [ ! "$INPUT" == "" ]; then
+    DEPARTMENT="$INPUT"
+fi
+
+echo "-=[ Please confirm this is correct:... ]=-"
+echo
+cat << EOF
+domain requested:                                   $DOMAIN
+Country Name (2 letter code) [US]:                  $COUNTRY
+State or Province Name (full name) [Some-State]:    $STATE
+Locality Name (eg, city) []:                        $LOCALITY
+Organization Name (eg, company):                    $ORGANISATION
+Organizational Unit Name (eg, section) []:          $DEPARTMENT
+Common Name (eg, YOUR name) []:                     $FQDN
+Email Address []:                                   $EMAIL
+An optional company name []:                        
+EOF
+echo "-=[  ^c to cancel, [enter] to continue  ]=-"
+read confirm
+
+tilt(){
+echo "There has been an error, I will not overwrite $1"
+exit 1
+}
+
+if [ -f "$DOMAIN.key" ]; then tilt "$DOMAIN.key" ; fi
+echo "-=[ Generating $DOMAIN.key ]=-"
+## 1024 is now conscidered insecure.. generate a 2048 key-ds110908
+#openssl genrsa -out $DOMAIN.key 1024
+openssl genrsa -out $DOMAIN.key 2048
+
+
+
+if [ -f "$DOMAIN.crt" ]; then tilt "$DOMAIN.crt" ; fi
+echo "-=[ Generating $DOMAIN.crt ]=-"
+
+#openssl req -new -key $DOMAIN.key -out $DOMAIN.csr <<EOF
+#updated 120405 to force SHA1 as MD5 is insecure
+openssl req -new -sha1 -key $DOMAIN.key -out $DOMAIN.csr <<EOF
+$COUNTRY
+$STATE
+$LOCALITY
+$ORGANISATION
+$DEPARTMENT
+$FQDN
+$EMAIL
+
+
+
+EOF
+
+cat >>$DOMAIN.string<<EOF
+$COUNTRY
+$STATE
+$LOCALITY
+$ORGANISATION
+$DEPARTMENT
+$FQDN
+$EMAIL
+
+
+
+EOF
+printf "\n\n\n## OK DONE.. \n\nSign your own cert with something like this:\n\topenssl x509 -req -days 1825 -in ${DOMAIN}.csr -signkey ${DOMAIN}.key -out ${DOMAIN}.crt\n"

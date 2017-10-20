@@ -1,0 +1,66 @@
+---
+- defaults:
+    link:
+      create: true
+      relink: true
+
+#directories to be cleaned (dead symlinks removed)
+- clean: ['~']
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - mkdir -p ~/.config/mc
+  - cp -rvp mc/* ~/.config/mc/.
+
+- link:
+    ~/.ssh:                   '/keybase/private/starkers/home/ssh'              #sensitive
+    ~/.aws:                   '/keybase/private/starkers/home/aws'              #sensitive
+    ~/.cheat:                 '/keybase/private/starkers/home/cheats'           #sensitive
+    ~/Notes:                  '/keybase/private/starkers/home/notes'            #sensitive
+    ~/.kube:                  '/keybase/private/starkers/home/kube'             #sensitive
+    ~/.weechat:               '/keybase/private/starkers/home/weechat'          #sensitive
+    ~/.mutt:                  '/keybase/private/starkers/home/mutt'             #sensitive
+    ~/.muttrc:                '/keybase/private/starkers/home/muttrc'
+    ~/.gitconfig:             'gitconfig'
+    ~/.config/autostart:      'autostart'
+    ~/.shell_functions:       'shell_functions'
+    ~/.aliases:               'aliases'
+    ~/.oh-my-zsh:             'oh-my-zsh'
+    ~/.zshrc:                 'zshrc'
+    ~/.bashrc:                'bashrc'
+    ~/.bashrc_git:            'git-prompt.sh'
+    ~/.bin:                   'bin'              #scripts and general "helpers"
+    ~/.local/share/nvim:      'nvim-share'
+    ~/.config/nvim:           'nvim-config'
+    ~/.vimrc:                 'vimrc'
+    ~/.profile:               'profile'
+    ~/.screenrc:              'screenrc'
+    ~/.config/terminator:     'terminator'
+    ~/.tmux.conf:             'tmux'
+    ~/.local/share/mc/skins:  'mc-skins'
+    ~/.config/i3:             'i3-gaps'
+    ~/.config/i3blocks:       'i3blocks'
+    ~/.config/compton.conf:   'compton.conf'
+    ~/.config/roxterm.sourceforge.net: 'roxterm'
+    ~/.local/share/fonts:     'fonts'
+    ~/.config/fontconfig:     'fontconfig'
+    ~/.digrc:                 'digrc'
+    ~/.zsh:                   'zsh'
+    ~/.fzf.zsh:               'fzf.zsh'
+    ~/.fzf.bash:              'fzf.bash'
+    ~/.config/dunst:          'dunst'
+    ~/.xinitrc:               'xinitrc'
+
+- shell:
+  - mkdir -p ~/.local/share/applications
+  - cp -rvp applications/* ~/.local/share/applications/.
+
+- shell:
+  - mkdir -p ~/.mutt/cache/headers
+  - mkdir -p ~/.mutt/cache/bodies
+  - chmod 0700 ~/.mutt/cache/headers
+  - chmod 0700 ~/.mutt/cache/bodies
+  - mkdir -p ~/.weechat/logs
+  - chmod 0700 ~/.ssh/
+  - chmod 0600 ~/.ssh/id_*
+

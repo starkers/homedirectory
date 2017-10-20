@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+# import json
+# import pprint
+
+import json
+
+file = "in.json"
+data = []
+
+with open(file) as f:
+    d = json.load(f)
+    print(json.dumps(d, sort_keys=True))

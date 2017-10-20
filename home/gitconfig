@@ -1,0 +1,31 @@
+#git config
+[user]
+	name = David Stark
+	email = david@starkers.org
+[push]
+  default = simple
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
+[mergetool "vimdiff"]
+  cmd = nvim -d $BASE $LOCAL
+  #$BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[alias]
+  d   = difftool
+  co  = checkout
+  lg  = log --graph --abbrev-commit --decorate --date=relative
+  lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  # up  = "!git remote update -p; git merge --ff-only @{u}"
+  pf = pull -ff
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
+
+
+
+[github]
+	user = starkers
