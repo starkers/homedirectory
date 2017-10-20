@@ -32,7 +32,6 @@
     ~/.bin:                   'bin'              #scripts and general "helpers"
     ~/.local/share/nvim:      'nvim-share'
     ~/.config/nvim:           'nvim-config'
-    ~/.vimrc:                 'vimrc'
     ~/.profile:               'profile'
     ~/.screenrc:              'screenrc'
     ~/.config/terminator:     'terminator'
