@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+
+
+title="Select repo"
+prompt="Pick an option:"
+cd "$DIR" || (echo error getting into dir: $DIR; exit 1)
+
+
+options=( $( find ~/dev/mendeley  -maxdepth 3 -mindepth 3 -type d) )
+
+echo "$title"
+PS3="$prompt "
+select opt in "${options[@]}" ; do
+
+    case "$REPLY" in
+
+    * ) echo ":: You picked "$opt" which is option $REPLY]"
+        echo "cd $opt"
+        eval `cd $opt`
+        exit
+      ;;
+
+    esac
+
+done
