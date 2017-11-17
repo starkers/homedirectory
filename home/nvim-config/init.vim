@@ -199,7 +199,7 @@ function! TabToggle()
   endif
 endfunction
 nmap <leader>e :call TabToggle()<CR>
-noremap <leader>l :call ALEToggle<CR>
+" nmap <leader>l :call ALEToggle()<CR>
 
 
 """ "movement mods"
@@ -399,6 +399,7 @@ let g:go_fmt_command = 'goimports'
 let g:go_term_enabled = 1
 
 " cause there will be tabs, show them but without the ^I bollox
+autocmd FileType sh setlocal  listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
 autocmd FileType go setlocal  listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
 
 autocmd FileType go nmap <buffer> <leader>r <plug>(go-run)
