@@ -432,3 +432,10 @@ let g:deoplete#sources#go#align_class = 1
 
 " let NERDTree show hidden files on default
 let NERDTreeShowHidden=1
+
+" resize current buffer by +/- 5 (shift+arrows)
+nnoremap <S-up>    :resize -5<cr>
+nnoremap <S-down>  :resize +5<cr>
+nnoremap <S-left>  :vertical resize -5<cr>
+nnoremap <S-right> :vertical resize +5<cr>
+
