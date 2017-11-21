@@ -1,8 +1,7 @@
 [global_config]
-  borderless = True
-  extra_styling = False
   focus = mouse
   handle_size = 20
+  homogeneous_tabbar = False
   inactive_color_offset = 0.708333333333
   scroll_tabbar = True
   title_font = Hack 9
