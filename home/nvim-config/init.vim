@@ -58,6 +58,9 @@ Plug 'Yggdroot/indentLine'                          "show indent levels (very ha
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
 
+
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 """ "========================================================================"
 
