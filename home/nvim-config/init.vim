@@ -30,6 +30,7 @@ Plug 'fatih/vim-go'                                       " golan
 Plug 'zchee/deoplete-jedi'                                " python
 Plug 'davidhalter/jedi'                                   " python jedi
 Plug 'jmcantrell/vim-virtualenv'                          " venv support
+Plug 'hashivim/vim-terraform'                             " basic terraform
 
 
 " "========================================================================"
@@ -57,9 +58,10 @@ Plug 'vim-airline/vim-airline-themes'               "airline themes
 Plug 'Yggdroot/indentLine'                          "show indent levels (very handy for yaml)
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
+Plug 'ryanoasis/vim-devicons'                       "show icons for filetypes in NERDtree etc
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicons
 
 
-Plug 'hashivim/vim-terraform'
 
 call plug#end()
 """ "========================================================================"
@@ -181,7 +183,8 @@ set termguicolors                                 " allow support for more colou
 " colorscheme paramount                            " nice and rounded dark theme
 " colorscheme PaperColor                            " nice and rounded dark theme
 " colorscheme onedark
-colorscheme materialbox
+" colorscheme materialbox
+colorscheme molokai
 set scrolloff=4                                   " always show at least X lines above/below the cursor
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
@@ -442,3 +445,22 @@ nnoremap <S-down>  :resize +5<cr>
 nnoremap <S-left>  :vertical resize -5<cr>
 nnoremap <S-right> :vertical resize +5<cr>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" add some additional filetype symbols
+" (note this requires a NerdFont patched font in your term)
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}                      "required
+
+" terraform
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tf'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tfstate.backup'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tfvars'] = ''
+
+" files without .extentions
+"
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['Jenkinsfile'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['Dockerfile'] = ''
+
+" let g:NERDTreeFileExtensionHighlightFullName = 1
+" let g:NERDTreeExactMatchHighlightFullName = 1
+" let g:NERDTreePatternMatchHighlightFullName = 1

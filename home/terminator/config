@@ -4,7 +4,7 @@
   handle_size = 5
   inactive_color_offset = 0.708333333333
   scroll_tabbar = True
-  title_font = Hack 9
+  title_font = Knack Nerd Font 9
   title_hide_sizetext = True
   title_transmit_bg_color = "#73d216"
   title_use_system_font = False
