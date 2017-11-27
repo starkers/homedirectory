@@ -78,7 +78,6 @@ my_load_golang(){
   export "PATH=/usr/local/go/bin:${PATH}"
 }
 
-export CHEATCOLORS=true
 
 
 my_load_pip(){
@@ -118,5 +117,8 @@ if [ ! "X$USER" = "Xroot" ]; then
 fi
 
 
+## additions to "cheat" (pip install cheat --user)
 ## store my encrypted cheats and notes in keybase
-export CHEATPATH="/keybase/private/starkers/cheats"
+export CHEATCOLORS=true
+export CHEATPATH="/keybase/private/starkers/home/cheats"
+
