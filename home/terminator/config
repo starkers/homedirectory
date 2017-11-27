@@ -1,5 +1,5 @@
 [global_config]
-  borderless = True
+  extra_styling = False
   focus = mouse
   handle_size = 5
   inactive_color_offset = 0.708333333333
@@ -22,9 +22,11 @@
   [[default]]
     background_color = "#002b36"
     background_darkness = 0.96
+    background_type = transparent
     cursor_color = "#aaaaaa"
     font = Hack 10
     foreground_color = "#dbf0e2"
     scrollback_infinite = True
     scrollbar_position = hidden
+    show_titlebar = False
     use_system_font = False
