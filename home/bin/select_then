@@ -22,7 +22,7 @@ fi
 oldDIR="$(pwd)"
 cd "$DEST_DIR"
 
-list="$( find . -type f -maxdepth 3 | sort)"
+list="$( find . -maxdepth 3 -type f | sort)"
 
 if [ "X$list" == X ]; then
   echo "no options found in $DEST_DIR"
