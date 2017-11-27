@@ -211,3 +211,9 @@ if [ -f "$foo" ] ; then
   source <(kubectl completion zsh)
 fi
 unset foo
+
+
+#for VTE (tilix)
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
