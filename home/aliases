@@ -50,7 +50,7 @@ alias cdv="cd ~/files/vagrant"
 
 alias mtr="mtr --curses"
 
-alias docker="docker"
+alias d="docker"
 
 alias lxc="sudo lxc"
 alias lxd="sudo lxd"
