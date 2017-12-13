@@ -40,13 +40,13 @@ alias cdD="cd ~/Downloads"
 alias cds="cd ~/Seafile"
 # alias cdm="cd ~/master"
 alias cdw="cd ~/work"
-alias cdh="cd ~/dev/starkers/dotfiles/home"
+alias cdh="cd ~/dev/starkers/homedirectory/home"
 alias cdg="cd ~/.go"
 alias cdt="cd ~/Torrents"
 
 alias ansible_dev="cd ~/dev/ansible ; source ./hacking/env-setup -q"
 
-alias cdv="cd ~/files/vagrant"
+#alias cdv="cd ~/files/vagrant"
 
 alias mtr="mtr --curses"
 
