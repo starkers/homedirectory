@@ -179,12 +179,14 @@ let g:airline_powerline_fonts = 1                 " you must have appropriate fo
 let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
-" colorscheme deep-space                            " nice and rounded dark theme
+colorscheme deep-space                            " nice and rounded dark theme
 " colorscheme paramount                            " nice and rounded dark theme
-" colorscheme PaperColor                            " nice and rounded dark theme
+" colorscheme PaperColor                           " nice and rounded dark theme
 " colorscheme onedark
 " colorscheme materialbox
-colorscheme molokai
+" colorscheme molokai
+" colorscheme hybrid_material
+" colorscheme space-vim-dark
 set scrolloff=4                                   " always show at least X lines above/below the cursor
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
