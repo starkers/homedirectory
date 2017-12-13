@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # USAGE:
 #
@@ -57,25 +58,23 @@
 IGNORE_SECS=0.25
 
 function execute() {
-    echo "$@"
+    echo "running: $@"
     "$@"
 }
 
-execute "$@"
+# execute "$@"
 ignore_until=$(date +%s.%N)
 
 inotifywait --quiet --recursive --monitor --format "%e %w%f" \
-    --event modify --event move --event create --event delete \
-    --exclude '__pycache__' \
-    * | while read changed
-do
-
-    echo "$changed"
+  --event modify --event move --event create --event delete \
+  --exclude '(__pycache__|.git)' . \
+  | while read changed ; do
 
     if [ $(echo " $(date +%s.%N) > $ignore_until" | bc) -eq 1 ] ; then
-        ignore_until=$(echo "$(date +%s.%N) + $IGNORE_SECS" | bc)
-        ( sleep $IGNORE_SECS ; execute "$@" ) &
+      echo "### changes detected ###"
+      ignore_until=$(echo "$(date +%s.%N) + $IGNORE_SECS" | bc)
+      ( sleep $IGNORE_SECS ; execute "$@" ) &
     fi
 
-done
+  done
 
