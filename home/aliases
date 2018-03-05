@@ -40,8 +40,8 @@ alias cdD="cd ~/Downloads"
 alias cds="cd ~/Seafile"
 # alias cdm="cd ~/master"
 alias cdw="cd ~/work"
-alias cdh="cd ~/dev/starkers/homedirectory/home"
-alias cdg="cd ~/.go"
+alias cdh="cd ~/dev/github.com/starkers/homedirectory/home"
+alias cdg="cd ~/dev/github.com"
 alias cdt="cd ~/Torrents"
 
 alias ansible_dev="cd ~/dev/ansible ; source ./hacking/env-setup -q"
@@ -82,8 +82,8 @@ alias systemctl="sudo systemctl"
 
 ghc(){
   #takes github git URL EG: git@github.com:containous/traefik.git
-  #clones into ~/dev/containous/traefik (gostyle)
-  local DEV="$HOME/dev"
+  #clones into ~/dev/github.com/containous/traefik (gostyle)
+  local DEV="$HOME/dev/github.com"
   local GH_URL="$1"
   if grep -q git@github.com <<<"$GH_URL" ; then
     # echo found github url
