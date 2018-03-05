@@ -109,12 +109,12 @@ my_load_path_home_bin
 
 
 #always load this if ! root
-if [ ! "X$USER" = "Xroot" ]; then
-  #and only if this is a desktop session
-  if [ -n "$DESKTOP_SESSION" ]; then
-    my_load_gnome_keyring
-  fi
-fi
+# if [ ! "X$USER" = "Xroot" ]; then
+#   #and only if this is a desktop session
+#   if [ -n "$DESKTOP_SESSION" ]; then
+#     my_load_gnome_keyring
+#   fi
+# fi
 
 
 ## additions to "cheat" (pip install cheat --user)
