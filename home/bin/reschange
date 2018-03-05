@@ -29,7 +29,7 @@ post_work(){
   echo ":: doing post_work"
   sleep 0.1
   compton -b
-  feh --bg-fill $HOME/.config/i3/wallpapers/octocat.jpg
+  feh --bg-fill $HOME/.config/i3/wallpapers/default
   /usr/bin/setxkbmap gb
   /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
 }

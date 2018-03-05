@@ -23,8 +23,8 @@ active="#393939,#268bd2,#393939,#268bd2,#205171"
 urgent="#393939,#f3843d,#393939,#268bd2,#ffc39c"
 # OPTS="$OPTS -color-urgent ${normal}"
 
-# font="'Hack 25'"
+font="Hack 15"
 # OPTS="$OPTS -font ${font}"
 
 set -x
-rofi -color-normal ${normal} -color-window ${window} -color-active ${active} -color-urgent ${urgent} -font "Hack 14" -show run */
+rofi -color-normal ${normal} -color-window ${window} -color-active ${active} -color-urgent ${urgent} -font "${font}" -show run */

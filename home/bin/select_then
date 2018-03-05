@@ -49,6 +49,8 @@ while true; do
         $ACTION "${item}"
         # bash "${DEST_DIR}/${item}"
         # post_work
+
+        read -n 1 -s -r -p "Press any key to continue"
         break 2
       fi
     done

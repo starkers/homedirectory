@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+# stop an active virtualenv fucking with my gcloud
+unset VIRTUAL_ENV
+/usr/bin/python2.7 /opt/google-cloud-sdk/lib/gcloud.py $@

@@ -8,10 +8,10 @@
 ###############################################################################
 
 
-SINK=1
+SINK="$(pactl list short sinks | grep output | head -n1 | cut -f2)"
 
 #percentage to adjust on default
-increments=5
+increments=3
 
 mute(){
   pactl set-sink-mute $SINK true

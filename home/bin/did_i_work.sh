@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+ARG1="$1"
+
 HIST_FILE="${HOME}/.zsh_history"
 
 
@@ -17,17 +19,29 @@ function epoch_to_human(){
 
 
 
-egrep "${grep_include}" "${HIST_FILE}" | egrep -v "${grep_exclude}" > "${tmpf}"
+if [ "X$ARG1" == Xall ]; then
+  cp "${HIST_FILE}" "${tmpf}"
+  while IFS= read -r var
+  do
+    EPOCH="$(cut -c 3-12 <<<"$var")"
+    HUMAN_TIME="$(date -d "@${EPOCH}" +"%Y-%m-%d %H:%M:%S")"
+    NEW_VAR="$(cut -c 16-9999 <<<"${var}")"
+    echo "${HUMAN_TIME}: ${NEW_VAR}"
+  done < "${tmpf}"
+else
+
+  egrep "${grep_include}" "${HIST_FILE}" | egrep -v "${grep_exclude}" > "${tmpf}"
+  while IFS= read -r var
+  do
+    EPOCH="$(cut -c 3-12 <<<"$var")"
+    HUMAN_TIME="$(date -d "@${EPOCH}" +"%Y-%m-%d %H:%M:%S")"
+    NEW_VAR="$(cut -c 16-9999 <<<"${var}")"
+    echo "${HUMAN_TIME}: ${NEW_VAR}"
+  done < "${tmpf}"
 
 
-while IFS= read -r var
-do
-  EPOCH="$(cut -c 3-12 <<<"$var")"
-  HUMAN_TIME="$(date -d "@${EPOCH}" +"%Y-%m-%d %H:%M:%S")"
-  NEW_VAR="$(cut -c 16-9999 <<<"${var}")"
-  echo "${HUMAN_TIME}: ${NEW_VAR}"
-done < "${tmpf}"
 
 
+fi
 
 rm "${tmpf}"

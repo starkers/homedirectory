@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-cd $HOME/Downloads/pct ; ./Popcorn-Time
-
