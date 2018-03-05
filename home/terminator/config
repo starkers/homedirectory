@@ -6,9 +6,13 @@
   scroll_tabbar = True
   title_font = Knack Nerd Font 9
   title_hide_sizetext = True
-  title_transmit_bg_color = "#73d216"
+  title_inactive_bg_color = "#01403d"
+  title_transmit_bg_color = "#046d6b"
+  title_transmit_fg_color = "#000000"
   title_use_system_font = False
 [keybindings]
+  next_profile = <Primary><Shift>braceright
+  previous_profile = <Primary><Shift>braceleft
 [layouts]
   [[default]]
     [[[child1]]]
