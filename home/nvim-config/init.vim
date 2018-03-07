@@ -19,6 +19,7 @@ endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') } " YCM engine
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion framework
 Plug 'w0rp/ale'                                               " Async Lint Engine (framework)
+Plug 'majutsushi/tagbar'                                      " works with ctags to render tags of code
 
 
 " "========================================================================"
@@ -26,7 +27,8 @@ Plug 'w0rp/ale'                                               " Async Lint Engin
 
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }          " clojure
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }  " golang
-Plug 'fatih/vim-go'                                       " golan
+Plug 'fatih/vim-go'                                       " golang
+Plug 'zchee/deoplete-go', { 'do': 'make'}                 " golang
 Plug 'zchee/deoplete-jedi'                                " python
 Plug 'davidhalter/jedi'                                   " python jedi
 Plug 'jmcantrell/vim-virtualenv'                          " venv support
@@ -360,6 +362,7 @@ nmap <silent> <leader>f   :NERDTreeToggle<cr>
 " nmap <silent> <leader>a   :bprevious <CR>
 nmap <silent> <c-o>       :FZFMru<CR>
 nmap <C-_>                :Commentary<CR>
+nmap <silent> <c-a>       :TagbarToggle<CR>
 map <silent> <leader>qq   :qa!<CR>
 noremap <leader>p "+p
 noremap <leader>y "+y
