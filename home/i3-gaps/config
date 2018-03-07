@@ -43,7 +43,6 @@ hide_edge_borders both
 font pango:Hack 12
 
 
-bindsym $mod+0           workspace   $ws10
 bindsym $mod+1           workspace   $ws1
 bindsym $mod+2           workspace   $ws2
 bindsym $mod+3           workspace   $ws3
@@ -53,6 +52,7 @@ bindsym $mod+6           workspace   $ws6
 bindsym $mod+7           workspace   $ws7
 bindsym $mod+8           workspace   $ws8
 bindsym $mod+9           workspace   $ws9
+bindsym $mod+0           workspace   $ws10
 
 bindsym $mod+Shift+exclam      move container to workspace number $ws1
 bindsym $mod+Shift+quotedbl    move container to workspace number $ws2
@@ -183,7 +183,6 @@ exec        --no-startup-id redshift-gtk &
 exec        --no-startup-id volumeicon &
 exec        --no-startup-id run_keybase &
 exec        --no-startup-id copyq &
-exec        --no-startup-id /usr/bin/redshift-gtk &
 exec_always --no-startup-id feh --bg-fill $HOME/.config/i3/wallpapers/default &
 
 
