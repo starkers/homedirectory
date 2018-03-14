@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# stop an active virtualenv fucking with my gcloud
+unset VIRTUAL_ENV
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+
+/usr/bin/nvim $@

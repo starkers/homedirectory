@@ -19,52 +19,6 @@ my_nvm_load(){
 }
 
 
-openssl_encrypt(){
-  # set -x
-  function_name=openssl_encrypt
-  file_in="$1"
-  file_out="$1.enc"
-  if [ "X$file_in" == X ]; then
-    echo "$function_name: Soz.. you must specify a (single) file to encrypt"
-  else
-    if [ -f "$file_in" ]; then
-      echo "$function_name: processing $file_in"
-      if [ -f "$file_out" ]; then
-        rm -f "$file_out"
-        echo "$function_name: destination file [$file_out] removed"
-      fi
-     echo "$function_name: start encryption of [$file_in] -> [$file_out]"
-     openssl enc -aes-256-cbc -salt -in "$file_in" -out "$file_out" && rm -f "$file_in"
-    else
-      echo "$function_name: didn't find source file [$file_in]"
-    fi
-  fi
-}
-
-openssl_decrypt(){
-  # set -x
-  function_name=openssl_encrypt
-  file_in="$1"
-  file_out="$(sed "s+.enc$++g" <<<"$file_in")"
-  echo $file_out
-  if [ "X$file_in" == X ]; then
-    echo "$function_name: Soz.. you must specify a (single) file to decrypt"
-  else
-    if [ -f "$file_in" ]; then
-      echo "$function_name: processing $file_in"
-      if [ -f "$file_out" ]; then
-        echo "$function_name: destination file [$file_out] already exists, remove it?"
-        rm -fi "$file_out"
-      fi
-     echo "$function_name: start decryption of [$file_in] -> [$file_out]"
-     openssl enc -aes-256-cbc -salt -in "$file_in" -out "$file_out"
-    else
-      echo "$function_name: didn't find source file [$file_in]"
-    fi
-  fi
-}
-
-
 passwd_gen(){
   pwgen 32 1
 }

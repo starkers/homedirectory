@@ -20,6 +20,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') } " YCM engine
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion framework
 Plug 'w0rp/ale'                                               " Async Lint Engine (framework)
 Plug 'majutsushi/tagbar'                                      " works with ctags to render tags of code
+Plug 'ap/vim-buftabline'
+
 
 
 " "========================================================================"
@@ -42,7 +44,13 @@ Plug 'mattn/webapi-vim'                                           " required for
 Plug 'mattn/gist-vim'                                             " share gists
 Plug 'tpope/vim-fugitive'                                         " lets airline detect branch
 Plug 'airblade/vim-gitgutter'                                     " git notations
-Plug 'ctrlpvim/ctrlp.vim'                                         " Ctrl+P for file searching etc
+
+" Plug 'ctrlpvim/ctrlp.vim'                                         " Ctrl+P for file searching etc
+
+Plug 'wincent/command-t', {
+  \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+  \ }
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " FuzzyFinder
 Plug 'junegunn/vim-easy-align'                                    " easy alignment, EG: 'gaip='
 Plug 'pbogut/fzf-mru.vim'                                         " MostRecentlyUsed via FZF
@@ -129,13 +137,15 @@ map <silent> <leader>? :edit ~/.cheat/vim<CR>
 
 " "================ pretties ==================="
 
+" https://github.com/vim-airline/vim-airline/wiki/Screenshots
+" let g:airline_theme = "bubblegum"                 " airline theme
 let g:airline_theme = "bubblegum"                 " airline theme
-let g:airline#extensions#tabline#enabled = 1      " Enable the list of buffers
+" let g:airline#extensions#tabline#enabled = 1      " Enable the list of buffers
 
-" let g:airline#extensions#tabline#fnamemod = ':t'  " Show just the filename
-let g:airline#extensions#tabline#show_tab_type = 1
-let g:airline#extensions#tabline#buffer_min_count = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+" " let g:airline#extensions#tabline#fnamemod = ':t'  " Show just the filename
+" let g:airline#extensions#tabline#show_tab_type = 1
+" let g:airline#extensions#tabline#buffer_min_count = 0
+" let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 let g:airline#extensions#ale#enabled = 1
 let airline#extensions#ale#error_symbol = 'E:'
@@ -182,8 +192,8 @@ let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
 " colorscheme focuspoint
-colorscheme dracula
-" colorscheme deep-space                            " nice and rounded dark theme
+" colorscheme dracula
+colorscheme deep-space                            " nice and rounded dark theme
 " colorscheme paramount                            " nice and rounded dark theme
 " colorscheme PaperColor                           " nice and rounded dark theme
 " colorscheme orange-moon                          " nice but diffs hard to read
@@ -196,7 +206,7 @@ colorscheme dracula
 " colorscheme wombat256mod
 " colorscheme yellow-moon  "crap diff
 " colorscheme OceanicNextLight
-set scrolloff=4                                   " always show at least X lines above/below the cursor
+set scrolloff=2                                   " always show at least X lines above/below the cursor
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
 match ExtraWhitespace /\s\+$/                     " match ExtraWhitespace
@@ -360,7 +370,7 @@ nmap <silent> <C-f>       :NERDTreeFind<cr>
 nmap <silent> <leader>f   :NERDTreeToggle<cr>
 " nmap <silent> <leader>d   :bnext <CR>
 " nmap <silent> <leader>a   :bprevious <CR>
-nmap <silent> <c-o>       :FZFMru<CR>
+nmap <silent> <c-o>       :FZFFreshMru<CR>
 nmap <C-_>                :Commentary<CR>
 nmap <silent> <c-a>       :TagbarToggle<CR>
 map <silent> <leader>qq   :qa!<CR>
@@ -417,14 +427,20 @@ let g:go_fmt_command = 'goimports'
 let g:go_term_enabled = 1
 
 " cause there will be tabs, show them but without the ^I bollox
-autocmd FileType sh setlocal  listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
-autocmd FileType go setlocal  listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
+" autocmd FileType sh setlocal listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
+" autocmd FileType go setlocal  listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
+" autocmd FileType go setlocal  listchars=tab:→\ ,extends:❯,precedes:❮,trail:·,nbsp:·
+" autocmd FileType go setlocal  listchars=tab:\|_,extends:❯,precedes:❮,trail:·,nbsp:·
+autocmd FileType go setlocal  listchars=tab:\│\ ,extends:❯,precedes:❮,trail:·,nbsp:·
+autocmd FileType go setlocal  listchars=tab:\ \ ,extends:❯,precedes:❮,trail:·,nbsp:·
+autocmd FileType go setlocal  noet ts=4 sw=4 sts=4
+autocmd FileType go highlight SpecialKey guifg=red guibg=purple
 
 autocmd FileType go nmap <buffer> <leader>r <plug>(go-run)
 autocmd FileType go nmap <buffer> <leader>b <plug>(go-build)
 autocmd FileType go nmap <buffer> <leader>t <plug>(go-test)
 autocmd FileType go nmap <buffer> <leader>e <plug>(go-rename)
-" autocmd FileType go nmap <buffer> gd <plug>(go-def-vertical)
+autocmd FileType go nmap <buffer> <c-d> <plug>(go-def-vertical)
 autocmd FileType go nmap <buffer> <c-]> <plug>(go-def-vertical)
 autocmd FileType go nmap <buffer> <leader>i <plug>(go-info)
 
@@ -476,3 +492,26 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['Dockerfile'] = ''
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1
 " let g:NERDTreePatternMatchHighlightFullName = 1
+
+
+set hidden
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+
+
+let g:ruby_host_prog = '/home/starkers/.gem/ruby/2.5.0/bin/neovim-ruby-host'
+
+
+
+nmap <silent> <Leader>t <Plug>(CommandT)
+nmap <silent> <Leader>b <Plug>(CommandTBuffer)
+nmap <silent> <Leader>j <Plug>(CommandTJump)
+let g:CommandTTraverseSCM = "file"
+
+"       - "file": starting from the file currently being edited, traverse
+"         upwards through the filesystem hierarchy until you find an SCM root
+"         (as indicated by the presence of a ".git", ".hg" or similar directory)
+"         and use that as the base path. If no such root is found, fall back to
+"         using Vim's present working directory as a root. The list of SCM
+"         directories that Command-T uses to detect an SCM root can be
+" customized with the |g:CommandTSCMDirectories| option.

@@ -61,6 +61,15 @@ fi
 
 
 
+my_load_gemstuff(){
+  #TODO: dirty, fix me up.. decide/learn rbenv etc please
+  local gemstuff="${HOME}"/.gem/ruby/2.5.0/bin
+  if [ -d "${gemstuff}" ]; then
+    PATH="${gemstuff}:${PATH}"
+  fi
+}
+
+
 my_load_path_rbenv(){
   #load rbenv if exists
   if [ -d "${HOME}/.rbenv/bin" ]; then
@@ -68,7 +77,6 @@ my_load_path_rbenv(){
   fi
   # eval "$(rbenv init -)"
 }
-
 
 my_load_golang(){
   export GOPATH="${HOME}/go"
@@ -101,10 +109,11 @@ my_load_virtualenvwrapper(){
   fi
 }
 
-my_load_path_rbenv
+# my_load_path_rbenv
 my_load_golang
 my_load_pip
-my_load_virtualenvwrapper
+# my_load_virtualenvwrapper
+my_load_gemstuff
 my_load_path_home_bin
 
 
@@ -121,4 +130,14 @@ my_load_path_home_bin
 ## store my encrypted cheats and notes in keybase
 export CHEATCOLORS=true
 export CHEATPATH="/keybase/private/starkers/home/cheats"
+
+
+# function gcloud (){
+#   unset VIRTUAL_ENV
+#   local oldpath="${PATH}"
+#   PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+#   /opt/google-cloud-sdk/bin/gcloud $@
+#   export PATH=${oldpath}
+# }
+
 

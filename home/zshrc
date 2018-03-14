@@ -15,7 +15,7 @@ ZSH_THEME="default"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 
 #The theme_change() function will link up a random theme..
-# it is however a manual thing.. if a user as NOT linked a default one yet do so myself
+# if a user has NOT linked a default one yet do so myself
 #
 if [ ! -s "$HOME/.oh-my-zsh/themes/default.zsh-theme" ]; then
   echo "You've not picked a theme yet, run 'theme_change' to pick a random one anytime"
@@ -158,10 +158,10 @@ fancy-ctrl-z () {
     zle clear-screen
   fi
 }
+
+
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
-#export "PATH=$PATH:$HOME/go/bin:/usr/local/go/bin"
-#
 zstyle ":completion:*:commands" rehash 1
 bindkey '^W' vi-backward-kill-word
 
@@ -170,11 +170,7 @@ LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 export LS_COLORS
 
 my_nvm_load(){
-
   source /usr/share/nvm/init-nvm.sh
-  # export NVM_DIR="$HOME/.nvm"
-  # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 }
 
 # my_nvm_load
@@ -207,13 +203,6 @@ my_k_autocomplete
 fpath=(~/.zsh/completions $fpath)
 autoload -U compinit compdef
 compinit
-
-
-foo="$(which kubectl 2>/dev/null)"
-if [ -f "$foo" ] ; then
-  source <(kubectl completion zsh)
-fi
-unset foo
 
 
 #for VTE (tilix)
