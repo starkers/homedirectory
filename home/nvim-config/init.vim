@@ -8,6 +8,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " "==========            completions and linting"
 function! BuildYCM(info)
   " function to automatically run install.py for you
+  " to run manually: "cd ~/.local/share/nvim/plugged/YouCompleteMe ; ./install.py"
   " info is a dictionary with 3 fields
   "  - name:    name of the plugin
   "  - status: 'installed', 'updated', or 'unchanged'
