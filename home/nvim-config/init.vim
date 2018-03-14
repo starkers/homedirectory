@@ -35,6 +35,8 @@ Plug 'zchee/deoplete-jedi'                                " python
 Plug 'davidhalter/jedi'                                   " python jedi
 Plug 'jmcantrell/vim-virtualenv'                          " venv support
 Plug 'hashivim/vim-terraform'                             " basic terraform
+Plug 'martinda/Jenkinsfile-vim-syntax'                    " fml
+Plug 'ekalinin/Dockerfile.vim'
 
 
 " "========================================================================"
@@ -62,9 +64,7 @@ Plug 'honza/vim-snippets'                                         " snip
 
 " "========================================================================"
 " "==========            Visual Mods"
-Plug 'rafi/awesome-vim-colorschemes'                "collection of colorshemes
 Plug 'vim-airline/vim-airline'                      "airline
-Plug 'vim-airline/vim-airline-themes'               "airline themes
 Plug 'Yggdroot/indentLine'                          "show indent levels (very handy for yaml)
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
@@ -72,6 +72,11 @@ Plug 'ryanoasis/vim-devicons'                       "show icons for filetypes in
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicons
 
 
+" "========================================================================"
+" "==========            Themes"
+Plug 'flazz/vim-colorschemes'
+Plug 'rafi/awesome-vim-colorschemes'                "collection of colorshemes
+Plug 'vim-airline/vim-airline-themes'               "airline themes
 
 call plug#end()
 """ "========================================================================"
@@ -140,7 +145,11 @@ map <silent> <leader>? :edit ~/.cheat/vim<CR>
 " https://github.com/vim-airline/vim-airline/wiki/Screenshots
 " let g:airline_theme = "bubblegum"                 " airline theme
 " let g:airline_theme = "tomorrow"
-let g:airline_theme = "violet"
+" let g:airline_theme = "violet"
+let g:airline_theme = "murmur"
+" let g:airline_theme = "papercolor"
+" let g:airline_theme = "cobalt2"
+" let g:airline_theme = "light"
 " let g:airline#extensions#tabline#enabled = 1      " Enable the list of buffers
 
 " " let g:airline#extensions#tabline#fnamemod = ':t'  " Show just the filename
@@ -192,9 +201,16 @@ let g:airline_powerline_fonts = 1                 " you must have appropriate fo
 let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
+" colorscheme dw_purple
+" colorscheme evening
+" colorscheme flattened_dark
+" colorscheme flattown
+" colorscheme iceberg
+" colorscheme kalisi                            "not bad, great for diffs, just top buffer hard to distinguish
+colorscheme maroloccio
 " colorscheme focuspoint
 " colorscheme dracula
-colorscheme deep-space                            " nice and rounded dark theme
+" colorscheme deep-space                            " nice and rounded dark theme
 " colorscheme paramount                            " nice and rounded dark theme
 " colorscheme PaperColor                           " nice and rounded dark theme
 " colorscheme orange-moon                          " nice but diffs hard to read
@@ -361,31 +377,33 @@ let g:indentLine_char = '┆'
 nmap <silent> <leader>i   :IndentLinesToggle <CR>
 let g:indentLine_enabled = 0
 
+""" nerdtree tweaks
+let NERDTreeShowHidden=1
+
 
 """ "custom binds"
-nmap <silent> <c-n>       :enew <CR>
-nmap <leader>g            :GitGutterToggle<CR>
-" nmap <leader>[            :GitGutterPrevHunk<CR>
-" nmap <leader>]            :GitGutterNextHunk<CR>
-nmap <silent> <C-f>       :NERDTreeFind<cr>
-nmap <silent> <leader>f   :NERDTreeToggle<cr>
-" nmap <silent> <leader>d   :bnext <CR>
-" nmap <silent> <leader>a   :bprevious <CR>
-nmap <silent> <c-o>       :FZFFreshMru<CR>
-nmap <C-_>                :Commentary<CR>
-nmap <silent> <c-a>       :TagbarToggle<CR>
-map <silent> <leader>qq   :qa!<CR>
+" nmap    <leader>[            :GitGutterPrevHunk<CR>
+" nmap    <leader>]            :GitGutterNextHunk<CR>
+" nmap    <silent> <leader>a   :bprevious <CR>
+" nmap    <silent> <leader>d   :bnext <CR>
+nmap    <C-_>                :Commentary<CR>
+nmap    <Leader>c vip:TComment<cr>
+nmap    <leader>g            :GitGutterToggle<CR>
+nmap    <silent> <C-f>       :NERDTreeFind<cr>
+nmap    <silent> <c-a>       :TagbarToggle<CR>
+nmap    <silent> <c-n>       :enew <CR>
+nmap    <silent> <c-o>       :FZFFreshMru<CR>
+nmap    <silent> <leader>f   :NERDTreeToggle<cr>
+nmap    <silent> <leader>q   :bdelete! <CR>
 noremap <leader>p "+p
 noremap <leader>y "+y
-nmap <silent> <leader>q   :bdelete! <CR>
-nmap <Leader>c vip:TComment<cr>
+noremap <silent> <leader>qq   :qa!<CR>
 
-""" FileType rules
-au BufReadPost *Jenkinsfile set syntax=groovy
-au BufReadPost *Jenkinsfile set filetype=groovy
+" """ FileType rules
+" au BufReadPost *Jenkinsfile set syntax=groovy
+" au BufReadPost *Jenkinsfile set filetype=groovy
+
 filetype plugin indent on
-
-
 
 
 """ tmp files and undo
@@ -408,44 +426,6 @@ nmap <F3> :PrevColorScheme<CR>
 
 
 
-" au FileType go nmap <leader>rt <Plug>(go-run-tab)
-" au FileType go nmap <leader>rs <Plug>(go-run-split)
-" au FileType go nmap <leader>rv <Plug>(go-run-vertical)
-
-
-
-
-
-
-
-"""" "golang"
-" au BufRead,BufNewFile *.go  set filetype=go
-
-" vim-go
-" let g:go_def_mapping_enabled = 0
-let g:go_fmt_command = 'goimports'
-" let g:go_fmt_fail_silently = 1
-let g:go_term_enabled = 1
-
-" cause there will be tabs, show them but without the ^I bollox
-" autocmd FileType sh setlocal listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
-" autocmd FileType go setlocal  listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·
-" autocmd FileType go setlocal  listchars=tab:→\ ,extends:❯,precedes:❮,trail:·,nbsp:·
-" autocmd FileType go setlocal  listchars=tab:\|_,extends:❯,precedes:❮,trail:·,nbsp:·
-autocmd FileType go setlocal  listchars=tab:\│\ ,extends:❯,precedes:❮,trail:·,nbsp:·
-autocmd FileType go setlocal  listchars=tab:\ \ ,extends:❯,precedes:❮,trail:·,nbsp:·
-autocmd FileType go setlocal  noet ts=4 sw=4 sts=4
-autocmd FileType go highlight SpecialKey guifg=red guibg=purple
-
-autocmd FileType go nmap <buffer> <leader>r <plug>(go-run)
-autocmd FileType go nmap <buffer> <leader>b <plug>(go-build)
-autocmd FileType go nmap <buffer> <leader>t <plug>(go-test)
-autocmd FileType go nmap <buffer> <leader>e <plug>(go-rename)
-autocmd FileType go nmap <buffer> <c-d> <plug>(go-def-vertical)
-autocmd FileType go nmap <buffer> <c-]> <plug>(go-def-vertical)
-autocmd FileType go nmap <buffer> <leader>i <plug>(go-info)
-
-
 " deoplete
 imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
@@ -454,19 +434,17 @@ imap <expr> <cr> pumvisible() ? deoplete#close_popup() : "\<cr>"
 
 
 " deoplete
-set completeopt=longest,menuone " auto complete setting
+set completeopt=longest,menuone           " auto complete setting
+let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#keyword_patterns = {}
 let g:deoplete#keyword_patterns['default'] = '\h\w*'
 let g:deoplete#omni#input_patterns = {}
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#align_class = 1
 
-
-" let NERDTree show hidden files on default
-let NERDTreeShowHidden=1
+" let g:NERDTreeFileExtensionHighlightFullName = 1
+" let g:NERDTreeExactMatchHighlightFullName = 1
+" let g:NERDTreePatternMatchHighlightFullName = 1
 
 " resize current buffer by +/- 5 (shift+arrows)
 nnoremap <S-up>    :resize -5<cr>
@@ -474,25 +452,9 @@ nnoremap <S-down>  :resize +5<cr>
 nnoremap <S-left>  :vertical resize -5<cr>
 nnoremap <S-right> :vertical resize +5<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" add some additional filetype symbols
-" (note this requires a NerdFont patched font in your term)
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}                      "required
 
-" terraform
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tf'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tfstate.backup'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tfvars'] = ''
-
-" files without .extentions
-"
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {} " needed
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['Jenkinsfile'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['Dockerfile'] = ''
-
-" let g:NERDTreeFileExtensionHighlightFullName = 1
-" let g:NERDTreeExactMatchHighlightFullName = 1
-" let g:NERDTreePatternMatchHighlightFullName = 1
+autocmd BufRead,BufNewFile *.Jenkinsfile set ft=Jenkinsfile
+autocmd BufRead,BufNewFile *.Jenkinsfile setf Jenkinsfile
 
 
 set hidden
@@ -500,6 +462,8 @@ nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
 
 
+
+"TODO: fixme
 let g:ruby_host_prog = '/home/starkers/.gem/ruby/2.5.0/bin/neovim-ruby-host'
 
 
