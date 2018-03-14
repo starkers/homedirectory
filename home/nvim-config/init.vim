@@ -139,7 +139,8 @@ map <silent> <leader>? :edit ~/.cheat/vim<CR>
 
 " https://github.com/vim-airline/vim-airline/wiki/Screenshots
 " let g:airline_theme = "bubblegum"                 " airline theme
-let g:airline_theme = "bubblegum"                 " airline theme
+" let g:airline_theme = "tomorrow"
+let g:airline_theme = "violet"
 " let g:airline#extensions#tabline#enabled = 1      " Enable the list of buffers
 
 " " let g:airline#extensions#tabline#fnamemod = ':t'  " Show just the filename

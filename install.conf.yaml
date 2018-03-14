@@ -25,8 +25,9 @@
     ~/.config/autostart:      'autostart'
     ~/.shell_functions:       'shell_functions'
     ~/.aliases:               'aliases'
-    ~/.oh-my-zsh:             'oh-my-zsh'
+    # ~/.oh-my-zsh:             'oh-my-zsh'
     ~/.zshrc:                 'zshrc'
+    ~/.zsh_custom:            'zsh_custom'
     ~/.bashrc:                'bashrc'
     ~/.bashrc_git:            'git-prompt.sh'
     ~/.bin:                   'bin'              #scripts and general "helpers"
@@ -49,6 +50,7 @@
     ~/.fzf.bash:              'fzf.bash'
     ~/.config/dunst:          'dunst'
     ~/.xinitrc:               'xinitrc'
+    ~/.antigen:               'antigen'
 
 - shell:
   - mkdir -p ~/.local/share/applications
