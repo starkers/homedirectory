@@ -202,28 +202,7 @@ let g:airline_powerline_fonts = 1                 " you must have appropriate fo
 let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
-" colorscheme dw_purple
-" colorscheme evening
-" colorscheme flattened_dark
-" colorscheme flattown
-" colorscheme iceberg
-" colorscheme kalisi                            "not bad, great for diffs, just top buffer hard to distinguish
-colorscheme maroloccio
-" colorscheme focuspoint
-" colorscheme dracula
-" colorscheme deep-space                            " nice and rounded dark theme
-" colorscheme paramount                            " nice and rounded dark theme
-" colorscheme PaperColor                           " nice and rounded dark theme
-" colorscheme orange-moon                          " nice but diffs hard to read
-" colorscheme onedark
-" colorscheme materialbox
-" colorscheme molokai
-" colorscheme hybrid_material
-" colorscheme space-vim-dark
-" colorscheme carbonized-dark
-" colorscheme wombat256mod
-" colorscheme yellow-moon  "crap diff
-" colorscheme OceanicNextLight
+colorscheme wombat256mod
 set scrolloff=2                                   " always show at least X lines above/below the cursor
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
