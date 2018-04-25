@@ -4,52 +4,45 @@ unbind C-x
 set-option -g prefix C-x
 bind-key C-x send-prefix
 
-# split panes using | and -
+# split using same keys as terminator (eg: ctrl-x, e)
 bind e split-window -h
 bind o split-window -v
+
+
 unbind '"'
 unbind %
 
 ################
-# MOUSE   #####
-###############
+# MOUSE   ######
+################
+# credit: https://unix.stackexchange.com/questions/318281/how-to-copy-and-paste-with-a-mouse-with-tmux
+#
+# Basically this turns the mouse on (for resizing windows mostly)
+# AND when u drag over text it copies it both to tmux + x11 clipboard
+set -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
+bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
+bind -T copy-mode-vi    C-WheelUpPane   send-keys -X halfpage-up
+bind -T copy-mode-vi    C-WheelDownPane send-keys -X halfpage-down
+bind -T copy-mode-emacs C-WheelUpPane   send-keys -X halfpage-up
+bind -T copy-mode-emacs C-WheelDownPane send-keys -X halfpage-down
+# re-bind 'Enter' copy to also copy to X11
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -selection c"
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
 
-# #old version of tmux:
-# # Enable mouse control (clickable windows, panes, resizable panes)
-# set -g mouse-select-window on
-# set -g mouse-select-pane on
-# set -g mouse-resize-pane on
-
-# # Enable mouse mode (tmux 2.1 and above)
-# set -g mouse off
-
-# # don't rename windows automatically
-# set-option -g allow-rename off
-
-
-# bind o split-window -h
-# bind e split-window -v
-
-
-# ##copy paste like vi (see: http://jasonwryan.com/blog/2011/06/07/copy-and-paste-in-tmux/ )
-# setw -g mode-keys vi
-# unbind [
-# bind Escape copy-mode
-# unbind p
-# bind p paste-buffer
-# # bind-key -t vi-copy 'v' begin-selection
-# # bind-key -t vi-copy 'y' copy-selection
-# ##  workflow:
-# ## ctrl+x,escape      # enter copy mode
-# ## -move cursor about to start selecting
-# ## v                  #to activate highlighting
-# ## -move cursor about to cover what u want
-# ## y                  #capture the string
-# ## q                  #exit copy mode
-# ## ctrl+x,p           #paste
-# #
-# #
-
+#####################
+# copy/paste   ######
+#####################
+# makes it easier for copy + paste (IMO)
+#  Ctrl+x, [ will initialise copy mode
+#  ... move around and navigate to selection start
+#  [space] to start selection
+#  ... move around to end
+#  [enter] to end selection
+#  Ctrl+x, ] to insert
+setw -g mode-keys vi
 
 
 ######################
@@ -156,9 +149,4 @@ set -g message-bg colour166
 
 # Sane scrolling, allows normal terminal scrolling
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'<Paste>
-
 set -g history-limit 30000
-
-bind -T root WheelUpPane   if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
-bind -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
-set -g mouse on
