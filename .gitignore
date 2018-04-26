@@ -23,3 +23,6 @@ home/kube/schema/**
 home/bin/vendor/**
 
 home/nvim-share/shada/*.shada
+
+# ~/.font directories get temp .uuid files created now..
+.uuid
