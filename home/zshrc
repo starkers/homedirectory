@@ -103,3 +103,4 @@ my_load_direnv
 my_load_aliases
 my_load_profile
 my_load_shell_functions
+my_load_gnome_keyring
