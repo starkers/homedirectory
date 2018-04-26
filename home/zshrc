@@ -69,11 +69,11 @@ fi
 export ZSH_CUSTOM="${HOME}/.zsh_custom"
 export ZSH_THEME="starkers"
 
-source ${HOME}/.antigen/antigen.zsh
+source /usr/share/zsh/share/antigen.zsh
 antigen use oh-my-zsh
 
 # stuff I *mostly* use
-antigen bundle cheat
+# antigen bundle cheat
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle git
