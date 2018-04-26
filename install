@@ -1,16 +1,40 @@
 #!/usr/bin/env bash
 
-set -x
-
 set -e
+ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# I do unique things to my machines depending on which one..
+# EG:
+#  - the desktop PC has iommu VFIO passthrough for GameOS (windows)
+#  - the laptop(s) have things like TLP, bumblebee or whatnot
+# I'm simply going to use the "model name" of the CPU from /proc/cpuinfo
+# if there is a directory here called ./tweaks/<model name> (spaces replaced with underscores)
+# then this script will execute the scripts in there in sequence
+
+CPU="$(grep "model name" /proc/cpuinfo | uniq | cut -c 14-99)"
+CPU_SANE="$(sed "s+ +_+g" <<<"${CPU}")"
+TWEAKDIR="${ROOTDIR}/tweaks/${CPU_SANE}"
+if [ -d "${TWEAKDIR}" ]; then
+  echo found tweakdir:${TWEAKDIR}
+  for file in "${TWEAKDIR}/"* ; do
+    echo "##### executing: $file #####"
+    "${file}"
+  done
+else
+  echo "no tweaks found in ${TWEAKDIR}"
+fi
+for file in "${ROOTDIR}/tweaks/common/"* ; do
+  echo "##### executing: $file #####"
+  "${file}"
+done
+
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd "${BASEDIR}"
+cd "${ROOTDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}"/home -c "${CONFIG}" "${@}"
+"${ROOTDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${ROOTDIR}"/home -c "${CONFIG}" "${@}"
