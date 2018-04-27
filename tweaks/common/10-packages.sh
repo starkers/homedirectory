@@ -8,24 +8,30 @@ declare -a extra_groups=(
 
 declare -a arch_packages=(
   antigen-git
+  arandr
   atool
-  copyq
   compton
+  copyq
+  correcthorse
   direnv
   docker
   docker-compose
   feh
+  firefox
   flameshot
   fzf
   gitkraken
   go
   htop
   i3-gaps
+  i3blocks
   keybase-bin
   lynx
   mc
   ncdu
   neovim
+  ntpdate
+  pwgen
   python-cheat
   python-neovim
   python-virtualenv
@@ -33,13 +39,16 @@ declare -a arch_packages=(
   ranger
   rofi
   rsync
+  scrot
   silver-searcher-git
   slack-desktop
+  sysstat
   terminator
   thunderbird
   tig
   tilix
   tmux
+  vim
   xclip
   xdotool
   xorg-xbacklight
@@ -50,6 +59,7 @@ declare -a arch_packages=(
 declare -a arch_services=(
   docker
   libvirtd
+  sysstat
 )
 
 function is_arch(){
