@@ -2,14 +2,15 @@
 set -e
 
 declare -a arch_packages=(
-  ovmf
-  virt-manager
-  qemu
   dnsmasq
+  libvirt
   nvidia
+  ovmf
+  qemu
+  virt-manager
 )
 
-declare -a arch_packages=(
+declare -a arch_services=(
   libvirtd
 )
 

@@ -17,12 +17,13 @@ MY_OS="$(uname -s)"
 #load gpg/ssh env
 my_load_gnome_keyring(){
   if grep -q "Linux" <<<"$MY_OS" ; then
-    export $(gnome-keyring-daemon -s)
-    #NB: I expect to see summing like this after:
-    #    GNOME_KEYRING_CONTROL=/run/user/1000/keyring
-    #    GPG_AGENT_INFO=/home/dstark/.gnupg/S.gpg-agent:0:1
-    #    SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-
+    if [[ -v DISPLAY ]]; then
+      export $(gnome-keyring-daemon -s)
+      #NB: I expect to see summing like this after:
+      #    GNOME_KEYRING_CONTROL=/run/user/1000/keyring
+      #    GPG_AGENT_INFO=/home/dstark/.gnupg/S.gpg-agent:0:1
+      #    SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+    fi
   fi
 }
 
@@ -69,6 +70,7 @@ my_load_golang
 my_load_pip
 my_load_gemstuff
 my_load_path_home_bin
+my_load_gnome_keyring
 
 
 ## additions to "cheat" (pip install cheat --user)

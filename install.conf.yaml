@@ -88,6 +88,7 @@
 #   - chmod 0700 ~/.mutt/cache/headers
 #   - chmod 0700 ~/.mutt/cache/bodies
 #   - mkdir -p ~/.weechat/logs
+  - mkdir -p ~/.ssh
   - cp -R /keybase/private/starkers/home/ssh/* ~/.ssh/.
   - chmod 0700 ~/.ssh/
   - chmod 0600 ~/.ssh/id_*
