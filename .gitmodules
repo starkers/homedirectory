@@ -4,9 +4,3 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = git://github.com/anishathalye/dotbot
-[submodule "home/oh-my-zsh"]
-	path = home/oh-my-zsh
-	url = git@github.com:robbyrussell/oh-my-zsh.git
-[submodule "home/antigen"]
-	path = home/antigen
-	url = git@github.com:zsh-users/antigen.git

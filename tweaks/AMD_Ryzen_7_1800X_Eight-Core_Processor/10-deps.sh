@@ -9,6 +9,14 @@ declare -a arch_packages=(
   nvidia
 )
 
+declare -a arch_packages=(
+  libvirtd
+)
+
+declare -a extra_groups=(
+  libvirt
+)
+
 function is_arch(){
   if [ -f /etc/pacman.conf ]; then
     return 0
@@ -49,7 +57,19 @@ function deps_arch(){
   done
 }
 
-
 if is_arch; then
   deps_arch
+  for i in "${arch_services[@]}" ; do
+    echo systemctl enable $i
+    sudo systemctl enable $i
+    echo systemctl start $i
+    sudo systemctl start $i
+  done
+
+  # add myself to these groups
+  for i in "${extra_groups[@]}" ; do
+    echo sudo usermod -a -G ${i} $(whoami)
+    sudo usermod -a -G ${i} $(whoami)
+  done
+
 fi

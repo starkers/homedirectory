@@ -12,17 +12,15 @@
   - mkdir -p ~/.config/mc
   - cp -rvp mc/* ~/.config/mc/.
   # destroy these directories if they exist already
-  - D="${HOME}/.ssh" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+# - D="${HOME}/.ssh" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 
 - link:
-    ~/.ssh:                   '/keybase/private/starkers/home/ssh'
+#   ~/.ssh:                   '/keybase/private/starkers/home/ssh'
     ~/.gitconfig:             'gitconfig'
 
 
 
 ############## MISC
-- shell:
-  - [git submodule update --init --recursive, Installing submodules]
 
 - link:
     ~/.bin:                   'bin'              #scripts and general "helpers"
@@ -84,14 +82,16 @@
 #   - mkdir -p ~/.local/share/applications
 #   - cp -rvp applications/* ~/.local/share/applications/.
 #
-# - shell:
+- shell:
 #   - mkdir -p ~/.mutt/cache/headers
 #   - mkdir -p ~/.mutt/cache/bodies
 #   - chmod 0700 ~/.mutt/cache/headers
 #   - chmod 0700 ~/.mutt/cache/bodies
 #   - mkdir -p ~/.weechat/logs
-#   - chmod 0700 ~/.ssh/
-#   - chmod 0600 ~/.ssh/id_*
+  - cp -R /keybase/private/starkers/home/ssh/* ~/.ssh/.
+  - chmod 0700 ~/.ssh/
+  - chmod 0600 ~/.ssh/id_*
+  - [git submodule update --init --recursive, Installing submodules]
 
 
 ## VIM

@@ -3,7 +3,6 @@ set -e
 
 declare -a extra_groups=(
   docker
-  libvirt
 )
 
 declare -a arch_packages=(
@@ -66,7 +65,6 @@ declare -a arch_packages=(
 declare -a arch_services=(
   docker
   fail2ban
-  libvirtd
   sshd
   sysstat
 )

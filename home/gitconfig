@@ -21,8 +21,8 @@
   # up  = "!git remote update -p; git merge --ff-only @{u}"
   pf = pull -ff
 
-[url "git@github.com:"]
-  insteadOf = https://github.com/
+#[url "git@github.com:"]
+#  insteadOf = https://github.com/
 
 
 
