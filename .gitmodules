@@ -1,6 +1,3 @@
-[submodule "home/zsh/zsh-autosuggestions"]
-	path = home/zsh/zsh-autosuggestions
-	url = git://github.com/zsh-users/zsh-autosuggestions
 [submodule "dotbot"]
 	path = dotbot
 	url = git://github.com/anishathalye/dotbot
