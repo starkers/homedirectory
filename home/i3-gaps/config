@@ -23,7 +23,7 @@ set $ws10 "10:  "
 # others:
 # ♬ |  |  |  | 
 
-set $default_gaps_inner 25
+set $default_gaps_inner 20
 set $default_gaps_outer 0
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer

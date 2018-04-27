@@ -16,21 +16,26 @@ declare -a arch_packages=(
   direnv
   docker
   docker-compose
+  fail2ban
   feh
   firefox
   flameshot
   fzf
   gitkraken
   go
+  gthumb
   htop
   i3-gaps
   i3blocks
   keybase-bin
+  libreoffice-fresh-en-gb
   lynx
   mc
+  mpv
   ncdu
   neovim
   ntpdate
+  openssh
   pwgen
   python-cheat
   python-neovim
@@ -40,6 +45,7 @@ declare -a arch_packages=(
   rofi
   rsync
   scrot
+  seafile-client
   silver-searcher-git
   slack-desktop
   sysstat
@@ -49,6 +55,7 @@ declare -a arch_packages=(
   tilix
   tmux
   vim
+  volumeicon
   xclip
   xdotool
   xorg-xbacklight
@@ -58,7 +65,9 @@ declare -a arch_packages=(
 
 declare -a arch_services=(
   docker
+  fail2ban
   libvirtd
+  sshd
   sysstat
 )
 

@@ -5,7 +5,7 @@
 Name=Keybase
 Comment=Keybase Filesystem Service and GUI
 Type=Application
-Exec=env KEYBASE_START_UI=hideWindow run_keybase
+Exec=env KEYBASE_START_UI=hideWindow XDG_CURRENT_DESKTOP=Unity run_keybase
 
 # Uncomment the following line to disable Keybase autostart:
 #Hidden=true
