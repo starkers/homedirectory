@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 UPDATE_INITRD=0
 
-VFIO_OPTS="options vfio-pci ids=10de:13c2,10de:0fbb,1022:1455"
+VFIO_OPTS="options vfio-pci ids=1022:1455,1002:67df,1002:aaf0"
 
 function set_modprobe(){
   echo "setting /etc/modprobe.d/vfio.conf"
