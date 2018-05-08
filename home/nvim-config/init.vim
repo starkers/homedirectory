@@ -78,6 +78,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicon
 Plug 'flazz/vim-colorschemes'
 Plug 'rafi/awesome-vim-colorschemes'                "collection of colorshemes
 Plug 'vim-airline/vim-airline-themes'               "airline themes
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 """ "========================================================================"
@@ -202,7 +203,7 @@ let g:airline_powerline_fonts = 1                 " you must have appropriate fo
 let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
-colorscheme wombat256mod
+colorscheme onedark
 set scrolloff=2                                   " always show at least X lines above/below the cursor
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
