@@ -3,6 +3,7 @@ set -e
 
 declare -a extra_groups=(
   docker
+  vboxusers
 )
 
 declare -a arch_packages=(
@@ -12,32 +13,39 @@ declare -a arch_packages=(
   compton
   copyq
   correcthorse
+  ctags
   direnv
   docker
   docker-compose
   fail2ban
   feh
   firefox
+  flake8
   flameshot
   fzf
   gitkraken
   go
+  google-cloud-sdk-minimal
   gthumb
   htop
   i3-gaps
   i3blocks
   keybase-bin
+  kubectl-bin
   libreoffice-fresh-en-gb
   lynx
   mc
+  minikube-bin
   mpv
   ncdu
   neovim
+  nload
   ntpdate
   openssh
   pwgen
   python-cheat
   python-neovim
+  python-pip
   python-virtualenv
   python2-virtualenv
   ranger
@@ -54,6 +62,9 @@ declare -a arch_packages=(
   tilix
   tmux
   vim
+  virtualbox
+  virtualbox-guest-iso
+  virtualbox-host-dkms
   volumeicon
   xclip
   xdotool
