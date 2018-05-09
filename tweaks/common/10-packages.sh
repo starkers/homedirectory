@@ -3,13 +3,16 @@ set -e
 
 declare -a extra_groups=(
   docker
+  mpd
   vboxusers
 )
 
 declare -a arch_packages=(
+  android-sdk-platform-tools
   antigen-git
   arandr
   atool
+  chrome-gnome-shell
   compton
   copyq
   correcthorse
@@ -36,8 +39,10 @@ declare -a arch_packages=(
   lynx
   mc
   minikube-bin
+  mpd
   mpv
   ncdu
+  ncmpc
   neovim
   nload
   ntpdate
@@ -55,6 +60,7 @@ declare -a arch_packages=(
   seafile-client
   silver-searcher-git
   slack-desktop
+  sonata
   sysstat
   terminator
   thunderbird
@@ -76,6 +82,7 @@ declare -a arch_packages=(
 declare -a arch_services=(
   docker
   fail2ban
+  mpd
   sshd
   sysstat
 )

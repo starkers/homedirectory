@@ -69,7 +69,7 @@
   - F="${HOME}/.config/compton.conf" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
   - D="${HOME}/.config/i3" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 - link:
-#     ~/.tmux.conf:             'tmux'
+    ~/.tmux.conf:             'tmux'
     # ~/.local/share/mc/skins:  'mc-skins'
     ~/.config/autostart:      'autostart'
     ~/.config/i3:             'i3-gaps'
