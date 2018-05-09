@@ -174,6 +174,7 @@ bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-volume $output
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume $output_sink +2%
 
 exec        --no-startup-id compton -b
+# exec        --no-startup-id /usr/bin/gnome-keyring-daemon --daemonize --login &
 exec        --no-startup-id /usr/bin/setxkbmap gb &
 exec        --no-startup-id /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
 exec        --no-startup-id /usr/bin/xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1

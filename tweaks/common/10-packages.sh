@@ -20,6 +20,7 @@ declare -a arch_packages=(
   direnv
   docker
   docker-compose
+  dunst
   fail2ban
   feh
   firefox
@@ -33,6 +34,7 @@ declare -a arch_packages=(
   htop
   i3-gaps
   i3blocks
+  i3lock-fancy-dualmonitors-git
   keybase-bin
   kubectl-bin
   libreoffice-fresh-en-gb
@@ -72,8 +74,10 @@ declare -a arch_packages=(
   virtualbox-guest-iso
   virtualbox-host-dkms
   volumeicon
+  xautolock
   xclip
   xdotool
+  xinit-xsession
   xorg-xbacklight
   xsel
   zsh
