@@ -17,8 +17,8 @@ MY_OS="$(uname -s)"
 #load gpg/ssh env
 my_load_gnome_keyring(){
   if grep -q "Linux" <<<"$MY_OS" ; then
-    if [[ -v DISPLAY ]]; then
-      export $(gnome-keyring-daemon -s)
+    if grep -q "i3" <<<"${DESKTOP_SESSION}" ; then
+      export $(gnome-keyring-daemon --start)
       #NB: I expect to see summing like this after:
       #    GNOME_KEYRING_CONTROL=/run/user/1000/keyring
       #    GPG_AGENT_INFO=/home/dstark/.gnupg/S.gpg-agent:0:1
