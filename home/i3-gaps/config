@@ -177,7 +177,10 @@ exec        --no-startup-id compton -b
 # exec        --no-startup-id /usr/bin/gnome-keyring-daemon --daemonize --login &
 exec        --no-startup-id /usr/bin/setxkbmap gb &
 exec        --no-startup-id /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
+# for the thinkpad
 exec        --no-startup-id /usr/bin/xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+# for the XPS 15
+exec        --no-startup-id /usr/bin/xinput set-prop "DLL06E4:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 exec        --no-startup-id nm-applet &
 exec        --no-startup-id blueman-applet &
 exec        --no-startup-id redshift-gtk &
