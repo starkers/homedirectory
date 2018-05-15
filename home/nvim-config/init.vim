@@ -264,14 +264,6 @@ endfunction
 nnoremap <leader>n  :call NumberToggle()<cr>
 
 
-""" "enable code completion"
-" let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_refresh_always=0
-let g:deoplete#file#enable_buffer_path=1
-let g:deoplete#auto_completion_start_length = 0
-
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 
 " have vim jump to last location in a file on default
@@ -407,21 +399,24 @@ nmap <F3> :PrevColorScheme<CR>
 
 
 
-" deoplete
-imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
-imap <expr> <cr> pumvisible() ? deoplete#close_popup() : "\<cr>"
+" """ deoplete completion
+
+" set completeopt=longest,menuone           " auto complete setting
+" let g:deoplete#auto_complete_start_length = 1
+" let g:deoplete#auto_completion_start_length = 0
+" let g:deoplete#enable_at_startup=1
+" let g:deoplete#enable_refresh_always=0
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#file#enable_buffer_path=1
+" let g:deoplete#keyword_patterns = {}
+" let g:deoplete#keyword_patterns['default'] = '\h\w*'
+" let g:deoplete#omni#input_patterns = {}
+" deoplete tab-complete
+inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+" imap <expr> <cr> pumvisible() ? deoplete#close_popup() : "\<cr>"
 
 
-
-" deoplete
-set completeopt=longest,menuone           " auto complete setting
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns['default'] = '\h\w*'
-let g:deoplete#omni#input_patterns = {}
 
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1

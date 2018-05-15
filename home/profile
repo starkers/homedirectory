@@ -16,15 +16,7 @@ MY_OS="$(uname -s)"
 
 #load gpg/ssh env
 my_load_gnome_keyring(){
-  if grep -q "Linux" <<<"$MY_OS" ; then
-    if grep -q "i3" <<<"${DESKTOP_SESSION}" ; then
-      export $(gnome-keyring-daemon --start)
-      #NB: I expect to see summing like this after:
-      #    GNOME_KEYRING_CONTROL=/run/user/1000/keyring
-      #    GPG_AGENT_INFO=/home/dstark/.gnupg/S.gpg-agent:0:1
-      #    SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-    fi
-  fi
+  export $(gnome-keyring-daemon --start)
 }
 
 my_load_path_home_bin(){
@@ -70,7 +62,9 @@ my_load_golang
 my_load_pip
 my_load_gemstuff
 my_load_path_home_bin
-my_load_gnome_keyring
+if egrep -q "i3|xinitrc" <<<"${DESKTOP_SESSION}" ; then
+  my_load_gnome_keyring
+fi
 
 
 ## additions to "cheat" (pip install cheat --user)

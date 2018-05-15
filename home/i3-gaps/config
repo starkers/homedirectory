@@ -14,8 +14,8 @@ set $ws2   "2:  "
 set $ws3   "3:  "
 set $ws4   "4:  "
 set $ws5   "5:  "
-set $ws6   "6:  "
-set $ws7   "7:  "
+set $ws6   "6:  "
+set $ws7   "7:  "
 set $ws8   "8:  "
 set $ws9   "9:  "
 set $ws10 "10:  "
@@ -23,7 +23,7 @@ set $ws10 "10:  "
 # others:
 # ♬ |  |  |  | 
 
-set $default_gaps_inner 20
+set $default_gaps_inner 15
 set $default_gaps_outer 0
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
@@ -37,7 +37,7 @@ floating_maximum_size -1 x -1
 
 new_window pixel
 smart_gaps on
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 hide_edge_borders both
 
 font pango:Hack 12
@@ -84,13 +84,13 @@ bindsym $mod+Shift+c     reload
 bindsym $mod+Shift+r     restart
 bindsym $mod+Tab         workspace back_and_forth
 bindsym $mod+f           fullscreen
-bindsym $mod+q           kill
+bindsym $mod+w           kill
 
 bindsym $mod+v           split v
 bindsym $mod+h           split h
 
 bindsym $mod+e           layout toggle split
-bindsym $mod+w           layout tabbed
+bindsym $mod+t           layout tabbed
 bindsym $mod+s           layout stacking
 
 
@@ -157,7 +157,7 @@ bindsym $mod+n                exec --no-startup-id nautilus --no-desktop "${HOME
 bindsym Print                 exec --no-startup-id flameshot gui
 bindsym XF86MonBrightnessDown exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -dec 5
 bindsym XF86MonBrightnessUp   exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -inc 5
-bindsym $mod+Return           exec --no-startup-id terminator
+bindsym $mod+Return           exec --no-startup-id tilix
 bindsym $mod+d                exec --no-startup-id $HOME/.config/i3/rof
 bindsym $mod+g                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
 bindsym $mod+l                exec --no-startup-id $HOME/.config/i3/scripts/i3exit lock
