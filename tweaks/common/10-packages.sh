@@ -28,6 +28,7 @@ declare -a arch_packages=(
   flameshot
   fzf
   gitkraken
+  gksu
   go
   google-cloud-sdk-minimal
   gthumb
