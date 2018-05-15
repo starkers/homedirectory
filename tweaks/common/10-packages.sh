@@ -69,6 +69,7 @@ declare -a arch_packages=(
   tig
   tilix
   tmux
+  vagrant
   vim
   virtualbox
   virtualbox-guest-iso
