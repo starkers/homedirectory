@@ -8,7 +8,7 @@ set -x
 
 # pkill i3lock
 
-scrot -e 'convert $f -blur 8x8 $f && ( i3lock --pointer=default -i $f && rm $f)'
+cd /tmp ; scrot -e 'convert $f -blur 8x8 $f && ( i3lock --pointer=default -i $f && rm $f)'
 
 # tmpd="$(mktemp -d)"
 # lockimg="${tmpd}/image.png"
