@@ -8,6 +8,7 @@ declare -a extra_groups=(
 )
 
 declare -a arch_packages=(
+  abricotine
   android-sdk-platform-tools
   antigen-git
   arandr

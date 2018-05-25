@@ -23,6 +23,9 @@ my_load_path_home_bin(){
   if [ -d "${HOME}/.bin" ] ; then
     export PATH="${HOME}/.bin:${HOME}/.bin/vendor/bin/:${PATH}"
   fi
+  if [ -d "${HOME}/.software/bin" ] ; then
+    export PATH="${HOME}/.software/bin:${PATH}"
+  fi
 }
 
 my_load_gemstuff(){

@@ -29,7 +29,7 @@ install_hub(){
   cd "${out_dir}"
   wget -O "${out_file}" https://github.com/github/hub/releases/download/v${ver}/hub-linux-amd64-${ver}.tgz
   tar xvf "${out_file}"
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${software}/hub-v${ver}/hub-linux-amd64-${ver}/bin/hub" "${name}"
 }
 
@@ -45,7 +45,7 @@ install_deis(){
   # https://storage.googleapis.com/workflow-cli-release/v2.0.0/deis-v2.0.0-darwin-386
   wget -O "${out_file}" https://storage.googleapis.com/workflow-cli-release/v${ver}/deis-v${ver}-linux-amd64
   chmod +x "${out_file}"
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${out_dir}/${out_file}" "${name}"
 }
 
@@ -60,7 +60,7 @@ install_gofabric8(){
   cd "${out_dir}"
   wget -O "${out_file}" https://github.com/fabric8io/gofabric8/releases/download/v${ver}/gofabric8-linux-amd64
   chmod +x "${out_file}"
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${out_dir}/${out_file}" "${name}"
 }
 
@@ -68,14 +68,14 @@ install_gofabric8(){
 #: kubectl
 install_kubectl(){
   name=kubectl
-  ver=1.3.6
+  ver=1.10.0
   out_dir="${software}/${name}"
   out_file="${name}-${ver}"
   mkdir -p "${out_dir}"
   cd "${out_dir}"
   wget -O "${out_file}" https://storage.googleapis.com/kubernetes-release/release/v${ver}/bin/linux/amd64/kubectl
   chmod +x "${out_file}"
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${out_dir}/${out_file}" "${name}"
 }
 
@@ -83,14 +83,14 @@ install_kubectl(){
 #: minikube
 install_minikube(){
   name=minikube
-  ver=0.11.0
+  ver=0.27.0
   out_dir="${software}/${name}"
   out_file="${name}-${ver}"
   mkdir -p "${out_dir}"
   cd "${out_dir}"
   wget -O "${out_file}" https://storage.googleapis.com/minikube/releases/v${ver}/minikube-linux-amd64 -q
   chmod +x "${out_file}"
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${out_dir}/${out_file}" "${name}"
 }
 
@@ -104,7 +104,7 @@ install_helm(){
   wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz
   delete_if_exists "${name}"
   tar xvf helm-v${ver}-linux-amd64.tar.gz
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${software}/${name}-${ver}/linux-amd64/${name}" ${name}
 }
 
@@ -119,7 +119,7 @@ install_helmc(){
   chmod +x helmc-latest-linux-amd64
   # delete_if_exists "${name}"
   # tar xvf helm-v${ver}-linux-amd64.tar.gz
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${software}/${name}-${ver}/helmc-latest-linux-amd64" ${name}
 }
 
@@ -133,7 +133,7 @@ install_packer(){
   wget https://releases.hashicorp.com/packer/${ver}/packer_${ver}_linux_amd64.zip
   delete_if_exists "${name}"
   unzip packer_${ver}_linux_amd64.zip
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${software}/${name}-${ver}/${name}" ${name}
 }
 
@@ -149,7 +149,7 @@ install_terraform(){
   wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip
   delete_if_exists "${name}"
   unzip terraform_${ver}_linux_amd64.zip
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${software}/${name}-${ver}/${name}" ${name}-${ver}
 }
 
@@ -163,7 +163,7 @@ install_cfssljson(){
   cd "${dest}"
   wget https://pkg.cfssl.org/R${ver}/cfssljson_linux-amd64
   chmod +x cfssljson_linux-amd64
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${dest}/cfssljson_linux-amd64" ${name}
 }
 ##############################################
@@ -176,7 +176,7 @@ install_cfssl(){
   cd "${dest}"
   wget https://pkg.cfssl.org/R${ver}/cfssl_linux-amd64
   chmod +x cfssl_linux-amd64
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${dest}/cfssl_linux-amd64" ${name}
 }
 
@@ -194,7 +194,7 @@ install_kops(){
   cd "${dest}"
   wget https://github.com/kubernetes/kops/releases/download/v${ver}/${file}
   chmod +x "${file}"
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${dest}/${file}" "${name}"
 }
 
@@ -212,13 +212,13 @@ install_direnv(){
   cd "${dest}"
   wget https://github.com/direnv/direnv/releases/download/v${ver}/direnv.linux-amd64
   chmod +x "${file}"
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${dest}/${file}" "${name}"
 }
 ##############################################
 #: psmem
 install_psmem(){
-  cd "${bin}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
   wget https://raw.githubusercontent.com/pixelb/ps_mem/master/ps_mem.py -O psmem
   chmod +x psmem
 }

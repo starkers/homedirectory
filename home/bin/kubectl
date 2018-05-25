@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-# stop an active virtualenv fucking with my gcloud
-unset VIRTUAL_ENV
-/opt/google-cloud-sdk/bin/kubectl $@
