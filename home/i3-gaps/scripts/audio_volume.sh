@@ -8,7 +8,7 @@
 ###############################################################################
 
 
-SINK="$(pactl list short sinks | grep output | head -n1 | cut -f2)"
+SINK="$(pactl list short sinks | grep RUNNING | grep output | head -n1 | cut -f2)"
 
 #percentage to adjust on default
 increments=3

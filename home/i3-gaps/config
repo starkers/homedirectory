@@ -167,11 +167,11 @@ bindsym $mod+space            exec --no-startup-id copyq show
 # bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 # bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 
-set $input_source "$(pactl list short sources | grep input | head -n1 | cut -f2)"
-set $output_sink  "$(pactl list short sinks  | grep output | head -n1 | cut -f2)"
-bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume $output_sink -2%
-bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-volume $output_sink 0%
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume $output_sink +2%
+# set $input_source "$(pactl list short sources | grep input | head -n1 | cut -f2)"
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh dec
+bindsym XF86AudioMute         exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh toggle
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh inc
+
 
 exec        --no-startup-id compton -b
 # exec        --no-startup-id /usr/bin/gnome-keyring-daemon --daemonize --login &
