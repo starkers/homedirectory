@@ -28,6 +28,7 @@ declare -a arch_packages=(
   flake8
   flameshot
   fzf
+  gitbook-editor
   gitkraken
   gksu
   go
@@ -37,6 +38,7 @@ declare -a arch_packages=(
   i3-gaps
   i3blocks
   i3lock-fancy-dualmonitors-git
+  jdk10-openjdk
   keybase-bin
   kubectl-bin
   libreoffice-fresh-en-gb
@@ -70,6 +72,7 @@ declare -a arch_packages=(
   thunderbird
   tig
   tilix
+  tiny-media-manager-bin
   tmux
   vagrant
   vim
