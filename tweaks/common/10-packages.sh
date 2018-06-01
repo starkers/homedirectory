@@ -34,6 +34,7 @@ declare -a arch_packages=(
   go
   google-cloud-sdk-minimal
   gthumb
+  httpie
   htop
   i3-gaps
   i3blocks
