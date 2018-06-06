@@ -9,10 +9,12 @@ declare -a extra_groups=(
 
 declare -a arch_packages=(
   abricotine
+  acpilight
   android-sdk-platform-tools
   antigen-git
   arandr
   atool
+  atom
   chrome-gnome-shell
   compton
   copyq
@@ -40,6 +42,7 @@ declare -a arch_packages=(
   i3blocks
   i3lock-fancy-dualmonitors-git
   jdk10-openjdk
+  jq
   keybase-bin
   kubectl-bin
   libreoffice-fresh-en-gb
