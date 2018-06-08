@@ -187,12 +187,12 @@ install_kops(){
   # cd ${GOPATH}/src/k8s.io/kops/
   # make
   name=kops
-  ver=1.4.1
+  ver=1.9.1
   dest="${software}/${name}-${ver}"
   file=kops-linux-amd64
   mkdir -p "$dest"
   cd "${dest}"
-  wget https://github.com/kubernetes/kops/releases/download/v${ver}/${file}
+  wget https://github.com/kubernetes/kops/releases/download/${ver}/${file}
   chmod +x "${file}"
   mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${dest}/${file}" "${name}"

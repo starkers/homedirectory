@@ -41,6 +41,7 @@ declare -a arch_packages=(
   i3-gaps
   i3blocks
   i3lock-fancy-dualmonitors-git
+  intellij-idea-ultimate-edition
   jdk10-openjdk
   jq
   keybase-bin

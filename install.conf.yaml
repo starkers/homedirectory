@@ -70,7 +70,7 @@
   - D="${HOME}/.config/i3" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 - link:
     ~/.tmux.conf:             'tmux'
-    # ~/.local/share/mc/skins:  'mc-skins'
+    ~/.local/share/mc/skins:  'mc-skins'
     ~/.config/autostart:      'autostart'
     ~/.config/i3:             'i3-gaps'
     ~/.config/i3blocks:       'i3blocks'
