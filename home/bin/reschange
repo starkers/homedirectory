@@ -21,6 +21,7 @@ pre_work(){
   echo ":: doing pre_work"
   set +e
   pkill compton
+  pkill copyq
   sleep 0.2
   set -e
 }
@@ -28,6 +29,7 @@ pre_work(){
 post_work(){
   echo ":: doing post_work"
   sleep 0.1
+  copyq &
   compton -b
   feh --bg-fill $HOME/.config/i3/wallpapers/default
   /usr/bin/setxkbmap gb

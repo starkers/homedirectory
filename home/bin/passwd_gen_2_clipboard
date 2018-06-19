@@ -2,9 +2,11 @@
 
 
 # generate a random 32 char pass, remove newline, insert into buffer
-pass="$(/usr/bin/pwgen 32 1)"
+pass="$(pwgen -Bsv1 64)"
 
+# ensure no trailing newline
 trimmed="$(tr --delete '\n' <<<"${pass}")"
 
+# whack it into clipboard
 printf "${trimmed}" | /usr/bin/xclip -selection clipboard
 

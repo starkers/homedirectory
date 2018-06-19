@@ -62,13 +62,33 @@ list_contexts() {
   cur_ctx_fg=${KUBECTX_CURRENT_FGCOLOR:-$yellow}
   cur_ctx_bg=${KUBECTX_CURRENT_BGCOLOR:-$darkbg}
 
-  for c in $(get_contexts); do
-  if [[ -t 1 && "${c}" = "${cur}" ]]; then
-    echo "${cur_ctx_bg}${cur_ctx_fg}${c}${normal}"
-  else
-    echo "${c}"
-  fi
+  echo ${cur}
+  # for c in $(get_contexts); do
+  # if [[ -t 1 && "${c}" = "${cur}" ]]; then
+  #   echo "${cur_ctx_bg}${cur_ctx_fg}${c}${normal}"
+  # else
+  #   echo "${c}"
+  # fi
+  # done
+
+
+  list=$(get_contexts)
+
+  # more than one IP found, let the human pick
+  # sorry about the crazy shell stuff....
+  select cluster in $list "quit"; do
+  case $cluster in
+    "quit")
+      break
+    ;;
+    *)
+      # echo set "${cluster}"
+      set_context "${cluster}"
+      exit $?
+    ;;
+  esac
   done
+
 }
 
 read_context() {

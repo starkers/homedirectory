@@ -95,6 +95,35 @@ install_minikube(){
 }
 
 ##############################################
+#: sops
+install_sops(){
+  name=sops
+  ver="3.0.5"
+  out_dir="${software}/${name}"
+  out_file="${name}-${ver}"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://github.com/mozilla/sops/releases/download/${ver}/sops-${ver}.linux
+  chmod +x "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/${out_file}" "${name}"
+}
+##############################################
+#: stern
+install_stern(){
+  name=stern
+  ver="1.6.0"
+  out_dir="${software}/${name}"
+  out_file="${name}-${ver}"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://github.com/wercker/stern/releases/download/${ver}/stern_linux_amd64
+  chmod +x "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/${out_file}" "${name}"
+}
+
+##############################################
 #: helm
 install_helm(){
   name=helm
