@@ -23,7 +23,7 @@ set $ws10 "10:  "
 # others:
 # ♬ |  |  |  | 
 
-set $default_gaps_inner 15
+set $default_gaps_inner 10
 set $default_gaps_outer 0
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
@@ -40,7 +40,7 @@ smart_gaps on
 for_window [class="^.*"] border pixel 3
 hide_edge_borders both
 
-font pango:Hack 12
+font pango:Hack 10
 
 
 bindsym $mod+1           workspace   $ws1
