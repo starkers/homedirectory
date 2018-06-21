@@ -15,6 +15,7 @@ declare -a arch_packages=(
   arandr
   atool
   atom
+  bombardier
   chrome-gnome-shell
   compton
   copyq
@@ -34,13 +35,14 @@ declare -a arch_packages=(
   gitkraken
   gksu
   go
-  google-cloud-sdk-minimal
+  google-cloud-sdk
   gthumb
   httpie
   htop
   i3-gaps
   i3blocks
   i3lock-fancy-dualmonitors-git
+  ipython
   intellij-idea-ultimate-edition
   jdk10-openjdk
   jq
@@ -52,11 +54,14 @@ declare -a arch_packages=(
   minikube-bin
   mpd
   mpv
+  mtr
   ncdu
   ncmpc
   neovim
+  networkmanager-openconnect-multiprotocol-git
   nload
   ntpdate
+  openconnect-palo-git
   openssh
   pwgen
   python-cheat
@@ -70,6 +75,7 @@ declare -a arch_packages=(
   scrot
   seafile-client
   silver-searcher-git
+  sipcalc
   slack-desktop
   sonata
   sysstat

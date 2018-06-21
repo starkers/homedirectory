@@ -33,12 +33,16 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }  " golang
 Plug 'fatih/vim-go'                                       " golang
 Plug 'zchee/deoplete-go', { 'do': 'make'}                 " golang
 Plug 'zchee/deoplete-jedi'                                " python
+
 Plug 'davidhalter/jedi'                                   " python jedi
+Plug 'davidhalter/jedi-vim'  " more py-jedi
 Plug 'jmcantrell/vim-virtualenv'                          " venv support
+
 Plug 'hashivim/vim-terraform'                             " basic terraform
 Plug 'martinda/Jenkinsfile-vim-syntax'                    " fml
 Plug 'ekalinin/Dockerfile.vim'
 
+Plug 'pearofducks/ansible-vim'
 
 " "========================================================================"
 " "==========            Workflow Optimisation"
@@ -431,7 +435,10 @@ nnoremap <S-right> :vertical resize +5<cr>
 
 autocmd BufRead,BufNewFile *.Jenkinsfile set ft=Jenkinsfile
 autocmd BufRead,BufNewFile *.Jenkinsfile setf Jenkinsfile
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 
+
+let g:virtualenv_auto_activate = 1
 
 set hidden
 nnoremap <C-N> :bnext<CR>
@@ -456,3 +463,4 @@ let g:CommandTTraverseSCM = "file"
 "         using Vim's present working directory as a root. The list of SCM
 "         directories that Command-T uses to detect an SCM root can be
 " customized with the |g:CommandTSCMDirectories| option.
+" in your plugin constants configuration section
