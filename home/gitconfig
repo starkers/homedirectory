@@ -28,4 +28,8 @@
 
 
 [github]
-	user = starkers
+  user = starkers
+
+# keep some https credential cache
+[credential]
+  helper = cache --timeout=86400
