@@ -37,7 +37,7 @@ fi
 export $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 
 # lock screen @ 15min
-xautolock -time 15 -locker "$HOME/.config/i3/scripts/i3exit lock" &
+# xautolock -time 15 -locker "$HOME/.config/i3/scripts/i3exit lock" &
 
 # # suspend @ 25min (actually rather annoying if I'm using a VM on another screen/etc)
 # xautolock -time 25 -locker "$HOME/.config/i3/scripts/i3exit suspend" &

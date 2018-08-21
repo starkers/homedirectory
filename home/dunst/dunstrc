@@ -1,5 +1,5 @@
 [global]
-    font = "Hack 12"
+    font = "Hack 10"
 
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -79,7 +79,7 @@
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
     # Set to 0 to disable.
-    idle_threshold = 30
+    idle_threshold = 0
 
     # Which monitor should the notifications be displayed on.
     monitor = 0
