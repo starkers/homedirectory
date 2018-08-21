@@ -10,6 +10,7 @@ declare -a extra_groups=(
 declare -a arch_packages=(
   abricotine
   acpilight
+  # acpilight
   android-sdk-platform-tools
   antigen-git
   arandr
@@ -27,6 +28,7 @@ declare -a arch_packages=(
   dunst
   fail2ban
   feh
+  figlet
   firefox
   flake8
   flameshot
@@ -58,10 +60,10 @@ declare -a arch_packages=(
   ncdu
   ncmpc
   neovim
-  networkmanager-openconnect-multiprotocol-git
+  # networkmanager-openconnect-multiprotocol-git
   nload
   ntpdate
-  openconnect-palo-git
+  # openconnect-palo-git
   openssh
   pwgen
   python-cheat
@@ -73,7 +75,7 @@ declare -a arch_packages=(
   rofi
   rsync
   scrot
-  seafile-client
+  # seafile-client
   silver-searcher-git
   sipcalc
   slack-desktop
