@@ -1,14 +1,4 @@
 
-let g:jedi#goto_assignments_command = "<C-]>"
-
-" py <<EOF
-" import os
-" import sys
-" if 'VIRTUAL_ENV' in os.environ:
-"   project_base_dir = os.environ['VIRTUAL_ENV']
-"   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"   execfile(activate_this, dict(__file__=activate_this))
-" EOF
 
 
 nnoremap <leader>t oimport pudb; pudb.set_trace()<Esc>
@@ -31,5 +21,23 @@ nnoremap <leader>t oimport pudb; pudb.set_trace()<Esc>
 
 "python with virtualenv support
 "
-"
+" hide .pyc in file list
 let NERDTreeIgnore = ['\.pyc$']
+
+
+"    _          _ _
+"  (_) ___  __| (_)
+"  | |/ _ \/ _` | |
+"  | |  __/ (_| | |
+" _/ |\___|\__,_|_|
+"|__/
+"
+" https://github.com/zchee/deoplete-jedi
+let g:jedi#goto_assignments_command = "<C-]>"
+let g:python_host_prog = '/home/starkers/.venv_nvim_2.7'
+let g:python3_host_prog = '/home/starkers/.venv_nvim_3.6'
+
+" see: https://github.com/zchee/deoplete-jedi
+let g:deoplete#sources#jedi#show_docstring = 1
+
+" when its time to go pro, read: https://afnan.io/2018-04-12/my-neovim-development-setup/

@@ -28,7 +28,7 @@ Plug 'ap/vim-buftabline'
 " "========================================================================"
 " "==========            Language Specifc"
 
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }          " clojure
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }          " clojure
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }  " golang
 Plug 'fatih/vim-go'                                       " golang
 Plug 'zchee/deoplete-go', { 'do': 'make'}                 " golang
@@ -42,7 +42,8 @@ Plug 'hashivim/vim-terraform'                             " basic terraform
 Plug 'martinda/Jenkinsfile-vim-syntax'                    " fml
 Plug 'ekalinin/Dockerfile.vim'
 
-Plug 'pearofducks/ansible-vim'
+" Plug 'pearofducks/ansible-vim'
+" Plug 'chase/vim-ansible-yaml'
 
 " "========================================================================"
 " "==========            Workflow Optimisation"
@@ -83,6 +84,11 @@ Plug 'flazz/vim-colorschemes'
 Plug 'rafi/awesome-vim-colorschemes'                "collection of colorshemes
 Plug 'vim-airline/vim-airline-themes'               "airline themes
 Plug 'joshdick/onedark.vim'
+
+Plug 'ddrscott/vim-side-search'
+
+" "close all but current buffer
+Plug 'vim-scripts/BufOnly.vim'
 
 call plug#end()
 """ "========================================================================"
@@ -207,7 +213,7 @@ let g:airline_powerline_fonts = 1                 " you must have appropriate fo
 let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
-colorscheme onedark
+colorscheme colorsbox-steighties
 set scrolloff=2                                   " always show at least X lines above/below the cursor
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
@@ -352,7 +358,7 @@ nmap ga <Plug>(EasyAlign)
 let g:indentLine_char = '┆'
 " let g:indentLine_color_term = 239
 nmap <silent> <leader>i   :IndentLinesToggle <CR>
-let g:indentLine_enabled = 0
+let g:indentLine_enabled = 1
 
 """ nerdtree tweaks
 let NERDTreeShowHidden=1
@@ -427,10 +433,10 @@ inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 " let g:NERDTreePatternMatchHighlightFullName = 1
 
 " resize current buffer by +/- 5 (shift+arrows)
-nnoremap <S-up>    :resize -5<cr>
-nnoremap <S-down>  :resize +5<cr>
-nnoremap <S-left>  :vertical resize -5<cr>
-nnoremap <S-right> :vertical resize +5<cr>
+nnoremap <S-up>    :resize -1<cr>
+nnoremap <S-down>  :resize +1<cr>
+nnoremap <S-left>  :vertical resize -3<cr>
+nnoremap <S-right> :vertical resize +3<cr>
 
 
 autocmd BufRead,BufNewFile *.Jenkinsfile set ft=Jenkinsfile
@@ -464,3 +470,72 @@ let g:CommandTTraverseSCM = "file"
 "         directories that Command-T uses to detect an SCM root can be
 " customized with the |g:CommandTSCMDirectories| option.
 " in your plugin constants configuration section
+
+
+
+
+
+"=================================================
+" https://github.com/ddrscott/vim-side-search
+" SideSearch current word and return to original window
+nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
+
+" Create an shorter `SS` command
+command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
+
+" or command abbreviation
+cabbrev SS SideSearch
+
+
+" How should we execute the search?
+" --heading and --stats are required!
+let g:side_search_prg = 'ag --word-regexp'
+  \. " --ignore='*.js.map'"
+  \. " --heading --stats -B 1 -A 4"
+
+" Can use `vnew` or `new`
+let g:side_search_splitter = 'vnew'
+
+" I like 40% splits, change it if you don't
+let g:side_search_split_pct = 0.4
+
+
+
+" " disable yaml auto-indent bolox
+" autocmd FileType yaml.ansible setl indentkeys-=<:>
+
+"" use Ctrl+f in insert mode instead
+
+
+
+"""""""" FZF mods
+" mostly just here as reference :/
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10split enew' }
+
+
+
+nnoremap <Left> :echo "No left for you!"<CR>
+vnoremap <Left> :<C-u>echo "No left for you!"<CR>
+inoremap <Left> <C-o>:echo "No left for you!"<CR>
+nnoremap <Right> :echo "No right for you!"<CR>
+vnoremap <Right> :<C-u>echo "No right for you!"<CR>
+inoremap <Right> <C-o>:echo "No right for you!"<CR>
+nnoremap <Up> :echo "No up for you!"<CR>
+vnoremap <Up> :<C-u>echo "No up for you!"<CR>
+inoremap <Up> <C-o>:echo "No up for you!"<CR>
+nnoremap <Down> :echo "No down for you!"<CR>
+vnoremap <Down> :<C-u>echo "No down for you!"<CR>
+inoremap <Down> <C-o>:echo "No down for you!"<CR>
