@@ -525,17 +525,32 @@ let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': '10split enew' }
 
+" inoremap <Down> <C-o>:echo "No down for you!"<CR>
+" inoremap <Left> <C-o>:echo "No left for you!"<CR>
+" inoremap <Right> <C-o>:echo "No right for you!"<CR>
+" inoremap <Up> <C-o>:echo "No up for you!"<CR>
 
-
-nnoremap <Left> :echo "No left for you!"<CR>
-vnoremap <Left> :<C-u>echo "No left for you!"<CR>
-inoremap <Left> <C-o>:echo "No left for you!"<CR>
-nnoremap <Right> :echo "No right for you!"<CR>
-vnoremap <Right> :<C-u>echo "No right for you!"<CR>
-inoremap <Right> <C-o>:echo "No right for you!"<CR>
-nnoremap <Up> :echo "No up for you!"<CR>
-vnoremap <Up> :<C-u>echo "No up for you!"<CR>
-inoremap <Up> <C-o>:echo "No up for you!"<CR>
 nnoremap <Down> :echo "No down for you!"<CR>
-vnoremap <Down> :<C-u>echo "No down for you!"<CR>
-inoremap <Down> <C-o>:echo "No down for you!"<CR>
+nnoremap <Left> :echo "No left for you!"<CR>
+nnoremap <Right> :echo "No right for you!"<CR>
+nnoremap <Up> :echo "No up for you!"<CR>
+
+" vnoremap <Down> :<C-u>echo "No down for you!"<CR>
+" vnoremap <Left> :<C-u>echo "No left for you!"<CR>
+" vnoremap <Right> :<C-u>echo "No right for you!"<CR>
+" vnoremap <Up> :<C-u>echo "No up for you!"<CR>
+
+" https://robots.thoughtbot.com/faster-grepping-in-vim
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
