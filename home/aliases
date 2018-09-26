@@ -7,6 +7,10 @@ alias gs="git status"
 alias gc="my_git_commit"
 alias gd="git d"  #call git diff with vimdiff
 
+alias mplayer="mpv"
+
+alias dc="docker-compose"
+alias dps="docker ps --quiet "$@" | xargs --no-run-if-empty docker inspect --format='{{printf "%.12s" .Id}}|{{.Config.Image}}|{{printf "%.19s" .State.StartedAt}}|{{.State.Status}}|{{range $net, $conf := .NetworkSettings.Networks}}{{$net}}:{{$conf.IPAddress}} {{end}}|{{.Name}}' | column -t -s '|'"
 
 alias vim="nvim"
 # release any files vim thinks are +ro
@@ -19,13 +23,14 @@ alias vimdiff="nvim -d"
 # git config --global alias.d difftool
 
 
-
+alias lg="lazygit"
 alias ls="ls --color"
 alias ll="ls -l"
 alias lla="ls -la"
 alias ltr="ls -ltr"
 
 
+alias snap="sudo snap"
 alias apts="apt-cache search"
 alias apti="sudo apt-get install"
 alias apt="sudo apt"
@@ -55,6 +60,7 @@ alias d="docker"
 alias lxc="sudo lxc"
 alias lxd="sudo lxd"
 
+alias vim-clear-tmp-and-swap="rm -rf ~/.config/nvim/tmp/tmp/*.sw*"
 alias nload="sudo nload wlan0 -u K"
 
 alias atop="sudo atop"
@@ -112,3 +118,5 @@ ghc(){
   fi
   unset GH_URL
 }
+
+alias fastboot="sudo fastboot"
