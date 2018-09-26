@@ -9,13 +9,12 @@ declare -a extra_groups=(
 
 declare -a arch_packages=(
   abricotine
-  acpilight
-  # acpilight
   android-sdk-platform-tools
   antigen-git
   arandr
-  atool
   atom
+  atool
+  bat
   bombardier
   chrome-gnome-shell
   compton
@@ -32,6 +31,7 @@ declare -a arch_packages=(
   firefox
   flake8
   flameshot
+  flatpak
   fzf
   gitbook-editor
   gitkraken
@@ -39,14 +39,13 @@ declare -a arch_packages=(
   go
   google-cloud-sdk
   gthumb
-  httpie
   htop
+  httpie
   i3-gaps
   i3blocks
   i3lock-fancy-dualmonitors-git
   ipython
-  intellij-idea-ultimate-edition
-  jdk10-openjdk
+  jdk8-openjdk
   jq
   keybase-bin
   kubectl-bin
@@ -60,11 +59,10 @@ declare -a arch_packages=(
   ncdu
   ncmpc
   neovim
-  # networkmanager-openconnect-multiprotocol-git
   nload
   ntpdate
-  # openconnect-palo-git
   openssh
+  pinta
   pwgen
   python-cheat
   python-neovim
@@ -75,10 +73,10 @@ declare -a arch_packages=(
   rofi
   rsync
   scrot
-  # seafile-client
   silver-searcher-git
   sipcalc
-  slack-desktop
+  sipcalc
+  snapd
   sonata
   sysstat
   terminator
