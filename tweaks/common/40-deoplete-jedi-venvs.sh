@@ -26,4 +26,4 @@ function jedi(){
 
 
 jedi 2.7
-jedi 3.6
+jedi 3
