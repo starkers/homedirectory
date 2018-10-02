@@ -18,6 +18,12 @@ function my_load_shell_functions(){
 
 export ANSIBLE_NOCOWS=1
 
+
+# export _Z_DATA="${HOME}/.z_h_data"
+# if [ ! -d "${_Z_DATA}" ]; then
+#   mkdir -p "${_Z_DATA}"
+# fi
+
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
@@ -75,28 +81,28 @@ SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory section
   host          # Hostname section
   git           # Git section (git_branch + git_status)
-  hg            # Mercurial section (hg_branch  + hg_status)
+  # hg            # Mercurial section (hg_branch  + hg_status)
   # package     # Package version (Disabled)
-  node          # Node.js section
-  ruby          # Ruby section
-  elixir        # Elixir section
+  # node          # Node.js section
+  # ruby          # Ruby section
+  # elixir        # Elixir section
   # xcode       # Xcode section (Disabled)
-  swift         # Swift section
+  # swift         # Swift section
   golang        # Go section
-  php           # PHP section
-  rust          # Rust section
-  haskell       # Haskell Stack section
+  # php           # PHP section
+  # rust          # Rust section
+  # haskell       # Haskell Stack section
   # julia       # Julia section (Disabled)
   # docker      # Docker section (Disabled)
   aws           # Amazon Web Services section
   venv          # virtualenv section
-  conda         # conda virtualenv section
-  pyenv         # Pyenv section
-  dotnet        # .NET section
+  # conda         # conda virtualenv section
+  # pyenv         # Pyenv section
+  # dotnet        # .NET section
   # ember       # Ember.js section (Disabled)
-  kubecontext   # Kubectl context section
+  # kubecontext   # Kubectl context section
   exec_time     # Execution time
-  line_sep      # Line break
+  # line_sep      # Line break
   battery       # Battery level and status
   # vi_mode     # Vi-mode indicator (Disabled)
   jobs          # Background jobs indicator
@@ -141,4 +147,7 @@ my_load_profile
 my_load_shell_functions
 
 
-#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/
+export JAVA_HOME=/usr/lib/jvm/default/
+
+eval "$(pyenv init -)"
+
