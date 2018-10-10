@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 UPDATE_INITRD=0
 
-VFIO_OPTS="options vfio-pci ids=1022:1455,1002:67df,1002:aaf0"
+# old 580
+# VFIO_OPTS="options vfio-pci ids=1022:1455,1002:67df,1002:aaf0"
+
+# vega 64 (note USB3 device "1022:1455" changed to 1022:145c)
+VFIO_OPTS="options vfio-pci ids=1022:145c,1002:687f,1002:aaf8"
 
 function set_modprobe(){
   echo "setting /etc/modprobe.d/vfio.conf"
