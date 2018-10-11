@@ -87,17 +87,24 @@ alias systemctl="sudo systemctl"
 
 
 ghc(){
-  #takes github git URL EG: git@github.com:containous/traefik.git
-  #clones into ~/dev/github.com/containous/traefik (gostyle)
-  #TODO: convert http urls also
+  # githubclone
+  # takes a github URL like:
+  # - git@github.com:containous/traefik.git or
+  # - https://@github.com/containous/traefik.git
+  #
+  # will clone into ~/dev/github.com/containous/traefik (if its not checked out yet)
+  # will drop you in that directory
   local DEV="$HOME/dev/github.com"
-  local GH_URL="$1"
-  if grep -q git@github.com <<<"$GH_URL" ; then
-    # echo found github url
+  local INPUT="$1"
+  # if the URL is in https format convert it to ssh
+  if grep -q "github" <<<"${INPUT}" ; then
+    local INPUT="$(sed 's+https://github.com/+git@github.com:+g' <<<${INPUT})"
+  fi
+
+  if grep -q github <<<"${INPUT}"; then
+    local GH_URL="${INPUT}"
     local GH_USER="$(echo $GH_URL | cut -d ":" -f 2 | cut -d "/" -f 1)"
-    # echo U:$GH_USER
     local GH_REPO="$(echo $GH_URL | cut -d ":" -f 2 | cut -d "/" -f 2 | sed "s+.git++g")"
-    # echo R:$GH_REPO
     local CHECKOUT="${DEV}/${GH_USER}/${GH_REPO}"
     if [ -d "$CHECKOUT" ]; then
       echo "doing nothing, $CHECKOUT already exists"
@@ -109,14 +116,14 @@ ghc(){
       set +x
     fi
     cd "$CHECKOUT"
-    unset GH_USER
-    unset GH_REPO
-    unset DEV
-    unset CHECKOUT
   else
-    echo "err, not github (or an SSH repo): $GH_URL"
+    echo "sorry.. ${INPUT} doesnt look like a github URL"
   fi
-  unset GH_URL
 }
 
 alias fastboot="sudo fastboot"
+
+PRIVATE_ALIASES_FILE=/keybase/private/starkers/shell-aliases
+if [ -f "${PRIVATE_ALIASES_FILE}" ]; then
+  source "${PRIVATE_ALIASES_FILE}"
+fi
