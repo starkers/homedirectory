@@ -35,7 +35,7 @@ let NERDTreeIgnore = ['\.pyc$']
 " https://github.com/zchee/deoplete-jedi
 let g:jedi#goto_assignments_command = "<C-]>"
 let g:python_host_prog = '/home/starkers/.venv_nvim_2.7'
-let g:python3_host_prog = '/home/starkers/.venv_nvim_3.6'
+let g:python3_host_prog = '/home/starkers/.venv_nvim_3'
 
 " see: https://github.com/zchee/deoplete-jedi
 let g:deoplete#sources#jedi#show_docstring = 1
