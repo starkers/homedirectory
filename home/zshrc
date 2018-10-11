@@ -53,13 +53,17 @@ function my_load_direnv(){
 }
 
 function my_load_fzf(){
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  for i in /usr/share/fzf/completion.zsh /usr/share/fzf/key-bindings.zsh ]; do
+    if [ -f "${i}" ]; then
+      source "${i}"
+    fi
+  done
 }
-
 
 
 #load "hub" and other completions (see: https://github.com/github/hub/tree/master/etc)
 fpath=(~/.zsh/completions $fpath)
+# plugins=(... zsh-completions)
 autoload -U compinit compdef
 compinit
 
@@ -148,6 +152,4 @@ my_load_shell_functions
 
 
 export JAVA_HOME=/usr/lib/jvm/default/
-
-eval "$(pyenv init -)"
 

@@ -40,7 +40,7 @@ smart_gaps on
 for_window [class="^.*"] border pixel 3
 hide_edge_borders both
 
-font pango:Hack 10
+font pango:Hack Nerd Font Regular 10
 
 
 bindsym $mod+1           workspace   $ws1
