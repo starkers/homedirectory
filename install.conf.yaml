@@ -8,17 +8,11 @@
 - clean: ['~']
 
 - shell:
-# - [git submodule update --init --recursive, Installing submodules]
   - mkdir -p ~/.config/mc
   - cp -rvp mc/* ~/.config/mc/.
-  # destroy these directories if they exist already
-# - D="${HOME}/.ssh" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 
 - link:
-#   ~/.ssh:                   '/keybase/private/starkers/home/ssh'
     ~/.gitconfig:             'gitconfig'
-
-
 
 ############## MISC
 
@@ -40,34 +34,21 @@
 ######### ZSH + BASH
 - shell:
   - F="${HOME}/.bashrc" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
-  - F="${HOME}/.fzf.bash" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
-  - F="${HOME}/.fzf.zsh" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
-  - F="${HOME}/.zshrc" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
+  - F="${HOME}/.zshrc"  ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
 
 - link:
     ~/.aliases:               'aliases'
     ~/.bashrc:                'bashrc'
     ~/.bashrc_git:            'git-prompt.sh'
-    ~/.fzf.bash:              'fzf.bash'
-    ~/.fzf.zsh:               'fzf.zsh'
     ~/.profile:               'profile'
     ~/.shell_functions:       'shell_functions'
     ~/.zshrc:                 'zshrc'
 
-######### FONTS
-- shell:
-  - D="${HOME}/.config/fontconfig" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
-- link:
-    ~/.local/share/fonts:     'fonts'
-    ~/.config/fontconfig:     'fontconfig'
-
-
-
 ######### i3 + co
 - shell:
-  - D="${HOME}/.config/autostart" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
-  - F="${HOME}/.config/compton.conf" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
-  - D="${HOME}/.config/i3" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+  - D="${HOME}/.config/autostart"    ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+  - F="${HOME}/.config/compton.conf" ; if [ -f "${F}" ]; then ; rm -rf "${F}" ; fi
+  - D="${HOME}/.config/i3"           ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 - link:
     ~/.tmux.conf:             'tmux'
     ~/.local/share/mc/skins:  'mc-skins'
@@ -77,19 +58,10 @@
     ~/.config/compton.conf:   'compton.conf'
     ~/.config/dunst:          'dunst'
     ~/.xinitrc:               'xinitrc'
-#
-# - shell:
-#   - mkdir -p ~/.local/share/applications
-#   - cp -rvp applications/* ~/.local/share/applications/.
-#
+
 - shell:
-#   - mkdir -p ~/.mutt/cache/headers
-#   - mkdir -p ~/.mutt/cache/bodies
-#   - chmod 0700 ~/.mutt/cache/headers
-#   - chmod 0700 ~/.mutt/cache/bodies
-#   - mkdir -p ~/.weechat/logs
   - mkdir -p ~/.ssh
-  - cp -R /keybase/private/starkers/home/ssh/* ~/.ssh/.
+  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --dry-run
   - chmod 0700 ~/.ssh/
   - chmod 0600 ~/.ssh/id_*
   - [git submodule update --init --recursive, Installing submodules]
@@ -102,5 +74,6 @@
     ~/.local/share/nvim:      'nvim-share'
     ~/.config/nvim:           'nvim-config'
 - shell:
-# if there aren't a whole bunch of plugins then install them..
+# if there aren't a whole bunch of plugins in here already, please launch nvim and install them..
   - COUNT="$(ls "${HOME}/.local/share/nvim/plugged/" | sort | wc -l)" ; if [ "$COUNT" -lt 10 ]; then echo "installing vim plugins" ; nvim +'PlugInstall --sync' +qa ; fi
+
