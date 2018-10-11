@@ -131,6 +131,8 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
+let g:python_host_prog  = "/home/starkers/.pyenv/versions/2.7.15/bin/python"
+let g:python3_host_prog = "/home/starkers/.pyenv/versions/3.5.6/bin/python"
 
 """ "git"
 let g:gitgutter_realtime = 1
@@ -530,10 +532,10 @@ let g:fzf_layout = { 'window': '10split enew' }
 " inoremap <Right> <C-o>:echo "No right for you!"<CR>
 " inoremap <Up> <C-o>:echo "No up for you!"<CR>
 
-nnoremap <Down> :echo "No down for you!"<CR>
-nnoremap <Left> :echo "No left for you!"<CR>
-nnoremap <Right> :echo "No right for you!"<CR>
-nnoremap <Up> :echo "No up for you!"<CR>
+" nnoremap <Down> :echo "No down for you!"<CR>
+" nnoremap <Left> :echo "No left for you!"<CR>
+" nnoremap <Right> :echo "No right for you!"<CR>
+" nnoremap <Up> :echo "No up for you!"<CR>
 
 " vnoremap <Down> :<C-u>echo "No down for you!"<CR>
 " vnoremap <Left> :<C-u>echo "No left for you!"<CR>
