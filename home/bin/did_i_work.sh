@@ -10,8 +10,9 @@ HIST_FILE="${HOME}/.zsh_history"
 tmpf="$(mktemp)"
 
 # if I was doing work I hope I ran something like this:
-grep_include="make ACCOUNT=shared|ACCOUNT=production|ACCOUNT=staging"
-grep_exclude="drone|gocd|grep|gcloud|deps"
+grep_include="make"
+# grep_exclude="drone|gocd|grep|gcloud|deps"
+grep_exclude=""
 
 # converts zsh timestamps (epoch) to something human "$@"
 function epoch_to_human(){
