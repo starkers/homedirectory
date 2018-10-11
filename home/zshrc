@@ -64,8 +64,12 @@ function my_load_fzf(){
 #load "hub" and other completions (see: https://github.com/github/hub/tree/master/etc)
 fpath=(~/.zsh/completions $fpath)
 # plugins=(... zsh-completions)
-autoload -U compinit compdef
-compinit
+
+plugins=(archlinux docker docker-compose go golang kops kubectl z zsh-completions)
+
+# this is required so `docker exec -it <TAB>` works.. see: https://github.com/moby/moby/commit/402caa94d23ea3ad47f814fc1414a93c5c8e7e58
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 
 #for VTE (tilix)
@@ -104,7 +108,7 @@ SPACESHIP_PROMPT_ORDER=(
   # pyenv         # Pyenv section
   # dotnet        # .NET section
   # ember       # Ember.js section (Disabled)
-  # kubecontext   # Kubectl context section
+  kubecontext   # Kubectl context section
   exec_time     # Execution time
   # line_sep      # Line break
   battery       # Battery level and status
@@ -135,6 +139,11 @@ antigen bundle z
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
+
+# # docker zsh completions
+# antigen bundle felixr/docker-zsh-completion
+
+
 
 # a nice theme
 antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
