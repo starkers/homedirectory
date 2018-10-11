@@ -15,6 +15,7 @@ declare -a arch_packages=(
   atom
   atool
   bat
+  bitwarden-bin
   bombardier
   chrome-gnome-shell
   compton
@@ -46,6 +47,7 @@ declare -a arch_packages=(
   i3lock-fancy-dualmonitors-git
   ipython
   jdk8-openjdk
+  jetbrains-toolbox
   jq
   keybase-bin
   kubectl-bin
@@ -59,6 +61,7 @@ declare -a arch_packages=(
   ncdu
   ncmpc
   neovim
+  nerd-fonts-complete
   nload
   ntpdate
   openssh
@@ -76,6 +79,7 @@ declare -a arch_packages=(
   silver-searcher-git
   sipcalc
   sipcalc
+  slack-desktop
   snapd
   sonata
   sysstat

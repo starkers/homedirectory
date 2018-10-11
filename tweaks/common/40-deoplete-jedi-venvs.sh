@@ -8,8 +8,6 @@ set -e
 # let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
 
 
-VER=2.7
-
 function jedi(){
   local VER=${1}
   figlet py${VER} neovim
@@ -20,6 +18,7 @@ function jedi(){
     virtualenv --python=python${VER} ${DIR}
   fi
   source ${DIR}/bin/activate
+  pip install --upgrade pip
   pip install neovim
   deactivate
 }

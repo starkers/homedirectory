@@ -3,18 +3,18 @@ set -e
 
 # list of --classic snaps to install
 declare -a snap_classic=(
-  intellij-idea-ultimate
-  pycharm-professional
-  slack
+  # intellij-idea-ultimate
+  # pycharm-professional
+  # slack
 )
 
 # snap install {{ these }}
 declare -a snap_vanilla=(
-  bitwarden
-  postman
-  slack-term
-  spotify
-  whatsdesk
+  # bitwarden
+  # postman
+  # slack-term
+  # spotify
+  # whatsdesk
 )
 
 function is_arch(){
