@@ -108,9 +108,9 @@ SPACESHIP_PROMPT_ORDER=(
   # pyenv         # Pyenv section
   # dotnet        # .NET section
   # ember       # Ember.js section (Disabled)
-  kubecontext   # Kubectl context section
+  # kubecontext   # Kubectl context section
   exec_time     # Execution time
-  # line_sep      # Line break
+  line_sep      # Line break
   battery       # Battery level and status
   # vi_mode     # Vi-mode indicator (Disabled)
   jobs          # Background jobs indicator
@@ -162,3 +162,8 @@ my_load_shell_functions
 
 export JAVA_HOME=/usr/lib/jvm/default/
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# cleanup trash ~/.z.* files
+find ~/  -maxdepth 1 -name ".z*"  -type f -size 0 -exec rm {} \;
