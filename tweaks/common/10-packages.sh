@@ -32,7 +32,7 @@ declare -a arch_packages=(
   firefox
   flake8
   flameshot
-  flatpak
+  # flatpak
   fzf
   gitbook-editor
   gitkraken
@@ -66,6 +66,7 @@ declare -a arch_packages=(
   ntpdate
   openssh
   pinta
+  pv
   pwgen
   python-cheat
   python-neovim

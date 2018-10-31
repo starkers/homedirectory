@@ -7,23 +7,18 @@
 # #directories to be cleaned (dead symlinks removed)
 - clean: ['~']
 
-- shell:
-  - mkdir -p ~/.config/mc
-  - cp -rvp mc/* ~/.config/mc/.
 
-- link:
-    ~/.gitconfig:             'gitconfig'
-
-############## MISC
+##############
+# This sections sets up links <on the left> to the stuff in this git repo or my keybase
 
 - link:
     ~/.bin:                   'bin'              #scripts and general "helpers"
     ~/.config/terminator:     'terminator'
     ~/.digrc:                 'digrc'
+    ~/.gitconfig:             'gitconfig'
     ~/.screenrc:              'screenrc'
-
-############# Secrets Et-al
-    ~/.aws:                   '/keybase/private/starkers/home/aws'              #sensitive
+    ~/.screenlayout:          'screenlayout'
+    ~/.aws:                   '/keybase/private/starkers/home/aws'
     ~/.cheat:                 '/keybase/private/starkers/home/cheats'
     ~/.kube:                  '/keybase/private/starkers/home/kube'
     ~/.mutt:                  '/keybase/private/starkers/home/mutt'
@@ -33,13 +28,15 @@
 
 ######### ZSH + BASH
 - shell:
+  # remove these files if they are already present..
+  # I want to symlink them
   - F="${HOME}/.bashrc" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
   - F="${HOME}/.zshrc"  ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
 
 - link:
     ~/.aliases:               'aliases'
     ~/.bashrc:                'bashrc'
-    ~/.bashrc_git:            'git-prompt.sh'
+    ~/.bashrc_git:            'git-prompt.sh' # deprecated?
     ~/.profile:               'profile'
     ~/.shell_functions:       'shell_functions'
     ~/.zshrc:                 'zshrc'
@@ -50,18 +47,26 @@
   - F="${HOME}/.config/compton.conf" ; if [ -f "${F}" ]; then ; rm -rf "${F}" ; fi
   - D="${HOME}/.config/i3"           ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 - link:
-    ~/.tmux.conf:             'tmux'
-    ~/.local/share/mc/skins:  'mc-skins'
     ~/.config/autostart:      'autostart'
-    ~/.config/i3:             'i3-gaps'
-    ~/.config/i3blocks:       'i3blocks'
     ~/.config/compton.conf:   'compton.conf'
     ~/.config/dunst:          'dunst'
+    ~/.config/i3:             'i3-gaps'
+    ~/.config/i3blocks:       'i3blocks'
+    ~/.tmux.conf:             'tmux'
     ~/.xinitrc:               'xinitrc'
 
+######### mc (yes, yes.. I know ranger... but old habits)
+- shell:
+  - mkdir -p ~/.config/mc
+  - cp -rvp mc/* ~/.config/mc/.
+- link:
+    ~/.local/share/mc/skins:  'mc-skins'
+
+
+######### SSH
 - shell:
   - mkdir -p ~/.ssh
-  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --dry-run
+  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --exclude=google_compute_known_hosts
   - chmod 0700 ~/.ssh/
   - chmod 0600 ~/.ssh/id_*
   - [git submodule update --init --recursive, Installing submodules]

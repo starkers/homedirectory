@@ -95,6 +95,22 @@ install_minikube(){
 }
 
 ##############################################
+#: saml2aws
+install_saml2aws(){
+  name=saml2aws
+  ver="2.9.1"
+  out_dir="${software}/${name}"
+  out_file="${name}-${ver}.tar.gm"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://github.com/Versent/saml2aws/releases/download/v${ver}/saml2aws_${ver}_linux_amd64.tar.gz
+  delete_if_exists "${name}"
+  tar xvf "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
 #: sops
 install_sops(){
   name=sops
@@ -112,7 +128,7 @@ install_sops(){
 #: stern
 install_stern(){
   name=stern
-  ver="1.6.0"
+  ver="1.7.0"
   out_dir="${software}/${name}"
   out_file="${name}-${ver}"
   mkdir -p "${out_dir}"
@@ -166,19 +182,18 @@ install_packer(){
   ln -sf "${software}/${name}-${ver}/${name}" ${name}
 }
 
-
-
 ##############################################
 #: terraform
 install_terraform(){
   name=terraform
-  ver=0.9.11
+  ver=0.11.8
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip
   delete_if_exists "${name}"
   unzip terraform_${ver}_linux_amd64.zip
   mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${software}/${name}-${ver}/${name}" ${name}
   ln -sf "${software}/${name}-${ver}/${name}" ${name}-${ver}
 }
 
@@ -216,7 +231,7 @@ install_kops(){
   # cd ${GOPATH}/src/k8s.io/kops/
   # make
   name=kops
-  ver=1.9.1
+  ver=1.10.0
   dest="${software}/${name}-${ver}"
   file=kops-linux-amd64
   mkdir -p "$dest"
