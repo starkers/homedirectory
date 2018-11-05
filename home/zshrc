@@ -167,3 +167,5 @@ export JAVA_HOME=/usr/lib/jvm/default/
 
 # cleanup trash ~/.z.* files
 find ~/  -maxdepth 1 -name ".z*"  -type f -size 0 -exec rm {} \;
+
+export PATH=/keybase/private/starkers/scripts:${PATH}
