@@ -2,7 +2,7 @@
 
 alias ga="git add --all ."
 alias gps="git push"
-alias gpl="git pull"
+alias gpl="git pull -ff"
 alias gs="git status"
 alias gc="my_git_commit"
 alias gd="git d"  #call git diff with vimdiff
@@ -13,6 +13,7 @@ alias dc="docker-compose"
 alias dps="docker ps --quiet "$@" | xargs --no-run-if-empty docker inspect --format='{{printf "%.12s" .Id}}|{{.Config.Image}}|{{printf "%.19s" .State.StartedAt}}|{{.State.Status}}|{{range $net, $conf := .NetworkSettings.Networks}}{{$net}}:{{$conf.IPAddress}} {{end}}|{{.Name}}' | column -t -s '|'"
 
 alias vim="nvim"
+alias sternalltail="stern --all-namespaces --tail 10"
 # release any files vim thinks are +ro
 alias vim_swp_clear="rm -rvf ~/.vim/tmp/*.swp"
 
@@ -119,6 +120,60 @@ ghc(){
   else
     echo "sorry.. ${INPUT} doesnt look like a github URL"
   fi
+}
+
+
+# git grab (for) geeks
+
+# always clone into ~/somewhere/<server>/<project>  #you set "~/somewhere"
+# option to try convert https URLs to ssh://git@ (TODO)
+# if dest dir already exists just CD in there
+
+
+function ggg(){
+  local store="${HOME}/dev"
+
+  local in="$1"
+  local outname="ggg"
+  function gsay() { echo -e "\e[34m${outname}: $*\e[0m" >&2 ; }
+  function gerr() { echo -e "\e[31m${outname}: ${@}\e[0m"   ; }
+  function gdie() { gerr "$*" ; return 111 ; }
+  function try() { gsay "$@" ; "$@" || gdie "cannot $*" ; }
+  echo $1
+
+  function gparse_git(){
+    local chunk1="$(cut -d "@" -f 1 <<<"$1")"
+    local chunk2="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 1 | cut -d ":" -f 1)"
+    local chunk3="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 2-99| sed "s+.git$++g" )"
+    local dest="${store}/${chunk2}/${chunk3}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+
+  function gparse_http(){
+    local chunk2="$(echo "$1" | cut -d "/" -f 3 | cut -d ":" -f 1)"
+    local chunk3="$(echo "$1" | cut -d "/" -f 4-99 | sed "s+.git++g" )"
+    local dest="${store}/${chunk2}/${chunk3}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+
+  if grep -q "^http://" <<<"${in}" ; then
+    gparse_http "${in}"
+  elif grep -q "^https://" <<<"${in}" ; then
+    gparse_http "${in}"
+  elif grep -q "^git@" <<<"${in}"; then
+    gparse_git "${in}"
+  elif grep -q "^ssh://.*@" <<<"${in}"; then
+    gparse_git "${in}"
+  else
+    gdie "sorry couldn't match ${in} to any kind of git URL"
+  fi
+
 }
 
 alias fastboot="sudo fastboot"
