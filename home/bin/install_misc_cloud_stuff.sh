@@ -68,7 +68,9 @@ install_gofabric8(){
 #: kubectl
 install_kubectl(){
   name=kubectl
-  ver=1.10.0
+  # find latest version:
+  # curl https://storage.googleapis.com/kubernetes-release/release/stable.txt
+  ver=1.12.2
   out_dir="${software}/${name}"
   out_file="${name}-${ver}"
   mkdir -p "${out_dir}"
