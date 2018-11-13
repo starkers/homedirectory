@@ -157,7 +157,7 @@ bindsym $mod+n                exec --no-startup-id nautilus --no-desktop "${HOME
 bindsym Print                 exec --no-startup-id flameshot gui
 bindsym XF86MonBrightnessDown exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -dec 5
 bindsym XF86MonBrightnessUp   exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -inc 5
-bindsym $mod+Return           exec --no-startup-id tilix
+bindsym $mod+Return           exec --no-startup-id terminator
 bindsym $mod+d                exec --no-startup-id $HOME/.config/i3/rof
 bindsym $mod+g                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
 bindsym $mod+l                exec --no-startup-id $HOME/.config/i3/scripts/i3exit lock
