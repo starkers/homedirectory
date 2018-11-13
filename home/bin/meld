@@ -1,5 +1,1 @@
-#!/usr/bin/env sh
-
-# stop an active virtualenv fucking with my gcloud
-unset VIRTUAL_ENV
-/usr/bin/meld $@
+GTK_THEME=Arc-Darker /usr/bin/meld $@
