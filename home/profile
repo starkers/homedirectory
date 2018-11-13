@@ -77,3 +77,4 @@ export CHEATCOLORS=true
 # default $CHEATPATH is ~/.cheat however I may keep something sensitive
 # so I keep mine in keybase:
 export CHEATPATH="/keybase/private/starkers/home/cheats"
+export PATH=/keybase/private/starkers/scripts/:${PATH}
