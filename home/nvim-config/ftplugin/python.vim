@@ -40,4 +40,28 @@ let g:python3_host_prog = '/home/starkers/.venv_nvim_3'
 " see: https://github.com/zchee/deoplete-jedi
 let g:deoplete#sources#jedi#show_docstring = 1
 
+let g:jedi#auto_initialization = 1
+let g:jedi#documentation_command = "D"
+
 " when its time to go pro, read: https://afnan.io/2018-04-12/my-neovim-development-setup/
+
+
+
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+" let g:jedi#rename_command = "<leader>r"
+"
+let g:ale_linters = {
+  \ 'python': ['flake8','pycodestyle'],
+  \ }
+
+nnoremap <space>. :lnext<CR>
+nnoremap <space>, :lprevious<CR>
+" nnoremap <space>r :lrewind<CR>
+
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 0
