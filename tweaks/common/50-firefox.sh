@@ -16,6 +16,13 @@ fi
 PROFILE="$(grep Path "${INI_FILE}" | cut -d "=" -f 2)"
 mkdir -p "${HOME}/.mozilla/firefox/$PROFILE/chrome"
 
+file="${HOME}/.mozilla/firefox/$PROFILE/chrome/userChrome.css"
+
+# if [ -f ${file} ]; then
+#   rm ${file}
+# fi
+
+# HACK to hide tab bar
 cat >"${HOME}/.mozilla/firefox/$PROFILE/chrome/userChrome.css"<<EOF
 #TabsToolbar {
   visibility: collapse !important;
