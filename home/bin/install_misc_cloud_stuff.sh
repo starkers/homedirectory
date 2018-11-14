@@ -145,7 +145,7 @@ install_stern(){
 #: helm
 install_helm(){
   name=helm
-  ver="2.9.1"
+  ver="2.11.0"
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz
