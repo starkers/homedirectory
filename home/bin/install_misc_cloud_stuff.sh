@@ -126,6 +126,7 @@ install_sops(){
   mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${out_dir}/${out_file}" "${name}"
 }
+
 ##############################################
 #: stern
 install_stern(){
@@ -212,6 +213,7 @@ install_cfssljson(){
   mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${dest}/cfssljson_linux-amd64" ${name}
 }
+
 ##############################################
 #: cfssl
 install_cfssl(){
@@ -261,6 +263,37 @@ install_direnv(){
   mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${dest}/${file}" "${name}"
 }
+
+##############################################
+#: fluxctl
+install_fluxctl(){
+  name=fluxctl
+  ver=1.8.1
+  dest="${software}/${name}-${ver}"
+  file=fluxctl_linux_amd64
+  mkdir -p "$dest"
+  cd "${dest}"
+  wget https://github.com/weaveworks/flux/releases/download/${ver}/fluxctl_linux_amd64 -c
+  chmod +x "${file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${dest}/${file}" "${name}"
+}
+
+##############################################
+#: kubeseal
+install_kubeseal(){
+  name=kubeseal
+  ver=0.7.0
+  dest="${software}/${name}-${ver}"
+  file=kubeseal-linux-amd64
+  mkdir -p "$dest"
+  cd "${dest}"
+  wget -c https://github.com/bitnami-labs/sealed-secrets/releases/download/v${ver}/kubeseal-linux-amd64
+  chmod +x "${file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${dest}/${file}" "${name}"
+}
+
 ##############################################
 #: psmem
 install_psmem(){
