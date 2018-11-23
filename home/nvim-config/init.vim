@@ -131,8 +131,9 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-let g:python_host_prog  = "/home/starkers/.pyenv/versions/2.7.15/bin/python"
-let g:python3_host_prog = "/home/starkers/.pyenv/versions/3.5.6/bin/python"
+
+" let g:python_host_prog  = "/home/starkers/.venv_nvim_2.7"
+" let g:python3_host_prog = "/home/starkers/.venv_nvim_3"
 
 """ "git"
 let g:gitgutter_realtime = 1
@@ -215,7 +216,7 @@ let g:airline_powerline_fonts = 1                 " you must have appropriate fo
 let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
-colorscheme colorsbox-steighties
+colorscheme colorsbox-material
 set scrolloff=2                                   " always show at least X lines above/below the cursor
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
@@ -556,3 +557,6 @@ if executable('ag')
 endif
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+
+
+map <CR> i<CR><ESC>
