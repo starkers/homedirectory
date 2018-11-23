@@ -46,7 +46,7 @@ alias cdD="cd ~/Downloads"
 alias cds="cd ~/Seafile"
 # alias cdm="cd ~/master"
 alias cdw="cd ~/work"
-alias cdh="cd ~/dev/github.com/starkers/homedirectory"
+alias cdh="cd ~/dev/github.com/starkers/homedirectory/home"
 alias cdg="cd ~/dev/github.com"
 alias cdt="cd ~/Torrents"
 
