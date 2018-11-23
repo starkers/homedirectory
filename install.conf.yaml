@@ -46,14 +46,19 @@
   - D="${HOME}/.config/autostart"    ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
   - F="${HOME}/.config/compton.conf" ; if [ -f "${F}" ]; then ; rm -rf "${F}" ; fi
   - D="${HOME}/.config/i3"           ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+
 - link:
-    ~/.config/autostart:      'autostart'
-    ~/.config/compton.conf:   'compton.conf'
-    ~/.config/dunst:          'dunst'
-    ~/.config/i3:             'i3-gaps'
-    ~/.config/i3blocks:       'i3blocks'
-    ~/.tmux.conf:             'tmux'
-    ~/.xinitrc:               'xinitrc'
+
+    ~/.config/autostart:    'autostart'
+    ~/.config/compton.conf: 'compton.conf'
+    ~/.config/dunst:        'dunst'
+    ~/.config/i3:           'i3-gaps'
+    ~/.config/i3blocks:     'i3blocks'
+    ~/.tmux.conf:           'tmux'
+    ~/.xinitrc:             'xinitrc'
+    ~/.xsettingsd:          'xsettingsd'
+    ~/.Xresources:          'Xresources'
+    ~/.urxvt:               'urxvt'
 
 ######### mc (yes, yes.. I know ranger... but old habits)
 - shell:
