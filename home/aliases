@@ -144,12 +144,21 @@ function ggg(){
   function gparse_git(){
     local chunk1="$(cut -d "@" -f 1 <<<"$1")"
     local chunk2="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 1 | cut -d ":" -f 1)"
-    local chunk3="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 2-99| sed "s+.git$++g" )"
+    # does the git url have ports or go directly into "group/repo" ?
+    # if its got more than three colons then ports are in the mix (and foo is not empty)
+    local foo="$(echo $1 | cut -d ":" -f 3)"
+    if [ ! "${foo}" = "" ]; then
+      local chunk3="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 2-99| sed "s+.git$++g" )"
+    else
+      echo "oop"
+      local chunk3="$(echo "$1" | cut -d ":" -f 2 | cut -d "/" -f 1-99| sed "s+.git$++g" )"
+    fi
     local dest="${store}/${chunk2}/${chunk3}"
     if [ ! -d "${dest}" ]; then
       try git clone "${in}" "${dest}"
     fi
     try cd "${dest}"
+    gsay "proto:${chunk1}, host:${chunk2}, repo:${chunk3}  -> ${dest}"
   }
 
   function gparse_http(){
