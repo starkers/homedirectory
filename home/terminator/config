@@ -149,7 +149,6 @@
   [[Flatland]]
     background_color = "#1d1f21"
     background_darkness = 0.96
-    background_type = transparent
     cursor_color = "#708284"
     font = Hack Nerd Font Mono 10
     foreground_color = "#b8dbef"
