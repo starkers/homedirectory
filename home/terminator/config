@@ -1,49 +1,24 @@
 [global_config]
   enabled_plugins = TerminatorThemes, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   extra_styling = False
-  focus = mouse
-  handle_size = 5
-  inactive_color_offset = 0.708333333333
-  scroll_tabbar = True
-  title_font = Hack Nerd Font Mono 9
-  title_hide_sizetext = True
-  title_inactive_bg_color = "#01403d"
-  title_transmit_bg_color = "#046d6b"
-  title_transmit_fg_color = "#000000"
-  title_use_system_font = False
 [keybindings]
   next_profile = <Primary><Shift>braceright
   previous_profile = <Primary><Shift>braceleft
 [layouts]
   [[default]]
-    [[[child0]]]
-      fullscreen = False
-      last_active_term = 04e126a7-eb57-45c5-a968-69810cfd52fa
-      last_active_window = True
-      maximised = False
-      order = 0
-      parent = ""
-      position = 1150:8
-      size = 1129, 1391
-      title = starkers@ryzen: ~/dev/github.com/starkers/homedirectory/home
-      type = Window
-    [[[terminal1]]]
-      command = zsh
-      order = 0
-      parent = child0
-      profile = Brogrammer
+    [[[child1]]]
+      parent = window0
       type = Terminal
-      uuid = 04e126a7-eb57-45c5-a968-69810cfd52fa
+    [[[window0]]]
+      parent = ""
+      type = Window
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#434454"
-    background_darkness = 0.96
+    background_darkness = 0.93
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = Hack Nerd Font Mono 10
-    foreground_color = "#ffffff"
-    palette = "#000000:#ff0000:#4e9a06:#c4a000:#7487ff:#75507b:#06989a:#d3d7cf:#555753:#ff0000:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    font = Hack Nerd Font Mono 9
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
@@ -549,7 +524,3 @@
     font = Hack Nerd Font Mono 10
     foreground_color = "#e6e1cf"
     palette = "#000000:#ff3333:#b8cc52:#e7c547:#36a3d9:#f07178:#95e6cb:#ffffff:#323232:#ff6565:#eafe84:#fff779:#68d5ff:#ffa3aa:#c7fffd:#ffffff"
-    scrollback_infinite = True
-    scrollbar_position = hidden
-    show_titlebar = False
-    use_system_font = False
