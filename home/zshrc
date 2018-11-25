@@ -122,23 +122,28 @@ export ZSH_CUSTOM="${HOME}/.zsh_custom"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
   # context
   # time
-  aws
-  kubecontext
   dir
-  virtualenv
-  newline
   vcs
+  virtualenv
   command_execution_time
   status
+  newline
+  aws
+  kubecontext
+  newline
   )
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-  root_indicator
-  battery
+  # root_indicator
+  # battery
   # background_jobs
   # history
   # time
   )
+
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
 # POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
 
