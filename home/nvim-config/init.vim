@@ -559,4 +559,4 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
 
-map <CR> i<CR><ESC>
+map I i<CR><ESC>
