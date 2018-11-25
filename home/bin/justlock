@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+/usr/bin/gnome-screensaver &
+sleep 1
+/usr/bin/gnome-screensaver-command -l
