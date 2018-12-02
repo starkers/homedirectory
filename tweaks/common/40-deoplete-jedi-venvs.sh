@@ -8,6 +8,9 @@ set -e
 # let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
 
 
+# for golang.. should probably make this its own init script when I can be bothered to tidy up
+go get -u github.com/mdempsky/gocode
+
 function jedi(){
   local VER=${1}
   figlet py${VER} neovim

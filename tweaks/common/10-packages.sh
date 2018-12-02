@@ -23,6 +23,7 @@ declare -a arch_packages=(
   correcthorse
   ctags
   direnv
+  dep
   docker
   docker-compose
   dunst
@@ -34,7 +35,6 @@ declare -a arch_packages=(
   flameshot
   # flatpak
   fzf
-  gitbook-editor
   gitkraken
   gksu
   go
@@ -47,7 +47,6 @@ declare -a arch_packages=(
   i3lock-fancy-dualmonitors-git
   ipython
   jdk8-openjdk
-  jetbrains-toolbox
   jq
   keybase-bin
   kubectl-bin
@@ -81,7 +80,6 @@ declare -a arch_packages=(
   sipcalc
   sipcalc
   slack-desktop
-  snapd
   sonata
   sysstat
   terminator
@@ -134,14 +132,6 @@ function instal_yay(){
 
 function deps_arch(){
   # ensure yay is installed
-  local data="$(yaourt -Q)"
-  if ! grep -q yay-bin <<<"$data" ; then
-    set -x
-    yaourt -Sy
-    yaourt --noconfirm -S yay-bin
-  else
-    echo $0: yay already installed
-  fi
 
   for i in "${arch_packages[@]}" ; do
     if ! is_installed_yay ${i}  ; then

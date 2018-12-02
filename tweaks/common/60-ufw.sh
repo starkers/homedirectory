@@ -34,16 +34,6 @@ function instal_yay(){
 
 
 function deps_arch(){
-  # ensure yay is installed
-  local data="$(yaourt -Q)"
-  if ! grep -q yay-bin <<<"$data" ; then
-    set -x
-    yaourt -Sy
-    yaourt --noconfirm -S yay-bin
-  else
-    echo $0: yay already installed
-  fi
-
   for i in "${arch_packages[@]}" ; do
     if ! is_installed_yay ${i}  ; then
       echo $0: installing $i
