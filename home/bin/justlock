@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
-/usr/bin/gnome-screensaver &
-sleep 1
-/usr/bin/gnome-screensaver-command -l
+# /usr/bin/gnome-screensaver &
+# sleep 1
+
+RC=$(/usr/bin/gnome-screensaver-command -l)
+
+if [ ${RC} -gt 0 ]; then
+  /usr/bin/gnome-screensaver &
+  sleep 1
+  /usr/bin/gnome-screensaver-command -l
+fi
+
