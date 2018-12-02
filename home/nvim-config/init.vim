@@ -28,36 +28,38 @@ Plug 'ap/vim-buftabline'
 " "========================================================================"
 " "==========            Language Specifc"
 
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }          " clojure
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }  " golang
-Plug 'fatih/vim-go'                                       " golang
-Plug 'zchee/deoplete-go', { 'do': 'make'}                 " golang
-Plug 'zchee/deoplete-jedi'                                " python
+" " "==========            GOLANG"
+Plug 'mdempsky/gocode', { 'rtp': 'vim' }
+Plug 'fatih/vim-go',      { 'do': ':GoUpdateBinaries' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-jedi'
 
-Plug 'davidhalter/jedi'                                   " python jedi
-Plug 'davidhalter/jedi-vim'  " more py-jedi
-Plug 'jmcantrell/vim-virtualenv'                          " venv support
+" " "==========            PYTHON"
+Plug 'davidhalter/jedi'
+Plug 'davidhalter/jedi-vim'
+Plug 'jmcantrell/vim-virtualenv'
 
-Plug 'hashivim/vim-terraform'                             " basic terraform
-Plug 'martinda/Jenkinsfile-vim-syntax'                    " fml
+Plug 'hashivim/vim-terraform'          " basic terraform
+Plug 'martinda/Jenkinsfile-vim-syntax' " fml
 Plug 'ekalinin/Dockerfile.vim'
-
-" Plug 'pearofducks/ansible-vim'
-" Plug 'chase/vim-ansible-yaml'
 
 " "========================================================================"
 " "==========            Workflow Optimisation"
 
-Plug 'mattn/webapi-vim'                                           " required for gist-vim
-Plug 'mattn/gist-vim'                                             " share gists
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'  " Default snippets for many languages
+
+" Plug 'mattn/webapi-vim'                                           " required for gist-vim
+" Plug 'mattn/gist-vim'                                             " share gists
+
 Plug 'tpope/vim-fugitive'                                         " lets airline detect branch
 Plug 'airblade/vim-gitgutter'                                     " git notations
 
-" Plug 'ctrlpvim/ctrlp.vim'                                         " Ctrl+P for file searching etc
+Plug 'ctrlpvim/ctrlp.vim'          " CtrlP is installed to support tag finding in vim-go
 
-Plug 'wincent/command-t', {
-  \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
-  \ }
+" Plug 'wincent/command-t', {
+"   \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+"   \ }
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " FuzzyFinder
 Plug 'junegunn/vim-easy-align'                                    " easy alignment, EG: 'gaip='
@@ -65,17 +67,19 @@ Plug 'pbogut/fzf-mru.vim'                                         " MostRecently
 Plug 'scrooloose/nerdtree'                                        " file browsing awesomeness
 Plug 'tpope/vim-commentary'                                       " Allow comment toggling, EG: :gcip
 Plug 'tomtom/tcomment_vim'                                        " has mappings for things like 'gcip'
-Plug 'SirVer/ultisnips'                                           " snips
-Plug 'honza/vim-snippets'                                         " snip
 
-" "========================================================================"
-" "==========            Visual Mods"
+" Plug 'SirVer/ultisnips'                                           " snips
+" Plug 'honza/vim-snippets'                                         " snip
+
+" " "========================================================================"
+" " "==========            Visual Mods"
 Plug 'vim-airline/vim-airline'                      "airline
 Plug 'Yggdroot/indentLine'                          "show indent levels (very handy for yaml)
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
-Plug 'ryanoasis/vim-devicons'                       "show icons for filetypes in NERDtree etc
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicons
+
+" Plug 'ryanoasis/vim-devicons'                       "show icons for filetypes in NERDtree etc
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicons
 
 
 " "========================================================================"
@@ -85,10 +89,10 @@ Plug 'rafi/awesome-vim-colorschemes'                "collection of colorshemes
 Plug 'vim-airline/vim-airline-themes'               "airline themes
 Plug 'joshdick/onedark.vim'
 
-Plug 'ddrscott/vim-side-search'
+" Plug 'ddrscott/vim-side-search'
 
 " "close all but current buffer
-Plug 'vim-scripts/BufOnly.vim'
+" Plug 'vim-scripts/BufOnly.vim'
 
 call plug#end()
 """ "========================================================================"
@@ -127,13 +131,21 @@ set nocompatible                                              "no, this is NOT '
 filetype off
 let &runtimepath.='~/.local/share/nvim/plugged/ale'
 filetype plugin on
+
+
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+
+" Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 
-" let g:python_host_prog  = "/home/starkers/.venv_nvim_2.7"
-" let g:python3_host_prog = "/home/starkers/.venv_nvim_3"
+let g:python_host_prog  = "/home/starkers/.venv_nvim_2.7/bin/python"
+let g:python3_host_prog = "/home/starkers/.venv_nvim_3/bin/python"
 
 """ "git"
 let g:gitgutter_realtime = 1
@@ -413,6 +425,7 @@ nmap <F3> :PrevColorScheme<CR>
 
 
 " """ deoplete completion
+let g:deoplete#enable_at_startup = 1
 
 " set completeopt=longest,menuone           " auto complete setting
 " let g:deoplete#auto_complete_start_length = 1
@@ -425,6 +438,7 @@ nmap <F3> :PrevColorScheme<CR>
 " let g:deoplete#keyword_patterns['default'] = '\h\w*'
 " let g:deoplete#omni#input_patterns = {}
 " deoplete tab-complete
+
 inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 " imap <expr> <cr> pumvisible() ? deoplete#close_popup() : "\<cr>"
@@ -516,8 +530,8 @@ let g:side_search_split_pct = 0.4
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+  \ 'ctrl-v': 'split',
+  \ 'ctrl-x': 'vsplit' }
 
 " Default fzf layout
 " - down / up / left / right
@@ -555,8 +569,20 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" search files matching word under the cursor
+nnoremap <leader>s :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
 
 
 
 map I i<CR><ESC>
+
+" ctrlp just here for vim-go, ensure its nerfed
+let g:ctrlp_map = ''
+
+
+" " Below you can disable default snippets for specific languages. If you set the
+" " language to _ it sets the default for all languages.
+" let g:neosnippet#disable_runtime_snippets = {
+"     \ 'go': 1
+" \}

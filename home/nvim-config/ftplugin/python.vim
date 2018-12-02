@@ -1,3 +1,4 @@
+let g:virtualenv_auto_activate = 1
 
 
 
@@ -34,8 +35,8 @@ let NERDTreeIgnore = ['\.pyc$']
 "
 " https://github.com/zchee/deoplete-jedi
 let g:jedi#goto_assignments_command = "<C-]>"
-let g:python_host_prog = '/home/starkers/.venv_nvim_2.7'
-let g:python3_host_prog = '/home/starkers/.venv_nvim_3'
+" let g:python_host_prog = '/home/starkers/.venv_nvim_2.7/bin/python'
+" let g:python3_host_prog = '/home/starkers/.venv_nvim_3/bin/python'
 
 " see: https://github.com/zchee/deoplete-jedi
 let g:deoplete#sources#jedi#show_docstring = 1
