@@ -41,22 +41,21 @@ alias ssh-copy-id-work="ssh-copy-id -i ~/.ssh/id_rsa"
 alias ssh-copy-id-clovis="ssh-copy-id -i ~/.ssh/id_rsa_clovis"
 
 alias cdb="cd ~/bin"
-alias cdd="cd ~/dev"
+alias cdd="cd ~/go/src"
 alias cdD="cd ~/Downloads"
 alias cds="cd ~/Seafile"
 # alias cdm="cd ~/master"
 alias cdw="cd ~/work"
-alias cdh="cd ~/dev/github.com/starkers/homedirectory/home"
-alias cdg="cd ~/dev/github.com"
+alias cdh="cd ~/go/src/github.com/starkers/homedirectory/home"
+alias cdg="cd ~/go/src/github.com"
 alias cdt="cd ~/Torrents"
-
-alias ansible_dev="cd ~/dev/ansible ; source ./hacking/env-setup -q"
 
 #alias cdv="cd ~/files/vagrant"
 
 alias mtr="mtr --curses"
 
 alias d="docker"
+alais k="kubectl"
 
 alias lxc="sudo lxc"
 alias lxd="sudo lxd"
@@ -87,41 +86,6 @@ pf(){
 alias systemctl="sudo systemctl"
 
 
-ghc(){
-  # githubclone
-  # takes a github URL like:
-  # - git@github.com:containous/traefik.git or
-  # - https://@github.com/containous/traefik.git
-  #
-  # will clone into ~/dev/github.com/containous/traefik (if its not checked out yet)
-  # will drop you in that directory
-  local DEV="$HOME/dev/github.com"
-  local INPUT="$1"
-  # if the URL is in https format convert it to ssh
-  if grep -q "github" <<<"${INPUT}" ; then
-    local INPUT="$(sed 's+https://github.com/+git@github.com:+g' <<<${INPUT})"
-  fi
-
-  if grep -q github <<<"${INPUT}"; then
-    local GH_URL="${INPUT}"
-    local GH_USER="$(echo $GH_URL | cut -d ":" -f 2 | cut -d "/" -f 1)"
-    local GH_REPO="$(echo $GH_URL | cut -d ":" -f 2 | cut -d "/" -f 2 | sed "s+.git++g")"
-    local CHECKOUT="${DEV}/${GH_USER}/${GH_REPO}"
-    if [ -d "$CHECKOUT" ]; then
-      echo "doing nothing, $CHECKOUT already exists"
-    else
-      echo "checking out $GH_URL -> $CHECKOUT"
-      set -x
-      mkdir "${DEV}/${GH_USER}" -p
-      git clone "$GH_URL" "$CHECKOUT"
-      set +x
-    fi
-    cd "$CHECKOUT"
-  else
-    echo "sorry.. ${INPUT} doesnt look like a github URL"
-  fi
-}
-
 
 # git grab (for) geeks
 
@@ -131,7 +95,7 @@ ghc(){
 
 
 function ggg(){
-  local store="${HOME}/dev"
+  local store="${HOME}/go/src"
 
   local in="$1"
   local outname="ggg"
@@ -139,26 +103,21 @@ function ggg(){
   function gerr() { echo -e "\e[31m${outname}: ${@}\e[0m"   ; }
   function gdie() { gerr "$*" ; return 111 ; }
   function try() { gsay "$@" ; "$@" || gdie "cannot $*" ; }
-  echo $1
 
   function gparse_git(){
     local chunk1="$(cut -d "@" -f 1 <<<"$1")"
     local chunk2="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 1 | cut -d ":" -f 1)"
-    # does the git url have ports or go directly into "group/repo" ?
-    # if its got more than three colons then ports are in the mix (and foo is not empty)
-    local foo="$(echo $1 | cut -d ":" -f 3)"
-    if [ ! "${foo}" = "" ]; then
+    if grep -q "ssh://" <<<"$1" ; then
       local chunk3="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 2-99| sed "s+.git$++g" )"
     else
-      echo "oop"
       local chunk3="$(echo "$1" | cut -d ":" -f 2 | cut -d "/" -f 1-99| sed "s+.git$++g" )"
     fi
     local dest="${store}/${chunk2}/${chunk3}"
+    gsay "host:${chunk2}, repo:${chunk3}  -> ${dest}"
     if [ ! -d "${dest}" ]; then
       try git clone "${in}" "${dest}"
     fi
     try cd "${dest}"
-    gsay "proto:${chunk1}, host:${chunk2}, repo:${chunk3}  -> ${dest}"
   }
 
   function gparse_http(){
