@@ -71,6 +71,9 @@ Plug 'tomtom/tcomment_vim'                                        " has mappings
 " Plug 'SirVer/ultisnips'                                           " snips
 " Plug 'honza/vim-snippets'                                         " snip
 
+Plug 'towolf/vim-helm'
+
+
 " " "========================================================================"
 " " "==========            Visual Mods"
 Plug 'vim-airline/vim-airline'                      "airline
@@ -89,7 +92,7 @@ Plug 'rafi/awesome-vim-colorschemes'                "collection of colorshemes
 Plug 'vim-airline/vim-airline-themes'               "airline themes
 Plug 'joshdick/onedark.vim'
 
-" Plug 'ddrscott/vim-side-search'
+Plug 'ddrscott/vim-side-search'
 
 " "close all but current buffer
 " Plug 'vim-scripts/BufOnly.vim'
@@ -571,7 +574,7 @@ if executable('ag')
 endif
 
 " search files matching word under the cursor
-nnoremap <leader>s :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
+nnoremap <leader>s :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
 

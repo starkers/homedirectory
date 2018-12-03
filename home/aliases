@@ -55,7 +55,7 @@ alias cdt="cd ~/Torrents"
 alias mtr="mtr --curses"
 
 alias d="docker"
-alais k="kubectl"
+alias k="kubectl"
 
 alias lxc="sudo lxc"
 alias lxd="sudo lxd"
