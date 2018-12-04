@@ -12,7 +12,8 @@ function! BuildYCM(info)
   " info is a dictionary with 3 fields
   "  - name:    name of the plugin
   "  - status: 'installed', 'updated', or 'unchanged'
-  "  - force:   set on PlugInstall! or PlugUpdate!
+  "  - force:   set on Plug
+  "  Install! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
     !./install.py
   endif
@@ -577,8 +578,6 @@ endif
 nnoremap <leader>s :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
-
-map I i<CR><ESC>
 
 " ctrlp just here for vim-go, ensure its nerfed
 let g:ctrlp_map = ''
