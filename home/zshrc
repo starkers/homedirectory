@@ -122,18 +122,17 @@ export ZSH_CUSTOM="${HOME}/.zsh_custom"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
   # context
   # time
+  aws
   dir
   vcs
   virtualenv
   command_execution_time
+  newline
   status
-  newline
-  aws
-  kubecontext
-  newline
   )
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+  kubecontext
   # root_indicator
   # battery
   # background_jobs
