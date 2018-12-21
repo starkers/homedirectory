@@ -71,7 +71,7 @@ install_kubectl(){
   # find latest version:
   # curl https://storage.googleapis.com/kubernetes-release/release/stable.txt
   ver=1.12.2
-  out_dir="${software}/${name}"
+  out_dir="${software}/${name}-${ver}"
   out_file="${name}-${ver}"
   mkdir -p "${out_dir}"
   cd "${out_dir}"
@@ -86,7 +86,7 @@ install_kubectl(){
 install_minikube(){
   name=minikube
   ver=0.27.0
-  out_dir="${software}/${name}"
+  out_dir="${software}/${name}-${ver}"
   out_file="${name}-${ver}"
   mkdir -p "${out_dir}"
   cd "${out_dir}"
@@ -101,13 +101,28 @@ install_minikube(){
 install_saml2aws(){
   name=saml2aws
   ver="2.9.1"
-  out_dir="${software}/${name}"
-  out_file="${name}-${ver}.tar.gm"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
   mkdir -p "${out_dir}"
   cd "${out_dir}"
   wget -O "${out_file}" https://github.com/Versent/saml2aws/releases/download/v${ver}/saml2aws_${ver}_linux_amd64.tar.gz
   delete_if_exists "${name}"
   tar xvf "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
+#: skaffold
+install_skaffold(){
+  name=skaffold
+  ver=0.19.0
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://github.com/GoogleContainerTools/skaffold/releases/download/v${ver}/skaffold-linux-amd64
+  chmod +x "${out_file}"
   mkdir -p "${software}/bin"; cd "${software}/bin"
   ln -sf "${out_dir}/${name}" "${name}"
 }
