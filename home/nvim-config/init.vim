@@ -81,8 +81,8 @@ Plug 'Yggdroot/indentLine'                          "show indent levels (very ha
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
 
-" Plug 'ryanoasis/vim-devicons'                       "show icons for filetypes in NERDtree etc
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicons
+Plug 'ryanoasis/vim-devicons'                       "show icons for filetypes in NERDtree etc
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicons
 
 
 " "========================================================================"
