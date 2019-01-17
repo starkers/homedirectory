@@ -19,6 +19,24 @@ mkdir -p "${software}"
 cd "${bin}"
 
 ##############################################
+#: krew
+install_krew(){
+  name=krew
+  ver="0.2.1"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="${name}-${ver}.tgz"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://storage.googleapis.com/krew/v${ver}/krew.tar.gz
+  wget -O krew.yaml https://storage.googleapis.com/krew/v${ver}/krew.yaml
+  tar xf "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/krew-linux_amd64" "${name}"
+  krew install --manifest=${out_dir}/krew.yaml
+  kubectl plugin list
+}
+
+##############################################
 #: hub
 install_hub(){
   name=hub
