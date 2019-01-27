@@ -84,3 +84,5 @@ export CHEATCOLORS=true
 # so I keep mine in keybase:
 export CHEATPATH="/keybase/private/starkers/home/cheats"
 export PATH=/keybase/private/starkers/scripts/:${PATH}
+
+vf() { fzf | xargs -r -I % $EDITOR % ;}
