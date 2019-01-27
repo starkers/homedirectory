@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+FOO="$(xclip -out -selection clipboard)"
+
+OUTPUT="$(echo "$FOO" | base64 -d)"
+
+echo "${OUTPUT}" | xclip -selection clipboard
+
