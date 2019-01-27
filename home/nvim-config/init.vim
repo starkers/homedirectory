@@ -130,6 +130,7 @@ set splitbelow     " default split behavior
 set splitright     " default split behavior
 set number         " show line number on default
 set relativenumber " show relative line number on default
+set indentkeys-=0# " don't fsck with my insert on col 0 please..
 syntax on          " syntax on by default
 
 """ "initialise ALE linting"
