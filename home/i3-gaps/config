@@ -45,7 +45,7 @@ floating_minimum_size -1 x -1
 floating_maximum_size -1 x -1
 
 new_window pixel
-smart_gaps on
+# smart_gaps on
 for_window [class="^.*"] border pixel 3
 # hide_edge_borders both
 
@@ -162,6 +162,7 @@ bar {
     inactive_workspace #2f343f #2f343f #d8dee8
     urgent_workspace   #2f343f #ebcb8b #2f343f
   }
+  position top
   status_command i3status -c ~/.config/i3/i3status.conf
 }
 
@@ -188,9 +189,8 @@ bindsym $mod+Return           exec --no-startup-id terminator
 
 
 # start dmenu (a program launcher)
-bindsym $mod+Shift+d              exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
-bindsym $mod+d              exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
-
+bindsym $mod+Shift+d          exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+bindsym $mod+d                exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
 bindsym $mod+g                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
 bindsym $mod+l                exec --no-startup-id $HOME/.config/i3/scripts/i3exit lock
 bindsym $mod+p                exec --no-startup-id $HOME/.config/i3/scripts/i3exit suspend
@@ -215,7 +215,7 @@ exec        --no-startup-id /usr/bin/xinput set-prop "SynPS/2 Synaptics TouchPad
 exec        --no-startup-id /usr/bin/xinput set-prop "DLL06E4:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 
 exec        --no-startup-id wicd-gtk -t &
-# exec        --no-startup-id nm-applet &
+exec        --no-startup-id nm-applet &
 # exec        --no-startup-id blueman-applet &
 # exec        --no-startup-id redshift-gtk &
 # exec        --no-startup-id volumeicon &

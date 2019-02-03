@@ -66,8 +66,8 @@ my_load_pip(){
 
 
 my_load_golang
-my_load_pip
-my_load_gemstuff
+# my_load_pip
+# my_load_gemstuff
 my_load_path_home_bin
 my_load_path_krew
 
