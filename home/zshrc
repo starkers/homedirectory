@@ -175,7 +175,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 
 
 
-antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
+# antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
+antigen theme gnzh
 antigen apply
 
 

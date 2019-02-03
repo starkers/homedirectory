@@ -45,8 +45,8 @@ floating_minimum_size -1 x -1
 floating_maximum_size -1 x -1
 
 new_window pixel
-# smart_gaps on
-for_window [class="^.*"] border pixel 5
+smart_gaps on
+for_window [class="^.*"] border pixel 3
 # hide_edge_borders both
 
 font pango:Hack Nerd Font Regular 9
