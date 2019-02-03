@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+
+function dirty(){
+  find "${1}" -type f -exec sed -i "s+${2}+${3}+g" {} +
+}
+
+# if no path is supplied rename inside CWD
+if [ X"${1}" == X ]; then
+  HERE="$(pwd)"
+  read -p "no path supplied.. run the sed against files in ${HERE}? [Yn]" yn
+  if [ X${yn} == Xn ]; then
+    exit 1
+  fi
+  export DIR=${HERE}
+else
+  HERE="${1}"
+fi
+
+echo DIR=${DIR}
+NEW=app.kubernetes.io/name:
+OLD=app:
+dirty "${DIR}" ${NEW} ${OLD}
+
+NEW=app.kubernetes.io/instance:
+OLD=release:
+dirty "${DIR}" ${NEW} ${OLD}
+
+NEW=helm.sh/chart:
+OLD=chart:
+dirty "${DIR}" ${NEW} ${OLD}
+
+OLD=heritage:
+NEW=app.kubernetes.io/managed-by:
+dirty "${DIR}" ${NEW} ${OLD}
