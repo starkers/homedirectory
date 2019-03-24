@@ -52,6 +52,21 @@ install_hub(){
 }
 
 ##############################################
+#: helmfile
+install_helmfile(){
+  name=helmfile
+  ver="0.45.3"
+  out_dir="${software}/${name}"
+  out_file="${name}-${ver}"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://github.com/roboll/helmfile/releases/download/v${ver}/helmfile_linux_amd64
+  chmod +x "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/${out_file}" "${name}"
+}
+
+##############################################
 #: deis
 install_deis(){
   name=deis
@@ -134,7 +149,7 @@ install_saml2aws(){
 #: skaffold
 install_skaffold(){
   name=skaffold
-  ver=0.19.0
+  ver=0.22.0
   out_dir="${software}/${name}-${ver}"
   out_file="${name}"
   mkdir -p "${out_dir}"
@@ -222,7 +237,7 @@ install_packer(){
 #: terraform
 install_terraform(){
   name=terraform
-  ver=0.11.8
+  ver=0.11.11
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip

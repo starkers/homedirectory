@@ -23,10 +23,14 @@ if [ -d "${TWEAKDIR}" ]; then
 else
   echo "no tweaks found in ${TWEAKDIR}"
 fi
-for file in "${ROOTDIR}/tweaks/common/"* ; do
-  echo "##### executing: $file #####"
-  "${file}"
+cd "${ROOTDIR}/tweaks/common/"
+for file in * ; do
+  if [ -f ${file} ]; then
+    echo "##### executing: $file #####"
+    "./${file}"
+  fi
 done
+cd ../..
 
 
 CONFIG="install.conf.yaml"

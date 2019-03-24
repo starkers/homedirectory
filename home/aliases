@@ -1,9 +1,21 @@
+# shell
+
+
+#alias '-'='cd -'
+alias ...=../..
+alias ....=../../..
+alias .....=../../../..
+alias ......=../../../../..
+
+alias g="grep"
 #####GIT
+
 
 alias ga="git add --all ."
 alias gps="git push"
 alias gpl="git pull -ff"
 alias gs="git status"
+alias gss="git status --short"
 alias gc="my_git_commit"
 alias gd="git d"  #call git diff with vimdiff
 
@@ -150,3 +162,15 @@ PRIVATE_ALIASES_FILE=/keybase/private/starkers/shell-aliases
 if [ -f "${PRIVATE_ALIASES_FILE}" ]; then
   source "${PRIVATE_ALIASES_FILE}"
 fi
+
+alias python=python3
+alias pip=pip3
+
+alias gitkraken=/opt/gitkraken/gitkraken
+
+
+
+function flux_last_output(){
+  local a="$(kubectl -n flux logs deployment/flux | grep output= | tail -1| cut -d '"' -f 4)"
+  printf "\n=============\n$a\n=============\n"
+}

@@ -71,13 +71,13 @@ Plug 'tomtom/tcomment_vim'                                        " has mappings
 " Plug 'SirVer/ultisnips'                                           " snips
 " Plug 'honza/vim-snippets'                                         " snip
 
-Plug 'towolf/vim-helm'
+" Plug 'towolf/vim-helm'
 
 
 " " "========================================================================"
 " " "==========            Visual Mods"
 Plug 'vim-airline/vim-airline'                      "airline
-Plug 'Yggdroot/indentLine'                          "show indent levels (very handy for yaml)
+Plug 'Yggdroot/indentLine'                          "show indent levels (very handy for false
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
 
@@ -432,10 +432,14 @@ nmap <F3> :PrevColorScheme<CR>
 
 
 " """ deoplete completion
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 
+
+let g:jedi#show_call_signatures = 2
 " set completeopt=longest,menuone           " auto complete setting
-" let g:deoplete#auto_complete_start_length = 1
+" set completeopt=menuone,noinsert,noselect
+set completeopt=preview,noinsert,noselect
+let g:deoplete#auto_complete_start_length = 2
 " let g:deoplete#auto_completion_start_length = 0
 " let g:deoplete#enable_at_startup=1
 " let g:deoplete#enable_refresh_always=0

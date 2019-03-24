@@ -66,7 +66,7 @@ my_load_pip(){
 
 
 my_load_golang
-# my_load_pip
+my_load_pip
 # my_load_gemstuff
 my_load_path_home_bin
 my_load_path_krew
@@ -86,3 +86,5 @@ export CHEATPATH="/keybase/private/starkers/home/cheats"
 export PATH=/keybase/private/starkers/scripts/:${PATH}
 
 vf() { fzf | xargs -r -I % $EDITOR % ;}
+
+export ANSIBLE_NOCOWS=1

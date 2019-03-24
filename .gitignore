@@ -26,3 +26,9 @@ home/nvim-share/shada/*.shada
 
 # ~/.font directories get temp .uuid files created now..
 .uuid
+
+
+home/nvim-config/tmp/backup/**
+home/nvim-config/tmp/tmp/**
+home/z/**
+

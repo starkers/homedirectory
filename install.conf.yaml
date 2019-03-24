@@ -24,13 +24,15 @@
     ~/.muttrc:                '/keybase/private/starkers/home/muttrc'
     ~/.weechat:               '/keybase/private/starkers/home/weechat'
     ~/Notes:                  '/keybase/private/starkers/home/notes'
+    ~/.antigen.zsh:           'antigen.zsh'
+    ~/.completions_bash:      'completions_bash'
 
-######### ZSH + BASH
-- shell:
-  # remove these files if they are already present..
-  # I want to symlink them
-  - F="${HOME}/.bashrc" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
-  - F="${HOME}/.zshrc"  ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
+# ######### ZSH + BASH
+# - shell:
+#   # remove these files if they are already present..
+#   # I want to symlink them
+#   - F="${HOME}/.bashrc" ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
+#   - F="${HOME}/.zshrc"  ; if [ -f "${F}" ]; then ; rm -f "${F}" ; fi
 
 - link:
     ~/.aliases:               'aliases'
@@ -39,12 +41,13 @@
     ~/.profile:               'profile'
     ~/.shell_functions:       'shell_functions'
     ~/.zshrc:                 'zshrc'
+    ~/.ztool:                 'z'
 
-######### i3 + co
-- shell:
-  - D="${HOME}/.config/autostart"    ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
-  - F="${HOME}/.config/compton.conf" ; if [ -f "${F}" ]; then ; rm -rf "${F}" ; fi
-  - D="${HOME}/.config/i3"           ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+ ######### i3 + co
+# - shell:
+#   - D="${HOME}/.config/autostart"    ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+#   - F="${HOME}/.config/compton.conf" ; if [ -f "${F}" ]; then ; rm -rf "${F}" ; fi
+#   - D="${HOME}/.config/i3"           ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 
 - link:
 
@@ -76,9 +79,10 @@
   - [git submodule update --init --recursive, Installing submodules]
 
 
-## VIM
-- shell:
-  - D="${HOME}/.local/share/nvim" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+# ## VIM
+# - shell:
+#   - D="${HOME}/.local/share/nvim" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
+
 - link:
     ~/.local/share/nvim:      'nvim-share'
     ~/.config/nvim:           'nvim-config'

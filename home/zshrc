@@ -16,9 +16,6 @@ function my_load_shell_functions(){
   source ~/.shell_functions
 }
 
-export ANSIBLE_NOCOWS=1
-
-
 # export _Z_DATA="${HOME}/.z_h_data"
 # if [ ! -d "${_Z_DATA}" ]; then
 #   mkdir -p "${_Z_DATA}"
@@ -53,7 +50,13 @@ function my_load_direnv(){
 }
 
 function my_load_fzf(){
-  for i in /usr/share/fzf/completion.zsh /usr/share/fzf/key-bindings.zsh ]; do
+  declare -a filenames=(
+    /usr/share/fzf/completion.zsh
+    /usr/share/fzf/key-bindings.zsh
+    ~/.fzf/shell/completion.zsh
+    ~/.fzf/shell/key-bindings.zsh
+  )
+  for i in "${filenames[@]}"; do
     if [ -f "${i}" ]; then
       source "${i}"
     fi
@@ -72,10 +75,10 @@ zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 
-#for VTE (tilix)
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte.sh
-fi
+# #for VTE (tilix)
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#   source /etc/profile.d/vte.sh
+# fi
 
 # export SDKMAN_DIR="${HOME}/.sdkman"
 # [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
@@ -148,7 +151,7 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
 # POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
 
-source /usr/share/zsh/share/antigen.zsh
+source ~/.antigen.zsh
 antigen use oh-my-zsh
 
 # stuff I *mostly* use
@@ -183,7 +186,7 @@ antigen apply
 
 
 my_load_fzf
-my_load_direnv
+# my_load_direnv
 my_load_aliases
 my_load_profile
 my_load_shell_functions
@@ -192,9 +195,9 @@ my_load_shell_functions
 export JAVA_HOME=/usr/lib/jvm/default/
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # cleanup trash ~/.z.* files
 find ~/  -maxdepth 1 -name ".z*"  -type f -size 0 -exec rm {} \;
 
 export PATH=/keybase/private/starkers/scripts:${PATH}
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

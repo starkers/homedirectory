@@ -55,6 +55,7 @@ for a in x:
         print("{} -> {}".format(
             a,
             final))
+        os.rename(a, final)
 
         # os.rename(a, final)
 
