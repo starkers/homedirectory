@@ -11,6 +11,11 @@
 ##############
 # This sections sets up links <on the left> to the stuff in this git repo or my keybase
 
+# fish
+- link:
+    ~/.config/fish:           'config-fish'
+    ~/.config/fisher:         'config-fisher'
+    ~/.config/omf:            'config-omf'
 - link:
     ~/.bin:                   'bin'              #scripts and general "helpers"
     ~/.config/terminator:     'terminator'
@@ -86,7 +91,3 @@
 - link:
     ~/.local/share/nvim:      'nvim-share'
     ~/.config/nvim:           'nvim-config'
-- shell:
-# if there aren't a whole bunch of plugins in here already, please launch nvim and install them..
-  - COUNT="$(ls "${HOME}/.local/share/nvim/plugged/" | sort | wc -l)" ; if [ "$COUNT" -lt 10 ]; then echo "installing vim plugins" ; nvim +'PlugInstall --sync' +qa ; fi
-
