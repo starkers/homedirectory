@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+
+set -eu
+
+read -p "type your commit message here:" FOO
+
+if [ ! X${FOO} == X ]; then
+  echo attempting: git commit -m "${FOO}"
+fi

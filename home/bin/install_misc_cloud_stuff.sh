@@ -283,7 +283,7 @@ install_kops(){
   # cd ${GOPATH}/src/k8s.io/kops/
   # make
   name=kops
-  ver=1.10.0
+  ver=1.11.1
   dest="${software}/${name}-${ver}"
   file=kops-linux-amd64
   mkdir -p "$dest"
