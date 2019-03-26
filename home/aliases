@@ -12,7 +12,8 @@ alias g="grep"
 
 
 #autojump
-alias z="j"
+alias j=autojump
+alias z=autojump
 alias flatpak="flatpak"
 
 alias ga="git add --all ."
