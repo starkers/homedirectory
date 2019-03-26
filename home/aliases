@@ -20,12 +20,10 @@ alias gps="git push"
 alias gpl="git pull -ff"
 alias gs="git status"
 alias gss="git status --short"
-alias gc="my_git_commit"
+alias gc="gitcommit"
 alias gd="git d"  #call git diff with vimdiff
 
 alias mplayer="mpv"
-
-alias dc="docker-compose"
 
 alias vim="nvim"
 alias sternalltail="stern --all-namespaces --tail 10"

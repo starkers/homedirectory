@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+if [ ! X"$1" == X ]; then
+  git commit -m "${FOO}"
+  exit 0
+fi
 
 set -eu
-
-read -p "type your commit message here:" FOO
+echo "##################################################################################"
+read -p "msg: " FOO
 
 if [ ! X${FOO} == X ]; then
-  echo attempting: git commit -m "${FOO}"
+  git commit -m "${FOO}"
 fi
