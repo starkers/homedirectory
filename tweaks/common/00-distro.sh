@@ -24,6 +24,8 @@ fi
 
 
 if is_fedora; then
-  ./fedora/*
+  for a in ./fedora/* ; do
+    $a
+  done
 fi
 
