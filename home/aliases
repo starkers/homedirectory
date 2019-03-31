@@ -1,115 +1,72 @@
-# shell
-
-
-#alias '-'='cd -'
+#cd
 alias ...=../..
 alias ....=../../..
 alias .....=../../../..
 alias ......=../../../../..
+alias cdD="cd ~/Downloads"
+alias cdb="cd ~/bin"
+alias cdd="cd ~/go/src"
+alias cdg="cd ~/go/src/github.com"
+alias cdh="cd ~/go/src/github.com/starkers/homedirectory/home"
+alias cds="cd ~/Seafile"
+alias cdt="cd ~/Torrents"
+alias cdw="cd ~/work"
 
+#misc
+alias atop="sudo atop"
+alias d="docker"
+alias fastboot="sudo fastboot"
 alias g="grep"
-#####GIT
-
-
-#autojump
-alias j=autojump
-alias z=autojump
-alias flatpak="flatpak"
-
-alias ga="git add --all ."
-alias gps="git push"
-alias gpl="git pull -ff"
-alias gs="git status"
-alias gss="git status --short"
-alias gc="gitcommit"
-alias gd="git d"  #call git diff with vimdiff
-
+alias lxc="sudo lxc"
+alias lxd="sudo lxd"
+alias mc="mc -S ~/.local/share/mc/skins/candy256.ini"
 alias mplayer="mpv"
-
-alias vim="nvim"
+alias mtr="mtr --curses"
+alias nload="sudo nload wlan0 -u K"
+alias openvpn="sudo openvpn"
+alias ssh="ssh -A"
 alias sternalltail="stern --all-namespaces --tail 10"
-# release any files vim thinks are +ro
-alias vim_swp_clear="rm -rvf ~/.vim/tmp/*.swp"
-
+alias systemctl="sudo systemctl"
+alias vim-clear-tmp-and-swap="rm -rf ~/.config/nvim/tmp/tmp/*.sw*"
+alias vim="nvim"
 alias vimdiff="nvim -d"
-#protip.. use vimdiff/meld
-# git config --global diff.tool nvim -d
-# git config --global difftool.prompt false
-# git config --global alias.d difftool
 
-
-alias lg="lazygit"
+#ls
 alias ls="ls --color"
 alias ll="ls -l"
 alias lla="ls -la"
 alias ltr="ls -ltr"
 
+#autojump
+alias j=autojump
+alias z=j
 
-alias snap="sudo snap"
-alias apts="apt-cache search"
-alias apti="sudo apt-get install"
-alias apt="sudo apt"
-alias ssh="ssh -A"
-alias pacman="sudo pacman"
-alias ssh-copy-id-work="ssh-copy-id -i ~/.ssh/id_rsa"
-alias ssh-copy-id-clovis="ssh-copy-id -i ~/.ssh/id_rsa_clovis"
-
-alias cdb="cd ~/bin"
-alias cdd="cd ~/go/src"
-alias cdD="cd ~/Downloads"
-alias cds="cd ~/Seafile"
-# alias cdm="cd ~/master"
-alias cdw="cd ~/work"
-alias cdh="cd ~/go/src/github.com/starkers/homedirectory/home"
-alias cdg="cd ~/go/src/github.com"
-alias cdt="cd ~/Torrents"
-
-#alias cdv="cd ~/files/vagrant"
-
-alias mtr="mtr --curses"
-
-alias d="docker"
+#kubectl
 alias k="kubectl"
+alias keti='kubectl exec -ti'
 
-alias lxc="sudo lxc"
-alias lxd="sudo lxd"
+#git
+alias ga="git add --all ."
+alias gc="gitcommit"
+alias gco="git checkout"
+alias gd="git d"  #call git diff with vimdiff
+alias gpl="git pull -ff"
+alias gps="git push"
+alias gs="git status"
+alias gss="git status --short"
+alias lg="lazygit"
 
-alias vim-clear-tmp-and-swap="rm -rf ~/.config/nvim/tmp/tmp/*.sw*"
-alias nload="sudo nload wlan0 -u K"
+#arch
+alias pacman="sudo pacman"
 
-alias atop="sudo atop"
+#debian
+alias apt="sudo apt"
+alias apti="sudo apt-get install"
+alias apts="apt-cache search"
 
+#ubuntu
+alias snap="sudo snap"
 
-# alias aws="awssudo sainsburys aws"
-
-
-alias openvpn="sudo openvpn"
-
-# mem(){
-#   printf " Private  +   Shared  =  RAM used       Program\n"
-#   sudo ~/.bin/psmem_exec | tail -30
-# }
-
-
-# alias k="kubectl --kubeconfig=$KCONFIG"
-#
-alias systemctl="sudo systemctl"
-
-
-
-# git grab (for) geeks
-
-# always clone into ~/somewhere/<server>/<project>  #you set "~/somewhere"
-# option to try convert https URLs to ssh://git@ (TODO)
-# if dest dir already exists just CD in there
-
-
-
-alias fastboot="sudo fastboot"
-
-
-alias python=python3
+# defaults
 alias pip=pip3
-
-
-
+alias python=python3
