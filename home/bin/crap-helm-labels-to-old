@@ -10,4 +10,5 @@ RULE="s|helm.sh/chart:|chart:|g; ${RULE}"
 RULE="s|app.kubernetes.io/managed-by:|heritage:|g; ${RULE}"
 
 find ${DIR} -type f -exec sed -i.bak "${RULE}" {} +
+find ${DIR} -type f -name "*.bak" -exec rm "{}" +
 
