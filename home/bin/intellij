@@ -9,7 +9,7 @@ import time
 
 # see com.intellij.idea.SocketLock for the server side of this interface
 
-RUN_PATH = u'/opt/JetBrains/apps/IDEA-U/ch-0/181.5087.20/bin/idea.sh'
+RUN_PATH = u'/home/starkers/.software/idea-IU-191.6183.87/bin/idea.sh'
 CONFIG_PATH = u'/home/starkers/.IntelliJIdea2018.1/config'
 SYSTEM_PATH = u'/home/starkers/.IntelliJIdea2018.1/system'
 
@@ -99,6 +99,7 @@ def start_new_instance(args):
         os.execvp('open', ['-a', RUN_PATH] + args)
     else:
         bin_file = os.path.split(RUN_PATH)[1]
+        print(RUN_PATH, [bin_file] + args)
         os.execv(RUN_PATH, [bin_file] + args)
 
 
