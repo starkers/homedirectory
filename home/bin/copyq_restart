@@ -2,4 +2,4 @@
 
 pkill copyq
 sleep 1
-copyq
+copyq &
