@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function trim(){
+  echo $@ | sed -e :a -e '/^\n*$/{$d;N;};/\n$/ba'
+}
+
+if [ ! X"$1" == X ]; then
+  trim "$@" | base64 -d
+  exit 0
+fi
+
+echo "##################################################################################"
+read -p "enter base64 string: " FOO
+
+if [ ! "X${FOO}" == X ]; then
+  trim "$FOO" | base64 -d
+fi
