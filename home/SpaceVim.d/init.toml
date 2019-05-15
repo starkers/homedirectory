@@ -1,0 +1,64 @@
+[options]
+bootstrap_after              = "myspacevim#after"
+bootstrap_before             = "myspacevim#before"
+buffer_index_type            = 4
+colorscheme                  = "one"
+colorscheme_bg               = "dark"
+default_indent               = 2
+enable_guicolors             = true
+enable_tabline_filetype_icon = true
+lint_on_the_fly              = 1
+
+
+
+[[layers]]
+name = "autocomplete"
+
+[[layers]]
+name             = "shell"
+default_position = "top"
+default_height   = 30
+
+[[layers]]
+name = "colorscheme"
+
+# [[layers]]
+# name = "checker"
+
+[[layers]]
+name = "denite"
+
+# [[layers]]
+# name = "format"
+
+# [[layers]]
+# name = "git"
+
+[[layers]]
+name = "fzf"
+
+# [[layers]]
+# name = "tools"
+
+# [[layers]]
+# name = "tags"
+
+[[layers]]
+name = "VersionControl"
+
+[[layers]]
+name = "lang#dockerfile"
+
+# # [[layers]]
+# # name = "lang#html"
+# # [[layers]]
+# # name = "lang#graphql"
+
+[[layers]]
+name = "lang#go"
+
+[[layers]]
+name = "lang#python"
+
+[[layers]]
+name = "lang#toml"
