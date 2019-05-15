@@ -46,7 +46,6 @@
     ~/.profile:               'profile'
     ~/.shell_functions:       'shell_functions'
     ~/.zshrc:                 'zshrc'
-    ~/.ztool:                 'z'
 
  ######### i3 + co
 # - shell:
@@ -78,7 +77,7 @@
 ######### SSH
 - shell:
   - mkdir -p ~/.ssh
-  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --exclude=google_compute_known_hosts
+    #  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --exclude=google_compute_known_hosts
   - chmod 0700 ~/.ssh/
   - chmod 0600 ~/.ssh/id_*
   - [git submodule update --init --recursive, Installing submodules]
@@ -89,5 +88,4 @@
 #   - D="${HOME}/.local/share/nvim" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
 
 - link:
-    ~/.local/share/nvim:      'nvim-share'
-    ~/.config/nvim:           'nvim-config'
+    ~/.SpaceVim.d:            'SpaceVim.d'
