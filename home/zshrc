@@ -64,20 +64,11 @@ function my_load_fzf(){
 }
 
 
-#load "hub" and other completions (see: https://github.com/github/hub/tree/master/etc)
-fpath=(~/.zsh/completions $fpath)
-# plugins=(... zsh-completions)
-
-plugins=(archlinux docker docker-compose go golang kops kubectl z zsh-completions)
-
-# this is required so `docker exec -it <TAB>` works.. see: https://github.com/moby/moby/commit/402caa94d23ea3ad47f814fc1414a93c5c8e7e58
-zstyle ':completion:*:*:docker:*' option-stacking yes
-zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 
 # #for VTE (tilix)
 # if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-#   source /etc/profile.d/vte.sh
+#   [ -e /etc/profile.d/vte.sh ] && source /etc/profile.d/vte.sh
 # fi
 
 # export SDKMAN_DIR="${HOME}/.sdkman"
@@ -99,7 +90,7 @@ SPACESHIP_PROMPT_ORDER=(
   # elixir        # Elixir section
   # xcode       # Xcode section (Disabled)
   # swift         # Swift section
-  golang        # Go section
+  # golang        # Go section
   # php           # PHP section
   # rust          # Rust section
   # haskell       # Haskell Stack section
@@ -111,10 +102,10 @@ SPACESHIP_PROMPT_ORDER=(
   # pyenv         # Pyenv section
   # dotnet        # .NET section
   # ember       # Ember.js section (Disabled)
-  kubecontext   # Kubectl context section
+  # kubecontext   # Kubectl context section
   exec_time     # Execution time
   line_sep      # Line break
-  battery       # Battery level and status
+  # battery       # Battery level and status
   # vi_mode     # Vi-mode indicator (Disabled)
   jobs          # Background jobs indicator
   exit_code     # Exit code section
@@ -122,6 +113,17 @@ SPACESHIP_PROMPT_ORDER=(
 )
 
 SPACESHIP_VENV_SYMBOL='🐍'
+
+SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
+  # red if namespace is "kube-system"
+  red    '\(prod)$'
+  # else, green if "dev-01" is anywhere in the context or namespace
+  green  '\(dev|preview|demo)$'
+  # else, red if context name ends with ".k8s.local" _and_ namespace is "system"
+  # red    '\.k8s\.local \(system)$'
+  # else, yellow if the entire content is "test-" followed by digits, and no namespace is displayed
+  blue '^.*$'
+  )
 
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
@@ -155,7 +157,6 @@ source ~/.antigen.zsh
 antigen use oh-my-zsh
 
 # stuff I *mostly* use
-# antigen bundle cheat
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle git
@@ -164,9 +165,9 @@ antigen bundle golang
 antigen bundle gpg-agent
 antigen bundle history
 antigen bundle httpie
+# antigen bundle kubectl
 antigen bundle pip
 antigen bundle systemd
-# antigen bundle vagrant
 antigen bundle virtualenv
 antigen bundle z
 antigen bundle zsh-users/zsh-autosuggestions
@@ -176,28 +177,91 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # # docker zsh completions
 # antigen bundle felixr/docker-zsh-completion
 
+fpath=(~/.zsh/completions $fpath)
+plugins=(docker docker-compose go golang kops kubectl z zsh-completions)
+# this is required so `docker exec -it <TAB>` works.. see: https://github.com/moby/moby/commit/402caa94d23ea3ad47f814fc1414a93c5c8e7e58
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 
-# antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
-antigen theme gnzh
+antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
+# antigen theme gnzh
 antigen apply
 
 
 
-
 my_load_fzf
-# my_load_direnv
+my_load_direnv
 my_load_aliases
-my_load_profile
+# my_load_profile
 my_load_shell_functions
 
 
-export JAVA_HOME=/usr/lib/jvm/default/
 
 
 # cleanup trash ~/.z.* files
 find ~/  -maxdepth 1 -name ".z*"  -type f -size 0 -exec rm {} \;
 
-export PATH=/keybase/private/starkers/scripts:${PATH}
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export JAVA_HOME=/usr/lib/jvm/default/
+export GOPATH="${HOME}/go"
+export PATH="${GOPATH}/bin:${PATH}"
+export PATH="${HOME}/.bin:${PATH}"
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.software/bin:${PATH}"
+export PATH="${HOME}/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:${PATH}"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# unset JAVA_HOME
+
+[ -e ${HOME}/.sdkman/bin/sdkman-init.sh ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# [ -e ${HOME}/.software/bin/kubectl ]      && source <(command ${HOME}/.software/bin/kubectl completion zsh)
+
+function kubectl() {
+  command kubectl $*
+  if [[ -z $KUBECTL_COMPLETE ]]
+    then
+    source <(command kubectl completion zsh)
+    KUBECTL_COMPLETE=1
+  fi
+}
+
+[ -e /keybase/private/starkers/scripts ]  && export PATH=/keybase/private/starkers/scripts:${PATH}
+[ -e ~/.fzf.zsh ]                         && source ~/.fzf.zsh
+
+# unsetopt share_history
+
+
+
+export KUBECONFIG="${HOME}/.kube/config"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# 
+# # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+## Defer initialization of nvm until nvm, node or a node-dependent command is
+## run. Ensure this block is only run once if .bashrc gets sourced multiple times
+## by checking whether __init_nvm is a function.
+#if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -t __init_nvm)" = function ]; then
+#  export NVM_DIR="$HOME/.nvm"
+#  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+#  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack')
+#  function __init_nvm() {
+#    for i in "${__node_commands[@]}"; do unalias $i; done
+#    . "$NVM_DIR"/nvm.sh
+#    unset __node_commands
+#    unset -f __init_nvm
+#  }
+#  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+#fi
+
+
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  alias  nvm='unalias nvm node npm  && . "$NVM_DIR"/nvm.sh && nvm'
+  alias node='unalias nvm node npm  && . "$NVM_DIR"/nvm.sh && node'
+  alias  npm='unalias nvm node npm  && . "$NVM_DIR"/nvm.sh && npm'
+  alias yarn='unalias nvm node yarn && . "$NVM_DIR"/nvm.sh && yarn'
+fi

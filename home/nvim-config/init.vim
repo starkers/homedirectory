@@ -236,7 +236,7 @@ let g:deepspace_italics = 1                       " allow italic fonts
 set background=dark                               " Dark BG please
 set termguicolors                                 " allow support for more colours, this aint putty
 colorscheme colorsbox-material
-set scrolloff=2                                   " always show at least X lines above/below the cursor
+set scrolloff=2                                   " always show at least X lines above/below the cursor 
 highlight TermCursor ctermfg=red guifg=red        " highlight whitespace and bad things in big fat RED
 highlight ExtraWhitespace ctermbg=red guibg=red   " highlight group for ExtraWhitespace
 match ExtraWhitespace /\s\+$/                     " match ExtraWhitespace

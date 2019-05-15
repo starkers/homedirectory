@@ -12,3 +12,5 @@ set -xg EDITOR nvim
 
 
 source ~/.aliases
+
+# eval (direnv hook fish)

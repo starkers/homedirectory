@@ -9,7 +9,10 @@
 [difftool]
   prompt = false
 [mergetool "vimdiff"]
-  cmd = nvim -d $BASE $LOCAL
+  # neovim
+  # cmd = nvim -d $BASE $LOCAL
+  # vim
+  cmd = vimdiff -d $BASE $LOCAL
   #$BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 [alias]

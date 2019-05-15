@@ -103,7 +103,7 @@ install_kubectl(){
   name=kubectl
   # find latest version:
   # curl https://storage.googleapis.com/kubernetes-release/release/stable.txt
-  ver=1.12.2
+  ver=1.14.1
   out_dir="${software}/${name}-${ver}"
   out_file="${name}-${ver}"
   mkdir -p "${out_dir}"
@@ -114,6 +114,20 @@ install_kubectl(){
   ln -sf "${out_dir}/${out_file}" "${name}"
 }
 
+##############################################
+#: kubedb
+install_kubedb(){
+  name=kubedb
+  ver=0.11.0
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://github.com/kubedb/cli/releases/download/${ver}/kubedb-linux-amd64 -q
+  chmod +x "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/${out_file}" "${name}"
+}
 ##############################################
 #: minikube
 install_minikube(){
@@ -194,7 +208,9 @@ install_stern(){
 #: helm
 install_helm(){
   name=helm
-  ver="2.12.3"
+  ver="$1"
+  # ver="2.12.3"
+  # ver="2.11.0"
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz
@@ -205,18 +221,18 @@ install_helm(){
 }
 
 ##############################################
-#: helmc (helm classic)
-install_helmc(){
-  name=helmc
-  ver="latest"  #0.8.1+a9c55cf at time of writing
-  mkdir -p "${software}/${name}-${ver}"
-  cd "${software}/${name}-${ver}"
-  wget https://storage.googleapis.com/helm-classic/helmc-latest-linux-amd64
-  chmod +x helmc-latest-linux-amd64
-  # delete_if_exists "${name}"
-  # tar xvf helm-v${ver}-linux-amd64.tar.gz
+#: onessl
+install_onessl(){
+  name=onessl
+  ver="0.3.0"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${out_dir}/onessl"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" -c https://github.com/kubepack/onessl/releases/download/${ver}/onessl-linux-amd64
+  chmod +x "${out_file}"
   mkdir -p "${software}/bin"; cd "${software}/bin"
-  ln -sf "${software}/${name}-${ver}/helmc-latest-linux-amd64" ${name}
+  ln -sf "${out_file}" ${name}
 }
 
 ##############################################
@@ -237,7 +253,7 @@ install_packer(){
 #: terraform
 install_terraform(){
   name=terraform
-  ver=0.11.11
+  ver=0.11.13
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip
@@ -357,6 +373,6 @@ if [ "X$1" = X ]; then
   grep "^#:" "$self" | cut -d " " -f 2 | sort
 else
   set -x
-  install_$1
+  install_$1 "$2"
 fi
 

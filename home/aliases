@@ -27,9 +27,7 @@ alias openvpn="sudo openvpn"
 alias ssh="ssh -A"
 alias sternalltail="stern --all-namespaces --tail 10"
 alias systemctl="sudo systemctl"
-alias vim-clear-tmp-and-swap="rm -rf ~/.config/nvim/tmp/tmp/*.sw*"
-alias vim="nvim"
-alias vimdiff="nvim -d"
+alias vim-clear-tmp-and-swap="rm -rf ~/.vim/tmp_tmp/*.sw*"
 
 #ls
 alias ls="ls --color"
@@ -37,13 +35,6 @@ alias ll="ls -l"
 alias lla="ls -la"
 alias ltr="ls -ltr"
 
-#autojump
-alias j=autojump
-alias z=j
-
-#kubectl
-alias k="kubectl"
-alias keti='kubectl exec -ti'
 
 #git
 alias ga="git add --all ."
@@ -67,6 +58,51 @@ alias apts="apt-cache search"
 #ubuntu
 alias snap="sudo snap"
 
-# defaults
-alias pip=pip3
-alias python=python3
+function ggg(){
+  local store="${HOME}/go/src"
+
+  local in="$1"
+  local outname="ggg"
+  function gsay() { echo -e "\e[34m${outname}: $*\e[0m" >&2 ; }
+  function gerr() { echo -e "\e[31m${outname}: ${@}\e[0m"   ; }
+  function gdie() { gerr "$*" ; return 111 ; }
+  function try() { gsay "$@" ; "$@" || gdie "cannot $*" ; }
+
+  function gparse_git(){
+    local chunk1="$(cut -d "@" -f 1 <<<"$1")"
+    local chunk2="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 1 | cut -d ":" -f 1)"
+    if grep -q "ssh://" <<<"$1" ; then
+      local chunk3="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 2-99| sed "s+.git$++g" )"
+    else
+      local chunk3="$(echo "$1" | cut -d ":" -f 2 | cut -d "/" -f 1-99| sed "s+.git$++g" )"
+    fi
+    local dest="${store}/${chunk2}/${chunk3}"
+    gsay "host:${chunk2}, repo:${chunk3}  -> ${dest}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+
+  function gparse_http(){
+    local chunk2="$(echo "$1" | cut -d "/" -f 3 | cut -d ":" -f 1)"
+    local chunk3="$(echo "$1" | cut -d "/" -f 4-99 | sed "s+.git++g" )"
+    local dest="${store}/${chunk2}/${chunk3}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+
+  if grep -q "^http://" <<<"${in}" ; then
+    gparse_http "${in}"
+  elif grep -q "^https://" <<<"${in}" ; then
+    gparse_http "${in}"
+  elif grep -q "^git@" <<<"${in}"; then
+    gparse_git "${in}"
+  elif grep -q "^ssh://.*@" <<<"${in}"; then
+    gparse_git "${in}"
+  else
+    gdie "sorry couldn't match ${in} to any kind of git URL"
+  fi
+}

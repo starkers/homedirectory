@@ -1,0 +1,6 @@
+#!/bin/sh
+
+
+ID="$(xinput list --id-only "SYNA2393:00 06CB:19AC")"
+set -x
+xinput disable ${ID}
