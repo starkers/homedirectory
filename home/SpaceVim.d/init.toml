@@ -22,8 +22,8 @@ default_height   = 30
 [[layers]]
 name = "colorscheme"
 
-# [[layers]]
-# name = "checker"
+[[layers]]
+name = "checker"
 
 [[layers]]
 name = "denite"
