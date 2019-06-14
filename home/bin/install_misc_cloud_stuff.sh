@@ -52,6 +52,20 @@ install_hub(){
 }
 
 ##############################################
+#: kustomize
+install_kustomize(){
+  name=kustomize
+  ver="2.0.3"
+  out_dir="${software}/${name}"
+  out_file="${name}-${ver}"
+  mkdir -p "${out_dir}"
+  cd "${out_dir}"
+  wget -O "${out_file}" https://github.com/kubernetes-sigs/kustomize/releases/download/v${ver}/kustomize_${ver}_linux_amd64
+  chmod +x "${out_file}"
+  mkdir -p "${software}/bin"; cd "${software}/bin"
+  ln -sf "${out_dir}/${out_file}" "${name}"
+}
+##############################################
 #: helmfile
 install_helmfile(){
   name=helmfile
@@ -253,7 +267,7 @@ install_packer(){
 #: terraform
 install_terraform(){
   name=terraform
-  ver=0.11.13
+  ver=""${1:-0.11.13}""
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip
@@ -332,7 +346,7 @@ install_direnv(){
 #: fluxctl
 install_fluxctl(){
   name=fluxctl
-  ver=1.8.1
+  ver=1.12.3
   dest="${software}/${name}-${ver}"
   file=fluxctl_linux_amd64
   mkdir -p "$dest"
@@ -373,6 +387,6 @@ if [ "X$1" = X ]; then
   grep "^#:" "$self" | cut -d " " -f 2 | sort
 else
   set -x
-  install_$1 "$2"
+  install_$1 "$2" "$3"
 fi
 
