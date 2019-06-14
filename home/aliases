@@ -13,6 +13,7 @@ alias cdt="cd ~/Torrents"
 alias cdw="cd ~/work"
 
 #misc
+alias pip="pip3"
 alias atop="sudo atop"
 alias d="docker"
 alias fastboot="sudo fastboot"
