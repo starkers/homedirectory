@@ -28,7 +28,6 @@ home/nvim-share/shada/*.shada
 .uuid
 
 
-home/nvim-config/tmp/backup/**
-home/nvim-config/tmp/tmp/**
+home/nvim-config/tmp/
 home/z/**
 
