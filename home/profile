@@ -7,8 +7,7 @@ if [ -n "${BASH_VERSION}" ]; then
   fi
 fi
 
-export EDITOR="$(which nvim)"
-alias vim="$(which nvim)"
+export EDITOR="$(which vim)"
 MY_OS="$(uname -s)"
 
 ## I wrap all my tweaks in functions so zprof can profile them (incase something is slow)
