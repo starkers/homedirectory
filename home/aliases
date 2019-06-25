@@ -107,3 +107,6 @@ function ggg(){
     gdie "sorry couldn't match ${in} to any kind of git URL"
   fi
 }
+
+alias open=xdg-open
+alias top=gotop
