@@ -4,10 +4,10 @@ if [ X"${1}" == X ]; then
   DIR="."  ; else DIR="${1}"
 fi
 
-RULE="s|app.kubernetes.io/name:|app:|g"
-RULE="s|app.kubernetes.io/instance:|release:|g; ${RULE}"
-RULE="s|helm.sh/chart:|chart:|g; ${RULE}"
-RULE="s|app.kubernetes.io/managed-by:|heritage:|g; ${RULE}"
+RULE="s|app.kubernetes.io/name|app|g"
+RULE="s|app.kubernetes.io/instance|release|g; ${RULE}"
+RULE="s|helm.sh/chart|chart|g; ${RULE}"
+RULE="s|app.kubernetes.io/managed-by|heritage|g; ${RULE}"
 
 find ${DIR} -type f -exec sed -i.bak "${RULE}" {} +
 find ${DIR} -type f -name "*.bak" -exec rm "{}" +
