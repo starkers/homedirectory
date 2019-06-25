@@ -8,11 +8,15 @@ default_indent               = 2
 enable_guicolors             = true
 enable_tabline_filetype_icon = true
 lint_on_the_fly              = 1
+filemanager = "nerdtree" #vimfiler / defx / nerdtree
 
 
 
 [[layers]]
 name = "autocomplete"
+
+[[layers]]
+name = "default"
 
 [[layers]]
 name             = "shell"
@@ -62,3 +66,12 @@ name = "lang#python"
 
 [[layers]]
 name = "lang#toml"
+
+[[custom_plugins]]
+  name = "tpope/vim-commentary"
+  merged = false
+
+ [[custom_plugins]]
+   name = "tomtom/tcomment_vim"
+   merged = false
+

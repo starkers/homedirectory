@@ -25,7 +25,12 @@ function! myspacevim#before() abort
     call winrestview(l:save)
   endfun
 
+  "tpope/vim-commentary: this is 'Ctrl + /'
+  nmap    <C-_>                :Commentary<CR>
 
+  "I suck.. but I've already bound these in my head
+  nnoremap <C-Left> B
+  nnoremap <C-Right> W
 
 endfunction
 
