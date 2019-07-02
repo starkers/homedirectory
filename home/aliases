@@ -110,3 +110,4 @@ function ggg(){
 
 alias open=xdg-open
 alias top=gotop
+alias df="df -x squashfs"
