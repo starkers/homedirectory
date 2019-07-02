@@ -72,22 +72,23 @@ list_contexts() {
   # done
 
 
-  list=$(get_contexts)
+  local selected=$(get_contexts | fzf)
+  set_context ${selected}
 
-  # more than one IP found, let the human pick
-  # sorry about the crazy shell stuff....
-  select cluster in $list "quit"; do
-  case $cluster in
-    "quit")
-      break
-    ;;
-    *)
-      # echo set "${cluster}"
-      set_context "${cluster}"
-      exit $?
-    ;;
-  esac
-  done
+  # # more than one IP found, let the human pick
+  # # sorry about the crazy shell stuff....
+  # select cluster in $list "quit"; do
+  # case $cluster in
+  #   "quit")
+  #     break
+  #   ;;
+  #   *)
+  #     # echo set "${cluster}"
+  #     set_context "${cluster}"
+  #     exit $?
+  #   ;;
+  # esac
+  # done
 
 }
 
