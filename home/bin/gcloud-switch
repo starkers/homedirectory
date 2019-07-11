@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+
+declare -a deps=(
+  awk
+  cut
+  fzf
+  gcloud
+)
+
+for dep in "${deps[@]}"; do
+  hash ${dep} 2>/dev/null
+  if [ $? -gt 0 ]; then
+    echo "error.. please install ${dep} to use this script" ; exit 111
+  fi
+done
+
 args="--height=10% --no-sort --tac"
 PROJECT_CURRENT="$(gcloud config get-value project)"
 cat <<EOF
@@ -19,11 +34,10 @@ EOF
 )
 
 
-
 set_project(){
   local RAW="$(gcloud alpha projects list | fzf ${args})"
   local RAW_PROJECT="$(echo ${RAW} | awk '{print $1}')"
-  if [ ${PROJECT_CURRENT} != ${RAW_PROJECT} ]; then
+  if [ ! "X${PROJECT_CURRENT}" == "X${RAW_PROJECT}" ]; then
     echo "[] exec: gcloud config set project ${RAW_PROJECT}"
     gcloud config set project ${RAW_PROJECT}
   fi
