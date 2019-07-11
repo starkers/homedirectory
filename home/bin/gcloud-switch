@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+args="--height=10% --no-sort --tac"
+PROJECT_CURRENT="$(gcloud config get-value project)"
+cat <<EOF
+###############################################
+### your current project is ${PROJECT_CURRENT}
+###############################################
+EOF
+
+
+
+pick=$(cat <<EOF | fzf ${args}
+## your current project is: ${PROJECT_CURRENT}
+cluster
+project
+project-and-cluster
+EOF
+)
+
+
+
+set_project(){
+  local RAW="$(gcloud alpha projects list | fzf ${args})"
+  local RAW_PROJECT="$(echo ${RAW} | awk '{print $1}')"
+  if [ ${PROJECT_CURRENT} != ${RAW_PROJECT} ]; then
+    echo "[] exec: gcloud config set project ${RAW_PROJECT}"
+    gcloud config set project ${RAW_PROJECT}
+  fi
+}
+
+set_cluster(){
+  PROJECT_CURRENT="$(gcloud config get-value project)"
+  local RAW="$(gcloud container clusters list 2>/dev/null | egrep "RUNNING|STATUS" | fzf ${args})"
+  local RAW_NAME="$(echo ${RAW} | awk '{print $1}')"
+  local RAW_LOCATION="$(echo ${RAW} | awk '{print $2}' | cut -d "-" -f 1-2)"
+  echo "[] exec: gcloud beta container clusters get-credentials ${RAW_NAME} --region ${RAW_LOCATION} --project ${PROJECT_CURRENT}"
+  gcloud beta container clusters get-credentials ${RAW_NAME} --region ${RAW_LOCATION} --project ${PROJECT_CURRENT}
+}
+
+
+
+case $pick in
+  project)
+    echo "picked project"
+    set_project
+    ;;
+  cluster)
+    echo "picked cluster"
+    set_cluster
+    ;;
+  project-and-cluster)
+    echo "picked project + cluster"
+    set_project
+    set_cluster
+    ;;
+esac
+
