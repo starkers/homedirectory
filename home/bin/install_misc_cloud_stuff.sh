@@ -177,7 +177,7 @@ install_saml2aws(){
 #: skaffold
 install_skaffold(){
   name=skaffold
-  ver=0.22.0
+  ver=0.33.0
   out_dir="${software}/${name}-${ver}"
   out_file="${name}"
   mkdir -p "${out_dir}"
@@ -222,9 +222,7 @@ install_stern(){
 #: helm
 install_helm(){
   name=helm
-  ver="$1"
-  # ver="2.12.3"
-  # ver="2.11.0"
+  ver="${1:-2.12.3}"
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz
@@ -267,7 +265,7 @@ install_packer(){
 #: terraform
 install_terraform(){
   name=terraform
-  ver=""${1:-0.11.13}""
+  ver="${1:-0.11.13}"
   mkdir -p "${software}/${name}-${ver}"
   cd "${software}/${name}-${ver}"
   wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip
