@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 declare -a deps=(
   awk
   cut
@@ -22,8 +21,6 @@ cat <<EOF
 ### your current project is ${PROJECT_CURRENT}
 ###############################################
 EOF
-
-
 
 pick=$(cat <<EOF | fzf ${args}
 ## your current project is: ${PROJECT_CURRENT}
