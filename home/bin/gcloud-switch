@@ -14,7 +14,7 @@ for dep in "${deps[@]}"; do
   fi
 done
 
-args="--height=10% --no-sort --tac"
+args="--height=20% --no-sort --tac"
 PROJECT_CURRENT="$(gcloud config get-value project)"
 cat <<EOF
 ###############################################
@@ -44,7 +44,8 @@ set_cluster(){
   PROJECT_CURRENT="$(gcloud config get-value project)"
   local RAW="$(gcloud container clusters list 2>/dev/null | egrep "RUNNING|STATUS" | fzf ${args})"
   local RAW_NAME="$(echo ${RAW} | awk '{print $1}')"
-  local RAW_LOCATION="$(echo ${RAW} | awk '{print $2}' | cut -d "-" -f 1-2)"
+  # local RAW_LOCATION="$(echo ${RAW} | awk '{print $2}' | cut -d "-" -f 1-2)"
+  local RAW_LOCATION="$(echo ${RAW} | awk '{print $2}' )"
   echo "[] exec: gcloud beta container clusters get-credentials ${RAW_NAME} --region ${RAW_LOCATION} --project ${PROJECT_CURRENT}"
   gcloud beta container clusters get-credentials ${RAW_NAME} --region ${RAW_LOCATION} --project ${PROJECT_CURRENT}
 }
