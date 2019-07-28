@@ -12,35 +12,28 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/vim-easy-align'
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fatih/molokai'
 Plug 'fatih/vim-go'
-Plug 'w0rp/ale'
-
-"Plug 'fatih/molokai'
-Plug 'tomasr/molokai'
+Plug 'flazz/vim-colorschemes'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'joshdick/onedark.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
+Plug 'majutsushi/tagbar'
 Plug 'mdempsky/gocode', {'rtp': 'vim/'}
 Plug 'nsf/gocode'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf'
-Plug 'airblade/vim-gitgutter'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tomtom/tcomment_vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
-
-
-
-Plug 'ryanoasis/vim-devicons'                       "show icons for filetypes in NERDtree etc
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      "adds colours to vim-devicons
-
-Plug 'flazz/vim-colorschemes'
-Plug 'rafi/awesome-vim-colorschemes'                "collection of colorshemes
-Plug 'joshdick/onedark.vim'
-Plug 'majutsushi/tagbar'
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -97,14 +90,16 @@ set foldcolumn=0
 set t_Co=256
 syntax enable
 let g:rehash256 = 1
-let g:molokai_original = 1
-"colorscheme molokai
+" let g:molokai_original = 1
+" colorscheme molokai
 "colorscheme molokai_dark
 "colorscheme jellyx
-colorscheme monokai-phoenix
+" colorscheme monokai-phoenix
+" colorscheme random
 "colorscheme colorsbox-material
+colorscheme jellybeans
 
-set background=dark
+" set background=dark
 
 
 set nobackup
@@ -162,8 +157,8 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -204,7 +199,7 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 
 
 " vim-airline
-let g:airline_theme = 'dark'
+let g:airline_theme = 'simple'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -402,18 +397,18 @@ augroup go
 	" Open :GoDeclsDir with ctrl-g
 	nmap <C-g> :GoDeclsDir<cr>
 	imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
-	
-	
+
+
 	autocmd FileType go nmap <leader>b  <Plug>(go-build)
 	autocmd FileType go nmap <leader>r  <Plug>(go-run)
-	
+
 	"let g:go_list_type = "quickfix"
-	
-	
+
+
 	autocmd FileType go nmap <leader>t  <Plug>(go-test)
-	
+
 	"autocmd FileType go nmap <leader>b  <Plug>(go-build)
-	
+
 	" run :GoBuild or :GoTestCompile based on the go file
 	function! s:build_go_files()
 	  let l:file = expand('%')
@@ -423,14 +418,14 @@ augroup go
 	    call go#cmd#Build(0)
 	  endif
 	endfunction
-	
+
 	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-	
-	
+
+
 	"
-	
-	
-	
+
+
+
 
 	" :GoBuild and :GoTestCompile
 	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
@@ -569,3 +564,5 @@ set incsearch
 nnoremap <leader>` :call NumberToggle()<cr>
 nnoremap <leader>\ :GitGutterToggle<cr>
 
+
+nnoremap <leader>- :call TrimWhitespace()<cr>
