@@ -5,9 +5,9 @@ alias .....=../../../..
 alias ......=../../../../..
 alias cdD="cd ~/Downloads"
 alias cdb="cd ~/bin"
-alias cdd="cd ~/go/src"
-alias cdg="cd ~/go/src/github.com"
-alias cdh="cd ~/go/src/github.com/starkers/homedirectory/home"
+alias cdd="cd ~/src"
+alias cdg="cd ~/src/github.com"
+alias cdh="cd ~/src/github.com/starkers/homedirectory/home"
 alias cds="cd ~/Seafile"
 alias cdt="cd ~/Torrents"
 alias cdw="cd ~/work"
@@ -60,7 +60,7 @@ alias apts="apt-cache search"
 alias snap="sudo snap"
 
 function ggg(){
-  local store="${HOME}/go/src"
+  local store="${HOME}/src"
 
   local in="$1"
   local outname="ggg"
