@@ -83,9 +83,7 @@
   - [git submodule update --init --recursive, Installing submodules]
 
 
-# ## VIM
-# - shell:
-#   - D="${HOME}/.local/share/nvim" ; if [ -d "${D}" ]; then ; rm -rf "${D}" ; fi
-
+## neovim
 - link:
-    ~/.SpaceVim.d:            'SpaceVim.d'
+    # ~/.config/nvim:            'nvim'
+    ~/.vimrc:                  'vimrc'

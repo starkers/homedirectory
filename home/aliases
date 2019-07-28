@@ -13,9 +13,9 @@ alias cdt="cd ~/Torrents"
 alias cdw="cd ~/work"
 
 #misc
-alias pip="pip3"
 alias atop="sudo atop"
 alias d="docker"
+alias df="df -x squashfs" #flapak master race
 alias fastboot="sudo fastboot"
 alias g="grep"
 alias lxc="sudo lxc"
@@ -24,18 +24,19 @@ alias mc="mc -S ~/.local/share/mc/skins/candy256.ini"
 alias mplayer="mpv"
 alias mtr="mtr --curses"
 alias nload="sudo nload wlan0 -u K"
+alias open=xdg-open
 alias openvpn="sudo openvpn"
+alias pip="pip3"
 alias ssh="ssh -A"
 alias sternalltail="stern --all-namespaces --tail 10"
 alias systemctl="sudo systemctl"
-alias vim-clear-tmp-and-swap="rm -rf ~/.vim/tmp_tmp/*.sw*"
+alias top=gotop
 
 #ls
-alias ls="ls --color"
 alias ll="ls -l"
 alias lla="ls -la"
+alias ls="ls --color"
 alias ltr="ls -ltr"
-
 
 #git
 alias ga="git add --all ."
@@ -55,6 +56,9 @@ alias pacman="sudo pacman"
 alias apt="sudo apt"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
+
+#fedora
+alias dnf="sudo dnf"
 
 #ubuntu
 alias snap="sudo snap"
@@ -108,6 +112,3 @@ function ggg(){
   fi
 }
 
-alias open=xdg-open
-alias top=gotop
-alias df="df -x squashfs"
