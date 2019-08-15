@@ -67,10 +67,28 @@ install_hub(){
 }
 
 ##############################################
+#: kompose
+install_kompose(){
+  name=kompose
+  ver="${1:-1.18.0}"
+  url=https://github.com/kubernetes/kompose/releases/download/v${ver}/kompose-linux-amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+##############################################
+#: kops
+install_kops(){
+  name=kops
+  ver="${1:-1.12.3}"
+  url=https://github.com/kubernetes/kops/releases/download/${ver}/kops-linux-amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+##############################################
 #: kustomize
 install_kustomize(){
   name=kustomize
-  ver="${1:-2.0.3}"
+  ver="${1:-3.1.0}"
   url=https://github.com/kubernetes-sigs/kustomize/releases/download/v${ver}/kustomize_${ver}_linux_amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
@@ -99,7 +117,7 @@ install_kubectl(){
   name=kubectl
   # find latest version:
   # curl https://storage.googleapis.com/kubernetes-release/release/stable.txt
-  ver="${1:-1.14.1}"
+  ver="${1:-1.15.2}"
   url=https://storage.googleapis.com/kubernetes-release/release/v${ver}/bin/linux/amd64/kubectl
   generic_binary "${name}" "${ver}" "${url}"
 }
@@ -164,13 +182,31 @@ install_stern(){
 }
 
 ##############################################
+#: dive
+install_dive(){
+  name=dive
+  ver="${1:-0.7.2}"
+  try mkdir -p "${software}/${name}-${ver}"
+  try cd "${software}/${name}-${ver}"
+  fname=dive_${ver}_linux_amd64.tar.gz
+  #file to expect relative to the extraction point
+  inside_archive=dive
+  try wget https://github.com/wagoodman/dive/releases/download/v${ver}/${fname} -c
+  delete_if_exists "${name}"
+  try tar xvf ${fname}
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${software}/${name}-${ver}/${inside_archive}" ${name}
+}
+
+##############################################
 #: helm
 install_helm(){
   name=helm
   ver="${1:-2.12.3}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
-  try wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz
+  try wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz -c
   delete_if_exists "${name}"
   try tar xvf helm-v${ver}-linux-amd64.tar.gz
   try mkdir -p "${software}/bin"
@@ -230,13 +266,6 @@ install_cfssl(){
   name=cfssl
   ver="${1:-1.2}"
   url=https://pkg.cfssl.org/R${ver}/cfssl_linux-amd64
-  generic_binary "${name}" "${ver}" "${url}"
-}
-
-install_kops(){
-  name=kops
-  ver="${1:-1.11.1}"
-  url=https://github.com/kubernetes/kops/releases/download/${ver}/${file}
   generic_binary "${name}" "${ver}" "${url}"
 }
 
