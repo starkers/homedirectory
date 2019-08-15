@@ -12,25 +12,32 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'NLKNguyen/papercolor-theme'           " theme
+Plug 'Valodim/vim-zsh-completion'           " sh
 Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/vim-zsh'                     " sh
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dracula/vim',     { 'as': 'dracula' } " theme
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'elzr/vim-json'
 Plug 'fatih/molokai'
 Plug 'fatih/vim-go'
-Plug 'flazz/vim-colorschemes'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'joshdick/onedark.vim'
+Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-easy-align'
+Plug 'lvht/fzf-mru'
 Plug 'majutsushi/tagbar'
-Plug 'mdempsky/gocode', {'rtp': 'vim/'}
+Plug 'mdempsky/gocode', { 'rtp': 'vim/'}
 Plug 'nsf/gocode'
-Plug 'rafi/awesome-vim-colorschemes'
+Plug 'patstockwell/vim-monokai-tasty'       " theme
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
+Plug 'sonph/onehalf',   { 'rtp': 'vim/'}    " theme
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-commentary'
+Plug 'uarun/vim-protobuf'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
@@ -50,83 +57,76 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 call plug#end()
 
 
-"filetype plugin on
 
 set history=500
 filetype plugin on
 filetype indent on
-set autoread
+
+
 let mapleader = ","
 nmap <leader>w :w!<cr>
-set so=7
-
-set wildmenu
 
 
-set wildignore=*.o,*~,*.pyc
-set wildignore+=*/.git/*,*/.hg/*
-
-set lazyredraw
-set magic
-set smartcase
-set ignorecase
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
 
 
-" Add a bit extra margin to the left
-set foldcolumn=0
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set t_Co=256
-syntax enable
-let g:rehash256 = 1
-" let g:molokai_original = 1
-" colorscheme molokai
-"colorscheme molokai_dark
-"colorscheme jellyx
-" colorscheme monokai-phoenix
-" colorscheme random
-"colorscheme colorsbox-material
-colorscheme jellybeans
-
-" set background=dark
-
-
-set nobackup
+set ai                         " Auto indent
+set backspace=eol,start,indent " change backspace behavour
+set encoding=utf8              " uft is good
+set expandtab                  " expand tab on default
+set foldcolumn=0               " no extra margin to the left
+set ignorecase                 " ignore caps in search
+set incsearch                  " realtime/incremental search (as u type)
+set lazyredraw                 " save cpu
+set lbr                        " Linebreak on 100 characters
+set magic                      " this is not vi
+set mat=2                      " How many tenths of a second to blink when matching brackets
+set nobackup                   " skip backup
+set noerrorbells               " No annoying sound on errors
+set noswapfile                 " no swap
+set novisualbell               " No annoying sound on errors
 set nowb
-set noswapfile
+set shiftwidth=2               " 2 space'd tabs
+set showmatch                  " show matching results when searching
+set si                         " Smart indent
+set smartcase                  " smart case
+set smarttab                   " smart Tag behabior
+set so=7
+set t_vb=                      " No annoying sound on errors
+set tabstop=2                  " 2 is just fine
+set tm=500                     " No annoying sound on errors
+" set tw=100                     " Linebreak on 100 characters
+" set whichwrap+=<,>,h
+set wildignore+=*/.git/*,*/.hg/*,*.o,*~,*.pyc
+set wildmenu
+" set wrap                       " Wrap lines
+
+" let g:rehash256 = 1
+set t_Co=256                   " terminal has colours
+" colorscheme jellybeans
+" colorscheme molokai
+" set background=dark
+" let g:airline_theme = 'simple'
+
+" colorscheme onehalfdark
+" colorscheme dracula
+" colorscheme vim-monokai-tasty
+" let g:airline_theme='onehalfdark'
+set background=dark
+colorscheme PaperColor
+let g:airline_theme='papercolor'
 
 
-set expandtab
-set encoding=utf8
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-" Linebreak on 100 characters
-set lbr
-set tw=100
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
 
 
 
-
-
+syntax enable               " enable syntax highlighting
+" vim-easy-align Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" vim-easy-align Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -150,6 +150,10 @@ map <leader>bd :Bclose<cr>:tabclose<cr>gT
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
 
+"map <C-n> :cnext<CR>
+"map <C-m> :cprevious<CR>
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
 map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
 
@@ -174,32 +178,12 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 
-"" Disable the blinking cursor.
-set gcr=a:blinkon0
-set scrolloff=3
-
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set gcr=a:blinkon0 " Disable the blinking cursor.
+set scrolloff=3 " Disable the blinking cursor.
+set laststatus=2 " Always show the status line
 
 
 
-
-
-
-
-
-" vim-airline
-let g:airline_theme = 'simple'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -225,17 +209,8 @@ endtry
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-
-
-
-
-
-
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
-
-
-
 
 
 " Quickly open a markdown buffer for scribble
@@ -288,28 +263,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 map <leader>f :NERDTreeToggle<CR>
-
-
-
 
 
 let g:ctrlp_working_path_mode = 0
@@ -332,8 +286,6 @@ map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 
 
-
-
 let g:gitgutter_enabled=1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
@@ -347,8 +299,6 @@ let g:gitgutter_realtime = 1
 "let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_enter = 0
 
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
 let g:go_list_type = "quickfix"
@@ -373,7 +323,6 @@ augroup go
 	autocmd!
 	setlocal omnifunc=gocomplete#Complete
 	autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-
 
 	" :GoBuild and :GoTestCompile
 	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
@@ -409,41 +358,18 @@ augroup go
 
 	"autocmd FileType go nmap <leader>b  <Plug>(go-build)
 
-	" run :GoBuild or :GoTestCompile based on the go file
-	function! s:build_go_files()
-	  let l:file = expand('%')
-	  if l:file =~# '^\f\+_test\.go$'
-	    call go#test#Test(0, 1)
-	  elseif l:file =~# '^\f\+\.go$'
-	    call go#cmd#Build(0)
-	  endif
-	endfunction
+	" " run :GoBuild or :GoTestCompile based on the go file
+	" function! s:build_go_files()
+	"   let l:file = expand('%')
+	"   if l:file =~# '^\f\+_test\.go$'
+	"     call go#test#Test(0, 1)
+	"   elseif l:file =~# '^\f\+\.go$'
+	"     call go#cmd#Build(0)
+	"   endif
+	" endfunction
+	" autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
-	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-
-
-	"
-
-
-
-
-	" :GoBuild and :GoTestCompile
-	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 augroup END
-
-
-
-" build_go_files is a custom function that builds or compiles the test file.
-" It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
 
 
 " Tagbar
@@ -451,11 +377,11 @@ nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 
-" snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
+" " snippets
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+" let g:UltiSnipsEditSplit="vertical"
 
 " ale
 let g:ale_linters = {}
@@ -479,16 +405,17 @@ let g:airline_powerline_fonts = 1
 
 
 
-  "tpope/vim-commentary: this is 'Ctrl + /'
+"tpope/vim-commentary: this is 'Ctrl + /'
 nmap <C-_> :Commentary<CR>
 
 
-  "I suck.. but I've already bound these in my head
+"I suck.. but I've already bound these in my head
 nnoremap <C-Left> B
 nnoremap <C-Right> W
 
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
+
 " powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -498,6 +425,7 @@ let g:airline_right_alt_sep = ''
 set mouse=
 nnoremap <S-up>    :resize -1<cr>
 nnoremap <S-down>  :resize +1<cr>
+
 nnoremap <S-left>  :vertical resize -3<cr>
 nnoremap <S-right> :vertical resize +3<cr>
 
@@ -507,19 +435,35 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 
-set directory=/dev/shm
-set backupdir=/dev/shm
-set undodir=/dev/shm
+"""""" BACKUP / MRU / UNDO etc
+" au BufWritePre * let &bex = '@' . strftime("%F.%H:%M") " Meaningful backup name, ex: filename@2015-04-05.14:59
+set backup                                             " Turn on backup option
+set backupcopy=yes                                     " Overwrite the original backup file
+set backupdir=~/.vim/backup//                          " Where to store backups
+set directory=~/.vim/directory//  "dunno
+set undofile  " maintain file history between sessions
+set undodir=~/.vim/undo// " where to keep undo history
+set writebackup                                        " Make backup before overwriting the current buffer
+function! EnsureDirExists (dir)
+  if !isdirectory(a:dir)
+    if exists("*mkdir")
+      call mkdir(a:dir,'p')
+      echo "Created directory: " . a:dir
+    else
+      echo "Please create directory: " . a:dir
+    endif
+  endif
+endfunction
+" nnoremap <C-m> :FZFMru<CR>
+call EnsureDirExists($HOME . '/.vim/backup')
+call EnsureDirExists($HOME . '/.vim/undo')
+
+
 
 
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk<Paste>
 
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    %s/\s\+$//e
-    call winrestview(l:save)
-endfun
 
 
 " Error and warning signs.
@@ -527,10 +471,15 @@ let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 
 
-
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
+
+
+
+map <leader>q :q!<cr>
+map <leader>qq :qa!<cr>
 
 
 function! NumberToggle()
@@ -549,20 +498,108 @@ function! NumberToggle()
     set number
   endif
 endfunction
-nnoremap <leader>n :call NumberToggle()<cr>S
-
-
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
-
-
-map <leader>q :q!<cr>
-map <leader>qq :qa!<cr>
-
-set incsearch
-
 nnoremap <leader>` :call NumberToggle()<cr>
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+nnoremap <leader>- :call TrimWhitespace()<cr>
+
 nnoremap <leader>\ :GitGutterToggle<cr>
 
 
-nnoremap <leader>- :call TrimWhitespace()<cr>
+
+
+
+
+
+
+
+set splitbelow
+set splitright
+" split current buffer to left
+nnoremap <C-up>    :vert sb#<cr>
+" split current buffer to bottom (vertical)
+nnoremap <C-down>  :sb#<cr>
+
+
+" autocmd FileType json setlocal shiftwidth=2 tabstop=2
+
+
+"" auto read if the file changes under the hood
+set autoread
+au CursorHold,CursorHoldI * :checktime
+au FocusGained,BufEnter * :checktime
+set updatetime=1000
+
+let g:terraform_align=1
+
+"Allow vim-terraform to automatically format *.tf and *.tfvars files with terraform fmt. You can also do this manually with the :TerraformFmt command.
+let g:terraform_fmt_on_save=1
+
+let g:vim_json_syntax_conceal = 0
+let g:vim_json_syntax_concealcursor = ''
+
+
+
+
+
+
+
+
+
+if exists('*json_decode')
+  let g:_spacevim_api_json_trus = v:true
+  let g:_spacevim_api_json_trus = v:false
+  let g:_spacevim_api_json_trus = v:null
+  function! s:json_decode(json) abort
+    if a:json ==# ''
+      return []
+    endif
+    return json_decode(a:json)
+  endfunction
+else
+  function! s:json_null() abort
+  endfunction
+
+  function! s:json_true() abort
+  endfunction
+
+  function! s:json_false() abort
+  endfunction
+
+  let g:_spacevim_api_json_trus = [function('s:json_true')]
+  let g:_spacevim_api_json_falss = [function('s:json_false')]
+  let g:_spacevim_api_json_nuls = [function('s:json_null')]
+  " @vimlint(EVL102, 1, l:true)
+  " @vimlint(EVL102, 1, l:false)
+  " @vimlint(EVL102, 1, l:null)
+  function! s:json_decode(json) abort
+    let true = g:_spacevim_api_json_trus
+    let false = g:_spacevim_api_json_falss
+    let null = g:_spacevim_api_json_nuls
+    if substitute(a:json, '\v\"%(\\.|[^"\\])*\"|true|false|null|[+-]?\d+%(\.\d+%([Ee][+-]?\d+)?)?', '', 'g') !~# "[^,:{}[\\] \t]"
+
+      try
+        let object = eval(a:json)
+      catch
+        " malformed JSON
+        let object = ''
+      endtry
+    else
+      let object = ''
+    endif
+
+    return object
+  endfunction
+  " @vimlint(EVL102, 0, l:true)
+  " @vimlint(EVL102, 0, l:false)
+  " @vimlint(EVL102, 0, l:null)
+endif
+
+lockvar g:_spacevim_api_json_trus
+lockvar g:_spacevim_api_json_falss
+lockvar g:_spacevim_api_json_nuls
+
