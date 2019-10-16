@@ -30,7 +30,6 @@ alias pip="pip3"
 alias ssh="ssh -A"
 alias sternalltail="stern --all-namespaces --tail 10"
 alias systemctl="sudo systemctl"
-alias top=gotop
 
 #ls
 alias ll="ls -l"
@@ -112,3 +111,69 @@ function ggg(){
   fi
 }
 
+
+
+
+
+
+
+alias kaf='kubectl apply -f'
+# alias kca='f(){ kubectl "$@" --all-namespaces;  unset -f f; }; f'
+alias kccc='kubectl config current-context'
+alias kcdc='kubectl config delete-context'
+# alias kcn='kubectl config set-context $(kubectl config current-context) --namespace'
+alias kcp='kubectl cp'
+alias kcsc='kubectl config set-context'
+alias kcuc='kubectl config use-context'
+alias kdcm='kubectl describe configmap'
+alias kdd='kubectl describe deployment'
+alias kdel='kubectl delete'
+alias kdelcm='kubectl delete configmap'
+alias kdeld='kubectl delete deployment'
+alias kdelf='kubectl delete -f'
+alias kdeli='kubectl delete ingress'
+alias kdelno='kubectl delete node'
+alias kdelns='kubectl delete namespace'
+alias kdelp='kubectl delete pods'
+alias kdels='kubectl delete svc'
+alias kdelsec='kubectl delete secret'
+alias kdi='kubectl describe ingress'
+alias kdno='kubectl describe node'
+alias kdns='kubectl describe namespace'
+alias kdp='kubectl describe pods'
+alias kds='kubectl describe svc'
+alias kdsec='kubectl describe secret'
+alias kecm='kubectl edit configmap'
+alias ked='kubectl edit deployment'
+alias kei='kubectl edit ingress'
+alias keno='kubectl edit node'
+alias kens='kubectl edit namespace'
+alias kep='kubectl edit pods'
+alias kes='kubectl edit svc'
+alias keti='kubectl exec -ti'
+alias kga='kubectl get all'
+alias kgaa='kubectl get all --all-namespaces'
+alias kgcm='kubectl get configmaps'
+alias kgd='kubectl get deployment'
+alias kgi='kubectl get ingress'
+alias kgno='kubectl get nodes'
+alias kgns='kubectl get namespaces'
+alias kgp='kubectl get pods'
+alias kgrs='kubectl get rs'
+alias kgs='kubectl get svc'
+alias kgsec='kubectl get secret'
+alias kl='kubectl logs'
+alias klf='kubectl logs -f'
+alias kpf='kubectl port-forward'
+alias krh='kubectl rollout history'
+alias krsd='kubectl rollout status deployment'
+alias kru='kubectl rollout undo'
+alias ksd='kubectl scale deployment'
+alias ku=kubectl
+
+
+
+alias dc='docker-compose'
+
+
+alias ipython="ipython3"
