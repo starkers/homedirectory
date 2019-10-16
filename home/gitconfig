@@ -25,3 +25,5 @@
 # keep some https credential cache
 [credential]
   helper = cache --timeout=86400
+[core]
+	excludesfile = /home/starkers/.git_global_ignore

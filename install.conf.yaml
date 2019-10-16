@@ -21,6 +21,7 @@
     ~/.config/terminator:     'terminator'
     ~/.digrc:                 'digrc'
     ~/.gitconfig:             'gitconfig'
+    ~/.git_global_ignore:     'git-global-ignore'
     ~/.screenrc:              'screenrc'
     ~/.screenlayout:          'screenlayout'
     ~/.aws:                   '/keybase/private/starkers/home/aws'
