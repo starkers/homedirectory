@@ -40,8 +40,8 @@ install_krew(){
   out_file="${name}-${ver}.tgz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" https://storage.googleapis.com/krew/v${ver}/krew.tar.gz
-  try wget -O krew.yaml https://storage.googleapis.com/krew/v${ver}/krew.yaml
+  try wget -O "${out_file}" https://storage.googleapis.com/krew/v${ver}/krew.tar.gz -c
+  try wget -O krew.yaml https://storage.googleapis.com/krew/v${ver}/krew.yaml -c
   try tar xf "${out_file}"
   try mkdir -p "${software}/bin"
   try cd "${software}/bin"
@@ -51,20 +51,36 @@ install_krew(){
 }
 
 ##############################################
-#: hub
-install_hub(){
-  name=hub
-  ver="2.3.0-pre9"
+#: drone
+install_drone(){
+  name=drone
+  ver="${1:-1.2.0}"
   out_dir="${software}/${name}-v${ver}"
   out_file="${name}-${ver}.tgz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" https://github.com/github/hub/releases/download/v${ver}/hub-linux-amd64-${ver}.tgz
+  try wget -O "${out_file}" https://github.com/drone/drone-cli/releases/download/v${ver}/drone_linux_amd64.tar.gz -c
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"
   try cd "${software}/bin"
-  try ln -sf "${software}/hub-v${ver}/hub-linux-amd64-${ver}/bin/hub" "${name}"
+  try ln -sf "${out_dir}/drone" drone
 }
+
+# ##############################################
+# #: hub
+# install_hub(){
+#   name=hub
+#   ver="2.3.0-pre9"
+#   out_dir="${software}/${name}-v${ver}"
+#   out_file="${name}-${ver}.tgz"
+#   try mkdir -p "${out_dir}"
+#   try cd "${out_dir}"
+#   try wget -O "${out_file}" https://github.com/github/hub/releases/download/v${ver}/hub-linux-amd64-${ver}.tgz -c
+#   try tar xvf "${out_file}"
+#   try mkdir -p "${software}/bin"
+#   try cd "${software}/bin"
+#   try ln -sf "${software}/hub-v${ver}/hub-linux-amd64-${ver}/bin/hub" "${name}"
+# }
 
 ##############################################
 #: kompose
@@ -83,6 +99,15 @@ install_kops(){
   url=https://github.com/kubernetes/kops/releases/download/${ver}/kops-linux-amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
+
+# ##############################################
+# #: kind
+# install_kind(){
+#   name=kind
+#   ver="${1:-0.5.1}"
+#   url=https://github.com/kubernetes-sigs/kind/releases/download/v${ver}/kind-linux-amd64
+#   generic_binary "${name}" "${ver}" "${url}"
+# }
 
 ##############################################
 #: kustomize
@@ -148,7 +173,7 @@ install_saml2aws(){
   out_file="${name}-${ver}.tar.gz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" https://github.com/Versent/saml2aws/releases/download/v${ver}/saml2aws_${ver}_linux_amd64.tar.gz
+  try wget -O "${out_file}" https://github.com/Versent/saml2aws/releases/download/v${ver}/saml2aws_${ver}_linux_amd64.tar.gz -c
   try delete_if_exists "${name}"
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"
@@ -185,7 +210,7 @@ install_stern(){
 #: dive
 install_dive(){
   name=dive
-  ver="${1:-0.7.2}"
+  ver="${1:-0.8.1}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
   fname=dive_${ver}_linux_amd64.tar.gz
@@ -203,7 +228,7 @@ install_dive(){
 #: helm
 install_helm(){
   name=helm
-  ver="${1:-2.12.3}"
+  ver="${1:-2.14.3}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
   try wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz -c
@@ -230,7 +255,7 @@ install_packer(){
   ver=0.10.1
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
-  try wget https://releases.hashicorp.com/packer/${ver}/packer_${ver}_linux_amd64.zip
+  try wget https://releases.hashicorp.com/packer/${ver}/packer_${ver}_linux_amd64.zip -c
   try delete_if_exists "${name}"
   try unzip packer_${ver}_linux_amd64.zip
   try mkdir -p "${software}/bin"
@@ -245,7 +270,7 @@ install_terraform(){
   ver="${1:-0.11.13}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
-  try wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip
+  try wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip -c
   try delete_if_exists "${name}"
   try unzip terraform_${ver}_linux_amd64.zip
   try mkdir -p "${software}/bin"; cd "${software}/bin"
@@ -278,8 +303,8 @@ install_direnv(){
 
 install_fluxctl(){
   name=fluxctl
-  ver="${1:-1.12.3}"
-  wget https://github.com/weaveworks/flux/releases/download/${ver}/fluxctl_linux_amd64 -c
+  ver="${1:-1.14.2}"
+  url=https://github.com/weaveworks/flux/releases/download/${ver}/fluxctl_linux_amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
 
@@ -292,7 +317,7 @@ install_kubeseal(){
 
 install_psmem(){
   try mkdir -p "${software}/bin"; cd "${software}/bin"
-  try wget https://raw.githubusercontent.com/pixelb/ps_mem/master/ps_mem.py -O psmem
+  try wget https://raw.githubusercontent.com/pixelb/ps_mem/master/ps_mem.py -O psmem -c
   chmod +x psmem
 }
 
