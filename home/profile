@@ -53,6 +53,9 @@ my_load_golang(){
     export PATH="${GOPATH}/bin:${PATH}"
   fi
   export "PATH=/usr/local/go/bin:${PATH}"
+  # docker run -d -p '3030:3000' gomods/athens:latest
+  export GOPROXY=http://localhost:3030
+  export GO111MODULE=on
 }
 
 my_load_pip(){
@@ -87,3 +90,11 @@ export PATH=/keybase/private/starkers/scripts/:${PATH}
 vf() { fzf | xargs -r -I % $EDITOR % ;}
 
 export ANSIBLE_NOCOWS=1
+
+
+
+export FZF_DEFAULT_COMMAND='ag -l --nogroup  --nocolor --hidden -g ""'
+
+
+export FLUX_FORWARD_NAMESPACE=flux
+
