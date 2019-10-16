@@ -25,8 +25,10 @@ Plug 'fatih/molokai'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'lvht/fzf-mru'
+" Plug 'lvht/fzf-mru'
+Plug 'pbogut/fzf-mru.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mdempsky/gocode', { 'rtp': 'vim/'}
 Plug 'nsf/gocode'
@@ -41,6 +43,9 @@ Plug 'uarun/vim-protobuf'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -115,7 +120,9 @@ set t_Co=256                   " terminal has colours
 " colorscheme vim-monokai-tasty
 " let g:airline_theme='onehalfdark'
 set background=dark
-colorscheme PaperColor
+" colorscheme PaperColor
+" colorscheme ron
+colorscheme vim-monokai-tasty
 let g:airline_theme='papercolor'
 
 
@@ -214,7 +221,7 @@ map <leader>pp :setlocal paste!<cr>
 
 
 " Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
+map <leader>x :e /keybase/private/starkers/buffer.md<cr>
 
 
 
@@ -277,10 +284,9 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.git\|^\.coffee'
 
 
 let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=0
+let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
@@ -391,8 +397,8 @@ let g:ale_linters = {}
     \"go": ['golint', 'go vet'], })
 
 
-":call extend(g:ale_linters, {
-"    \'python': ['flake8'], })
+:call extend(g:ale_linters, {
+   \'python': ['pep8', 'flake8'], })
 
 " vim-airline
 let g:airline_theme = 'powerlineish'
@@ -454,7 +460,7 @@ function! EnsureDirExists (dir)
     endif
   endif
 endfunction
-" nnoremap <C-m> :FZFMru<CR>
+nnoremap <C-m> :FZFMru<CR>
 call EnsureDirExists($HOME . '/.vim/backup')
 call EnsureDirExists($HOME . '/.vim/undo')
 
@@ -603,3 +609,29 @@ lockvar g:_spacevim_api_json_trus
 lockvar g:_spacevim_api_json_falss
 lockvar g:_spacevim_api_json_nuls
 
+
+
+"search project files
+nnoremap <leader>p :FZF<cr>
+"search project files by lines of code
+nnoremap <leader>o :Lines<cr>
+"search project files by tags (requirs ctags to be installed)
+nnoremap <leader>t :Tags<cr>
+"search all open files/buffers
+nnoremap <leader>r :Buffers<cr>
+
+"start a search query by pressing \
+nnoremap \  :Ag<space>
+"search for word under cursor by pressing |
+nnoremap \| :Ag <C-R><C-W><cr>:cw<cr>
+
+
+set cursorcolumn
+
+"" YAML
+"
+"   Use 2 spaces for indentation.
+"   Use spaces instead of tabs.
+"   Skip re-indenting lines after inserting a comment character (#) at the beginning of a line, or a colon.
+"
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
