@@ -10,13 +10,28 @@ set $mod Mod4
 # client.unfocused          #1c1c1c   #1c1c1c     #888888     #222222
 
 
-                       # colour of border, background, text, indicator, and child_border
-client.focused          #bf616a #2f343f #d8dee8 #bf616a #d8dee8
-client.focused_inactive #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.unfocused        #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.urgent           #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.placeholder      #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.background       #2f343f
+
+
+# XRESOURCES
+set $fg_active "#363535"
+set $fg "#000000"
+set $bg "#000000"
+set $text "#a3a0a0"
+
+# CLASS                 BORDER         BACK    TEXT    INDICATOR
+client.focused          $fg     $fg_active     $text     $fg
+client.focused_inactive $fg            $fg     $text     $fg
+client.unfocused        $bg            $bg     $text     $bg
+client.urgent           $bg            $bg     $bg     $bg
+client.placeholder      $bg            $bg     $bg     $bg
+
+#                         # colour of border, background, text, indicator, and child_border
+# client.focused          #bf616a #2f343f #d8dee8 #bf616a #d8dee8
+# client.focused_inactive #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.unfocused        #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.urgent           #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.placeholder      #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.background       #2f343f
 
 set $ws1   "1:  "
 set $ws2   "2:  "
@@ -32,10 +47,26 @@ set $ws10 "10:  "
 # others:
 # ♬ |  |  |  | 
 
-set $default_gaps_inner 15
-set $default_gaps_outer 0
-gaps inner $default_gaps_inner
-gaps outer $default_gaps_outer
+
+# # GAP VARIABLES
+set $inner 32
+set $outer 0
+
+gaps inner $inner
+gaps outer $outer
+
+# gaps inner $default_gaps_inner
+# gaps outer $default_gaps_outer
+
+
+set $thick 2
+border_radius 4
+
+
+# toggle gaps
+bindsym $mod+Shift+g exec compton; gaps inner all set $inner; gaps outer all set $outer
+bindsym $mod+g exec compton; gaps inner all set 0; gaps outer all set 0
+
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
@@ -46,8 +77,9 @@ floating_maximum_size -1 x -1
 
 new_window pixel
 # smart_gaps on
-for_window [class="^.*"] border pixel 3
-# hide_edge_borders both
+for_window [class="^.*"] border pixel $thick
+
+hide_edge_borders both
 
 font pango:Hack Nerd Font Regular 9
 # font pango:Noto Sans 8
@@ -104,8 +136,8 @@ bindsym $mod+t           layout tabbed
 bindsym $mod+s           layout stacking
 
 
-bindsym $mod+period      gaps inner current plus  3
-bindsym $mod+comma       gaps inner current minus 3
+bindsym $mod+period      gaps inner current plus  5
+bindsym $mod+comma       gaps inner current minus 5
 
 
 
@@ -184,17 +216,19 @@ bindsym $mod+n                exec --no-startup-id nautilus --no-desktop "${HOME
 bindsym Print                 exec --no-startup-id flameshot gui
 bindsym XF86MonBrightnessDown exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -dec 5
 bindsym XF86MonBrightnessUp   exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -inc 5
-bindsym $mod+Return           exec --no-startup-id terminator
+bindsym $mod+Return           exec --no-startup-id tilix -p default
 # bindsym $mod+d                exec --no-startup-id $HOME/.config/i3/rof
+
+
 
 
 # start dmenu (a program launcher)
 bindsym $mod+Shift+d          exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
 bindsym $mod+d                exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
-bindsym $mod+g                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
+bindsym $mod+p                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
 bindsym $mod+l                exec --no-startup-id $HOME/.config/i3/scripts/i3exit lock
-bindsym $mod+p                exec --no-startup-id $HOME/.config/i3/scripts/i3exit suspend
-bindsym $mod+space            exec --no-startup-id copyq show
+# bindsym $mod+p                exec --no-startup-id $HOME/.config/i3/scripts/i3exit suspend
+bindsym $mod+space            exec --no-startup-id copyq toggle
 
 # bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 # bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks

@@ -25,13 +25,14 @@
     ~/.screenrc:              'screenrc'
     ~/.screenlayout:          'screenlayout'
     ~/.aws:                   '/keybase/private/starkers/home/aws'
-    ~/.cheat:                 '/keybase/private/starkers/home/cheats'
+    # ~/.cheat:                 '/keybase/private/starkers/home/cheats'
     ~/.mutt:                  '/keybase/private/starkers/home/mutt'
     ~/.muttrc:                '/keybase/private/starkers/home/muttrc'
     ~/.weechat:               '/keybase/private/starkers/home/weechat'
-    ~/Notes:                  '/keybase/private/starkers/home/notes'
+    ~/.password-store:        '/keybase/private/starkers/home/pass'
     ~/.antigen.zsh:           'antigen.zsh'
     ~/.completions_bash:      'completions_bash'
+    ~/.shell:                 '/keybase/private/starkers/home/shell'
 
 # ######### ZSH + BASH
 # - shell:
@@ -56,7 +57,7 @@
 
 - link:
 
-    ~/.config/autostart:    'autostart'
+    # ~/.config/autostart:    'autostart'
     ~/.config/compton.conf: 'compton.conf'
     ~/.config/dunst:        'dunst'
     ~/.config/i3:           'i3-gaps'

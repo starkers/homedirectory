@@ -4,6 +4,9 @@ export TERM="xterm-256color"
 HIST_STAMPS="yyyy-mm-dd"
 unsetopt share_history
 
+export EDITOR=vim
+export LS_COLORS
+
 function my_load_profile(){
   source ~/.profile
 }
@@ -16,12 +19,7 @@ function my_load_shell_functions(){
   source ~/.shell_functions
 }
 
-# export _Z_DATA="${HOME}/.z_h_data"
-# if [ ! -d "${_Z_DATA}" ]; then
-#   mkdir -p "${_Z_DATA}"
-# fi
-
-fancy-ctrl-z () {
+function fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line
@@ -31,15 +29,6 @@ fancy-ctrl-z () {
   fi
 }
 
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
-zstyle ":completion:*:commands" rehash 1
-bindkey '^W' vi-backward-kill-word
-
-# LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:';
-
-
-export LS_COLORS
 
 function my_nvm_load(){
   source /usr/share/nvm/init-nvm.sh
@@ -50,6 +39,7 @@ function my_load_direnv(){
 }
 
 function my_load_fzf(){
+  source ~/.fzf.zsh
   declare -a filenames=(
     /usr/share/fzf/completion.zsh
     /usr/share/fzf/key-bindings.zsh
@@ -66,15 +56,15 @@ function my_load_fzf(){
 
 
 
-# #for VTE (tilix)
-# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-#   [ -e /etc/profile.d/vte.sh ] && source /etc/profile.d/vte.sh
-# fi
+#for VTE (tilix)
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  [ -e /etc/profile.d/vte.sh ] && source /etc/profile.d/vte.sh
+fi
 
 # export SDKMAN_DIR="${HOME}/.sdkman"
 # [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
-export ZSH_CUSTOM="${HOME}/.zsh_custom"
+# export ZSH_CUSTOM="${HOME}/.zsh_custom"
 
 # Just comment a section if you want to disable it
 SPACESHIP_PROMPT_ORDER=(
@@ -102,7 +92,7 @@ SPACESHIP_PROMPT_ORDER=(
   # pyenv         # Pyenv section
   # dotnet        # .NET section
   # ember       # Ember.js section (Disabled)
-  # kubecontext   # Kubectl context section
+  kubecontext   # Kubectl context section
   exec_time     # Execution time
   line_sep      # Line break
   # battery       # Battery level and status
@@ -112,7 +102,7 @@ SPACESHIP_PROMPT_ORDER=(
   char          # Prompt character
 )
 
-SPACESHIP_VENV_SYMBOL='🐍'
+# SPACESHIP_VENV_SYMBOL='🐍'
 
 SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
   # red if namespace is "kube-system"
@@ -126,81 +116,81 @@ SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
   )
 
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-  # context
-  # time
-  aws
-  dir
-  vcs
-  virtualenv
-  command_execution_time
-  newline
-  status
-  )
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+#   # context
+#   # time
+#   aws
+#   dir
+#   vcs
+#   virtualenv
+#   command_execution_time
+#   newline
+#   status
+#   )
 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-  kubecontext
-  # root_indicator
-  # battery
-  # background_jobs
-  # history
-  # time
-  )
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+#   kubecontext
+#   # root_indicator
+#   # battery
+#   # background_jobs
+#   # history
+#   # time
+#   )
 
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=5
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+# POWERLEVEL9K_SHORTEN_DIR_LENGTH=5
+# POWERLEVEL9K_SHORTEN_DELIMITER=""
+# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
 # POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
 
-source ~/.antigen.zsh
-antigen use oh-my-zsh
+if [[ -o interactive ]]; then
 
-# stuff I *mostly* use
-antigen bundle docker
-antigen bundle docker-compose
-antigen bundle git
-antigen bundle git-flow
-antigen bundle golang
-antigen bundle gpg-agent
-antigen bundle history
-antigen bundle httpie
-# antigen bundle kubectl
-antigen bundle pip
-antigen bundle systemd
-antigen bundle virtualenv
-antigen bundle z
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
+  zle -N fancy-ctrl-z
+  bindkey '^Z' fancy-ctrl-z
+  zstyle ":completion:*:commands" rehash 1
+  bindkey '^W' vi-backward-kill-word
 
-# # docker zsh completions
-# antigen bundle felixr/docker-zsh-completion
+  ####################################################
+  ## theming etc
+  source ~/.antigen.zsh
+  antigen use oh-my-zsh
 
-fpath=(~/.zsh/completions $fpath)
-plugins=(docker docker-compose go golang kops kubectl z zsh-completions)
-# this is required so `docker exec -it <TAB>` works.. see: https://github.com/moby/moby/commit/402caa94d23ea3ad47f814fc1414a93c5c8e7e58
-zstyle ':completion:*:*:docker:*' option-stacking yes
-zstyle ':completion:*:*:docker-*:*' option-stacking yes
+  antigen bundle docker
+  antigen bundle docker-compose
+  antigen bundle git
+  antigen bundle git-flow
+  antigen bundle golang
+  antigen bundle gpg-agent
+  antigen bundle history
+  antigen bundle httpie
+  # antigen bundle kubectl
+  antigen bundle pip
+  antigen bundle systemd
+  antigen bundle virtualenv
+  antigen bundle z
+  antigen bundle zsh-users/zsh-autosuggestions
+  antigen bundle zsh-users/zsh-completions
+  antigen bundle zsh-users/zsh-syntax-highlighting
 
+  fpath=(~/.zsh/completions $fpath)
+  plugins=(docker docker-compose go golang kubectl z zsh-completions)
+  # this is required so `docker exec -it <TAB>` works.. see: https://github.com/moby/moby/commit/402caa94d23ea3ad47f814fc1414a93c5c8e7e58
+  zstyle ':completion:*:*:docker:*' option-stacking yes
+  zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
-antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
-# antigen theme gnzh
-antigen apply
+  antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
+  antigen apply
+  ####################################################
 
+  my_load_direnv
+  my_load_aliases
+  my_load_profile
+  my_load_shell_functions
+  if [ -e ~/.fzf.zsh ]; then
+    my_load_fzf
+  fi
 
-
-my_load_fzf
-my_load_direnv
-my_load_aliases
-# my_load_profile
-my_load_shell_functions
-
-
-
-
-# cleanup trash ~/.z.* files
-find ~/  -maxdepth 1 -name ".z*"  -type f -size 0 -exec rm {} \;
+fi
 
 
 export JAVA_HOME=/usr/lib/jvm/default/
@@ -212,22 +202,7 @@ export PATH="${HOME}/.software/bin:${PATH}"
 export PATH="${HOME}/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# unset JAVA_HOME
-
 [ -e ${HOME}/.sdkman/bin/sdkman-init.sh ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-# [ -e ${HOME}/.software/bin/kubectl ]      && source <(command ${HOME}/.software/bin/kubectl completion zsh)
-
-# function kubectl() {
-#   command kubectl $*
-#   if [[ -z $KUBECTL_COMPLETE ]]
-#     then
-#     source <(command kubectl completion zsh)
-#     KUBECTL_COMPLETE=1
-#   fi
-# }
-
-[ -e /keybase/private/starkers/scripts ]  && export PATH=/keybase/private/starkers/scripts:${PATH}
-[ -e ~/.fzf.zsh ]                         && source ~/.fzf.zsh
 
 # unsetopt share_history
 
@@ -236,10 +211,3 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export KUBECONFIG="${HOME}/.kube/config"
 
 
-# fnm
-if [ -e $HOME/.fnm ]; then
-  export PATH=$HOME/.fnm:$PATH
-  eval "`fnm env --multi`"
-fi
-
-export EDITOR=vim

@@ -11,27 +11,6 @@ ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # if there is a directory here called ./tweaks/<model name> (spaces replaced with underscores)
 # then this script will execute the scripts in there in sequence
 
-CPU="$(grep "model name" /proc/cpuinfo | uniq | cut -c 14-99)"
-CPU_SANE="$(sed "s+ +_+g" <<<"${CPU}")"
-TWEAKDIR="${ROOTDIR}/tweaks/${CPU_SANE}"
-if [ -d "${TWEAKDIR}" ]; then
-  echo found tweakdir:${TWEAKDIR}
-  for file in "${TWEAKDIR}/"* ; do
-    echo "##### executing: $file #####"
-    "${file}"
-  done
-else
-  echo "no tweaks found in ${TWEAKDIR}"
-fi
-cd "${ROOTDIR}/tweaks/common/"
-for file in * ; do
-  if [ -f ${file} ]; then
-    echo "##### executing: $file #####"
-    "./${file}"
-  fi
-done
-cd ../..
-
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
