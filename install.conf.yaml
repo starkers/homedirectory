@@ -79,7 +79,7 @@
 ######### SSH
 - shell:
   - mkdir -p ~/.ssh
-  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --exclude=google_compute_known_hosts --inplac
+  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --exclude=google_compute_known_hosts --inplace
   - chmod 0700 ~/.ssh/
   - chmod 0600 ~/.ssh/id_*
   - [git submodule update --init --recursive, Installing submodules]
