@@ -1,11 +1,11 @@
 
-# if running bash
-if [ -n "${BASH_VERSION}" ]; then
-  # include .bashrc if it exists
-  if [ -f "${HOME}/.bashrc" ]; then
-    . "${HOME}/.bashrc"
-  fi
-fi
+# # if running bash
+# if [ -n "${BASH_VERSION}" ]; then
+#   # include .bashrc if it exists
+#   if [ -f "${HOME}/.bashrc" ]; then
+#     . "${HOME}/.bashrc"
+#   fi
+# fi
 
 export EDITOR="$(which vim)"
 MY_OS="$(uname -s)"
@@ -31,13 +31,13 @@ my_load_path_home_bin(){
   fi
 }
 
-my_load_gemstuff(){
-  #TODO: dirty, fix me up.. evaluate+learn rbenv or something else please
-  local gemstuff="${HOME}"/.gem/ruby/2.5.0/bin
-  if [ -d "${gemstuff}" ]; then
-    PATH="${gemstuff}:${PATH}"
-  fi
-}
+# my_load_gemstuff(){
+#   #TODO: dirty, fix me up.. evaluate+learn rbenv or something else please
+#   local gemstuff="${HOME}"/.gem/ruby/2.5.0/bin
+#   if [ -d "${gemstuff}" ]; then
+#     PATH="${gemstuff}:${PATH}"
+#   fi
+# }
 
 my_load_path_rbenv(){
   #load rbenv if exists
@@ -66,35 +66,41 @@ my_load_pip(){
   fi
 }
 
+my_load_fnm(){
+  if [ -e $HOME/.fnm ]; then
+    export PATH=$HOME/.fnm:$PATH
+    eval "`fnm env --multi`"
+  fi
+}
+
+function my_load_keybase_stuff(){
+  KB_USER=starkers
+  KB_PLACE=/keybase/private/${KB_USER}/home/shell
+  if [ -d ${KB_PLACE} ]; then
+    source ${KB_PLACE}/*-profile.sh
+  fi
+  export PATH=/keybase/private/starkers/scripts:${PATH}
+  export CHEATPATH="/keybase/private/starkers/home/cheats"
+}
 
 my_load_golang
 my_load_pip
 # my_load_gemstuff
 my_load_path_home_bin
 my_load_path_krew
+my_load_fnm
+my_load_keybase_stuff
 
 if egrep -q "i3|xinitrc" <<<"${DESKTOP_SESSION}" ; then
   my_load_gnome_keyring
 fi
 
-
-## additions to "cheat" (pip install cheat --user)
-## store my encrypted cheats and notes in keybase
 export CHEATCOLORS=true
 
-# default $CHEATPATH is ~/.cheat however I may keep something sensitive
-# so I keep mine in keybase:
-export CHEATPATH="/keybase/private/starkers/home/cheats"
-export PATH=/keybase/private/starkers/scripts/:${PATH}
 
-vf() { fzf | xargs -r -I % $EDITOR % ;}
+#vf() { fzf | xargs -r -I % $EDITOR % ;}
 
 export ANSIBLE_NOCOWS=1
-
-
-
 export FZF_DEFAULT_COMMAND='ag -l --nogroup  --nocolor --hidden -g ""'
-
-
 export FLUX_FORWARD_NAMESPACE=flux
-
+export GOPROXY=http://localhost:3300

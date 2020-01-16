@@ -165,10 +165,30 @@ install_minikube(){
 }
 
 ##############################################
+#: kubebuilder
+install_kubebuilder(){
+  name=kubebuilder
+  ver="${1:-2.2.0}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${ver}/kubebuilder_${ver}_linux_amd64.tar.gz -c
+                            # https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.2.0/kubebuilder_2.2.0_linux_amd64.tar.gz
+  try delete_if_exists "${name}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}_${ver}_linux_amd64/bin/kubebuilder" "${name}"
+  try ln -sf "${out_dir}/${name}_${ver}_linux_amd64/bin/etcd" "etcd"
+  try ln -sf "${out_dir}/${name}_${ver}_linux_amd64/bin/kube-apiserver" "kube-apiserver"
+}
+
+##############################################
 #: saml2aws
 install_saml2aws(){
   name=saml2aws
-  ver="2.9.1"
+  ver="${1:-2.9.1}"
   out_dir="${software}/${name}-${ver}"
   out_file="${name}-${ver}.tar.gz"
   try mkdir -p "${out_dir}"
@@ -273,6 +293,21 @@ install_terraform(){
   try wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip -c
   try delete_if_exists "${name}"
   try unzip terraform_${ver}_linux_amd64.zip
+  try mkdir -p "${software}/bin"; cd "${software}/bin"
+  try ln -sf "${software}/${name}-${ver}/${name}" ${name}
+  try ln -sf "${software}/${name}-${ver}/${name}" ${name}-${ver}
+}
+
+##############################################
+#: vault
+install_vault(){
+  name=vault
+  ver="${1:-0.10.4}"
+  try mkdir -p "${software}/${name}-${ver}"
+  try cd "${software}/${name}-${ver}"
+  try wget https://releases.hashicorp.com/vault/${ver}/vault_${ver}_linux_amd64.zip -c
+  try delete_if_exists "${name}"
+  try unzip vault_${ver}_linux_amd64.zip
   try mkdir -p "${software}/bin"; cd "${software}/bin"
   try ln -sf "${software}/${name}-${ver}/${name}" ${name}
   try ln -sf "${software}/${name}-${ver}/${name}" ${name}-${ver}

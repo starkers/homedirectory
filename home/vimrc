@@ -14,10 +14,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'NLKNguyen/papercolor-theme'           " theme
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'Valodim/vim-zsh-completion'           " sh
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/vim-zsh'                     " sh
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dracula/vim',     { 'as': 'dracula' } " theme
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
@@ -116,14 +117,19 @@ set t_Co=256                   " terminal has colours
 " let g:airline_theme = 'simple'
 
 " colorscheme onehalfdark
+" colorscheme purify
+" colorscheme rdark-terminal2
+" colorscheme tender
+" colorscheme nord
+colorscheme wombat256mod
 " colorscheme dracula
 " colorscheme vim-monokai-tasty
 " let g:airline_theme='onehalfdark'
-set background=dark
+" set background=dark
 " colorscheme PaperColor
 " colorscheme ron
-colorscheme vim-monokai-tasty
-let g:airline_theme='papercolor'
+" colorscheme vim-monokai-tasty
+let g:airline_theme='wombat'
 
 
 
@@ -270,17 +276,19 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 
+"" normal open nerd Tree
 map <leader>f :NERDTreeToggle<CR>
 
+"" Ctrl+f opens the directory of current file in nerd tree
+map <c-f> :NERDTreeFind<CR>
 
-let g:ctrlp_working_path_mode = 0
 
-let g:ctrlp_map = '<c-f>'
-map <leader>j :CtrlP<cr>
-map <c-b> :CtrlPBuffer<cr>
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.git\|^\.coffee'
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_map = '<c-f>'
+" map <leader>j :CtrlP<cr>
+" map <c-b> :CtrlPBuffer<cr>
+" let g:ctrlp_max_height = 20
+" let g:ctrlp_custom_ignore = 'node_modules\|^\.git\|^\.coffee'
 
 
 let g:NERDTreeWinPos = "right"
@@ -635,3 +643,10 @@ set cursorcolumn
 "   Skip re-indenting lines after inserting a comment character (#) at the beginning of a line, or a colon.
 "
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
+
+set hlsearch
+
+
+nnoremap <F2> :PrevColorScheme<CR>
+nnoremap <F3> :NextColorScheme<CR>
+let g:colorscheme_switcher_exclude_builtins = 1

@@ -2,6 +2,7 @@
 [user]
 	name = David Stark
 	email = david@starkers.org
+	signingKey = ""
 [push]
   default = simple
 [diff]
@@ -27,3 +28,11 @@
   helper = cache --timeout=86400
 [core]
 	excludesfile = /home/starkers/.git_global_ignore
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false

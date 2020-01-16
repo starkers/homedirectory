@@ -17,7 +17,7 @@ alias atop="sudo atop"
 alias d="docker"
 alias df="df -x squashfs" #flapak master race
 alias fastboot="sudo fastboot"
-alias g="grep"
+alias g="egrep"
 alias lxc="sudo lxc"
 alias lxd="sudo lxd"
 alias mc="mc -S ~/.local/share/mc/skins/candy256.ini"
@@ -30,6 +30,7 @@ alias pip="pip3"
 alias ssh="ssh -A"
 alias sternalltail="stern --all-namespaces --tail 10"
 alias systemctl="sudo systemctl"
+alias t=touch
 
 #ls
 alias ll="ls -l"
@@ -177,3 +178,13 @@ alias dc='docker-compose'
 
 
 alias ipython="ipython3"
+
+function pass(){
+  PASS_ROOT=/keybase/private/starkers/home/pass
+  if [ "${1}" = "show" ]; then
+    cat "${PASS_ROOT}/${2}"
+  fi
+  if [ "${1}" = "edit" ]; then
+    vim "${PASS_ROOT}/${2}"
+  fi
+}
