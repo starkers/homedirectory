@@ -15,6 +15,7 @@
 - link:
     ~/.config/fish:           'config-fish'
     ~/.config/fisher:         'config-fisher'
+    ~/.fzf:                   'fzf'
     ~/.config/omf:            'config-omf'
 - link:
     ~/.bin:                   'bin'              #scripts and general "helpers"

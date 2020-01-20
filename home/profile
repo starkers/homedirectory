@@ -54,7 +54,7 @@ my_load_golang(){
   fi
   export "PATH=/usr/local/go/bin:${PATH}"
   # docker run -d -p '3030:3000' gomods/athens:latest
-  export GOPROXY=http://localhost:3030
+  export GOPROXY=http://localhost:3300
   export GO111MODULE=on
 }
 
@@ -91,6 +91,14 @@ my_load_path_krew
 my_load_fnm
 my_load_keybase_stuff
 
+my_gnome_settings(){
+  #disble animations
+  gsettings set org.gnome.desktop.interface enable-animations false
+}
+if egrep -q "gnome" <<<"${DESKTOP_SESSION}" ; then
+  my_gnome_settings
+fi
+
 if egrep -q "i3|xinitrc" <<<"${DESKTOP_SESSION}" ; then
   my_load_gnome_keyring
 fi
@@ -103,4 +111,3 @@ export CHEATCOLORS=true
 export ANSIBLE_NOCOWS=1
 export FZF_DEFAULT_COMMAND='ag -l --nogroup  --nocolor --hidden -g ""'
 export FLUX_FORWARD_NAMESPACE=flux
-export GOPROXY=http://localhost:3300

@@ -29,7 +29,6 @@ function fancy-ctrl-z () {
   fi
 }
 
-
 function my_nvm_load(){
   source /usr/share/nvm/init-nvm.sh
 }
@@ -39,27 +38,17 @@ function my_load_direnv(){
 }
 
 function my_load_fzf(){
-  source ~/.fzf.zsh
-  declare -a filenames=(
-    /usr/share/fzf/completion.zsh
-    /usr/share/fzf/key-bindings.zsh
-    ~/.fzf/shell/completion.zsh
-    ~/.fzf/shell/key-bindings.zsh
-  )
-  for i in "${filenames[@]}"; do
-    if [ -f "${i}" ]; then
-      source "${i}"
-    fi
-  done
+  source ~/.fzf/shell/completion.zsh
+  source ~/.fzf/shell/key-bindings.zsh
+}
+
+function my_load_vte(){
+  if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+    [ -e /etc/profile.d/vte.sh ] && source /etc/profile.d/vte.sh
+  fi
 }
 
 
-
-
-#for VTE (tilix)
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  [ -e /etc/profile.d/vte.sh ] && source /etc/profile.d/vte.sh
-fi
 
 # export SDKMAN_DIR="${HOME}/.sdkman"
 # [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
@@ -92,7 +81,7 @@ SPACESHIP_PROMPT_ORDER=(
   # pyenv         # Pyenv section
   # dotnet        # .NET section
   # ember       # Ember.js section (Disabled)
-  kubecontext   # Kubectl context section
+  # kubecontext   # Kubectl context section
   exec_time     # Execution time
   line_sep      # Line break
   # battery       # Battery level and status
@@ -182,19 +171,18 @@ if [[ -o interactive ]]; then
   antigen apply
   ####################################################
 
-  my_load_direnv
   my_load_aliases
+  my_load_direnv
+  my_load_fzf
   my_load_profile
   my_load_shell_functions
-  if [ -e ~/.fzf.zsh ]; then
-    my_load_fzf
-  fi
+  my_load_vte
+
 
 fi
 
 
 export JAVA_HOME=/usr/lib/jvm/default/
-export GOPATH="${HOME}/go"
 export PATH="${GOPATH}/bin:${PATH}"
 export PATH="${HOME}/.bin:${PATH}"
 export PATH="${HOME}/.local/bin:${PATH}"
@@ -204,10 +192,4 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 [ -e ${HOME}/.sdkman/bin/sdkman-init.sh ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# unsetopt share_history
-
-
-
 export KUBECONFIG="${HOME}/.kube/config"
-
-
