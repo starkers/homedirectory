@@ -221,7 +221,7 @@ install_sops(){
 
 install_stern(){
   name=stern
-  ver="${1:-1.7.0}"
+  ver="${1:-1.11.0}"
   url=https://github.com/wercker/stern/releases/download/${ver}/stern_linux_amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
