@@ -99,6 +99,16 @@ function ggg(){
     try cd "${dest}"
   }
 
+  function gparse_keybase(){
+    local chunk2="$(echo "$1" | cut -d "/" -f 4 )"
+    local chunk3="$(echo "$1" | cut -d "/" -f 5 )"
+    local dest="${store}/keybase/${chunk2}/${chunk3}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+
   if grep -q "^http://" <<<"${in}" ; then
     gparse_http "${in}"
   elif grep -q "^https://" <<<"${in}" ; then
@@ -107,6 +117,8 @@ function ggg(){
     gparse_git "${in}"
   elif grep -q "^ssh://.*@" <<<"${in}"; then
     gparse_git "${in}"
+  elif grep -q "^keybase://" <<<"${in}"; then
+    gparse_keybase "${in}"
   else
     gdie "sorry couldn't match ${in} to any kind of git URL"
   fi
