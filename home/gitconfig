@@ -2,7 +2,7 @@
 [user]
 	name = David Stark
 	email = david@starkers.org
-	signingKey = "01D0D532FB29A63DCA9B03BA3D73875B6FF4B48C"
+	signingKey = 01D0D532FB29A63DCA9B03BA3D73875B6FF4B48C
 [push]
   default = simple
 [diff]
@@ -33,6 +33,6 @@
 [gpg]
 	program = gpg
 [commit]
-	gpgSign = false
+	gpgSign = true
 [tag]
 	forceSignAnnotated = false
