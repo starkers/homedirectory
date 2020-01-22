@@ -63,6 +63,8 @@
     ~/.config/dunst:        'dunst'
     ~/.config/i3:           'i3-gaps'
     ~/.config/i3blocks:     'i3blocks'
+    ~/.config/sway:         'sway'
+    ~/.config/waybar:       'waybar'
     ~/.tmux.conf:           'tmux'
     ~/.xinitrc:             'xinitrc'
     ~/.xsettingsd:          'xsettingsd'

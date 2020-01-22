@@ -1,0 +1,306 @@
+# i3 config
+
+input * xkb_layout "gb"
+
+
+exec        --no-startup-id /usr/bin/gnome-keyring-daemon --daemonize --login &
+#set $keyring "/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"
+#exec $keyring
+
+#my mod is the "Meta/Super/Windows/Apple" button
+set $mod Mod4
+
+# #######################   BORDER    BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+# client.focused            #1990B7   #1990B7     #111111     #1990B7
+# client.focused_inactive   #1c1c1c   #1c1c1c     #5f676a
+# client.urgent             #2f343a   #009000     #ffffff     #009000
+# client.unfocused          #1c1c1c   #1c1c1c     #888888     #222222
+
+
+
+
+set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
+set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -run-command 'swaymsg exec -- {cmd}'
+
+
+# XRESOURCES
+set $cl_high #009ddc
+set $cl_indi #d9d8d8
+set $cl_back #231f20
+set $cl_fore #d9d8d8
+set $cl_urge #ee2e24
+
+# CLASS                 BORDER    BACK      TEXT      INDICATOR CHILDBORDER
+client.focused          $cl_high  $cl_high  $cl_fore  $cl_indi  $cl_high
+client.focused_inactive $cl_back  $cl_back  $cl_fore  $cl_back  $cl_back
+client.unfocused        $cl_back  $cl_back  $cl_fore  $cl_back  $cl_back
+client.urgent           $cl_urge  $cl_urge  $cl_fore  $cl_urge  $cl_urge
+
+# client.placeholder      $bg            $bg     $bg     $bg
+
+#                         # colour of border, background, text, indicator, and child_border
+# client.focused          #bf616a #2f343f #d8dee8 #bf616a #d8dee8
+# client.focused_inactive #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.unfocused        #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.urgent           #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.placeholder      #2f343f #2f343f #d8dee8 #2f343f #2f343f
+# client.background       #2f343f
+
+set $ws1   "1:  "
+set $ws2   "2:  "
+set $ws3   "3:  "
+set $ws4   "4:  "
+set $ws5   "5:  "
+set $ws6   "6:  "
+set $ws7   "7:  "
+set $ws8   "8:  "
+set $ws9   "9:  "
+set $ws10 "10:  "
+
+# others:
+# ♬ |  |  |  | 
+
+
+# # GAP VARIABLES
+set $inner 32
+set $outer 0
+
+gaps inner $inner
+gaps outer $outer
+
+# gaps inner $default_gaps_inner
+# gaps outer $default_gaps_outer
+
+
+set $thick 2
+# border_radius 4
+
+
+# toggle gaps
+bindsym $mod+Shift+g exec compton; gaps inner all set $inner; gaps outer all set $outer
+bindsym $mod+g exec compton; gaps inner all set 0; gaps outer all set 0
+
+
+workspace_auto_back_and_forth yes
+force_display_urgency_hint 0 ms
+focus_on_window_activation urgent
+
+floating_minimum_size -1 x -1
+floating_maximum_size -1 x -1
+
+# new_window pixel
+default_border pixel 1
+# smart_gaps on
+for_window [class="^.*"] border pixel $thick
+
+hide_edge_borders both
+
+font pango:Hack Nerd Font Regular 9
+# font pango:Noto Sans 8
+
+
+bindsym $mod+1           workspace   $ws1
+bindsym $mod+2           workspace   $ws2
+bindsym $mod+3           workspace   $ws3
+bindsym $mod+4           workspace   $ws4
+bindsym $mod+5           workspace   $ws5
+bindsym $mod+6           workspace   $ws6
+bindsym $mod+7           workspace   $ws7
+bindsym $mod+8           workspace   $ws8
+bindsym $mod+9           workspace   $ws9
+bindsym $mod+0           workspace   $ws10
+
+bindsym $mod+Shift+exclam      move container to workspace number $ws1
+bindsym $mod+Shift+quotedbl    move container to workspace number $ws2
+bindsym $mod+Shift+sterling    move container to workspace number $ws3
+bindsym $mod+Shift+dollar      move container to workspace number $ws4
+bindsym $mod+Shift+percent     move container to workspace number $ws5
+bindsym $mod+Shift+asciicircum move container to workspace number $ws6
+bindsym $mod+Shift+ampersand   move container to workspace number $ws7
+bindsym $mod+Shift+asterisk    move container to workspace number $ws8
+bindsym $mod+Shift+parenleft   move container to workspace number $ws9
+bindsym $mod+Shift+parenright  move container to workspace number $ws10
+
+bindsym $mod+Down        focus down
+bindsym $mod+Left        focus left
+bindsym $mod+Up          focus up
+bindsym $mod+Right       focus right
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+s     sticky toggle
+
+bindsym $mod+Shift+Down  move        down  25px
+bindsym $mod+Shift+Left  move        left  25px
+bindsym $mod+Shift+Right move        right 25px
+bindsym $mod+Shift+Up    move        up    25px
+
+bindsym $mod+Shift+a     focus       child
+bindsym $mod+a           focus       parent
+
+bindsym $mod+Shift+c     reload
+bindsym $mod+Shift+r     restart
+bindsym $mod+Tab         workspace back_and_forth
+bindsym $mod+f           fullscreen
+bindsym $mod+w           kill
+
+bindsym $mod+v           split v
+bindsym $mod+h           split h
+
+bindsym $mod+e           layout toggle split
+bindsym $mod+t           layout tabbed
+bindsym $mod+s           layout stacking
+
+
+bindsym $mod+period      gaps inner current plus  5
+bindsym $mod+comma       gaps inner current minus 5
+
+set $lock ~/.config/swap/lock.sh
+
+
+# set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+# mode "$mode_system" {
+#     bindsym l exec $lock, mode "default"
+#     bindsym e exit
+#     bindsym s exec --no-startup-id systemctl suspend, mode "default"
+#     bindsym r exec --no-startup-id systemctl reboot, mode "default"
+#     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+#     bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+#     # return to default mode
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+# bindsym $mod+Shift+e mode "$mode_system"
+
+
+set $mode_resize resize
+bindsym $mod+r mode "$mode_resize"
+mode "$mode_resize" {
+    bindsym Left  resize shrink width  5 px or 5 ppt
+    bindsym Down  resize grow   height 5 px or 5 ppt
+    bindsym Up    resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow   width  5 px or 5 ppt
+
+    bindsym Shift+Left  resize shrink width  10 px or 5 ppt
+    bindsym Shift+Down  resize grow   height 10 px or 5 ppt
+    bindsym Shift+Up    resize shrink height 10 px or 5 ppt
+    bindsym Shift+Right resize grow   width  10 px or 5 ppt
+
+    bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/scripts/slopsize.sh
+
+    bindsym 1 mode "default", resize set 1000 600
+    bindsym 2 mode "default", resize set 1500 600
+    bindsym 3 mode "default", resize set 1200 1000
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+for_window [class="(?i)blueman"]         floating enable
+for_window [class="(?i)gsimplecal"]      floating enable, move position mouse
+for_window [class="(?i)pavucontrol"      instance="pavucontrol-bar"] move down 34px
+for_window [class="(?i)pavucontrol"]     floating enable, move position mouse
+for_window [class="(?i)qemu-system"]     floating enable
+for_window [class="(?i)recordmydesktop"] floating enable
+for_window [instance="__nmtui"]          floating enable
+for_window [instance="arandr"]           floating enable
+for_window [instance="copyq"]            floating enable
+for_window [window_role="Preferences"]   floating enable
+for_window [window_role="bubble"]        floating enable
+for_window [window_role="pop-up"]        floating enable
+for_window [window_role="task_dialog"]   floating enable
+for_window [window_type="dialog"]        floating enable
+for_window [window_type="menu"]          floating enable
+
+#  # panel
+#  bar {
+#    colors {
+#      background #2f343f
+#      statusline #2f343f
+#      separator #4b5262
+#  
+#      # colour of border, background, and text
+#      focused_workspace  #2f343f #bf616a #d8dee8
+#      active_workspace   #2f343f #2f343f #d8dee8
+#      inactive_workspace #2f343f #2f343f #d8dee8
+#      urgent_workspace   #2f343f #ebcb8b #2f343f
+#    }
+#    position top
+#    status_command i3status -c ~/.config/i3/i3status.conf
+#  }
+
+# bar {
+#   status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#   position top
+#   colors {
+#     background          #1b1b1b
+#     separator           #ffffff
+#     statusline          #999999
+#     active_workspace    #000000 #333333 #999999
+#     focused_workspace   #000000 #1990B7 #1c1c1c
+#     inactive_workspace  #000000 #333333 #999999
+#     urgent_workspace    #000000 #ff5151 #1c1c1c
+#   }
+# }
+
+bindsym $mod+n                exec --no-startup-id nautilus --no-desktop "${HOME}/"
+bindsym Print                 exec --no-startup-id flameshot gui
+bindsym XF86MonBrightnessDown exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -dec 5
+bindsym XF86MonBrightnessUp   exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -inc 5
+bindsym $mod+Return           exec --no-startup-id tilix -p default
+# bindsym $mod+d                exec --no-startup-id $HOME/.config/i3/rof
+
+
+
+
+# start dmenu (a program launcher)
+bindsym $mod+Shift+d          exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+#bindsym $mod+d                exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
+
+
+bindsym $mod+d exec $menu
+
+bindsym $mod+p                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
+bindsym $mod+l                exec --no-startup-id $HOME/.config/sway/lock.sh
+# bindsym $mod+p                exec --no-startup-id $HOME/.config/i3/scripts/i3exit suspend
+bindsym $mod+space            exec --no-startup-id copyq toggle
+
+# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+
+# set $input_source "$(pactl list short sources | grep input | head -n1 | cut -f2)"
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh dec
+bindsym XF86AudioMute         exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh toggle
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh inc
+
+
+# Idle configuration
+exec swayidle \
+    timeout 300 'exec $lock' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    after-resume 'swaymsg "output * dpms on"' \
+    before-sleep 'exec $lock'
+
+
+exec_always ~/.config/waybar/waybar.sh
+
+
+#exec        --no-startup-id compton -b
+
+
+exec        --no-startup-id /usr/bin/setxkbmap gb &
+exec        --no-startup-id /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
+# for the thinkpad
+exec        --no-startup-id /usr/bin/xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+# for the XPS 15
+exec        --no-startup-id /usr/bin/xinput set-prop "DLL06E4:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
+
+exec        --no-startup-id wicd-gtk -t &
+exec        --no-startup-id nm-applet &
+# exec        --no-startup-id blueman-applet &
+# exec        --no-startup-id redshift-gtk &
+# exec        --no-startup-id volumeicon &
+exec        --no-startup-id run_keybase &
+exec        --no-startup-id copyq &
+exec_always --no-startup-id feh --bg-fill $HOME/.config/i3/wallpapers/default &
+
+

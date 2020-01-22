@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# set -x
+
+lock() {
+  #  killall compton
+  # [[ -z "$(pgrep i3lock)" ]] || exit
+  # pkill i3lock
+  # scrot -e 'convert $f -blur 4x4 $f && i3lock -i $f && rm $f' &
+  $HOME/.config/i3/scripts/i3lock.sh
+  # i3lock
+  #  compton -b
+}
+
+do_suspend(){
+  lock &
+  sleep 2
+  sudo systemctl suspend
+}
+
+do_logout(){
+  i3-msg exit
+  pkill gnome-session
+}
+
+case "$1" in
+  lock)
+    lock
+    ;;
+  logout)
+    do_logout
+    ;;
+  suspend)
+    do_suspend
+    ;;
+  hibernate)
+    systemctl hibernate
+    ;;
+  reboot)
+    systemctl reboot
+    ;;
+  shutdown)
+    systemctl poweroff
+    ;;
+  *)
+  echo "Usage: $0 [lock|logout|suspend|hibernate|reboot|shutdown]"
+  exit 2
+esac
+
+exit 0

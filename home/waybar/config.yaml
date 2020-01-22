@@ -1,0 +1,131 @@
+backlight:
+  format: '{icon}'
+  format-alt: '{percent}% {icon}'
+  format-alt-click: click-right
+  format-icons:
+  - "\uF0EB"
+  - "\uF672"
+  on-scroll-down: light -A 1
+  on-scroll-up: light -U 1
+battery:
+  format: '{capacity}% {icon}'
+  format-alt: '{time} {icon}'
+  format-charging: "{capacity}% \uF376"
+  format-icons:
+  - "\uF244"
+  - "\uF243"
+  - "\uF242"
+  - "\uF241"
+  - "\uF240"
+  interval: 30
+  states:
+    critical: 10
+    warning: 25
+  tooltip: false
+clock:
+  format: '{:%a %d %b %H:%M:%S}'
+  tooltip: false
+custom/mail:
+  exec: ~/.config/waybar/modules/mail.py
+  format: "\uF0E0"
+  format-alt: "{alt} \uF0E0"
+  format-alt-click: click-right
+  interval: 60
+  return-type: json
+  tooltip: false
+#custom/spotify:
+#  escape: true
+#  exec: ~/.config/waybar/modules/spotify.sh
+#  exec-if: pgrep spotify
+#  interval: 1
+#  return-type: json
+custom/storage:
+  exec: ~/.config/waybar/modules/storage.sh
+  format: "{} \uF0A0"
+  format-alt: "{percentage}% \uF0A0"
+  format-alt-click: click-right
+  interval: 60
+  return-type: json
+#custom/test:
+#  exec: /tmp/test blub
+#  format: '{}'
+#  interval: 5
+#  param: blah
+#custom/weather:
+#  exec: ~/.config/waybar/modules/weather.sh
+#  exec-if: ping wttr.in -c1
+#  format: '{}'
+#  format-alt: '{alt}: {}'
+#  format-alt-click: click-right
+#  interval: 1800
+#  return-type: json
+height: 50
+idle_inhibitor:
+  format: '{icon}'
+  format-icons:
+    activated: "\uF3C1"
+    deactivated: "\uF023"
+  tooltip: false
+layer: bottom
+modules-center:
+- sway/window
+modules-left:
+- sway/workspaces
+- sway/mode
+modules-right:
+- tray
+- custom/spotify
+- custom/weather
+- custom/mail
+- custom/storage
+- backlight
+- pulseaudio
+- network
+- idle_inhibitor
+- battery
+- clock
+network:
+  format: '{icon}'
+  format-alt: '{ipaddr}/{cidr} {icon}'
+  format-alt-click: click-right
+  format-icons:
+    disconnected:
+    - "\uF6AC"
+    ethernet:
+    - "\uF796"
+    wifi:
+    - "\uF6AA"
+    - "\uF6AB"
+    - "\uF1EB"
+  on-click: termite -e nmtui
+  tooltip: false
+position: top
+pulseaudio:
+  format: '{icon}'
+  format-alt: '{volume} {icon}'
+  format-alt-click: click-right
+  format-icons:
+    default:
+    - "\uF026"
+    - "\uF027"
+    - "\uF6A8"
+    - "\uF028"
+    phone:
+    - "\uF025 \uF026"
+    - "\uF025 \uF027"
+    - "\uF025 \uF6A8"
+    - "\uF025 \uF028"
+  format-muted: "\uF6A9"
+  on-click: pavucontrol
+  scroll-step: 10
+  tooltip: true
+sway/mode:
+  format: "\uF054\uF105 {}"
+sway/window:
+  max-length: 80
+  tooltip: false
+sway/workspaces:
+  disable-scroll: true
+  format: '{name}'
+tray:
+  icon-size: 24
