@@ -22,6 +22,7 @@
     ~/.config/terminator:     'terminator'
     ~/.digrc:                 'digrc'
     ~/.gitconfig:             'gitconfig'
+    ~/.gitconfig-pusher:      'gitconfig-pusher'
     ~/.git_global_ignore:     'git-global-ignore'
     ~/.screenrc:              'screenrc'
     ~/.screenlayout:          'screenlayout'
