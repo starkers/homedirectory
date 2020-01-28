@@ -200,3 +200,26 @@ function pass(){
     vim "${PASS_ROOT}/${2}"
   fi
 }
+
+function kube-diff(){
+  local OBJ1="${1}"
+  local OBJ2="${2}"
+  local OBJ1_NAME="$(sed "s+/+-+g" <<<"${OBJ1}")"
+  local OBJ2_NAME="$(sed "s+/+-+g" <<<"${OBJ2}")"
+  function yelp(){
+    echo "provide me with two k8s objects.. EG: $0 pod/fluentd-test-gbjbg pod/fluentd-test-k9fwj"
+  }
+  if grep -q "help" <<<"${OBJ1}"; then
+    yelp
+  else
+    local TMP1="$(mktemp -d)"
+    local TMP2="$(mktemp -d)"
+    set -x
+    kubectl get "${OBJ1}" -o yaml > "${TMP1}/${OBJ1_NAME}.yaml"
+    kubectl get "${OBJ2}" -o yaml > "${TMP2}/${OBJ2_NAME}.yaml"
+    vimdiff "${TMP1}/${OBJ1_NAME}.yaml" "${TMP2}/${OBJ2_NAME}.yaml"
+    rm -rf ${TMP1} ${TMP2}
+    set +x
+  fi
+}
+
