@@ -27,7 +27,7 @@
     ~/.screenrc:              'screenrc'
     ~/.screenlayout:          'screenlayout'
     ~/.aws:                   '/keybase/private/starkers/home/aws'
-    # ~/.cheat:                 '/keybase/private/starkers/home/cheats'
+    ~/.cheat:                 '/keybase/private/starkers/home/cheats'
     ~/.mutt:                  '/keybase/private/starkers/home/mutt'
     ~/.muttrc:                '/keybase/private/starkers/home/muttrc'
     ~/.weechat:               '/keybase/private/starkers/home/weechat'
