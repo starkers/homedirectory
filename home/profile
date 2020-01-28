@@ -73,15 +73,6 @@ my_load_fnm(){
   fi
 }
 
-function my_load_keybase_stuff(){
-  KB_USER=starkers
-  KB_PLACE=/keybase/private/${KB_USER}/home/shell
-  if [ -d ${KB_PLACE} ]; then
-    source ${KB_PLACE}/*-profile.sh
-  fi
-  export PATH=/keybase/private/starkers/scripts:${PATH}
-  export CHEATPATH="/keybase/private/starkers/home/cheats"
-}
 
 my_load_golang
 my_load_pip
@@ -89,17 +80,17 @@ my_load_pip
 my_load_path_home_bin
 my_load_path_krew
 my_load_fnm
-my_load_keybase_stuff
 
 my_gnome_settings(){
   #disble animations
   gsettings set org.gnome.desktop.interface enable-animations false
 }
-if egrep -q "gnome" <<<"${DESKTOP_SESSION}" ; then
-  my_gnome_settings
-fi
 
-if egrep -q "i3|xinitrc" <<<"${DESKTOP_SESSION}" ; then
+# if egrep -q "gnome" <<<"${DESKTOP_SESSION}" ; then
+#   my_gnome_settings
+# fi
+
+if egrep -q "i3|xinitrc|sway" <<<"${DESKTOP_SESSION}" ; then
   my_load_gnome_keyring
 fi
 

@@ -48,6 +48,16 @@ function my_load_vte(){
   fi
 }
 
+function my_load_keybase_stuff(){
+  KB_USER=starkers
+  KB_PLACE=/keybase/private/${KB_USER}/home/shell
+  if [ -d ${KB_PLACE} ]; then
+    source ${KB_PLACE}/*-profile.sh
+  fi
+  export PATH=/keybase/private/starkers/scripts:${PATH}
+  export CHEATPATH="/keybase/private/starkers/home/cheats"
+}
+
 
 
 # export SDKMAN_DIR="${HOME}/.sdkman"
@@ -174,6 +184,7 @@ if [[ -o interactive ]]; then
   my_load_aliases
   my_load_direnv
   my_load_fzf
+  my_load_keybase_stuff
   my_load_profile
   my_load_shell_functions
   my_load_vte
