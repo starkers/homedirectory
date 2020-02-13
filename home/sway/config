@@ -1,11 +1,33 @@
-# i3 config
+output "*" bg $HOME/.config/i3/wallpapers/default fill
+
 
 input * xkb_layout "gb"
 
+input "1739:52552:SYNA1D31:00_06CB:CD48_Touchpad" {
+  tap enabled
+}
 
-exec        --no-startup-id /usr/bin/gnome-keyring-daemon --daemonize --login &
-#set $keyring "/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"
-#exec $keyring
+#exec --no-startup-id swaymsg output eDP-1 scale 1.3
+
+
+
+output eDP-1 scale 1.2
+output eDP-1 pos 0 0 res 3000x2000
+output DP-1 pos 2500 0 res 2560x1440
+
+
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Matcha-dark-sea'
+    gsettings set $gnome-schema icon-theme 'Papirus-Dark-Maia'
+    gsettings set $gnome-schema cursor-theme 'xcursor-breeze-sno
+}
+
+
+
+# exec        --no-startup-id /usr/bin/gnome-keyring-daemon --daemonize --login &
+set $keyring "/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"
+exec $keyring
 
 #my mod is the "Meta/Super/Windows/Apple" button
 set $mod Mod4
@@ -15,7 +37,6 @@ set $mod Mod4
 # client.focused_inactive   #1c1c1c   #1c1c1c     #5f676a
 # client.urgent             #2f343a   #009000     #ffffff     #009000
 # client.unfocused          #1c1c1c   #1c1c1c     #888888     #222222
-
 
 
 
@@ -62,7 +83,7 @@ set $ws10 "10:  "
 
 
 # # GAP VARIABLES
-set $inner 32
+set $inner 16
 set $outer 0
 
 gaps inner $inner
@@ -110,16 +131,16 @@ bindsym $mod+8           workspace   $ws8
 bindsym $mod+9           workspace   $ws9
 bindsym $mod+0           workspace   $ws10
 
-bindsym $mod+Shift+exclam      move container to workspace number $ws1
-bindsym $mod+Shift+quotedbl    move container to workspace number $ws2
-bindsym $mod+Shift+sterling    move container to workspace number $ws3
-bindsym $mod+Shift+dollar      move container to workspace number $ws4
-bindsym $mod+Shift+percent     move container to workspace number $ws5
-bindsym $mod+Shift+asciicircum move container to workspace number $ws6
-bindsym $mod+Shift+ampersand   move container to workspace number $ws7
-bindsym $mod+Shift+asterisk    move container to workspace number $ws8
-bindsym $mod+Shift+parenleft   move container to workspace number $ws9
-bindsym $mod+Shift+parenright  move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 bindsym $mod+Down        focus down
 bindsym $mod+Left        focus left
@@ -135,6 +156,8 @@ bindsym $mod+Shift+Up    move        up    25px
 
 bindsym $mod+Shift+a     focus       child
 bindsym $mod+a           focus       parent
+
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 bindsym $mod+Shift+c     reload
 bindsym $mod+Shift+r     restart
@@ -211,49 +234,23 @@ for_window [window_role="task_dialog"]   floating enable
 for_window [window_type="dialog"]        floating enable
 for_window [window_type="menu"]          floating enable
 
-#  # panel
-#  bar {
-#    colors {
-#      background #2f343f
-#      statusline #2f343f
-#      separator #4b5262
-#  
-#      # colour of border, background, and text
-#      focused_workspace  #2f343f #bf616a #d8dee8
-#      active_workspace   #2f343f #2f343f #d8dee8
-#      inactive_workspace #2f343f #2f343f #d8dee8
-#      urgent_workspace   #2f343f #ebcb8b #2f343f
-#    }
-#    position top
-#    status_command i3status -c ~/.config/i3/i3status.conf
-#  }
-
-# bar {
-#   status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#   position top
-#   colors {
-#     background          #1b1b1b
-#     separator           #ffffff
-#     statusline          #999999
-#     active_workspace    #000000 #333333 #999999
-#     focused_workspace   #000000 #1990B7 #1c1c1c
-#     inactive_workspace  #000000 #333333 #999999
-#     urgent_workspace    #000000 #ff5151 #1c1c1c
-#   }
-# }
-
 bindsym $mod+n                exec --no-startup-id nautilus --no-desktop "${HOME}/"
 bindsym Print                 exec --no-startup-id flameshot gui
-bindsym XF86MonBrightnessDown exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -dec 5
-bindsym XF86MonBrightnessUp   exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -inc 5
-bindsym $mod+Return           exec --no-startup-id tilix -p default
+bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume  exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute         exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute      exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+bindsym XF86AudioPlay         exec playerctl play-pause
+bindsym XF86AudioNext         exec playerctl next
+bindsym XF86AudioPrev         exec playerctl previous
+
+
+bindsym $mod+Return           exec --no-startup-id tilix
 # bindsym $mod+d                exec --no-startup-id $HOME/.config/i3/rof
-
-
-
-
 # start dmenu (a program launcher)
-bindsym $mod+Shift+d          exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+# bindsym $mod+Shift+d          exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
 #bindsym $mod+d                exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
 
 
@@ -264,13 +261,6 @@ bindsym $mod+l                exec --no-startup-id $HOME/.config/sway/lock.sh
 # bindsym $mod+p                exec --no-startup-id $HOME/.config/i3/scripts/i3exit suspend
 bindsym $mod+space            exec --no-startup-id copyq toggle
 
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-
-# set $input_source "$(pactl list short sources | grep input | head -n1 | cut -f2)"
-bindsym XF86AudioLowerVolume  exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh dec
-bindsym XF86AudioMute         exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh toggle
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl $HOME/.config/i3/scripts/audio_volume.sh inc
 
 
 # Idle configuration
@@ -283,16 +273,8 @@ exec swayidle \
 
 exec_always ~/.config/waybar/waybar.sh
 
-
-#exec        --no-startup-id compton -b
-
-
-exec        --no-startup-id /usr/bin/setxkbmap gb &
-exec        --no-startup-id /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
-# for the thinkpad
-exec        --no-startup-id /usr/bin/xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-# for the XPS 15
-exec        --no-startup-id /usr/bin/xinput set-prop "DLL06E4:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
+# exec        --no-startup-id /usr/bin/setxkbmap gb &
+# exec        --no-startup-id /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
 
 exec        --no-startup-id wicd-gtk -t &
 exec        --no-startup-id nm-applet &
@@ -301,6 +283,5 @@ exec        --no-startup-id nm-applet &
 # exec        --no-startup-id volumeicon &
 exec        --no-startup-id run_keybase &
 exec        --no-startup-id copyq &
-exec_always --no-startup-id feh --bg-fill $HOME/.config/i3/wallpapers/default &
 
 

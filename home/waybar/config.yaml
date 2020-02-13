@@ -1,3 +1,8 @@
+---
+height: 36
+layer: bottom
+position: top
+
 backlight:
   format: '{icon}'
   format-alt: '{percent}% {icon}'
@@ -5,8 +10,9 @@ backlight:
   format-icons:
   - "\uF0EB"
   - "\uF672"
-  on-scroll-down: light -A 1
-  on-scroll-up: light -U 1
+  on-scroll-down: light -U 1
+  on-scroll-up: light -A 1
+
 battery:
   format: '{capacity}% {icon}'
   format-alt: '{time} {icon}'
@@ -22,23 +28,28 @@ battery:
     critical: 10
     warning: 25
   tooltip: false
+
 clock:
   format: '{:%a %d %b %H:%M:%S}'
   tooltip: false
-custom/mail:
-  exec: ~/.config/waybar/modules/mail.py
-  format: "\uF0E0"
-  format-alt: "{alt} \uF0E0"
-  format-alt-click: click-right
-  interval: 60
-  return-type: json
-  tooltip: false
+  interval: 1
+
+# custom/mail:
+#   exec: ~/.config/waybar/modules/mail.py
+#   format: "\uF0E0"
+#   format-alt: "{alt} \uF0E0"
+#   format-alt-click: click-right
+#   interval: 60
+#   return-type: json
+#   tooltip: false
+
 #custom/spotify:
 #  escape: true
 #  exec: ~/.config/waybar/modules/spotify.sh
 #  exec-if: pgrep spotify
 #  interval: 1
 #  return-type: json
+
 custom/storage:
   exec: ~/.config/waybar/modules/storage.sh
   format: "{} \uF0A0"
@@ -46,6 +57,7 @@ custom/storage:
   format-alt-click: click-right
   interval: 60
   return-type: json
+
 #custom/test:
 #  exec: /tmp/test blub
 #  format: '{}'
@@ -59,14 +71,12 @@ custom/storage:
 #  format-alt-click: click-right
 #  interval: 1800
 #  return-type: json
-height: 50
 idle_inhibitor:
   format: '{icon}'
   format-icons:
     activated: "\uF3C1"
     deactivated: "\uF023"
   tooltip: false
-layer: bottom
 modules-center:
 - sway/window
 modules-left:
@@ -74,9 +84,9 @@ modules-left:
 - sway/mode
 modules-right:
 - tray
-- custom/spotify
-- custom/weather
-- custom/mail
+# - custom/spotify
+# - custom/weather
+# - custom/mail
 - custom/storage
 - backlight
 - pulseaudio
@@ -85,7 +95,23 @@ modules-right:
 - battery
 - clock
 network:
-  format: '{icon}'
+
+  # interface": "wlp3s0"
+  # # format": "{ifname}"
+  # format": "{essid} ({signalStrength}%) "
+  # format-wifi": "{essid} ({signalStrength}%) "
+  # # format-ethernet": "{ifname} "
+  # format-ethernet": "{essid} ({signalStrength}%) "
+  # format-disconnected": ""
+  # # tooltip-format": "{ifname}"
+  # tooltip-format": "{essid} ({signalStrength}%) "
+  # tooltip-format-wifi": "{essid} ({signalStrength}%) "
+  # tooltip-format-ethernet": "{ifname} {essid} ({signalStrength}%) "
+  # tooltip-format-disconnected": "Disconnected"
+  # max-length": 50
+  # # tooltip: false
+
+  format: '{ipaddr}/{cidr} {icon}'
   format-alt: '{ipaddr}/{cidr} {icon}'
   format-alt-click: click-right
   format-icons:
@@ -94,12 +120,12 @@ network:
     ethernet:
     - "\uF796"
     wifi:
-    - "\uF6AA"
-    - "\uF6AB"
+    # - "\uF6AA"
+    # - "\uF6AB"
     - "\uF1EB"
-  on-click: termite -e nmtui
-  tooltip: false
-position: top
+  # on-click: termite -e nmtui
+  # tooltip: false
+
 pulseaudio:
   format: '{icon}'
   format-alt: '{volume} {icon}'
@@ -119,13 +145,18 @@ pulseaudio:
   on-click: pavucontrol
   scroll-step: 10
   tooltip: true
+
 sway/mode:
   format: "\uF054\uF105 {}"
+
 sway/window:
   max-length: 80
   tooltip: false
+
 sway/workspaces:
   disable-scroll: true
-  format: '{name}'
+  # format: '{name}'
+
 tray:
   icon-size: 24
+
