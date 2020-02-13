@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+## copies CWD into clipboard.. useful for quickly pasting into another terminal (EG)
+
+CWD="$(pwd -P)"
+printf "$CWD" | /usr/bin/xclip -selection clipboard
