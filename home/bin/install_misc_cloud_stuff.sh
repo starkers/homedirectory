@@ -251,7 +251,9 @@ install_helm(){
   ver="${1:-2.14.3}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
-  try wget http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz -c
+  # url=http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz
+  url=https://get.helm.sh/helm-v${ver}-linux-amd64.tar.gz
+  try wget ${url} -c
   delete_if_exists "${name}"
   try tar xvf helm-v${ver}-linux-amd64.tar.gz
   try mkdir -p "${software}/bin"
