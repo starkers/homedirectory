@@ -19,6 +19,24 @@ function my_load_shell_functions(){
   source ~/.shell_functions
 }
 
+function my_load_z_and_fzf(){
+  # https://github.com/junegunn/fzf/wiki/examples#z
+
+  unalias z
+  z() {
+    if [[ -z "$*" ]]; then
+      cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+    else
+      _last_z_args="$@"
+      _z "$@"
+    fi
+  }
+
+  zz() {
+    cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
+  }
+}
+
 function fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
@@ -188,6 +206,7 @@ if [[ -o interactive ]]; then
   my_load_profile
   my_load_shell_functions
   my_load_vte
+  my_load_z_and_fzf
 
 
 fi
