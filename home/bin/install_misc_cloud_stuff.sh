@@ -83,6 +83,15 @@ install_drone(){
 # }
 
 ##############################################
+#: tanka
+install_tanka(){
+  name=tanka
+  ver="${1:-0.8.0}"
+  url=https://github.com/grafana/tanka/releases/download/v${ver}/tk-linux-amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+##############################################
 #: kompose
 install_kompose(){
   name=kompose
