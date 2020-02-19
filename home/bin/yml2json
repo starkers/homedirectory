@@ -4,7 +4,20 @@ import yaml
 import json
 import sys
 
-filename = sys.argv[1]
-with open(filename, 'r') as stream:
-    data = yaml.safe_load(stream)
+#TODO: parse mutiple documents in one file/stdin
+
+def dump_json(data):
     print(json.dumps(data, sort_keys=True))
+
+# Check if we're getting data a stdin or not
+if not sys.stdin.isatty():
+    y=yaml.load(sys.stdin.read(), Loader=yaml.CSafeLoader)
+    dump_json(y)
+else:
+    ## assume argv[1] is a file
+    filename = sys.argv[1]
+    with open(filename, 'r') as stream:
+        data = yaml.safe_load(stream)
+        dump_json(data)
+        # print(json.dumps(data, sort_keys=True))
+
