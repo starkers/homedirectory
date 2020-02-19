@@ -1,3 +1,4 @@
+### sway cfg
 output "*" bg $HOME/.config/i3/wallpapers/default fill
 
 

@@ -54,7 +54,7 @@ my_load_golang(){
   fi
   export "PATH=/usr/local/go/bin:${PATH}"
   # docker run -d -p '3030:3000' gomods/athens:latest
-  export GOPROXY=http://localhost:3300
+  # export GOPROXY=http://localhost:3300
   export GO111MODULE=on
 }
 

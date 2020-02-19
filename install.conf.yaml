@@ -8,16 +8,14 @@
 - clean: ['~']
 
 
-##############
-# This sections sets up links <on the left> to the stuff in this git repo or my keybase
+- shell:
+  - mkdir -p ~/.config/{yamllint,mc}
 
-# fish
 - link:
     ~/.config/fish:           'config-fish'
     ~/.config/fisher:         'config-fisher'
     ~/.fzf:                   'fzf'
     ~/.config/omf:            'config-omf'
-- link:
     ~/.bin:                   'bin'              #scripts and general "helpers"
     ~/.config/terminator:     'terminator'
     ~/.digrc:                 'digrc'
@@ -34,6 +32,7 @@
     ~/.password-store:        '/keybase/private/starkers/home/pass'
     ~/.antigen.zsh:           'antigen.zsh'
     ~/.completions_bash:      'completions_bash'
+    ~/.config/yamllint/config: 'yamllint.yaml'
     ~/.shell:                 '/keybase/private/starkers/home/shell'
 
 # ######### ZSH + BASH
