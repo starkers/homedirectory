@@ -16,19 +16,31 @@ done
 
 args="--height=20% --no-sort --tac"
 PROJECT_CURRENT="$(gcloud config get-value project)"
+ACCOUNT_CURRENT="$(gcloud config get-value account)"
 cat <<EOF
 ###############################################
-### your current project is ${PROJECT_CURRENT}
+### What do you want to switch between?
+###############################################
+## Current Project: ${PROJECT_CURRENT}
+## Current Account: ${ACCOUNT_CURRENT}
 ###############################################
 EOF
 
 pick=$(cat <<EOF | fzf ${args}
-## your current project is: ${PROJECT_CURRENT}
+account
+account-and-project
+account-project-and-cluster
 cluster
 project
 project-and-cluster
 EOF
 )
+
+set_account(){
+  local SELECTED_ACCOUNT="$(gcloud auth list --format="value(account)" | fzf ${args})"
+  echo "[] exec: gcloud config set account ${SELECTED_ACCOUNT}"
+  gcloud config set account ${SELECTED_ACCOUNT}
+}
 
 
 set_project(){
@@ -53,6 +65,21 @@ set_cluster(){
 
 
 case $pick in
+  account)
+    echo "picked account"
+    set_account
+    ;;
+  account-and-project)
+    echo "picked account"
+    set_account
+    set_project
+    ;;
+  account-project-and-cluster)
+    echo "picked account"
+    set_account
+    set_project
+    set_cluster
+    ;;
   project)
     echo "picked project"
     set_project
