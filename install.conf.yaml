@@ -32,7 +32,6 @@
     ~/.password-store:        '/keybase/private/starkers/home/pass'
     ~/.antigen.zsh:           'antigen.zsh'
     ~/.completions_bash:      'completions_bash'
-    ~/.config/yamllint/config: 'yamllint.yaml'
     ~/.shell:                 '/keybase/private/starkers/home/shell'
 
 # ######### ZSH + BASH
