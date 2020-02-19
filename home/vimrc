@@ -51,6 +51,9 @@ Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
 
+" jsonnet
+Plug 'google/vim-jsonnet'
+
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
@@ -643,7 +646,6 @@ set cursorcolumn
 "   Use spaces instead of tabs.
 "   Skip re-indenting lines after inserting a comment character (#) at the beginning of a line, or a colon.
 "
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
 
 set hlsearch
 
@@ -714,3 +716,6 @@ endif
 
 au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger       . " <C-R>=g:UltiSnips_Complete()<cr>"
 au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
+" indentkeys-=0# indentkeys-=<:>

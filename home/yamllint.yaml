@@ -1,0 +1,16 @@
+---
+
+# https://yamllint.readthedocs.io/en/stable/configuration.html#extending-the-default-configuration
+
+extends: default
+
+rules:
+  comments-indentation: disable  # don't bother me with this rule
+  line-length:
+    max: 120
+    level: warning
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.indentation
+  indentation:
+    spaces: 2
+    indent-sequences: false
+
