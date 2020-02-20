@@ -99,7 +99,6 @@ alias ssh="ssh -A"
 alias sternalltail="stern --all-namespaces --tail 10"
 alias systemctl="sudo systemctl"
 alias t=touch
-alias xb="sudo xb"
 
 
 
