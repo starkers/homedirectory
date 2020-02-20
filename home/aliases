@@ -1,8 +1,11 @@
-#cd
-alias ...=../..
-alias ....=../../..
-alias .....=../../../..
 alias ......=../../../../..
+alias .....=../../../..
+alias ....=../../..
+alias ...=../..
+alias apt="sudo apt"
+alias apti="sudo apt-get install"
+alias apts="apt-cache search"
+alias atop="sudo atop"
 alias cdD="cd ~/Downloads"
 alias cdb="cd ~/bin"
 alias cdd="cd ~/src"
@@ -11,34 +14,12 @@ alias cdh="cd ~/src/github.com/starkers/homedirectory/home"
 alias cds="cd ~/Seafile"
 alias cdt="cd ~/Torrents"
 alias cdw="cd ~/work"
-
-#misc
-alias atop="sudo atop"
 alias d="docker"
+alias dc='docker-compose'
 alias df="df -x squashfs" #flapak master race
+alias dnf="sudo dnf"
 alias fastboot="sudo fastboot"
 alias g="egrep"
-alias lxc="sudo lxc"
-alias lxd="sudo lxd"
-alias mc="mc -S ~/.local/share/mc/skins/candy256.ini"
-alias mplayer="mpv"
-alias mtr="mtr --curses"
-alias nload="sudo nload wlan0 -u K"
-alias open=xdg-open
-alias openvpn="sudo openvpn"
-# alias pip="pip3"
-alias ssh="ssh -A"
-alias sternalltail="stern --all-namespaces --tail 10"
-alias systemctl="sudo systemctl"
-alias t=touch
-
-#ls
-alias ll="ls -l"
-alias lla="ls -la"
-alias ls="ls --color"
-alias ltr="ls -ltr"
-
-#git
 alias ga="git add --all ."
 alias gc="gitcommit"
 alias gco="git checkout"
@@ -47,94 +28,10 @@ alias gpl="git pull -ff"
 alias gps="git push"
 alias gs="git status"
 alias gss="git status --short"
-alias lg="lazygit"
-
-#arch
-alias pacman="sudo pacman"
-
-#debian
-alias apt="sudo apt"
-alias apti="sudo apt-get install"
-alias apts="apt-cache search"
-
-#fedora
-alias dnf="sudo dnf"
-
-#ubuntu
-alias snap="sudo snap"
-
-function ggg(){
-  local store="${HOME}/src"
-
-  local in="$1"
-  local outname="ggg"
-  function gsay() { echo -e "\e[34m${outname}: $*\e[0m" >&2 ; }
-  function gerr() { echo -e "\e[31m${outname}: ${@}\e[0m"   ; }
-  function gdie() { gerr "$*" ; return 111 ; }
-  function try() { gsay "$@" ; "$@" || gdie "cannot $*" ; }
-
-  function gparse_git(){
-    local chunk1="$(cut -d "@" -f 1 <<<"$1")"
-    local chunk2="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 1 | cut -d ":" -f 1)"
-    if grep -q "ssh://" <<<"$1" ; then
-      local chunk3="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 2-99| sed "s+.git$++g" )"
-    else
-      local chunk3="$(echo "$1" | cut -d ":" -f 2 | cut -d "/" -f 1-99| sed "s+.git$++g" )"
-    fi
-    local dest="${store}/${chunk2}/${chunk3}"
-    gsay "host:${chunk2}, repo:${chunk3}  -> ${dest}"
-    if [ ! -d "${dest}" ]; then
-      try git clone "${in}" "${dest}"
-    fi
-    try cd "${dest}"
-  }
-
-  function gparse_http(){
-    local chunk2="$(echo "$1" | cut -d "/" -f 3 | cut -d ":" -f 1)"
-    local chunk3="$(echo "$1" | cut -d "/" -f 4-99 | sed "s+.git++g" )"
-    local dest="${store}/${chunk2}/${chunk3}"
-    if [ ! -d "${dest}" ]; then
-      try git clone "${in}" "${dest}"
-    fi
-    try cd "${dest}"
-  }
-
-  function gparse_keybase(){
-    local chunk2="$(echo "$1" | cut -d "/" -f 4 )"
-    local chunk3="$(echo "$1" | cut -d "/" -f 5 )"
-    local dest="${store}/keybase/${chunk2}/${chunk3}"
-    if [ ! -d "${dest}" ]; then
-      try git clone "${in}" "${dest}"
-    fi
-    try cd "${dest}"
-  }
-
-  if grep -q "^http://" <<<"${in}" ; then
-    gparse_http "${in}"
-  elif grep -q "^https://" <<<"${in}" ; then
-    gparse_http "${in}"
-  elif grep -q "^git@" <<<"${in}"; then
-    gparse_git "${in}"
-  elif grep -q "^ssh://.*@" <<<"${in}"; then
-    gparse_git "${in}"
-  elif grep -q "^keybase://" <<<"${in}"; then
-    gparse_keybase "${in}"
-  else
-    gdie "sorry couldn't match ${in} to any kind of git URL"
-  fi
-}
-
-
-
-
-
-
-
+alias ipython="ipython3"
 alias kaf='kubectl apply -f'
-# alias kca='f(){ kubectl "$@" --all-namespaces;  unset -f f; }; f'
 alias kccc='kubectl config current-context'
 alias kcdc='kubectl config delete-context'
-# alias kcn='kubectl config set-context $(kubectl config current-context) --namespace'
 alias kcp='kubectl cp'
 alias kcsc='kubectl config set-context'
 alias kcuc='kubectl config use-context'
@@ -183,15 +80,87 @@ alias krsd='kubectl rollout status deployment'
 alias kru='kubectl rollout undo'
 alias ksd='kubectl scale deployment'
 alias ku=kubectl
+alias lg="lazygit"
+alias ll="ls -l"
+alias lla="ls -la"
+alias ls="ls --color"
+alias ltr="ls -ltr"
+alias lxc="sudo lxc"
+alias lxd="sudo lxd"
+alias mc="mc -S ~/.local/share/mc/skins/candy256.ini"
+alias mplayer="mpv"
+alias mtr="mtr --curses"
+alias nload="sudo nload wlan0 -u K"
+alias open=xdg-open
+alias openvpn="sudo openvpn"
+alias pacman="sudo pacman"
+alias snap="sudo snap"
+alias ssh="ssh -A"
+alias sternalltail="stern --all-namespaces --tail 10"
+alias systemctl="sudo systemctl"
+alias t=touch
+alias xb="sudo xb"
 
 
 
-alias dc='docker-compose'
-
-
-alias ipython="ipython3"
+function ggg(){
+  local store="${HOME}/src"
+  local in="$1"
+  local outname="ggg"
+  function gsay() { echo -e "\e[34m${outname}: $*\e[0m" >&2 ; }
+  function gerr() { echo -e "\e[31m${outname}: ${@}\e[0m"   ; }
+  function gdie() { gerr "$*" ; return 111 ; }
+  function try() { gsay "$@" ; "$@" || gdie "cannot $*" ; }
+  function gparse_git(){
+    local chunk1="$(cut -d "@" -f 1 <<<"$1")"
+    local chunk2="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 1 | cut -d ":" -f 1)"
+    if grep -q "ssh://" <<<"$1" ; then
+      local chunk3="$(echo "$1" | cut -d "@" -f 2 | cut -d "/" -f 2-99| sed "s+.git$++g" )"
+    else
+      local chunk3="$(echo "$1" | cut -d ":" -f 2 | cut -d "/" -f 1-99| sed "s+.git$++g" )"
+    fi
+    local dest="${store}/${chunk2}/${chunk3}"
+    gsay "host:${chunk2}, repo:${chunk3}  -> ${dest}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+  function gparse_http(){
+    local chunk2="$(echo "$1" | cut -d "/" -f 3 | cut -d ":" -f 1)"
+    local chunk3="$(echo "$1" | cut -d "/" -f 4-99 | sed "s+.git++g" )"
+    local dest="${store}/${chunk2}/${chunk3}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+  function gparse_keybase(){
+    local chunk2="$(echo "$1" | cut -d "/" -f 4 )"
+    local chunk3="$(echo "$1" | cut -d "/" -f 5 )"
+    local dest="${store}/keybase/${chunk2}/${chunk3}"
+    if [ ! -d "${dest}" ]; then
+      try git clone "${in}" "${dest}"
+    fi
+    try cd "${dest}"
+  }
+  if grep -q "^http://" <<<"${in}" ; then
+    gparse_http "${in}"
+  elif grep -q "^https://" <<<"${in}" ; then
+    gparse_http "${in}"
+  elif grep -q "^git@" <<<"${in}"; then
+    gparse_git "${in}"
+  elif grep -q "^ssh://.*@" <<<"${in}"; then
+    gparse_git "${in}"
+  elif grep -q "^keybase://" <<<"${in}"; then
+    gparse_keybase "${in}"
+  else
+    gdie "sorry couldn't match ${in} to any kind of git URL"
+  fi
+}
 
 function pass(){
+  # I don't like "pass" (yet).. I haz keybase
   PASS_ROOT=/keybase/private/starkers/home/pass
   if [ "${1}" = "show" ]; then
     cat "${PASS_ROOT}/${2}"
