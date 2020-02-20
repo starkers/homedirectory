@@ -52,12 +52,24 @@ function my_nvm_load(){
 }
 
 function my_load_direnv(){
-  hash direnv 2>/dev/null && eval "$(direnv hook zsh)"
+  if [[ -o interactive ]] ; then
+    hash direnv 2>/dev/null && eval "$(direnv hook zsh)"
+  fi
 }
 
 function my_load_fzf(){
-  source ~/.fzf/shell/completion.zsh
-  source ~/.fzf/shell/key-bindings.zsh
+  if [[ -o interactive ]] ; then
+    source ~/.fzf/shell/completion.zsh
+    source ~/.fzf/shell/key-bindings.zsh
+  fi
+}
+
+function my_load_sdkman(){
+  if [[ -o interactive ]] ; then
+    if [ -e ${HOME}/.sdkman/bin/sdkman-init.sh ] ; then
+      source "$HOME/.sdkman/bin/sdkman-init.sh"
+    fi
+  fi
 }
 
 function my_load_vte(){
@@ -92,12 +104,12 @@ SPACESHIP_PROMPT_ORDER=(
   git           # Git section (git_branch + git_status)
   # hg            # Mercurial section (hg_branch  + hg_status)
   # package     # Package version (Disabled)
-  # node          # Node.js section
+  node          # Node.js section
   # ruby          # Ruby section
   # elixir        # Elixir section
   # xcode       # Xcode section (Disabled)
   # swift         # Swift section
-  # golang        # Go section
+  golang        # Go section
   # php           # PHP section
   # rust          # Rust section
   # haskell       # Haskell Stack section
@@ -112,7 +124,7 @@ SPACESHIP_PROMPT_ORDER=(
   # kubecontext   # Kubectl context section
   exec_time     # Execution time
   line_sep      # Line break
-  # battery       # Battery level and status
+  battery       # Battery level and status
   # vi_mode     # Vi-mode indicator (Disabled)
   jobs          # Background jobs indicator
   exit_code     # Exit code section
@@ -132,33 +144,6 @@ SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
   blue '^.*$'
   )
 
-
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-#   # context
-#   # time
-#   aws
-#   dir
-#   vcs
-#   virtualenv
-#   command_execution_time
-#   newline
-#   status
-#   )
-
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-#   kubecontext
-#   # root_indicator
-#   # battery
-#   # background_jobs
-#   # history
-#   # time
-#   )
-
-# POWERLEVEL9K_SHORTEN_DIR_LENGTH=5
-# POWERLEVEL9K_SHORTEN_DELIMITER=""
-# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-
-# POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
 
 if [[ -o interactive ]]; then
 
@@ -199,20 +184,20 @@ if [[ -o interactive ]]; then
   antigen apply
   ####################################################
 
+fi
+
+
+if [[ -o interactive ]]; then
   my_load_aliases
-  my_load_direnv
   my_load_fzf
   my_load_keybase_stuff
   my_load_profile
   my_load_shell_functions
   my_load_vte
   my_load_z_and_fzf
-
-
 fi
 
 
-export JAVA_HOME=/usr/lib/jvm/default/
 export PATH="${GOPATH}/bin:${PATH}"
 export PATH="${HOME}/.bin:${PATH}"
 export PATH="${HOME}/.local/bin:${PATH}"
@@ -220,6 +205,8 @@ export PATH="${HOME}/.software/bin:${PATH}"
 export PATH="${HOME}/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-[ -e ${HOME}/.sdkman/bin/sdkman-init.sh ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 export KUBECONFIG="${HOME}/.kube/config"
+export JAVA_HOME=/usr/lib/jvm/default/
+
+my_load_direnv
+my_load_sdkman
