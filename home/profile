@@ -56,6 +56,10 @@ my_load_golang(){
   # docker run -d -p '3030:3000' gomods/athens:latest
   # export GOPROXY=http://localhost:3300
   export GO111MODULE=on
+  export TMPDIR=~/.gotmp/
+  if [ ! -d ${TMPDIR} ]; then
+    mkdir -p ${TMPDIR}
+  fi
 }
 
 my_load_pip(){
