@@ -280,6 +280,21 @@ install_onessl(){
 }
 
 ##############################################
+#: ngrok
+install_ngrok(){
+  name=ngrok
+  ver=4VmDzA7iaHb
+  try mkdir -p "${software}/${name}-${ver}"
+  try cd "${software}/${name}-${ver}"
+  try wget https://bin.equinox.io/c/${ver}/ngrok-stable-linux-amd64.zip -c
+  try delete_if_exists "${name}"
+  try unzip ngrok-stable-linux-amd64.zip
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${software}/${name}-${ver}/${name}" ${name}
+}
+
+##############################################
 #: packer
 install_packer(){
   name=packer
