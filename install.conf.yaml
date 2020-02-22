@@ -12,6 +12,7 @@
   - mkdir -p ~/.config/{yamllint,mc}
 
 - link:
+    ~/.config/alacritty:           'alacritty'
     ~/.config/fish:           'config-fish'
     ~/.config/fisher:         'config-fisher'
     ~/.fzf:                   'fzf'
