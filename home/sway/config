@@ -248,7 +248,7 @@ bindsym XF86AudioNext         exec playerctl next
 bindsym XF86AudioPrev         exec playerctl previous
 
 
-bindsym $mod+Return           exec --no-startup-id tilix
+bindsym $mod+Return           exec --no-startup-id alacritty
 # bindsym $mod+d                exec --no-startup-id $HOME/.config/i3/rof
 # start dmenu (a program launcher)
 # bindsym $mod+Shift+d          exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"

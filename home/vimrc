@@ -541,7 +541,7 @@ nnoremap <leader>g :GitGutterToggle<cr>
 
 set splitbelow
 set splitright
-" split current buffer to left
+" split current buffer to right
 nnoremap <C-up>    :vert sb#<cr>
 " split current buffer to bottom (vertical)
 nnoremap <C-down>  :sb#<cr>

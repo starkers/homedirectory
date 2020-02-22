@@ -104,12 +104,12 @@ SPACESHIP_PROMPT_ORDER=(
   git           # Git section (git_branch + git_status)
   # hg            # Mercurial section (hg_branch  + hg_status)
   # package     # Package version (Disabled)
-  node          # Node.js section
+  # node          # Node.js section
   # ruby          # Ruby section
   # elixir        # Elixir section
   # xcode       # Xcode section (Disabled)
   # swift         # Swift section
-  golang        # Go section
+  # golang        # Go section
   # php           # PHP section
   # rust          # Rust section
   # haskell       # Haskell Stack section
@@ -124,7 +124,7 @@ SPACESHIP_PROMPT_ORDER=(
   # kubecontext   # Kubectl context section
   exec_time     # Execution time
   line_sep      # Line break
-  battery       # Battery level and status
+  # battery       # Battery level and status
   # vi_mode     # Vi-mode indicator (Disabled)
   jobs          # Background jobs indicator
   exit_code     # Exit code section
