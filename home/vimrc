@@ -318,7 +318,9 @@ let g:gitgutter_realtime = 1
 "let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_enter = 0
 
-nnoremap <leader>a :cclose<CR>
+" nnoremap <leader>a :cclose
+map <C-l> :ALEToggle<CR>
+
 
 
 let g:go_fmt_command                         = "goimports"
