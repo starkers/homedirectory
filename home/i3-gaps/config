@@ -60,7 +60,8 @@ gaps outer $outer
 
 
 set $thick 0
-border_radius 8
+# i3-gaps-rounded only
+# border_radius 8
 
 
 # toggle gaps
@@ -220,6 +221,8 @@ exec        --no-startup-id /usr/bin/xinput set-prop "SynPS/2 Synaptics TouchPad
 exec        --no-startup-id /usr/bin/xinput set-prop "DLL06E4:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 # for the MateBookX Pro 2018
 exec        --no-startup-id /usr/bin/xinput set-prop "SYNA1D31:00 06CB:CD48 Touchpad" "libinput Tapping Enabled" 1
+
+exec        --no-startup-id /usr/bin/setxkbmap -layout gb
 
 exec        --no-startup-id blueman-applet &
 exec        --no-startup-id wicd-gtk -t &
