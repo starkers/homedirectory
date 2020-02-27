@@ -59,7 +59,7 @@ gaps outer $outer
 # gaps outer $default_gaps_outer
 
 
-set $thick 0
+set $thick 2
 # i3-gaps-rounded only
 # border_radius 8
 

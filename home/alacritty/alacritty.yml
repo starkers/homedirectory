@@ -1,63 +1,64 @@
 ---
 # https://github.com/alacritty/alacritty/blob/dea7a0890a724c50bc5767039f45a2e3d071ee1c/alacritty.yml#L417-L638
-background_opacity: 0.9
+background_opacity: 0.8
 
 colors:
 
-  ## challenrgder_deep
-  primary:
-    background: '0x1b182c'
-    foreground: '0xcbe3e7'
-  normal:
-    black: '0x100e23'
-    red: '0xff8080'
-    green: '0x95ffa4'
-    yellow: '0xffe9aa'
-    blue: '0x91ddff'
-    magenta: '0xc991e1'
-    cyan: '0xaaffe4'
-    white: '0xcbe3e7'
-  bright:
-    black: '0x565575'
-    red: '0xff5458'
-    green: '0x62d196'
-    yellow: '0xffb378'
-    blue: '0x65b2ff'
-    magenta: '0x906cff'
-    cyan: '0x63f2f1'
-    white: '0xa6b3cc'
+  # ## challenrgder_deep
+  # primary:
+  #   background: '0x1b182c'
+  #   foreground: '0xcbe3e7'
+  # normal:
+  #   black: '0x100e23'
+  #   red: '0xff8080'
+  #   green: '0x95ffa4'
+  #   yellow: '0xffe9aa'
+  #   blue: '0x91ddff'
+  #   magenta: '0xc991e1'
+  #   cyan: '0xaaffe4'
+  #   white: '0xcbe3e7'
+  # bright:
+  #   black: '0x565575'
+  #   red: '0xff5458'
+  #   green: '0x62d196'
+  #   yellow: '0xffb378'
+  #   blue: '0x65b2ff'
+  #   magenta: '0x906cff'
+  #   cyan: '0x63f2f1'
+  #   white: '0xa6b3cc'
 
-# ## Dracula
-#   # Default colors
-#   primary:
-#     background: '0x282a36'
-#     foreground: '0xf8f8f2'
-#   # Normal colors
-#   normal:
-#     black: '0x000000'
-#     blue: '0xcaa9fa'
-#     cyan: '0x8be9fd'
-#     green: '0x50fa7b'
-#     magenta: '0xff79c6'
-#     red: '0xff5555'
-#     white: '0xbfbfbf'
-#     yellow: '0xf1fa8c'
-#   # Bright colors
-#   bright:
-#     black: '0x575b70'
-#     blue: '0xcaa9fa'
-#     cyan: '0x9aedfe'
-#     green: '0x5af78e'
-#     magenta: '0xff92d0'
-#     red: '0xff6e67'
-#     white: '0xe6e6e6'
-#     yellow: '0xf4f99d'
+## Dracula
+  # Default colors
+  primary:
+    background: '0x282a36'
+    foreground: '0xf8f8f2'
+  # Normal colors
+  normal:
+    black: '0x000000'
+    blue: '0xcaa9fa'
+    cyan: '0x8be9fd'
+    green: '0x50fa7b'
+    magenta: '0xff79c6'
+    red: '0xff5555'
+    white: '0xbfbfbf'
+    yellow: '0xf1fa8c'
+  # Bright colors
+  bright:
+    black: '0x575b70'
+    blue: '0xcaa9fa'
+    cyan: '0x9aedfe'
+    green: '0x5af78e'
+    magenta: '0xff92d0'
+    red: '0xff6e67'
+    white: '0xe6e6e6'
+    yellow: '0xf4f99d'
 
 # https://github.com/alacritty/alacritty/wiki
 font:
-  size: 7.5
+  size: 10
 
   normal:
+    # family: Noto Sans Mono
     family: Hack Nerd Font Mono
     style: Regular
 
