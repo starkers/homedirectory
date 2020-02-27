@@ -128,13 +128,22 @@ set t_Co=256                   " terminal has colours
 " colorscheme nord
 " colorscheme wombat256mod
 " colorscheme challenger_deep
-colorscheme onedark
+" colorscheme onedark
 " colorscheme dracula
 " colorscheme vim-monokai-tasty
 " set background=dark
 " colorscheme PaperColor
 " colorscheme ron
 " colorscheme vim-monokai-tasty
+colorscheme challenger_deep
+" colorscheme deep-space
+
+
+"" transparent
+hi Normal guibg=NONE ctermbg=NONE
+let t:is_transparent = 1
+
+
 
 " most colourschemes utterly suck in vimdiff mode
 " use a specific one that doesn't when vimdiff == true

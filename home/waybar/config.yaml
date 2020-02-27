@@ -1,33 +1,34 @@
 ---
-height: 36
+height: 48
 layer: bottom
 position: top
 
 backlight:
-  format: '{icon}'
-  format-alt: '{percent}% {icon}'
+  # format: '{icon}'
+  format: '{percent}% {icon}'
+  # format-alt: '{percent}% {icon}'
   format-alt-click: click-right
   format-icons:
   - "\uF0EB"
-  - "\uF672"
+  # - "\uF672"
   on-scroll-down: light -U 1
   on-scroll-up: light -A 1
 
 battery:
   format: '{capacity}% {icon}'
   format-alt: '{time} {icon}'
-  format-charging: "{capacity}% \uF376"
+  format-charging: "{capacity}% \uF589"
   format-icons:
   - "\uF244"
   - "\uF243"
   - "\uF242"
   - "\uF241"
   - "\uF240"
-  interval: 30
+  interval: 5
   states:
     critical: 10
     warning: 25
-  tooltip: false
+  # tooltip: false
 
 clock:
   format: '{:%a %d %b %H:%M:%S}'
@@ -50,13 +51,13 @@ clock:
 #  interval: 1
 #  return-type: json
 
-custom/storage:
-  exec: ~/.config/waybar/modules/storage.sh
-  format: "{} \uF0A0"
-  format-alt: "{percentage}% \uF0A0"
-  format-alt-click: click-right
-  interval: 60
-  return-type: json
+# custom_storage:
+#   exec: ~/.config/waybar/modules/storage.sh
+#   format: "{} \uF0A0"
+#   format-alt: "{percentage}% \uF0A0"
+#   format-alt-click: click-right
+#   interval: 60
+#   return-type: json
 
 #custom/test:
 #  exec: /tmp/test blub
@@ -71,12 +72,14 @@ custom/storage:
 #  format-alt-click: click-right
 #  interval: 1800
 #  return-type: json
-idle_inhibitor:
-  format: '{icon}'
-  format-icons:
-    activated: "\uF3C1"
-    deactivated: "\uF023"
-  tooltip: false
+
+# idle_inhibitor:
+#   format: '{icon}'
+#   format-icons:
+#     activated: "\uF3C1"
+#     deactivated: "\uF023"
+#   tooltip: false
+
 modules-center:
 - sway/window
 modules-left:
@@ -87,31 +90,31 @@ modules-right:
 # - custom/spotify
 # - custom/weather
 # - custom/mail
-- custom/storage
+# - custom_storage
 - backlight
 - pulseaudio
 - network
-- idle_inhibitor
+# - idle_inhibitor
 - battery
 - clock
-network:
 
-  # interface": "wlp3s0"
+network:
+  interface: "wlp3s0"
   # # format": "{ifname}"
   # format": "{essid} ({signalStrength}%) "
-  # format-wifi": "{essid} ({signalStrength}%) "
+  format: "{essid} ({signalStrength}%) {icon}"
   # # format-ethernet": "{ifname} "
   # format-ethernet": "{essid} ({signalStrength}%) "
   # format-disconnected": ""
   # # tooltip-format": "{ifname}"
-  # tooltip-format": "{essid} ({signalStrength}%) "
+  tooltip-format: "{ipaddr}/{cidr} {essid} ({signalStrength}%) "
   # tooltip-format-wifi": "{essid} ({signalStrength}%) "
   # tooltip-format-ethernet": "{ifname} {essid} ({signalStrength}%) "
   # tooltip-format-disconnected": "Disconnected"
   # max-length": 50
   # # tooltip: false
 
-  format: '{ipaddr}/{cidr} {icon}'
+  # format: '{ipaddr}/{cidr} {icon}'
   format-alt: '{ipaddr}/{cidr} {icon}'
   format-alt-click: click-right
   format-icons:
@@ -158,5 +161,5 @@ sway/workspaces:
   # format: '{name}'
 
 tray:
-  icon-size: 24
+  icon-size: 38
 
