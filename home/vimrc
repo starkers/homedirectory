@@ -47,6 +47,7 @@ Plug 'uarun/vim-protobuf'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'jjo/vim-cue'
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -135,8 +136,10 @@ set t_Co=256                   " terminal has colours
 " colorscheme PaperColor
 " colorscheme ron
 " colorscheme vim-monokai-tasty
-colorscheme challenger_deep
+" colorscheme challenger_deep
+" colorscheme OceanicNext
 " colorscheme deep-space
+colorscheme purify
 
 
 "" transparent
