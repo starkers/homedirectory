@@ -174,6 +174,23 @@ install_minikube(){
 }
 
 ##############################################
+#: topgrade
+install_topgrade(){
+  name=topgrade
+  ver="${1:-4.2.0}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -v https://github.com/r-darwish/topgrade/releases/download/v${ver}/topgrade-v${ver}-x86_64-unknown-linux-gnu.tar.gz
+  try delete_if_exists "${name}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/topgrade" "topgrade"
+}
+
+##############################################
 #: kubebuilder
 install_kubebuilder(){
   name=kubebuilder
@@ -183,7 +200,6 @@ install_kubebuilder(){
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
   try wget -O "${out_file}" https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${ver}/kubebuilder_${ver}_linux_amd64.tar.gz -c
-                            # https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.2.0/kubebuilder_2.2.0_linux_amd64.tar.gz
   try delete_if_exists "${name}"
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"
