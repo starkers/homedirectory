@@ -50,6 +50,7 @@
     ~/.profile:               'profile'
     ~/.shell_functions:       'shell_functions'
     ~/.zshrc:                 'zshrc'
+    ~/.jabba:                 'jabba'
 
  ######### i3 + co
 # - shell:
