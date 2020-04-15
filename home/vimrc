@@ -137,9 +137,9 @@ set t_Co=256                   " terminal has colours
 " colorscheme ron
 " colorscheme vim-monokai-tasty
 " colorscheme challenger_deep
-" colorscheme OceanicNext
+colorscheme OceanicNext
 " colorscheme deep-space
-colorscheme purify
+" colorscheme purify
 
 
 "" transparent
