@@ -186,6 +186,10 @@ if [[ -o interactive ]]; then
 
 fi
 
+my_load_jabba(){
+  export JABBA_HOME="${HOME}/.jabba"
+  source "$JABBA_HOME/jabba.sh"
+}
 
 if [[ -o interactive ]]; then
   my_load_aliases
@@ -206,7 +210,6 @@ export PATH="${HOME}/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:${PAT
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export KUBECONFIG="${HOME}/.kube/config"
-export JAVA_HOME=/usr/lib/jvm/default/
 
 my_load_direnv
-my_load_sdkman
+my_load_jabba

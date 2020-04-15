@@ -83,6 +83,16 @@ install_drone(){
 # }
 
 ##############################################
+#: jabba
+install_jabba(){
+  name=jabba
+  ver="${1:-0.11.2}"
+  url=https://github.com/shyiko/jabba/releases/download/${ver}/jabba-${ver}-linux-amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+
+##############################################
 #: tanka
 install_tanka(){
   name=tanka
