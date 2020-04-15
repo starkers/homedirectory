@@ -92,8 +92,8 @@ modules-right:
 # - custom/mail
 # - custom_storage
 - backlight
-- pulseaudio
-- network
+# - pulseaudio
+# - network
 # - idle_inhibitor
 - battery
 - clock
