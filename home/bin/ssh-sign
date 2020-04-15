@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+ssh-sign() {
+  local key="$1"
+  if [[ -z $key ]]; then
+    key="id_rsa"
+  fi
+  echo "Requesting certificate for key $key"
+
+  cat ~/.ssh/$key.pub | vault write -field=signed_key ssh-client-keys/sign/coreos public_key=- > ~/.ssh/$key-cert.pub
+
+  if [[ $? == 0 ]]; then
+    echo "Certificate retrieved and written to ~/.ssh/$key-cert.pub"
+  else
+    echo "Failed to retrieve certificate from Vault, maybe you need to re-auth?"
+    exit 1
+  fi
+}
+
+
+ssh-sign "$1"
