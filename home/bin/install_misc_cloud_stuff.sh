@@ -83,6 +83,16 @@ install_drone(){
 # }
 
 ##############################################
+#: terragrunt
+install_terragrunt(){
+  name=terragrunt
+  ver="${1:-0.21.6}"
+  url=https://github.com/gruntwork-io/terragrunt/releases/download/v${ver}/terragrunt_linux_amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+
+##############################################
 #: tanka
 install_tanka(){
   name=tanka
@@ -174,6 +184,23 @@ install_minikube(){
 }
 
 ##############################################
+#: gotop
+install_gotop(){
+  name=gotop
+  ver="${1:-3.0.0}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -v https://github.com/cjbassi/gotop/releases/download/${ver}/gotop_${ver}_linux_amd64.tgz
+  try delete_if_exists "${name}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
 #: topgrade
 install_topgrade(){
   name=topgrade
@@ -187,7 +214,7 @@ install_topgrade(){
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"
   try cd "${software}/bin"
-  try ln -sf "${out_dir}/topgrade" "topgrade"
+  try ln -sf "${out_dir}/${name}" "${name}"
 }
 
 ##############################################
