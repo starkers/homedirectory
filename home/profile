@@ -106,3 +106,7 @@ export CHEATCOLORS=true
 export ANSIBLE_NOCOWS=1
 export FZF_DEFAULT_COMMAND='ag -l --nogroup  --nocolor --hidden -g ""'
 export FLUX_FORWARD_NAMESPACE=flux
+
+
+# https://stackoverflow.com/a/46202707
+export LIBVIRT_DEFAULT_URI="qemu:///system"
