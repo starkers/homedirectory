@@ -83,6 +83,15 @@ install_drone(){
 # }
 
 ##############################################
+#: jabba
+install_jabba(){
+  name=jabba
+  ver="${1:-0.11.2}"
+  url=https://github.com/shyiko/jabba/releases/download/${ver}/jabba-${ver}-linux-amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+##############################################
 #: terragrunt
 install_terragrunt(){
   name=terragrunt
@@ -90,7 +99,6 @@ install_terragrunt(){
   url=https://github.com/gruntwork-io/terragrunt/releases/download/v${ver}/terragrunt_linux_amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
-
 
 ##############################################
 #: tanka

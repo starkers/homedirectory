@@ -1,5 +1,7 @@
 # i3 config
 
+set $term tilix
+
 #my mod is the "Meta/Super/Windows/Apple" button
 set $mod Mod4
 
@@ -60,7 +62,8 @@ gaps outer $outer
 
 
 set $thick 2
-border_radius 4
+# i3-gaps-rounded only
+border_radius 6
 
 
 # toggle gaps
@@ -144,15 +147,15 @@ bindsym $mod+comma       gaps inner current minus 5
 set $mode_resize resize
 bindsym $mod+r mode "$mode_resize"
 mode "$mode_resize" {
-    bindsym Left  resize shrink width  5 px or 5 ppt
-    bindsym Down  resize grow   height 5 px or 5 ppt
-    bindsym Up    resize shrink height 5 px or 5 ppt
-    bindsym Right resize grow   width  5 px or 5 ppt
+    bindsym Left  resize shrink width  2 px or 2 ppt
+    bindsym Down  resize grow   height 2 px or 2 ppt
+    bindsym Up    resize shrink height 2 px or 2 ppt
+    bindsym Right resize grow   width  2 px or 2 ppt
 
-    bindsym Shift+Left  resize shrink width  10 px or 5 ppt
-    bindsym Shift+Down  resize grow   height 10 px or 5 ppt
-    bindsym Shift+Up    resize shrink height 10 px or 5 ppt
-    bindsym Shift+Right resize grow   width  10 px or 5 ppt
+    bindsym Shift+Left  resize shrink width  4 px or 2 ppt
+    bindsym Shift+Down  resize grow   height 4 px or 2 ppt
+    bindsym Shift+Up    resize shrink height 4 px or 2 ppt
+    bindsym Shift+Right resize grow   width  4 px or 2 ppt
 
     bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/scripts/slopsize.sh
 
@@ -181,42 +184,13 @@ for_window [window_role="task_dialog"]   floating enable
 for_window [window_type="dialog"]        floating enable
 for_window [window_type="menu"]          floating enable
 
-# panel
-bar {
-  colors {
-    background #2f343f
-    statusline #2f343f
-    separator #4b5262
-
-    # colour of border, background, and text
-    focused_workspace  #2f343f #bf616a #d8dee8
-    active_workspace   #2f343f #2f343f #d8dee8
-    inactive_workspace #2f343f #2f343f #d8dee8
-    urgent_workspace   #2f343f #ebcb8b #2f343f
-  }
-  position top
-  status_command i3status -c ~/.config/i3/i3status.conf
-}
-
-# bar {
-#   status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#   position top
-#   colors {
-#     background          #1b1b1b
-#     separator           #ffffff
-#     statusline          #999999
-#     active_workspace    #000000 #333333 #999999
-#     focused_workspace   #000000 #1990B7 #1c1c1c
-#     inactive_workspace  #000000 #333333 #999999
-#     urgent_workspace    #000000 #ff5151 #1c1c1c
-#   }
-# }
+exec_always --no-startup-id $HOME/.config/polybar/polybar.sh
 
 bindsym $mod+n                exec --no-startup-id nautilus --no-desktop "${HOME}/"
 bindsym Print                 exec --no-startup-id flameshot gui
 bindsym XF86MonBrightnessDown exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -dec 5
 bindsym XF86MonBrightnessUp   exec --no-startup-id ${HOME}/.config/i3/scripts/backlight.sh -inc 5
-bindsym $mod+Return           exec --no-startup-id tilix -p default
+bindsym $mod+Return           exec --no-startup-id $term
 # bindsym $mod+d                exec --no-startup-id $HOME/.config/i3/rof
 
 
@@ -224,7 +198,7 @@ bindsym $mod+Return           exec --no-startup-id tilix -p default
 
 # start dmenu (a program launcher)
 bindsym $mod+Shift+d          exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
-bindsym $mod+d                exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
+bindsym $mod+d                exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Hack 16'
 bindsym $mod+p                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
 bindsym $mod+l                exec --no-startup-id $HOME/.config/i3/scripts/i3exit lock
 # bindsym $mod+p                exec --no-startup-id $HOME/.config/i3/scripts/i3exit suspend
@@ -247,7 +221,12 @@ exec        --no-startup-id /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
 exec        --no-startup-id /usr/bin/xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 # for the XPS 15
 exec        --no-startup-id /usr/bin/xinput set-prop "DLL06E4:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
+# for the MateBookX Pro 2018
+exec        --no-startup-id /usr/bin/xinput set-prop "SYNA1D31:00 06CB:CD48 Touchpad" "libinput Tapping Enabled" 1
 
+exec        --no-startup-id /usr/bin/setxkbmap -layout gb
+
+exec        --no-startup-id blueman-applet &
 exec        --no-startup-id wicd-gtk -t &
 exec        --no-startup-id nm-applet &
 # exec        --no-startup-id blueman-applet &

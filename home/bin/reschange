@@ -59,35 +59,37 @@ set -e
 oldDIR="$(pwd)"
 cd "$SCRIPT_DIR"
 
-list="$( find * -maxdepth 1 -type f )"
+# list="$( find * -maxdepth 1 -type f )"
 
-if [ "X$list" == "X" ]; then
-  echo "no options found in $SCRIPT_DIR"
+picked="$(find * -maxdepth 1 -type f | fzf)"
+
+if [ "X$picked" == "X" ]; then
+  echo "nothing picked"
   exit 1
 fi
 
 
 
-oldIFS=$IFS
-IFS=$'\n'
+# oldIFS=$IFS
+# IFS=$'\n'
 
-choices=( $list )
-IFS=$oldIFS
-PS3="Pick your settings: "
+# choices=( $list )
+# IFS=$oldIFS
+# PS3="Pick your settings: "
 
-set -e
-select answer in "${choices[@]}"; do
-  for item in "${choices[@]}"; do
-    if [[ $item == $answer ]]; then
-      # working_dir="$(cut -d " " -f 1 <<<"$item")"
-      # echo "cd $working_dir"
-      # cd "${working_dir}"
+# set -e
+# select answer in "${choices[@]}"; do
+#   for item in "${choices[@]}"; do
+#     if [[ $item == $answer ]]; then
+#       # working_dir="$(cut -d " " -f 1 <<<"$item")"
+#       # echo "cd $working_dir"
+#       # cd "${working_dir}"
       pre_work
-      echo ":: running ${item}"
-      bash "${SCRIPT_DIR}/${item}"
+#       echo ":: running ${item}"
+      bash "${SCRIPT_DIR}/${picked}"
       post_work
-      break 2
-    fi
-  done
-done
-cd "$oldDIR"
+#       break 2
+#     fi
+#   done
+# done
+# cd "$oldDIR"

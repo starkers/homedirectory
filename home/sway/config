@@ -41,24 +41,47 @@ set $mod Mod4
 
 
 
-set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
-set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -run-command 'swaymsg exec -- {cmd}'
+
+# # XRESOURCES
+# set $cl_high #009ddc
+# set $cl_indi #d9d8d8
+# set $cl_back #231f20
+# set $cl_fore #d9d8d8
+# set $cl_urge #ee2e24
+# # CLASS                 BORDER    BACK      TEXT      INDICATOR CHILDBORDER
+# client.focused          $cl_high  $cl_high  $cl_fore  $cl_indi  $cl_high
+# client.focused_inactive $cl_back  $cl_back  $cl_fore  $cl_back  $cl_back
+# client.unfocused        $cl_back  $cl_back  $cl_fore  $cl_back  $cl_back
+# client.urgent           $cl_urge  $cl_urge  $cl_fore  $cl_urge  $cl_urge
 
 
-# XRESOURCES
-set $cl_high #009ddc
-set $cl_indi #d9d8d8
-set $cl_back #231f20
-set $cl_fore #d9d8d8
-set $cl_urge #ee2e24
 
-# CLASS                 BORDER    BACK      TEXT      INDICATOR CHILDBORDER
-client.focused          $cl_high  $cl_high  $cl_fore  $cl_indi  $cl_high
-client.focused_inactive $cl_back  $cl_back  $cl_fore  $cl_back  $cl_back
-client.unfocused        $cl_back  $cl_back  $cl_fore  $cl_back  $cl_back
-client.urgent           $cl_urge  $cl_urge  $cl_fore  $cl_urge  $cl_urge
+# # Xresources var value fallback
+# set $bg      #19043C
+# set $fg      #F1F1F1
+# set $black   #19043C
+# set $red     #EE79A9
+# set $green   #8C9440
+# set $yellow  #DE935F
+# set $blue    #05C6F1
+# set $purple  #85678F
+# set $cyan    #5E8D87
+# set $grey    #969CD3
+# # class 		            bd 	  bg 	txt    ind  child_bd
+# client.focused          $grey $bg $fg    $fg  $fg
+# client.unfocused        $grey $bg $black $bg  $bg
+# client.focused_inactive $grey $bg $black $bg  $bg
+# client.urgent           $red  $bg $red   $red $red
+# client.placeholder      $grey $bg $bg    $bg  $bg
+# client.background       $bg
 
-# client.placeholder      $bg            $bg     $bg     $bg
+
+client.focused          #349f86 #349f85 #000088 #00C1FF
+client.focused_inactive #2C2C2C #2C2C2C #ffffff #2C2C2C
+client.unfocused        #2C2C2C #2C2C2C #ffffff #2C2C2C
+client.urgent           #00C1FF #00C1FF #000088 #00C1FF
+default_border          pixel 3
+hide_edge_borders       vertical
 
 #                         # colour of border, background, text, indicator, and child_border
 # client.focused          #bf616a #2f343f #d8dee8 #bf616a #d8dee8
@@ -84,7 +107,7 @@ set $ws10 "10:  "
 
 
 # # GAP VARIABLES
-set $inner 16
+set $inner 12
 set $outer 0
 
 gaps inner $inner
@@ -94,18 +117,17 @@ gaps outer $outer
 # gaps outer $default_gaps_outer
 
 
-set $thick 2
 # border_radius 4
 
 
 # toggle gaps
 bindsym $mod+Shift+g exec compton; gaps inner all set $inner; gaps outer all set $outer
-bindsym $mod+g exec compton; gaps inner all set 0; gaps outer all set 0
+bindsym $mod+g       exec compton; gaps inner all set 0i    ; gaps outer all set 0
 
 
 workspace_auto_back_and_forth yes
-force_display_urgency_hint 0 ms
-focus_on_window_activation urgent
+force_display_urgency_hint    0 ms
+focus_on_window_activation    urgent
 
 floating_minimum_size -1 x -1
 floating_maximum_size -1 x -1
@@ -113,7 +135,8 @@ floating_maximum_size -1 x -1
 # new_window pixel
 default_border pixel 1
 # smart_gaps on
-for_window [class="^.*"] border pixel $thick
+
+for_window [class="^.*"] border pixel 0
 
 hide_edge_borders both
 
@@ -143,12 +166,12 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-bindsym $mod+Down        focus down
-bindsym $mod+Left        focus left
-bindsym $mod+Up          focus up
-bindsym $mod+Right       focus right
+bindsym $mod+Down        focus    down
+bindsym $mod+Left        focus    left
+bindsym $mod+Up          focus    up
+bindsym $mod+Right       focus    right
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+Shift+s     sticky toggle
+bindsym $mod+Shift+s     sticky   toggle
 
 bindsym $mod+Shift+Down  move        down  25px
 bindsym $mod+Shift+Left  move        left  25px
@@ -255,6 +278,10 @@ bindsym $mod+Return           exec --no-startup-id alacritty
 #bindsym $mod+d                exec rofi -lines 18 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
 
 
+# set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
+set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -font "Hack 22" -run-command 'swaymsg exec -- {cmd}'
+
+
 bindsym $mod+d exec $menu
 
 bindsym $mod+p                exec --no-startup-id $HOME/.bin/passwd_gen_2_clipboard  #actualy just runs: /usr/bin/pwgen 32 1 | /usr/bin/xclip -selection clipboard
@@ -274,15 +301,11 @@ exec swayidle \
 
 exec_always ~/.config/waybar/waybar.sh
 
-# exec        --no-startup-id /usr/bin/setxkbmap gb &
-# exec        --no-startup-id /usr/bin/setxkbmap -option "terminate:ctrl_alt_bksp"
-
-exec        --no-startup-id wicd-gtk -t &
+# exec        --no-startup-id wicd-gtk -t &
 exec        --no-startup-id nm-applet &
 # exec        --no-startup-id blueman-applet &
 # exec        --no-startup-id redshift-gtk &
 # exec        --no-startup-id volumeicon &
 exec        --no-startup-id run_keybase &
 exec        --no-startup-id copyq &
-
 

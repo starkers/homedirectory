@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+# attempts to open a file in your $PATH with your $EDITOR
+
+# Example Usage: "ew <somescript>"
+# would be the same as running: "$EDITOR `which somescript`"
+
+
+# if no $EDITOR set, use vim... if no vim installed, use vi
+
+# TODO ideas
+# 1. check if its a binary.. don't commit to opening an EDITOR without an override flag
+# 2. optional flag to fork the process (for people who don't use vim like me?)
+
+function exists_in_path(){
+  if hash "$1" 2>/dev/null ; then
+    echo found $1 in your \$PATH
+    return 0
+  else
+    echo "didn't find $1 in your \$PATH"
+    return 1
+  fi
+}
+
+function is_symlink(){
+  if [ -L "$1" ]; then
+    echo $1 is symlink
+    return 0
+  else
+    echo $1 is not symlink
+    return 1
+  fi
+}
+
+function get_link(){
+  readlink "$1"
+}
+
+
+if [ -z "$1" ]; then
+  echo "please provide the name of a script in your \$PATH"
+  exit 0
+fi
+
+if [ -z $EDITOR ]; then
+  if exists_in_path vim; then
+    export EDITOR=vim
+  else
+    export EDITOR=vim
+  fi
+fi
+
+
+
+# check $1 is in our path
+if exists_in_path "$1" ; then
+  FILE="$(which "$1" 2>/dev/null)"
+
+  # good.. lets check if its a symlink and if so.. follow it
+  if is_symlink "$FILE" ; then
+    REAL_FILE="$(get_link "$FILE")"
+  else
+    REAL_FILE="$FILE"
+  fi
+else
+  echo "couldn't find $1 in your \$PATH"
+  exit 1
+fi
+
+echo "OK.. launching.."
+echo "$EDITOR \"$REAL_FILE\"'"
+sleep 0.1
+$EDITOR "$REAL_FILE"
+
+

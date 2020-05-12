@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-GTK_THEME=Arc-Darker /usr/bin/meld $@
+GTK_THEME=Arc-Darker nohup /usr/bin/meld $@ 1>/dev/null &
