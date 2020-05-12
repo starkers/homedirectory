@@ -1,23 +1,13 @@
 #!/usr/bin/env bash
 
 set -e
-ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-# I do unique things to my machines depending on which one..
-# EG:
-#  - the desktop PC has iommu VFIO passthrough for GameOS (windows)
-#  - the laptop(s) have things like TLP, bumblebee or whatnot
-# I'm simply going to use the "model name" of the CPU from /proc/cpuinfo
-# if there is a directory here called ./tweaks/<model name> (spaces replaced with underscores)
-# then this script will execute the scripts in there in sequence
-
-
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
-
-DOTBOT_BIN="bin/dotbot"
-
+set -x
 cd "${ROOTDIR}"
-git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${ROOTDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${ROOTDIR}"/home -c "${CONFIG}" "${@}"
+# This will download the dotbot script into the (submodule) dir "./dotbot"
+git submodule update --init --recursive ./dotbot
+
+# Instruct dotbot to start ensuring symlinks + shell scripts are executed
+./dotbot/bin/dotbot -d home -c dotbot.yaml "${@}"

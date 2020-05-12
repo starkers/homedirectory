@@ -331,6 +331,23 @@ install_onessl(){
 }
 
 ##############################################
+#: op (1pass cli)
+install_op(){
+  name=op
+  ver=0.10.0
+  local zip=op_linux_amd64_v${ver}.zip
+  try mkdir -p "${software}/${name}-${ver}"
+  try cd "${software}/${name}-${ver}"
+  try delete_if_exists "${zip}"
+  try wget -c https://cache.agilebits.com/dist/1P/op/pkg/v${ver}/${zip} -O "${zip}"
+  try delete_if_exists "${name}"
+  try unzip -o ${zip}
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${software}/${name}-${ver}/${name}" ${name}
+}
+
+##############################################
 #: ngrok
 install_ngrok(){
   name=ngrok

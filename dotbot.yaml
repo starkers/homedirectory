@@ -1,0 +1,59 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+  clean: ['~']
+- link:
+    ~/.Xresources: 'Xresources'
+    ~/.aliases: 'aliases'
+    ~/.antigen.zsh: 'antigen.zsh'
+    ~/.aws: '/keybase/private/starkers/home/aws'
+    ~/.bashrc: 'bashrc'
+    ~/.bashrc_git: 'git-prompt.sh'
+    ~/.bin: 'bin'
+    ~/.cheat: '/keybase/private/starkers/home/cheats'
+    ~/.completions_bash: 'completions_bash'
+    ~/.config/alacritty: 'alacritty'
+    ~/.config/compton.conf: 'compton.conf'
+    ~/.config/dunst: 'dunst'
+    ~/.config/fish: 'config-fish'
+    ~/.config/fisher: 'config-fisher'
+    ~/.config/i3: 'i3-gaps'
+    ~/.config/i3blocks: 'i3blocks'
+    ~/.config/omf: 'config-omf'
+    ~/.config/polybar: 'polybar'
+    ~/.config/sway: 'sway'
+    ~/.config/terminator: 'terminator'
+    ~/.config/waybar: 'waybar'
+    ~/.digrc: 'digrc'
+    ~/.fzf: 'fzf'
+    ~/.git_global_ignore: 'git-global-ignore'
+    ~/.gitconfig-pusher: 'gitconfig-pusher'
+    ~/.gitconfig: 'gitconfig'
+    ~/.jabba: 'jabba'
+    ~/.local/share/mc/skins: 'mc-skins'
+    ~/.mutt: '/keybase/private/starkers/home/mutt'
+    ~/.muttrc: '/keybase/private/starkers/home/muttrc'
+    ~/.password-store: '/keybase/private/starkers/home/pass'
+    ~/.profile: 'profile'
+    ~/.screenlayout: 'screenlayout'
+    ~/.screenrc: 'screenrc'
+    ~/.shell: '/keybase/private/starkers/home/shell'
+    ~/.shell_functions: 'shell_functions'
+    ~/.tmux.conf: 'tmux'
+    ~/.urxvt: 'urxvt'
+    ~/.vimrc: 'vimrc'
+    ~/.weechat: '/keybase/private/starkers/home/weechat'
+    ~/.xinitrc: 'xinitrc'
+    ~/.xsettingsd: 'xsettingsd'
+    ~/.zshrc: 'zshrc'
+- shell:
+  - mkdir -p ~/.config/{yamllint,mc}
+  - mkdir -p ~/.config/mc
+  - cp -rvp mc/* ~/.config/mc/.
+  - mkdir -p ~/.ssh
+  - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --exclude=google_compute_known_hosts
+    --inplace
+  - chmod 0700 ~/.ssh/
+  - chmod 0600 ~/.ssh/id_*
+  - [git submodule update --init --recursive, Installing submodules]
