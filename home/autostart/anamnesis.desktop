@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Anamnesis
-Comment=Loss of forgetfulness
-GenericName=Anamnesis
-Exec=/usr/bin/anamnesis --start
-Terminal=false
-Type=Application
-X-GNOME-Autostart-enabled=true
