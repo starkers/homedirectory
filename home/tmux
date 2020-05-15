@@ -1,4 +1,4 @@
-unbind-key -a
+#unbind-key -a
 
 bind-key C-x send-prefix
 set-option -g prefix C-x

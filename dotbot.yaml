@@ -25,6 +25,7 @@
     ~/.config/sway: 'sway'
     ~/.config/terminator: 'terminator'
     ~/.config/waybar: 'waybar'
+    ~/.config/yamllint/config: 'yamllint.yaml'
     ~/.digrc: 'digrc'
     ~/.fzf: 'fzf'
     ~/.git_global_ignore: 'git-global-ignore'
@@ -48,7 +49,7 @@
     ~/.xsettingsd: 'xsettingsd'
     ~/.zshrc: 'zshrc'
 - shell:
-  - mkdir -p ~/.config/{yamllint,mc}
+  - mkdir -p ~/.config/mc
   - mkdir -p ~/.config/mc
   - cp -rvp mc/* ~/.config/mc/.
   - mkdir -p ~/.ssh
