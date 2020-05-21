@@ -192,6 +192,44 @@ install_minikube(){
 }
 
 ##############################################
+#: jsonnet
+install_jsonnet(){
+  name=jsonnet
+  name2=jsonnetfmt # there are two commands
+  ver="${1:-0.15.0}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -v https://github.com/google/jsonnet/releases/download/v${ver}/jsonnet-bin-v${ver}-linux.tar.gz
+  try delete_if_exists "${name}"
+  try delete_if_exists "${name2}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+  try ln -sf "${out_dir}/${name2}" "${name2}"
+}
+
+
+##############################################
+#: docker-credential-gcr
+install_docker-credential-gcr(){
+  name=docker-credential-gcr
+  ver="${1:-2.0.1}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -v https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${ver}/docker-credential-gcr_linux_amd64-${ver}.tar.gz
+  try delete_if_exists "${name}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
 #: gotop
 install_gotop(){
   name=gotop
@@ -212,12 +250,12 @@ install_gotop(){
 #: topgrade
 install_topgrade(){
   name=topgrade
-  ver="${1:-4.2.0}"
+  ver="${1:-4.5.0}"
   out_dir="${software}/${name}-${ver}"
   out_file="${name}-${ver}.tar.gz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" -v https://github.com/r-darwish/topgrade/releases/download/v${ver}/topgrade-v${ver}-x86_64-unknown-linux-gnu.tar.gz
+  try wget -O "${out_file}" -v https://github.com/r-darwish/topgrade/releases/download/v${ver}/topgrade-v${ver}-x86_64-unknown-linux-musl.tar.gz
   try delete_if_exists "${name}"
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"
