@@ -2,9 +2,17 @@
 
 file="$1"
 
+FZF_ARGS="--height=20% --no-sort --tac"
+
 if [ -f "$1" ]; then
   cat "$file" | /usr/bin/xclip -selection clipboard
   echo "clipboard full of file: $file"
 else
-  echo "err, $file is not a file"
+  file="$(fzf ${FZF_ARGS})"
+  if [ -f "$file" ]; then
+    echo "grabbing contents of: $file"
+    cat "$file" | /usr/bin/xclip -selection clipboard
+  else
+    echo "no file called: $FILE, doing nothing"
+  fi
 fi
