@@ -1,12 +1,21 @@
 #!/usr/bin/env bash
 
+# generate a random passwd
+generate(){
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9_' | fold -w 32 | head -n 1
+}
 
-# generate a random 32 char pass, remove newline, insert into buffer
-pass="$(pwgen -Bsv1 64)"
+
+# generate passwords until at least one `_` is inside the output
+while true; do
+  pass="$(generate)"
+  if grep -q \_ <<<"${pass}"; then
+    break
+  fi
+done
 
 # ensure no trailing newline
 trimmed="$(tr --delete '\n' <<<"${pass}")"
 
 # whack it into clipboard
 printf "${trimmed}" | /usr/bin/xclip -selection clipboard
-
