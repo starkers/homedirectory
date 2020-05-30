@@ -83,6 +83,15 @@ install_drone(){
 # }
 
 ##############################################
+#: aws-iam-authenticator
+install_aws-iam-authenticator(){
+  name=aws-iam-authenticator
+  ver="${1:-0.5.0}"
+  url=https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v${ver}/aws-iam-authenticator_${ver}_linux_amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+##############################################
 #: jabba
 install_jabba(){
   name=jabba
