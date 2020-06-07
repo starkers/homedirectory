@@ -352,13 +352,28 @@ install_dive(){
 }
 
 ##############################################
-#: helm
-install_helm(){
+#: helm2
+install_helm2(){
   name=helm
-  ver="${1:-2.14.3}"
+  ver="${1:-2.16.7}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
-  # url=http://storage.googleapis.com/kubernetes-helm/helm-v${ver}-linux-amd64.tar.gz
+  url=https://get.helm.sh/helm-v${ver}-linux-amd64.tar.gz
+  try wget ${url} -c
+  delete_if_exists "${name}"
+  try tar xvf helm-v${ver}-linux-amd64.tar.gz
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${software}/${name}-${ver}/linux-amd64/${name}" ${name}
+}
+
+##############################################
+#: helm3
+install_helm3(){
+  name=helm
+  ver="${1:-3.2.2}"
+  try mkdir -p "${software}/${name}-${ver}"
+  try cd "${software}/${name}-${ver}"
   url=https://get.helm.sh/helm-v${ver}-linux-amd64.tar.gz
   try wget ${url} -c
   delete_if_exists "${name}"
