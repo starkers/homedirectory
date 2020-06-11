@@ -56,3 +56,5 @@
 	gpgSign = true
 [tag]
 	forceSignAnnotated = false
+[pull]
+	ff = only
