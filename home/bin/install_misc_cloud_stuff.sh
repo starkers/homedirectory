@@ -231,15 +231,6 @@ install_kops(){
 # }
 
 ##############################################
-#: kustomize
-install_kustomize(){
-  name=kustomize
-  ver="${1:-3.1.0}"
-  url=https://github.com/kubernetes-sigs/kustomize/releases/download/v${ver}/kustomize_${ver}_linux_amd64
-  generic_binary "${name}" "${ver}" "${url}"
-}
-
-##############################################
 #: helmfile
 install_helmfile(){
   name=helmfile
@@ -303,6 +294,24 @@ install_jsonnet(){
   try cd "${software}/bin"
   try ln -sf "${out_dir}/${name}" "${name}"
   try ln -sf "${out_dir}/${name2}" "${name2}"
+}
+
+##############################################
+#: kustomize
+install_kustomize(){
+  name=kustomize
+  ver="${1:-3.6.1}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  url=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${ver}/kustomize_v${ver}_linux_amd64.tar.gz
+  try wget -O "${out_file}" -v ${url} -c
+  try delete_if_exists "${name}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
 }
 
 ##############################################
