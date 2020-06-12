@@ -134,7 +134,7 @@ install_drone(){
 #: linkerd
 install_linkerd(){
   name=linkerd
-  ver="${1:-2.7.1}"
+  ver="${1:-2.8.0}"
   url=https://github.com/linkerd/linkerd2/releases/download/stable-${ver}/linkerd2-cli-stable-${ver}-linux
   generic_binary "${name}" "${ver}" "${url}"
 }
