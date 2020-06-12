@@ -110,3 +110,8 @@ export FLUX_FORWARD_NAMESPACE=flux
 
 # https://stackoverflow.com/a/46202707
 export LIBVIRT_DEFAULT_URI="qemu:///system"
+
+export TF_PLUGIN_CACHE_DIR="${HOME}/.tf_cache"
+
+export TERRAGRUNT_DOWNLOAD="${HOME}/.terragrunt_download"
+

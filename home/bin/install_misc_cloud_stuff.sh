@@ -32,6 +32,54 @@ generic_binary(){
 }
 
 ##############################################
+#: octant
+install_octant(){
+  name=octant
+  ver="${1:-0.13.1}"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="${name}-${ver}.tgz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c https://github.com/vmware-tanzu/octant/releases/download/v${ver}/octant_${ver}_Linux-64bit.tar.gz
+  try tar xf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/octant_${ver}_Linux-64bit/${name}" "${name}"
+}
+
+##############################################
+#: golandci-lint
+install_golangci-lint(){
+  name=golangci-lint
+  ver="${1:-1.27.0}"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="${name}-${ver}.tgz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c https://github.com/golangci/golangci-lint/releases/download/v${ver}/golangci-lint-${ver}-linux-amd64.tar.gz -c
+  try tar xf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/golangci-lint-${ver}-linux-amd64/${name}" "${name}"
+}
+
+##############################################
+#: eksctl
+install_eksctl(){
+  name=eksctl
+  ver="0.20.0"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="${name}-${ver}.tgz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c https://github.com/weaveworks/eksctl/releases/download/${ver}/eksctl_Linux_amd64.tar.gz
+  try tar xf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
 #: krew
 install_krew(){
   name=krew
@@ -97,6 +145,34 @@ install_aws-iam-authenticator(){
   name=aws-iam-authenticator
   ver="${1:-0.5.0}"
   url=https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v${ver}/aws-iam-authenticator_${ver}_linux_amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+##############################################
+#: yq
+install_yq(){
+  name=yq
+  ver="${1:-3.3.0}"
+  url=https://github.com/mikefarah/yq/releases/download/${ver}/yq_linux_amd64
+  generic_binary "${name}" "${ver}" "${url}" -c
+}
+
+
+##############################################
+#: lens
+install_lens(){
+  name=lens
+  ver="${1:-3.5.0-beta.1}"
+  url=https://github.com/lensapp/lens/releases/download/v${ver}/Lens-${ver}.AppImage
+  generic_binary "${name}" "${ver}" "${url}" -c
+}
+
+##############################################
+#: docker-credential-ecr-login
+install_docker-credential-ecr-login(){
+  name=docker-credential-ecr-login
+  ver="${1:-0.4.0}"
+  url=https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/${ver}/linux-amd64/docker-credential-ecr-login
   generic_binary "${name}" "${ver}" "${url}"
 }
 
@@ -229,7 +305,6 @@ install_jsonnet(){
   try ln -sf "${out_dir}/${name2}" "${name2}"
 }
 
-
 ##############################################
 #: docker-credential-gcr
 install_docker-credential-gcr(){
@@ -239,7 +314,7 @@ install_docker-credential-gcr(){
   out_file="${name}-${ver}.tar.gz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" -v https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${ver}/docker-credential-gcr_linux_amd64-${ver}.tar.gz
+  try wget -O "${out_file}" -v https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${ver}/docker-credential-gcr_linux_amd64-${ver}.tar.gz -c
   try delete_if_exists "${name}"
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"
@@ -256,7 +331,7 @@ install_gotop(){
   out_file="${name}-${ver}.tar.gz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" -v https://github.com/cjbassi/gotop/releases/download/${ver}/gotop_${ver}_linux_amd64.tgz
+  try wget -O "${out_file}" -v https://github.com/cjbassi/gotop/releases/download/${ver}/gotop_${ver}_linux_amd64.tgz -c
   try delete_if_exists "${name}"
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"
@@ -273,7 +348,7 @@ install_topgrade(){
   out_file="${name}-${ver}.tar.gz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" -v https://github.com/r-darwish/topgrade/releases/download/v${ver}/topgrade-v${ver}-x86_64-unknown-linux-musl.tar.gz
+  try wget -O "${out_file}" -v https://github.com/r-darwish/topgrade/releases/download/v${ver}/topgrade-v${ver}-x86_64-unknown-linux-musl.tar.gz -c
   try delete_if_exists "${name}"
   try tar xvf "${out_file}"
   try mkdir -p "${software}/bin"

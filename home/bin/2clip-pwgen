@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+len="${1:-32}"
+
 # generate a random passwd
 generate(){
-  cat /dev/urandom | tr -dc 'a-zA-Z0-9_' | fold -w 32 | head -n 1
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9_' | fold -w "${len}" | head -n 1
 }
 
 

@@ -1,7 +1,8 @@
 [user]
 	name = David Stark
-	email = david.stark@pusher.com
-  signingKey = 01D0D532FB29A63DCA9B03BA3D73875B6FF4B48C
+	email = david.stark@doddle.com
+  signingKey = 849A6BF620D953BB666EA57AFD06B2B1CFD743B7
+
 [push]
   default = simple
 

@@ -139,9 +139,10 @@ set t_Co=256                   " terminal has colours
 " colorscheme ron
 " colorscheme vim-monokai-tasty
 " colorscheme challenger_deep
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " colorscheme deep-space
 " colorscheme purify
+colorscheme onehalfdark
 
 
 "" transparent
@@ -571,7 +572,7 @@ au FocusGained,BufEnter * :checktime
 set updatetime=1000
 
 "Allow vim-terraform to automatically format *.tf and *.tfvars files with terraform fmt. You can also do this manually with the :TerraformFmt command.
-let g:terraform_fmt_on_save         = 0
+let g:terraform_fmt_on_save         = 1
 let g:terraform_align               = 1
 let g:vim_json_syntax_conceal       = 0
 let g:vim_json_syntax_concealcursor = ''
@@ -672,7 +673,7 @@ let g:colorscheme_switcher_exclude_builtins = 1
 
 
 "" format yaml
-"" #install with:  go get github.com/wangkuiyi/yamlfmt
+"" #install with:  go get -u github.com/wangkuiyi/yamlfmt
 
 nnoremap <leader>y :%!yamlfmt<CR>
 
@@ -735,6 +736,11 @@ au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " 
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
 " indentkeys-=0# indentkeys-=<:>
+
+" vim augroup filetypedetect autocmd BufRead,BufNewFile *.hcl set filetype=terraform augroup END
+
+
+autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
 
 
 

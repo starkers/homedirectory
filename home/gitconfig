@@ -4,6 +4,9 @@
 	email = david@starkers.org
   signingKey = 765C54AD2F5620FBC3DAD3CD5A3F8B96B5B044F9
 
+[includeIf "gitdir:~/src/github.com/doddle/"]
+  path = ~/.gitconfig-doddle
+
 [includeIf "gitdir:~/src/github.com/pusher/"]
   path = ~/.gitconfig-pusher
 
@@ -37,7 +40,7 @@
   rpod = remote prune origin --dry-run
   undo = reset --soft HEAD^
   stash-all = stash save --include-untracked
-        exec = "!exec "
+  exec = "!exec "
   root = rev-parse --show-toplevel
 
 [github]

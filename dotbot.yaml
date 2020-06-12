@@ -29,7 +29,7 @@
     ~/.digrc: 'digrc'
     ~/.fzf: 'fzf'
     ~/.git_global_ignore: 'git-global-ignore'
-    ~/.gitconfig-pusher: 'gitconfig-pusher'
+    ~/.gitconfig-doddle: 'gitconfig-doddle'
     ~/.gitconfig: 'gitconfig'
     ~/.jabba: 'jabba'
     ~/.local/share/mc/skins: 'mc-skins'
