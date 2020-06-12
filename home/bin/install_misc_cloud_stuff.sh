@@ -140,8 +140,8 @@ install_kompose(){
 #: kops
 install_kops(){
   name=kops
-  ver="${1:-1.12.3}"
-  url=https://github.com/kubernetes/kops/releases/download/${ver}/kops-linux-amd64
+  ver="${1:-1.17.0}"
+  url=https://github.com/kubernetes/kops/releases/download/v${ver}/kops-linux-amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
 
