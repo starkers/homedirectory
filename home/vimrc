@@ -48,6 +48,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'jjo/vim-cue'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'psf/black', { 'tag': '19.10b0' }
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -670,7 +672,7 @@ let g:colorscheme_switcher_exclude_builtins = 1
 
 
 "" format yaml
-"" #install with:  go get -u github.com/miekg/yamlfmt
+"" #install with:  go get github.com/wangkuiyi/yamlfmt
 
 nnoremap <leader>y :%!yamlfmt<CR>
 
@@ -733,3 +735,11 @@ au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " 
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
 " indentkeys-=0# indentkeys-=<:>
+
+
+
+" https://pypi.org/project/black/
+autocmd BufWritePre *.py execute ':Black'
+autocmd BufWritePre *.yml execute ':%!yamlfmt'
+
+" nnoremap <leader>y :%!yamlfmt<CR>
