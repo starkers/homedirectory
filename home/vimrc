@@ -315,6 +315,7 @@ let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=35
+let NERDTreeShowBookmarks=1  " show bookmarks on default
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
@@ -746,6 +747,4 @@ autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
 
 " https://pypi.org/project/black/
 autocmd BufWritePre *.py execute ':Black'
-autocmd BufWritePre *.yml execute ':%!yamlfmt'
-
-" nnoremap <leader>y :%!yamlfmt<CR>
+" autocmd BufWritePre *.yml execute ':%!yamlfmt'

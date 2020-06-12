@@ -99,6 +99,7 @@ alias ssh="ssh -A"
 alias sternalltail="stern --all-namespaces --tail 10"
 alias systemctl="sudo systemctl"
 alias t=touch
+alias tree="tree -I '*.pyc'"
 
 
 
@@ -190,4 +191,5 @@ function kube-diff(){
     set +x
   fi
 }
+
 
