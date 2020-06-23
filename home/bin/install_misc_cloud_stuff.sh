@@ -277,6 +277,23 @@ install_minikube(){
 }
 
 ##############################################
+#: kubeval
+install_kubeval(){
+  name=kubeval
+  ver="${1:-0.15.0}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -v https://github.com/instrumenta/kubeval/releases/download/${ver}/kubeval-linux-amd64.tar.gz
+  try delete_if_exists "${name}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
 #: jsonnet
 install_jsonnet(){
   name=jsonnet
