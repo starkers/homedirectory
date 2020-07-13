@@ -1,7 +1,7 @@
 #git config
 [user]
-	name = David Stark
-	email = david@starkers.org
+  name = David Stark
+  email = david@starkers.org
   signingKey = 765C54AD2F5620FBC3DAD3CD5A3F8B96B5B044F9
 
 [includeIf "gitdir:~/src/github.com/doddle/"]
@@ -12,12 +12,24 @@
 
 [push]
   default = simple
+
+## diff
 [diff]
-  tool = vimdiff
+  tool = nvim
 [difftool]
   prompt = false
-[mergetool "vimdiff"]
-  cmd = vimdiff -d $BASE $LOCAL
+
+## merge
+# define command which will be used when "nvim" is set as a merge tool
+[mergetool "nvim"]
+  ; cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+  cmd = nvim -d $BASE $LOCAL
+# set "nvim" as tool for merging
+[merge]
+  tool = nvim
+# automatically launch merge tool without displaying a prompt
+[mergetool]
+  prompt = false
 
 [alias]
   d   = difftool
@@ -50,14 +62,16 @@
 [credential]
   helper = cache --timeout=86400
 [core]
-	excludesfile = /home/starkers/.git_global_ignore
+  excludesfile = /home/starkers/.git_global_ignore
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 [gpg]
-	program = gpg
+  program = gpg
 [commit]
-	gpgSign = true
+  gpgSign = true
 [tag]
-	forceSignAnnotated = false
+  forceSignAnnotated = false
 [pull]
-	ff = only
+  ff = only
+[mergetool]
+  path = nvim
