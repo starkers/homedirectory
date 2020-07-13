@@ -20,6 +20,7 @@
     ~/.config/fisher: 'config-fisher'
     ~/.config/i3: 'i3-gaps'
     ~/.config/i3blocks: 'i3blocks'
+    ~/.config/nvim/init.vim: 'vimrc'
     ~/.config/omf: 'config-omf'
     ~/.config/polybar: 'polybar'
     ~/.config/sway: 'sway'

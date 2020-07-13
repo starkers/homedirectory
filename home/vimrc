@@ -1,8 +1,17 @@
-let vimplug_exists=expand('~/.vim/autoload/plug.vim')
-if !filereadable(vimplug_exists)
-  silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  let g:not_finish_vimplug = "yes"
-  autocmd VimEnter * PlugInstall
+if has('nvim')
+  let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
+  if !filereadable(vimplug_exists)
+    silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    let g:not_finish_vimplug = "yes"
+    autocmd VimEnter * PlugInstall
+  endif
+else
+  let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+  if !filereadable(vimplug_exists)
+    silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    let g:not_finish_vimplug = "yes"
+    autocmd VimEnter * PlugInstall
+  endif
 endif
 
 
@@ -39,8 +48,12 @@ Plug 'nsf/gocode'
 Plug 'patstockwell/vim-monokai-tasty'       " theme
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
+
+" Plug 'Yggdroot/LeaderF'
+" Plug 'tamago324/LeaderF-filer'
+
 Plug 'sonph/onehalf',   { 'rtp': 'vim/'}    " theme
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-commentary'
 Plug 'uarun/vim-protobuf'
@@ -296,11 +309,6 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 
-"" normal open nerd Tree
-map <leader>f :NERDTreeToggle<CR>
-
-"" Ctrl+f opens the directory of current file in nerd tree
-map <c-f> :NERDTreeFind<CR>
 
 
 " let g:ctrlp_working_path_mode = 0
@@ -311,6 +319,10 @@ map <c-f> :NERDTreeFind<CR>
 " let g:ctrlp_custom_ignore = 'node_modules\|^\.git\|^\.coffee'
 
 
+"" normal open nerd Tree
+map <leader>f :NERDTreeToggle<CR>
+"" Ctrl+f opens the directory of current file in nerd tree
+map <c-f> :NERDTreeFind<CR>
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
@@ -676,7 +688,7 @@ let g:colorscheme_switcher_exclude_builtins = 1
 "" format yaml
 "" #install with:  go get -u github.com/wangkuiyi/yamlfmt
 
-nnoremap <leader>y :%!yamlfmt<CR>
+nnoremap <leader>y :%!~/go/bin/yamlfmt<CR>
 
 
 
@@ -748,3 +760,5 @@ autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
 " https://pypi.org/project/black/
 autocmd BufWritePre *.py execute ':Black'
 " autocmd BufWritePre *.yml execute ':%!yamlfmt'
+
+
