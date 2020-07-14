@@ -1,6 +1,6 @@
 # i3 config
 
-set $term tilix
+set $term alacritty
 
 #my mod is the "Meta/Super/Windows/Apple" button
 set $mod Mod4
