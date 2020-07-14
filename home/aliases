@@ -1,8 +1,8 @@
 # actual aliases
-alias ......=../../../../..
-alias .....=../../../..
-alias ....=../../..
-alias ...=../..
+alias ......="cd ../../../.."
+alias .....="cd ../../.."
+alias ....="cd ../.."
+alias ..="cd .."
 alias apt="sudo apt"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
@@ -195,3 +195,4 @@ function kube-diff(){
 }
 
 
+alias k=kubectl
