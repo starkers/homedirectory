@@ -99,10 +99,26 @@ install_krew(){
 }
 
 ##############################################
+#: kubespy
+install_kubespy(){
+  name=kubespy
+  ver="${1:-0.5.1}"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="${name}-${ver}.tgz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c https://github.com/pulumi/kubespy/releases/download/v${ver}/kubespy-linux-amd64.tar.gz
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/releases/kubespy-linux-amd64/${name}" ${name}
+}
+
+##############################################
 #: drone
 install_drone(){
   name=drone
-  ver="${1:-1.2.0}"
+  ver="${1:-1.2.1}"
   out_dir="${software}/${name}-v${ver}"
   out_file="${name}-${ver}.tgz"
   try mkdir -p "${out_dir}"
@@ -129,6 +145,26 @@ install_drone(){
 #   try cd "${software}/bin"
 #   try ln -sf "${software}/hub-v${ver}/hub-linux-amd64-${ver}/bin/hub" "${name}"
 # }
+
+##############################################
+#: jb
+install_jb(){
+  name=jb
+  ver="${1:-0.4.0}"
+  url=https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/v${ver}/jb-linux-amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
+
+##############################################
+#: kind
+install_kind(){
+  name=kind
+  ver="${1:-0.8.1}"
+  url=https://kind.sigs.k8s.io/dl/v0.8.1/kind-linux-amd64
+  generic_binary "${name}" "${ver}" "${url}"
+}
+
 
 ##############################################
 #: linkerd
@@ -253,9 +289,9 @@ install_deis(){
 install_kubectl(){
   name=kubectl
   # find latest version:
-  # curl https://storage.googleapis.com/kubernetes-release/release/stable.txt
-  ver="${1:-1.15.2}"
-  url=https://storage.googleapis.com/kubernetes-release/release/v${ver}/bin/linux/amd64/kubectl
+  local stable="$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"
+  ver="${1:-${stable}}"
+  url=https://storage.googleapis.com/kubernetes-release/release/${ver}/bin/linux/amd64/kubectl
   generic_binary "${name}" "${ver}" "${url}"
 }
 
@@ -604,7 +640,7 @@ install_direnv(){
 
 install_fluxctl(){
   name=fluxctl
-  ver="${1:-1.14.2}"
+  ver="${1:-1.19.0}"
   url=https://github.com/weaveworks/flux/releases/download/${ver}/fluxctl_linux_amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
