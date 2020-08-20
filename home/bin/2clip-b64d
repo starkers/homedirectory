@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+## converts clipboard into base64 (decoded)
+
+## get the current clipboard
+
+CUR="$(xclip -o -selection clipboard)"
+
+# test its base64
+
+TEST="$(printf "${CUR}" | base64 -d 2>/dev/null)"
+
+if [ $? != 0 ]; then
+  echo "Err, clipboard doesn't look like it contains base64"
+else
+  # if base64 -d worked.. shove that bad boy into the clipboard
+  echo "${TEST}" | /usr/bin/xclip -selection clipboard
+  # Todo.. send a notifcation of success/fail to opendesktop
+fi
+
+
