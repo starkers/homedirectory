@@ -23,7 +23,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'honza/vim-snippets'
 " " Plug 'bazelbuild/vim-bazel'
 Plug 'cormacrelf/vim-colors-github'
-" 
+"
 " Plug 'martinda/Jenkinsfile-vim-syntax'
 " Plug 'NLKNguyen/papercolor-theme'           " theme
 Plug 'rafi/awesome-vim-colorschemes'
@@ -36,10 +36,15 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 " Plug 'fatih/molokai'
 Plug 'fatih/vim-go'
-Plug 'hashivim/vim-terraform', { 'commit': '3d9561d6df7b6c204d24d673756a6f098d96064c' }
+
+" Plug 'hashivim/vim-terraform', { 'commit': '3d9561d6df7b6c204d24d673756a6f098d96064c' }
+Plug 'hashivim/vim-terraform'
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
+
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-" Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'majutsushi/tagbar'
 " Plug 'mdempsky/gocode', { 'rtp': 'vim/'}
@@ -47,10 +52,10 @@ Plug 'majutsushi/tagbar'
 " Plug 'patstockwell/vim-monokai-tasty'       " theme
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
-" 
+"
 " " Plug 'Yggdroot/LeaderF'
 " " Plug 'tamago324/LeaderF-filer'
-" 
+"
 " Plug 'sonph/onehalf',   { 'rtp': 'vim/'}    " theme
 " Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-commentary'
@@ -61,16 +66,16 @@ Plug 'w0rp/ale'
 " Plug 'jjo/vim-cue'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'psf/black', { 'tag': '19.10b0' }
- 
+
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
-" 
+"
 " " jsonnet
 Plug 'google/vim-jsonnet'
 
 Plug 'cappyzawa/starlark.vim'
 Plug 'Yggdroot/indentLine'  " show indentation guides
- 
+
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
@@ -114,7 +119,7 @@ set magic                      " this is not vi
 set mat=4                      " How many tenths of a second to blink when matching brackets
 "set nobackup                   " skip backup
 "set noerrorbells               " No annoying sound on errors
-"set noswapfile                 " no swap
+set noswapfile                 " no swap
 "set novisualbell               " No annoying sound on errors
 "set nowb
 set shiftwidth=2               " 2 space'd tabs
@@ -170,7 +175,8 @@ set background=dark
 " let g:airline_theme = "oceanicnext"
 
 " colorscheme oceanic_material
-colorscheme challenger_deep
+" colorscheme challenger_deep
+colorscheme deep-space
 " let g:airline_theme = "jellybeans"
 
 
@@ -182,9 +188,9 @@ colorscheme challenger_deep
 
 "" most colourschemes utterly suck in vimdiff mode
 "" use a specific one that doesn't when vimdiff == true
-"if &diff
-"    colorscheme PaperColor
-"endif
+if &diff
+    colorscheme PaperColor
+endif
 
 
 
@@ -192,9 +198,9 @@ colorscheme challenger_deep
 
 "syntax enable               " enable syntax highlighting
 "" vim-easy-align Start interactive EasyAlign in visual mode (e.g. vipga)
-"xmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 "" vim-easy-align Start interactive EasyAlign for a motion/text object (e.g. gaip)
-"nmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Moving around, tabs, windows and buffers
@@ -218,12 +224,12 @@ map <C-l> <C-W>l
 "" Close all the buffers
 "map <leader>ba :bufdo bd<cr>
 
-""map <C-n> :cnext<CR>
+"map <C-n> :cnext<CR>
 ""map <C-m> :cprevious<CR>
 "" use hidden so bnext/bprev doesn't moan if u have unsaved changes
 "set hidden
-"nnoremap <C-N> :bnext<CR>
-"nnoremap <C-P> :bprev<CR>
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
 "map <leader>l :bnext<cr>
 "map <leader>h :bprevious<cr>
 
@@ -639,8 +645,6 @@ let g:colorscheme_switcher_exclude_builtins = 1
 
 
 "" format yaml
-"" install with:  go get -u github.com/wangkuiyi/yamlfmt
-nnoremap <leader>y :%!~/go/bin/yamlfmt<CR>
 
 
 
@@ -712,13 +716,39 @@ nnoremap <leader>t :IndentLinesToggle<cr>
 " autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
 
 "LANG:terraform
+
+nnoremap <leader>tt :%!~/.software/bin/terraform fmt<CR>
 "" vim augroup filetypedetect autocmd BufRead,BufNewFile *.hcl set filetype=terraform augroup END
 """Allow vim-terraform to automatically format *.tf and *.tfvars files with terraform fmt. You can also do this manually with the :TerraformFmt command.
 "let g:terraform_fmt_on_save         = 1
 "let g:terraform_align               = 1
 "let g:vim_json_syntax_conceal       = 0
 "let g:vim_json_syntax_concealcursor = ''
+" Syntastic Config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" (Optional)Remove Info(Preview) window
+set completeopt-=preview
+
+" (Optional)Hide Info(Preview) window after completions
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" (Optional) Enable terraform plan to be include in filter
+let g:syntastic_terraform_tffilter_plan = 1
+
+" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+let g:terraform_completion_keys = 1
+
+" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+let g:terraform_registry_module_completion = 0
 
 
 
@@ -731,10 +761,12 @@ nnoremap <leader>t :IndentLinesToggle<cr>
 "LANG:yaml
 "" autocmd BufWritePre *.yml execute ':%!yamlfmt'
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
+"" install with:  go get -u github.com/wangkuiyi/yamlfmt
+nnoremap <leader>y :%!~/go/bin/yamlfmt<CR>
 
 
 "LANG:starlark
-autocmd BufNewFile *.star set ft=python tabstop=2 sw=2 softtabstop=2
+" autocmd BufNewFile *.star set ft=python tabstop=2 sw=2 softtabstop=2
 
 "LANG:go
 
