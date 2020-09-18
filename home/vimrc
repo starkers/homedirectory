@@ -1,75 +1,76 @@
-if has('nvim')
-  let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
-  if !filereadable(vimplug_exists)
-    silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    let g:not_finish_vimplug = "yes"
-    autocmd VimEnter * PlugInstall
-  endif
-else
-  let vimplug_exists=expand('~/.vim/autoload/plug.vim')
-  if !filereadable(vimplug_exists)
-    silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    let g:not_finish_vimplug = "yes"
-    autocmd VimEnter * PlugInstall
-  endif
+let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
+if !filereadable(vimplug_exists)
+  exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+  autocmd VimEnter * PlugInstall
 endif
-
+"  let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+"  if !filereadable(vimplug_exists)
+"    silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+"    let g:not_finish_vimplug = "yes"
+"    autocmd VimEnter * PlugInstall
+"  endif
+"endif
+"
 
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'NLKNguyen/papercolor-theme'           " theme
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" " Plug 'bazelbuild/vim-bazel'
+Plug 'cormacrelf/vim-colors-github'
+" 
+" Plug 'martinda/Jenkinsfile-vim-syntax'
+" Plug 'NLKNguyen/papercolor-theme'           " theme
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'Valodim/vim-zsh-completion'           " sh
+" Plug 'Valodim/vim-zsh-completion'           " sh
 Plug 'airblade/vim-gitgutter'
-Plug 'chrisbra/vim-zsh'                     " sh
-" Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dracula/vim',     { 'as': 'dracula' } " theme
+" Plug 'chrisbra/vim-zsh'                     " sh
+" " Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'dracula/vim',     { 'as': 'dracula' } " theme
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-Plug 'fatih/molokai'
+" Plug 'fatih/molokai'
 Plug 'fatih/vim-go'
-Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform', { 'commit': '3d9561d6df7b6c204d24d673756a6f098d96064c' }
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
-" Plug 'lvht/fzf-mru'
+" Plug 'junegunn/vim-easy-align'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mdempsky/gocode', { 'rtp': 'vim/'}
-Plug 'nsf/gocode'
-Plug 'patstockwell/vim-monokai-tasty'       " theme
+" Plug 'mdempsky/gocode', { 'rtp': 'vim/'}
+" Plug 'nsf/gocode'
+" Plug 'patstockwell/vim-monokai-tasty'       " theme
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
-
-" Plug 'Yggdroot/LeaderF'
-" Plug 'tamago324/LeaderF-filer'
-
-Plug 'sonph/onehalf',   { 'rtp': 'vim/'}    " theme
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'tomtom/tcomment_vim'
+" 
+" " Plug 'Yggdroot/LeaderF'
+" " Plug 'tamago324/LeaderF-filer'
+" 
+" Plug 'sonph/onehalf',   { 'rtp': 'vim/'}    " theme
+" Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-commentary'
-Plug 'uarun/vim-protobuf'
+" Plug 'uarun/vim-protobuf'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'jjo/vim-cue'
+" Plug 'jjo/vim-cue'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'psf/black', { 'tag': '19.10b0' }
-
+ 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
-
-" jsonnet
+" 
+" " jsonnet
 Plug 'google/vim-jsonnet'
 
+Plug 'cappyzawa/starlark.vim'
+Plug 'Yggdroot/indentLine'  " show indentation guides
+ 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
@@ -81,7 +82,7 @@ function! BuildYCM(info)
 endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-" Initialize plugin system
+" " Initialize plugin system
 call plug#end()
 
 
@@ -92,151 +93,164 @@ filetype indent on
 
 
 let mapleader = ","
-nmap <leader>w :w!<cr>
+"nmap <leader>w :w!<cr>
 
 
 
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set ai                         " Auto indent
+"set ai                         " Auto indent
 set backspace=eol,start,indent " change backspace behavour
 set encoding=utf8              " uft is good
 set expandtab                  " expand tab on default
 set foldcolumn=0               " no extra margin to the left
 set ignorecase                 " ignore caps in search
 set incsearch                  " realtime/incremental search (as u type)
-set lazyredraw                 " save cpu
-set lbr                        " Linebreak on 100 characters
+"set lazyredraw                 " save cpu
+"set lbr                        " Linebreak on 100 characters
 set magic                      " this is not vi
-set mat=2                      " How many tenths of a second to blink when matching brackets
-set nobackup                   " skip backup
-set noerrorbells               " No annoying sound on errors
-set noswapfile                 " no swap
-set novisualbell               " No annoying sound on errors
-set nowb
+set mat=4                      " How many tenths of a second to blink when matching brackets
+"set nobackup                   " skip backup
+"set noerrorbells               " No annoying sound on errors
+"set noswapfile                 " no swap
+"set novisualbell               " No annoying sound on errors
+"set nowb
 set shiftwidth=2               " 2 space'd tabs
 set showmatch                  " show matching results when searching
 set si                         " Smart indent
 set smartcase                  " smart case
 set smarttab                   " smart Tag behabior
-set so=7
-set t_vb=                      " No annoying sound on errors
+"set so=7
+"set t_vb=                      " No annoying sound on errors
 set tabstop=2                  " 2 is just fine
-set tm=500                     " No annoying sound on errors
-" set tw=100                     " Linebreak on 100 characters
-" set whichwrap+=<,>,h
-set wildignore+=*/.git/*,*/.hg/*,*.o,*~,*.pyc
-set wildmenu
-" set wrap                       " Wrap lines
+"set tm=500                     " No annoying sound on errors
+"" set tw=100                     " Linebreak on 100 characters
+"" set whichwrap+=<,>,h
+"set wildignore+=*/.git/*,*/.hg/*,*.o,*~,*.pyc
+"set wildmenu
+"" set wrap                       " Wrap lines
 
-" let g:rehash256 = 1
+"" let g:rehash256 = 1
 set t_Co=256                   " terminal has colours
-" colorscheme jellybeans
-" colorscheme molokai
-" set background=dark
+"" colorscheme jellybeans
+"" colorscheme molokai
 
-" colorscheme onehalfdark
-" colorscheme purify
-" colorscheme rdark-terminal2
-" colorscheme tender
-" colorscheme nord
-" colorscheme wombat256mod
-" colorscheme challenger_deep
-" colorscheme onedark
-" colorscheme dracula
-" colorscheme vim-monokai-tasty
-" set background=dark
-" colorscheme PaperColor
-" colorscheme ron
-" colorscheme vim-monokai-tasty
-" colorscheme challenger_deep
-" colorscheme OceanicNext
-" colorscheme deep-space
-" colorscheme purify
-colorscheme onehalfdark
+"" colorscheme OceanicNext
+"" colorscheme challenger_deep
+"" colorscheme deep-space
+"" colorscheme dracula
+"" colorscheme nord
+"" colorscheme onedark
+"" colorscheme onehalfdark
+"" colorscheme purify
+"" colorscheme purify
+"" colorscheme rdark-terminal2
+"" colorscheme ron
+"" colorscheme tender
+"" colorscheme vim-monokai-tasty
+"" colorscheme wombat256mod
+"" colorscheme PaperColor
+"" colorscheme challenger_deep
+"" colorscheme deus
+
+"" use a slightly darker background, like GitHub inline code blocks
+"let g:github_colors_soft = 1
+
+set termguicolors
+
+"" use the dark theme
+set background=dark
+
+"" more blocky diff markers in signcolumn (e.g. GitGutter)
+"let g:github_colors_block_diffmark = 0
+
+" colorscheme github
+" let g:airline_theme = "oceanicnext"
+
+" colorscheme oceanic_material
+colorscheme challenger_deep
+" let g:airline_theme = "jellybeans"
 
 
-"" transparent
-hi Normal guibg=NONE ctermbg=NONE
-let t:is_transparent = 1
+"" "" transparent
+"" hi Normal guibg=NONE ctermbg=NONE
+"" let t:is_transparent = 1
 
 
 
-" most colourschemes utterly suck in vimdiff mode
-" use a specific one that doesn't when vimdiff == true
-if &diff
-    colorscheme PaperColor
-endif
+"" most colourschemes utterly suck in vimdiff mode
+"" use a specific one that doesn't when vimdiff == true
+"if &diff
+"    colorscheme PaperColor
+"endif
 
 
 
 
 
-syntax enable               " enable syntax highlighting
-" vim-easy-align Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" vim-easy-align Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+"syntax enable               " enable syntax highlighting
+"" vim-easy-align Start interactive EasyAlign in visual mode (e.g. vipga)
+"xmap ga <Plug>(EasyAlign)
+"" vim-easy-align Start interactive EasyAlign for a motion/text object (e.g. gaip)
+"nmap ga <Plug>(EasyAlign)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" => Moving around, tabs, windows and buffers
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+"map <space> /
+"map <c-space> ?
 
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+"" Disable highlight when <leader><cr> is pressed
+"map <silent> <leader><cr> :noh<cr>
 
-" Smart way to move between windows
+"" Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+"" Close the current buffer
+"map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
+"" Close all the buffers
+"map <leader>ba :bufdo bd<cr>
 
-"map <C-n> :cnext<CR>
-"map <C-m> :cprevious<CR>
-" use hidden so bnext/bprev doesn't moan if u have unsaved changes
-set hidden
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+""map <C-n> :cnext<CR>
+""map <C-m> :cprevious<CR>
+"" use hidden so bnext/bprev doesn't moan if u have unsaved changes
+"set hidden
+"nnoremap <C-N> :bnext<CR>
+"nnoremap <C-P> :bprev<CR>
+"map <leader>l :bnext<cr>
+"map <leader>h :bprevious<cr>
 
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
+"" Useful mappings for managing tabs
+"map <leader>tn :tabnew<cr>
+"map <leader>to :tabonly<cr>
+"map <leader>tc :tabclose<cr>
+"map <leader>tm :tabmove
+"map <leader>t<leader> :tabnext
 
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+"" Let 'tl' toggle between this and the last accessed tab
+"let g:lasttab = 1
+"nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+"au TabLeave * let g:lasttab = tabpagenr()
 
 
-set gcr=a:blinkon0 " Disable the blinking cursor.
-set scrolloff=3 " Disable the blinking cursor.
-set laststatus=2 " Always show the status line
+"" Opens a new tab with the current buffer's path
+"" Super useful when editing files in the same directory
+"map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+"" Switch CWD to the directory of the open buffer
+"map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 
+"set gcr=a:blinkon0 " Disable the blinking cursor.
+"set scrolloff=3 " Disable the blinking cursor.
+"set laststatus=2 " Always show the status line
 
 
 
@@ -247,26 +261,25 @@ set laststatus=2 " Always show the status line
 
 
 
-" Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
 
-" Return to last edit position when opening files (You want this!)
+
+"" Specify the behavior when switching between buffers
+"try
+"  set switchbuf=useopen,usetab,newtab
+"  set stal=2
+"catch
+"endtry
+
+"" Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+"" Toggle paste mode on and off
+"map <leader>pp :setlocal paste!<cr>
 
 
-" Quickly open a markdown buffer for scribble
-map <leader>x :e /keybase/private/starkers/buffer.md<cr>
-
-
-
+"" Quickly open a markdown buffer for scribble
+"map <leader>x :e /keybase/private/starkers/buffer.md<cr>
 
 
 
@@ -279,160 +292,116 @@ map <leader>x :e /keybase/private/starkers/buffer.md<cr>
 
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ack searching and cope displaying
-"    requires ack.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use the the_silver_searcher if possible (much faster than Ack)
+
+
+
+" Use the the_silver_searcher if possible
 if executable('ag')
   let g:ackprg = 'ag --vimgrep --smart-case'
 endif
 
-" When you press gv you Ack after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
+"" When you press gv you Ack after the selected text
+"vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
-
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
+"" When you press <leader>r you can search and replace the selected text
+"vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 
-"" Vmap for maintain Visual Mode after shifting > and <
+"noremap YY "+y<CR>
+"noremap <leader>p "+gP<CR>
+"noremap XX "+x<CR>
+
+
+""" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
 
-"" Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+" """ Move visual block
+" vnoremap J :m '>+1<CR>gv=gv
+" vnoremap K :m '<-2<CR>gv=gv
 
 
 
 
-" let g:ctrlp_working_path_mode = 0
-" let g:ctrlp_map = '<c-f>'
-" map <leader>j :CtrlP<cr>
-" map <c-b> :CtrlPBuffer<cr>
-" let g:ctrlp_max_height = 20
-" let g:ctrlp_custom_ignore = 'node_modules\|^\.git\|^\.coffee'
+"" let g:ctrlp_working_path_mode = 0
+"" let g:ctrlp_map = '<c-f>'
+"" map <leader>j :CtrlP<cr>
+"" map <c-b> :CtrlPBuffer<cr>
+"" let g:ctrlp_max_height = 20
+"" let g:ctrlp_custom_ignore = 'node_modules\|^\.git\|^\.coffee'
 
 
 "" normal open nerd Tree
 map <leader>f :NERDTreeToggle<CR>
-"" Ctrl+f opens the directory of current file in nerd tree
-map <c-f> :NERDTreeFind<CR>
+
+"" Ctrl+o top Open files in same dir as current file
+" opens the directory of current file in nerd tree
+map <c-o> :NERDTreeFind<CR>
+
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=35
 let NERDTreeShowBookmarks=1  " show bookmarks on default
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
+"map <leader>nn :NERDTreeToggle<cr>
+"map <leader>nb :NERDTreeFromBookmark<Space>
+"map <leader>nf :NERDTreeFind<cr>
 
 
+
+
+"PLUGIN:gitgutter
 let g:gitgutter_enabled=1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
-"nnoremap <silent> <leader>d :GitGutterToggle<cr>
+nmap g] <Plug>(GitGutterNextHunk)
+nmap g[ <Plug>(GitGutterPrevHunk)
+
+nnoremap <leader>g :GitGutterToggle<cr>
 
 
-"" Disabling highlighting
+"highlight GitGutterAdd    guifg=#009900 ctermfg=2
+"highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+"highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
+
+
+"PLUGIN:ale
+
+""" Disabling highlighting
 "let g:ale_set_highlights = 0
-"
-"" Only run linting when saving the file
-"let g:ale_lint_on_text_changed = 'never'
-"let g:ale_lint_on_enter = 0
+""
+""" Only run linting when saving the file
+""let g:ale_lint_on_text_changed = 'never'
+""let g:ale_lint_on_enter = 0
 
-" nnoremap <leader>a :cclose
+"" nnoremap <leader>a :cclose
 map <C-l> :ALEToggle<CR>
 
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
 
 
-let g:go_fmt_command                         = "goimports"
-let g:go_fmt_fail_silently                   = 1
-let g:go_highlight_array_whitespace_error    = 0
-let g:go_highlight_build_constraints         = 1
-let g:go_highlight_extra_types               = 1
-let g:go_highlight_fields                    = 1
-let g:go_highlight_functions                 = 1
-let g:go_highlight_generate_tags             = 1
-let g:go_highlight_methods                   = 1
-let g:go_highlight_operators                 = 1
-let g:go_highlight_space_tab_error           = 0
-let g:go_highlight_structs                   = 1
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_types                     = 1
-let g:go_list_type                           = "quickfix"
-
-augroup go
-	autocmd!
-	setlocal omnifunc=gocomplete#Complete
-	autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-
-	" :GoBuild and :GoTestCompile
-	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-	" :GoTest
-	autocmd FileType go nmap <leader>t  <Plug>(go-test)
-	" :GoRun
-	autocmd FileType go nmap <leader>r  <Plug>(go-run)
-	" :GoDoc
-	autocmd FileType go nmap <Leader>d <Plug>(go-doc)
-	" :GoCoverageToggle
-	autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-	" :GoInfo
-	autocmd FileType go nmap <Leader>i <Plug>(go-info)
-	" :GoMetaLinter
-	autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
-	" :GoDef but opens in a vertical split
-	autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
-	" :GoDef but opens in a horizontal split
-	autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
-
-	" Open :GoDeclsDir with ctrl-g
-	nmap <C-g> :GoDeclsDir<cr>
-	imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 
 
-	autocmd FileType go nmap <leader>b  <Plug>(go-build)
-	autocmd FileType go nmap <leader>r  <Plug>(go-run)
-
-	"let g:go_list_type = "quickfix"
 
 
-	autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
-	"autocmd FileType go nmap <leader>b  <Plug>(go-build)
-
-	" " run :GoBuild or :GoTestCompile based on the go file
-	" function! s:build_go_files()
-	"   let l:file = expand('%')
-	"   if l:file =~# '^\f\+_test\.go$'
-	"     call go#test#Test(0, 1)
-	"   elseif l:file =~# '^\f\+\.go$'
-	"     call go#cmd#Build(0)
-	"   endif
-	" endfunction
-	" autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-
-augroup END
-
-
-" Tagbar
+"" Tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
 nmap <c-a> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 
-" " snippets
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-" let g:UltiSnipsEditSplit="vertical"
+"" " snippets
+"" let g:UltiSnipsExpandTrigger="<tab>"
+"" let g:UltiSnipsJumpForwardTrigger="<tab>"
+"" let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+"" let g:UltiSnipsEditSplit="vertical"
 
-" ale
+"" ale
 let g:ale_linters = {}
 
 
@@ -443,47 +412,48 @@ let g:ale_linters = {}
 :call extend(g:ale_linters, {
    \'python': ['pep8', 'flake8'], })
 
-" " vim-airline
-let g:airline_theme                      = 'onehalfdark'
-" let g:airline_theme                      = 'powerlineish'
-" let g:airline_theme                      = 'simple'
-" let g:airline_theme                      = 'wombat'
-" let g:airline_theme                      = 'zenburn'
-" let g:airline_theme                      = 'molokai'
+"" " vim-airline
+"let g:airline_theme                      = 'onehalfdark'
+"" let g:airline_theme                      = 'powerlineish'
+"" let g:airline_theme                      = 'simple'
+"" let g:airline_theme                      = 'wombat'
+"" let g:airline_theme                      = 'zenburn'
+"" let g:airline_theme                      = 'molokai'
 
 
-let g:airline#extensions#ale#enabled          = 1
-let g:airline#extensions#branch#enabled       = 1
-let g:airline#extensions#tabline#enabled      = 1
-let g:airline#extensions#tabline#formatter    = 'unique_tail_improved'
-" let g:airline#extensions#tabline#left_alt_sep = ''
-" let g:airline#extensions#tabline#left_sep     = ''
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#left_sep     = ' '
-let g:airline#extensions#tagbar#enabled       = 1
-let g:airline_left_alt_sep                    = ''
-let g:airline_left_sep                        = ''
-let g:airline_powerline_fonts                 = 1
-let g:airline_right_alt_sep                   = ''
-let g:airline_right_sep                       = ''
-let g:airline_skip_empty_sections             = 0
+"let g:airline#extensions#ale#enabled          = 1
+"let g:airline#extensions#branch#enabled       = 1
+"let g:airline#extensions#tabline#enabled      = 1
+"let g:airline#extensions#tabline#formatter    = 'unique_tail_improved'
+"" let g:airline#extensions#tabline#left_alt_sep = ''
+"" let g:airline#extensions#tabline#left_sep     = ''
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline#extensions#tabline#left_sep     = ' '
+"let g:airline#extensions#tagbar#enabled       = 1
+"let g:airline_left_alt_sep                    = ''
+"let g:airline_left_sep                        = ''
+"let g:airline_powerline_fonts                 = 1
+"let g:airline_right_alt_sep                   = ''
+"let g:airline_right_sep                       = ''
+"let g:airline_skip_empty_sections             = 0
 
-"tpope/vim-commentary: this is 'Ctrl + /'
+""tpope/vim-commentary: this is 'Ctrl + /'
 nmap <C-_> :Commentary<CR>
 
 
-"I suck.. but I've already bound these in my head
-nnoremap <C-Left> B
-nnoremap <C-Right> W
+""I suck.. but I've already bound these in my head
+"nnoremap <C-Left> B
+"nnoremap <C-Right> W
 
 
 set mouse=
 nnoremap <S-up>    :resize -1<cr>
 nnoremap <S-down>  :resize +1<cr>
-
 nnoremap <S-left>  :vertical resize -3<cr>
 nnoremap <S-right> :vertical resize +3<cr>
 
+
+"" always highlight any trailing whitespce
 set listchars=extends:❯,precedes:❮,trail:·,nbsp:·
 highlight TermCursor ctermfg=red guifg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -491,7 +461,7 @@ match ExtraWhitespace /\s\+$/
 
 
 """""" BACKUP / MRU / UNDO etc
-" au BufWritePre * let &bex = '@' . strftime("%F.%H:%M") " Meaningful backup name, ex: filename@2015-04-05.14:59
+"" au BufWritePre * let &bex = '@' . strftime("%F.%H:%M") " Meaningful backup name, ex: filename@2015-04-05.14:59
 set backup                                             " Turn on backup option
 set backupcopy=yes                                     " Overwrite the original backup file
 set backupdir=~/.vim/backup//                          " Where to store backups
@@ -509,21 +479,15 @@ function! EnsureDirExists (dir)
     endif
   endif
 endfunction
-nnoremap <C-m> :FZFMru<CR>
 call EnsureDirExists($HOME . '/.vim/backup')
 call EnsureDirExists($HOME . '/.vim/undo')
 
 
 
-
-nmap g] <Plug>(GitGutterNextHunk)
-nmap g[ <Plug>(GitGutterPrevHunk)
+nnoremap <C-m> :FZFMru<CR>
 
 
 
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
 
 
@@ -557,7 +521,6 @@ fun! TrimWhitespace()
 endfun
 nnoremap <leader>- :call TrimWhitespace()<cr>
 
-nnoremap <leader>g :GitGutterToggle<cr>
 
 
 
@@ -567,37 +530,37 @@ nnoremap <leader>g :GitGutterToggle<cr>
 
 
 
-set splitbelow
-set splitright
-" split current buffer to right
-nnoremap <C-up>    :vert sb#<cr>
-" split current buffer to bottom (vertical)
-nnoremap <C-down>  :sb#<cr>
 
 
-" autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
 
-"" auto read if the file changes under the hood
+
+"set splitbelow
+"set splitright
+"" split current buffer to right
+"nnoremap <C-up>    :vert sb#<cr>
+"" split current buffer to bottom (vertical)
+"nnoremap <C-down>  :sb#<cr>
+
+
+
+
+""" auto read if the file changes under the hood
 set autoread
 au CursorHold,CursorHoldI * :checktime
 au FocusGained,BufEnter * :checktime
 set updatetime=1000
 
-"Allow vim-terraform to automatically format *.tf and *.tfvars files with terraform fmt. You can also do this manually with the :TerraformFmt command.
-let g:terraform_fmt_on_save         = 1
-let g:terraform_align               = 1
-let g:vim_json_syntax_conceal       = 0
-let g:vim_json_syntax_concealcursor = ''
 
 
 
 
+"LANG:json
+autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
 
-
-
-
+""" stolen from spacevim
+" this hides the quotes around keys and values in json
 if exists('*json_decode')
   let g:_spacevim_api_json_trus = v:true
   let g:_spacevim_api_json_trus = v:false
@@ -611,13 +574,10 @@ if exists('*json_decode')
 else
   function! s:json_null() abort
   endfunction
-
   function! s:json_true() abort
   endfunction
-
   function! s:json_false() abort
   endfunction
-
   let g:_spacevim_api_json_trus = [function('s:json_true')]
   let g:_spacevim_api_json_falss = [function('s:json_false')]
   let g:_spacevim_api_json_nuls = [function('s:json_null')]
@@ -629,7 +589,6 @@ else
     let false = g:_spacevim_api_json_falss
     let null = g:_spacevim_api_json_nuls
     if substitute(a:json, '\v\"%(\\.|[^"\\])*\"|true|false|null|[+-]?\d+%(\.\d+%([Ee][+-]?\d+)?)?', '', 'g') !~# "[^,:{}[\\] \t]"
-
       try
         let object = eval(a:json)
       catch
@@ -639,45 +598,39 @@ else
     else
       let object = ''
     endif
-
     return object
   endfunction
   " @vimlint(EVL102, 0, l:true)
   " @vimlint(EVL102, 0, l:false)
   " @vimlint(EVL102, 0, l:null)
 endif
-
 lockvar g:_spacevim_api_json_trus
 lockvar g:_spacevim_api_json_falss
 lockvar g:_spacevim_api_json_nuls
 
 
 
-"search project files
-nnoremap <leader>p :FZF<cr>
-"search project files by lines of code
-nnoremap <leader>o :Lines<cr>
-"search project files by tags (requirs ctags to be installed)
-nnoremap <leader>t :Tags<cr>
-"search all open files/buffers
-nnoremap <leader>r :Buffers<cr>
+""search project files
+nnoremap <c-f> :FZF<cr>
 
-"start a search query by pressing \
-nnoremap \  :Ag<space>
-"search for word under cursor by pressing |
-nnoremap \| :Ag <C-R><C-W><cr>:cw<cr>
+""search project files by lines of code
+"nnoremap <leader>o :Lines<cr>
+""search project files by tags (requirs ctags to be installed)
+"nnoremap <leader>t :Tags<cr>
+""search all open files/buffers
+"nnoremap <leader>r :Buffers<cr>
 
 
-set cursorcolumn
 
-"" YAML
-"
-"   Use 2 spaces for indentation.
-"   Use spaces instead of tabs.
-"   Skip re-indenting lines after inserting a comment character (#) at the beginning of a line, or a colon.
-"
+"start a search query by pressing |
+nnoremap \|  :Ag<space>
+"search for word under cursor by pressing \
+nnoremap \ :Ag <C-R><C-W><cr>
+" nnoremap \ :Ag <C-R><C-W><cr>:cw<cr>
 
-set hlsearch
+
+set cursorcolumn  "vertical line to see where my cursor is lined up with
+set hlsearch       "highlight what I'm searching for in real-time
 
 
 nnoremap <F2> :PrevColorScheme<CR>
@@ -686,79 +639,169 @@ let g:colorscheme_switcher_exclude_builtins = 1
 
 
 "" format yaml
-"" #install with:  go get -u github.com/wangkuiyi/yamlfmt
-
+"" install with:  go get -u github.com/wangkuiyi/yamlfmt
 nnoremap <leader>y :%!~/go/bin/yamlfmt<CR>
 
 
 
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-go/gosnippets/UltiSnips']
+"let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-go/gosnippets/UltiSnips']
 
-" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" " let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsExpandTrigger="<s-tab>"
-" " let g:UltiSnipsListSnippets=<c-tab>
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"" " let g:UltiSnipsExpandTrigger="<tab>"
+"" let g:UltiSnipsExpandTrigger="<s-tab>"
+"" " let g:UltiSnipsListSnippets=<c-tab>
+"" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 
 
 
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
 
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
+"function! g:UltiSnips_Complete()
+"  call UltiSnips#ExpandSnippet()
+"  if g:ulti_expand_res == 0
+"    if pumvisible()
+"      return "\<C-n>"
+"    else
+"      call UltiSnips#JumpForwards()
+"      if g:ulti_jump_forwards_res == 0
+"        return "\<TAB>"
+"      endif
+"    endif
+"  endif
+"  return ""
+"endfunction
 
-  return ""
-endfunction
+"function! g:UltiSnips_Reverse()
+"  call UltiSnips#JumpBackwards()
+"  if g:ulti_jump_backwards_res == 0
+"    return "\<C-P>"
+"  endif
+
+"  return ""
+"endfunction
 
 
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
+"if !exists("g:UltiSnipsJumpForwardTrigger")
+"  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"endif
 
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
+"if !exists("g:UltiSnipsJumpBackwardTrigger")
+"  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"endif
 
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger       . " <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+"au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger       . " <C-R>=g:UltiSnips_Complete()<cr>"
+"au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
+"" indentkeys-=0# indentkeys-=<:>
+
+
+
+
+let g:indentLine_leadingSpaceEnabled='1'
+nnoremap <leader>t :IndentLinesToggle<cr>
+
+
+
+
+
+"LANG:hcl
+" autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
+
+"LANG:terraform
+"" vim augroup filetypedetect autocmd BufRead,BufNewFile *.hcl set filetype=terraform augroup END
+"""Allow vim-terraform to automatically format *.tf and *.tfvars files with terraform fmt. You can also do this manually with the :TerraformFmt command.
+"let g:terraform_fmt_on_save         = 1
+"let g:terraform_align               = 1
+"let g:vim_json_syntax_conceal       = 0
+"let g:vim_json_syntax_concealcursor = ''
+
+
+
+
+
+"LANG:py
+"" https://pypi.org/project/black/
+"" autocmd BufWritePre *.py set tabstop=2 sw=2 softtabstop=2
+
+
+"LANG:yaml
+"" autocmd BufWritePre *.yml execute ':%!yamlfmt'
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
-" indentkeys-=0# indentkeys-=<:>
-
-" vim augroup filetypedetect autocmd BufRead,BufNewFile *.hcl set filetype=terraform augroup END
 
 
-autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
+"LANG:starlark
+autocmd BufNewFile *.star set ft=python tabstop=2 sw=2 softtabstop=2
+
+"LANG:go
 
 
+"let g:go_fmt_command                         = "goimports"
+"let g:go_fmt_fail_silently                   = 1
+"let g:go_highlight_array_whitespace_error    = 0
+"let g:go_highlight_build_constraints         = 1
+"let g:go_highlight_extra_types               = 1
+"let g:go_highlight_fields                    = 1
+"let g:go_highlight_functions                 = 1
+"let g:go_highlight_generate_tags             = 1
+"let g:go_highlight_methods                   = 1
+"let g:go_highlight_operators                 = 1
+"let g:go_highlight_space_tab_error           = 0
+"let g:go_highlight_trailing_whitespace_error = 0
+"let g:go_list_type                           = "quickfix"
 
-" https://pypi.org/project/black/
-autocmd BufWritePre *.py execute ':Black'
-" autocmd BufWritePre *.yml execute ':%!yamlfmt'
+augroup go
+	autocmd!
 
+	let g:go_highlight_types                     = 1
+	let g:go_highlight_structs                   = 1
+
+	setlocal omnifunc=gocomplete#Complete
+	autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+"	" :GoBuild and :GoTestCompile
+"	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+"	" :GoTest
+"	autocmd FileType go nmap <leader>t  <Plug>(go-test)
+"	" :GoRun
+"	autocmd FileType go nmap <leader>r  <Plug>(go-run)
+"	" :GoDoc
+"	autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+"	" :GoCoverageToggle
+"	autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+"	" :GoInfo
+"	autocmd FileType go nmap <Leader>i <Plug>(go-info)
+"	" :GoMetaLinter
+"	autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+"	" :GoDef but opens in a vertical split
+"	autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+"	" :GoDef but opens in a horizontal split
+"	autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+"	" Open :GoDeclsDir with ctrl-g
+"	nmap <C-g> :GoDeclsDir<cr>
+"	imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
+"	autocmd FileType go nmap <leader>b  <Plug>(go-build)
+"	autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+"	"let g:go_list_type = "quickfix"
+
+	autocmd FileType go nmap <leader>t  <Plug>(go-test)
+
+	autocmd FileType go nmap <leader>b  <Plug>(go-build)
+
+"	" " run :GoBuild or :GoTestCompile based on the go file
+"	" function! s:build_go_files()
+"	"   let l:file = expand('%')
+"	"   if l:file =~# '^\f\+_test\.go$'
+"	"     call go#test#Test(0, 1)
+"	"   elseif l:file =~# '^\f\+\.go$'
+"	"     call go#cmd#Build(0)
+"	"   endif
+"	" endfunction
+"	" autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+augroup END
 
