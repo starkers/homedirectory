@@ -84,8 +84,8 @@ function my_load_keybase_stuff(){
   if [ -d ${KB_PLACE} ]; then
     source ${KB_PLACE}/*-profile.sh
   fi
-  export PATH=/keybase/private/starkers/scripts:${PATH}
-  export CHEATPATH="/keybase/private/starkers/home/cheats"
+  export PATH=/keybase/private/${KB_USER}/scripts:${PATH}
+  export CHEATPATH="/keybase/private/${KB_USER}/home/cheats"
 }
 
 
@@ -121,6 +121,7 @@ SPACESHIP_PROMPT_ORDER=(
   # pyenv         # Pyenv section
   # dotnet        # .NET section
   # ember       # Ember.js section (Disabled)
+  # line_sep      # Line break
   # kubecontext   # Kubectl context section
   exec_time     # Execution time
   line_sep      # Line break
@@ -135,9 +136,9 @@ SPACESHIP_PROMPT_ORDER=(
 
 SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
   # red if namespace is "kube-system"
-  red    '\(prod)$'
+  red    '.*prod'
   # else, green if "dev-01" is anywhere in the context or namespace
-  green  '\(dev|preview|demo)$'
+  green  '.*staging'
   # else, red if context name ends with ".k8s.local" _and_ namespace is "system"
   # red    '\.k8s\.local \(system)$'
   # else, yellow if the entire content is "test-" followed by digits, and no namespace is displayed
@@ -186,11 +187,6 @@ if [[ -o interactive ]]; then
 
 fi
 
-my_load_jabba(){
-  export JABBA_HOME="${HOME}/.jabba"
-  source "$JABBA_HOME/jabba.sh"
-}
-
 if [[ -o interactive ]]; then
   my_load_aliases
   my_load_fzf
@@ -212,4 +208,6 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export KUBECONFIG="${HOME}/.kube/config"
 
 my_load_direnv
-my_load_jabba
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"

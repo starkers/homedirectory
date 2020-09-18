@@ -23,7 +23,8 @@ generic_binary(){
   local out_file="${name}-${ver}"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" "${url}" -c --show-progress
+  echo $url
+  wget -O "${out_file}" "${url}" -c -L --show-progress
   try chmod +x "${out_file}"
   try mkdir -p "${software}/bin"
   try cd "${software}/bin"
@@ -252,7 +253,7 @@ install_kompose(){
 #: kops
 install_kops(){
   name=kops
-  ver="${1:-1.17.0}"
+  ver="${1:-1.17.1}"
   url=https://github.com/kubernetes/kops/releases/download/v${ver}/kops-linux-amd64
   generic_binary "${name}" "${ver}" "${url}"
 }

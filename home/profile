@@ -7,7 +7,7 @@
 #   fi
 # fi
 
-export EDITOR="$(which vim)"
+export EDITOR="$(which nvim)"
 MY_OS="$(uname -s)"
 
 ## I wrap all my tweaks in functions so zprof can profile them (incase something is slow)
@@ -115,3 +115,4 @@ export TF_PLUGIN_CACHE_DIR="${HOME}/.tf_cache"
 
 export TERRAGRUNT_DOWNLOAD="${HOME}/.terragrunt_download"
 
+export AWS_SDK_LOAD_CONFIG=1

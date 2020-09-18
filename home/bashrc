@@ -132,7 +132,6 @@ if [ ! -z PS1 ] ; then
   # direnv
   hash direnv 2>/dev/null && eval "$(direnv hook bash)"
 
-  source ~/.ztool/z.sh
   # autocomplete "make"
   complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
 fi

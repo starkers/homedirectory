@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+GTK_THEME=Arc-Darker nohup flatpak run com.jetbrains.PyCharm-Professional $@ 1>/dev/null &
