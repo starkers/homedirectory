@@ -708,6 +708,8 @@ let g:colorscheme_switcher_exclude_builtins = 1
 let g:indentLine_leadingSpaceEnabled='1'
 nnoremap <leader>t :IndentLinesToggle<cr>
 
+" " disable indentLines for nerdtree
+autocmd BufEnter NERD_tree* :LeadingSpaceDisable
 
 
 
