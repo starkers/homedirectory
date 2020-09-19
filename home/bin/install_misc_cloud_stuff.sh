@@ -540,6 +540,22 @@ install_onessl(){
 }
 
 ##############################################
+#: fnm
+install_fnm(){
+  name=fnm
+  ver="${1:-1.21.0}"
+  local zip=fnm-${ver}.zip
+  try mkdir -p "${software}/${name}-${ver}"
+  try cd "${software}/${name}-${ver}"
+  try wget -c https://github.com/Schniz/fnm/releases/download/v${ver}/fnm-linux.zip -O "${zip}"
+  try unzip -o ${zip}
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try chmod +x  "${software}/${name}-${ver}/${name}-linux/fnm"
+  try ln -sf "${software}/${name}-${ver}/${name}-linux/fnm" ${name}
+}
+
+##############################################
 #: op (1pass cli)
 install_op(){
   name=op

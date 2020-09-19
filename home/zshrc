@@ -209,5 +209,11 @@ export KUBECONFIG="${HOME}/.kube/config"
 
 my_load_direnv
 
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+hash jenv 2>/dev/null
+rc=$?
+if [  ${rc} -eq 0 ]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
+
+hash fnm 2>/dev/null && eval `fnm env --multi`
