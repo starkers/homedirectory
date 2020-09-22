@@ -59,7 +59,7 @@ font-2 = "Hack:size=11;1"
 ; font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ; font-2 = siji:pixelsize=10;1
 
-modules-left = bspwm i3
+; modules-left = bspwm i3
 modules-center = kcontext
 modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 
