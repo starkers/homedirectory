@@ -4,10 +4,11 @@
       relink: true
   clean: ['~']
 - link:
-    ~/.Xresources: 'Xresources'
+    # ~/.Xresources: 'Xresources'
     ~/.aliases: 'aliases'
     ~/.antigen.zsh: 'antigen.zsh'
     ~/.config/awesome: 'awesome'
+    ~/.local/share/fonts: 'fonts'
     ~/.aws: '/keybase/private/starkers/home/aws'
     ~/.bashrc: 'bashrc'
     ~/.bashrc_git: 'git-prompt.sh'
@@ -23,7 +24,7 @@
     ~/.config/i3blocks: 'i3blocks'
     ~/.config/nvim/init.vim: 'vimrc'
     ~/.config/omf: 'config-omf'
-    ~/.config/polybar: 'polybar'
+    # ~/.config/polybar: 'polybar'
     ~/.config/sway: 'sway'
     ~/.config/terminator: 'terminator'
     ~/.config/waybar: 'waybar'
