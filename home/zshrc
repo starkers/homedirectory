@@ -1,6 +1,6 @@
 zmodload zsh/zprof
 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 HIST_STAMPS="yyyy-mm-dd"
 unsetopt share_history
 
@@ -34,6 +34,9 @@ function my_load_z_and_fzf(){
 
   zz() {
     cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
+  }
+  z_last() {
+    cd "$(_z 2>&1 | tail -1 | sed 's/^[0-9,.]* *//')"
   }
 }
 
@@ -175,6 +178,12 @@ if [[ -o interactive ]]; then
   antigen bundle zsh-users/zsh-completions
   antigen bundle zsh-users/zsh-syntax-highlighting
 
+  antigen bundle larkery/zsh-histdb
+  ##
+  #antigen bundle zpm-zsh/colors
+  #antigen bundle zpm-zsh/helpers
+  #antigen bundle zpm-zsh/pr-cwd
+
   fpath=(~/.zsh/completions $fpath)
   plugins=(docker docker-compose go golang kubectl z zsh-completions)
   # this is required so `docker exec -it <TAB>` works.. see: https://github.com/moby/moby/commit/402caa94d23ea3ad47f814fc1414a93c5c8e7e58
@@ -184,6 +193,12 @@ if [[ -o interactive ]]; then
   antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
   antigen apply
   ####################################################
+
+  if [[ -f ~/.antigen/bundles/larkery/zsh-histdb/sqlite-history.zsh ]]; then
+    source ~/.antigen/bundles/larkery/zsh-histdb/sqlite-history.zsh
+    autoload -Uz add-zsh-hook
+  fi
+
 
 fi
 
@@ -217,3 +232,17 @@ if [  ${rc} -eq 0 ]; then
 fi
 
 hash fnm 2>/dev/null && eval `fnm env --multi`
+
+
+# # User configuration
+# # Always work in a tmux session if tmux is installed
+# # https://github.com/chrishunt/dot-files/blob/master/.zshrc
+# if [[ -o interactive ]] ; then
+#   if which tmux 2>&1 >/dev/null; then
+#     if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
+#       NOW="$(date +%Y-%m-%d_%H%M%S)"
+#       tmux new -t hack-$NOW
+#     fi
+#   fi
+# fi
+

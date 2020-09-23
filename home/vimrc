@@ -19,6 +19,8 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'xolox/vim-lua-ftplugin'
+
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 " " Plug 'bazelbuild/vim-bazel'
@@ -137,8 +139,18 @@ set tabstop=2                  " 2 is just fine
 "set wildmenu
 "" set wrap                       " Wrap lines
 
-"" let g:rehash256 = 1
-set t_Co=256                   " terminal has colours
+let g:rehash256 = 1
+" set t_Co=256                   " terminal has colours
+" set t_ut=
+
+if exists("$TMUX")
+  set t_Co=256
+  set notermguicolors
+else
+  set termguicolors
+endif
+
+set termguicolors
 "" colorscheme jellybeans
 "" colorscheme molokai
 
@@ -163,7 +175,6 @@ set t_Co=256                   " terminal has colours
 "" use a slightly darker background, like GitHub inline code blocks
 "let g:github_colors_soft = 1
 
-set termguicolors
 
 "" use the dark theme
 set background=dark
@@ -171,13 +182,14 @@ set background=dark
 "" more blocky diff markers in signcolumn (e.g. GitGutter)
 "let g:github_colors_block_diffmark = 0
 
-" colorscheme github
+colorscheme materialbox
 " let g:airline_theme = "oceanicnext"
 
 " colorscheme oceanic_material
 " colorscheme challenger_deep
-colorscheme deep-space
-" let g:airline_theme = "jellybeans"
+" colorscheme deep-space
+" colorscheme mountaineer
+let g:airline_theme = "jellybeans"
 
 
 "" "" transparent
@@ -212,11 +224,11 @@ nmap ga <Plug>(EasyAlign)
 "" Disable highlight when <leader><cr> is pressed
 "map <silent> <leader><cr> :noh<cr>
 
-"" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" "" Smart way to move between windows
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 "" Close the current buffer
 "map <leader>bd :Bclose<cr>:tabclose<cr>gT
@@ -281,7 +293,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 
 "" Toggle paste mode on and off
-"map <leader>pp :setlocal paste!<cr>
+map <leader>pp :setlocal paste!<cr>
 
 
 "" Quickly open a markdown buffer for scribble
@@ -757,7 +769,7 @@ let g:terraform_registry_module_completion = 0
 
 "LANG:py
 "" https://pypi.org/project/black/
-"" autocmd BufWritePre *.py set tabstop=2 sw=2 softtabstop=2
+autocmd BufWritePre *.py set tabstop=2 sw=2 softtabstop=2
 
 
 "LANG:yaml
