@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+# DIR="$(tail -1 ~/.z */
+if [[ -f ~/.antigen/bundles/larkery/zsh-histdb/sqlite-history.zsh ]]; then
+  source ~/.antigen/bundles/larkery/zsh-histdb/sqlite-history.zsh
+  DIR="$(histdb --limit 3| tail -2| head -1 | awk '{print $3}')"
+fi
+
+if [  -d "${DIR}" ]; then
+  DIR="${HOME}"
+fi
+DIR="$(echo "$DIR" | sed "s+~+$HOME+g")"
+
+alacritty --working-directory $DIR -e tmux new

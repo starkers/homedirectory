@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd $HOME/.config/i3/wallpapers/
+wall="$(fzf)"
+feh --bg-fill ${wall}

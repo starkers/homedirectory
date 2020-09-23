@@ -27,4 +27,4 @@ font="Hack 15"
 # OPTS="$OPTS -font ${font}"
 
 set -x
-rofi -color-normal ${normal} -color-window ${window} -color-active ${active} -color-urgent ${urgent} -font "${font}" -show run */
+rofi -color-normal ${normal} -color-window ${window} -color-active ${active} -color-urgent ${urgent} -font "${font}" -show drun */
