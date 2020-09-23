@@ -1,6 +1,6 @@
 ---
 # https://github.com/alacritty/alacritty/blob/dea7a0890a724c50bc5767039f45a2e3d071ee1c/alacritty.yml#L417-L638
-background_opacity: 0.8
+background_opacity: 0.94
 
 colors:
 
@@ -55,7 +55,7 @@ colors:
 
 # https://github.com/alacritty/alacritty/wiki
 font:
-  size: 10
+  size: 10.5
 
   normal:
     # family: Noto Sans Mono
