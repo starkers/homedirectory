@@ -146,6 +146,24 @@ let g:rehash256 = 1
 " set t_Co=256                   " terminal has colours
 " set t_ut=
 
+
+
+" augroup MyColors
+"     autocmd!
+"     autocmd ColorScheme \
+"         " * highlight Normal ctermbg=NONE guibg=NONE
+"       \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
+"       " \ | highlight NonText ctermbg=NONE guibg=NONE
+"       \ | highlight LineNr ctermbg=NONE guibg=NONE
+"       \ | highlight CursorLine ctermbg=NONE guibg=NONE
+"       " \ | highlight SpecialKey ctermbg=NONE guibg=NONE
+"       \ | highlight FoldColumn ctermbg=NONE guibg=NONE
+"       \ | highlight VertSplit ctermbg=NONE guibg=NONE
+"       " \ | highlight Visual term=reverse cterm=reverse guibg=Grey
+" augroup END
+
+
+
 if exists("$TMUX")
   set t_Co=256
   set notermguicolors
@@ -155,10 +173,14 @@ endif
 
 set termguicolors
 "" colorscheme jellybeans
-"" colorscheme molokai
+" colorscheme molokai
+" colorscheme molokayo
+" colorscheme ayu
+" colorscheme OceanicNext
 
-"" colorscheme OceanicNext
-"" colorscheme challenger_deep
+" colorscheme oceanic_material
+colorscheme challenger_deep
+" colorscheme carbonized-dark
 "" colorscheme deep-space
 "" colorscheme dracula
 "" colorscheme nord
@@ -174,30 +196,32 @@ set termguicolors
 "" colorscheme PaperColor
 "" colorscheme challenger_deep
 "" colorscheme deus
+" colorscheme github
 
 "" use a slightly darker background, like GitHub inline code blocks
-"let g:github_colors_soft = 1
+" let g:github_colors_soft = 1
 
 
 "" use the dark theme
-set background=dark
+" set background=dark
 
 "" more blocky diff markers in signcolumn (e.g. GitGutter)
 "let g:github_colors_block_diffmark = 0
 
-colorscheme materialbox
+" colorscheme materialbox
 " let g:airline_theme = "oceanicnext"
 
 " colorscheme oceanic_material
 " colorscheme challenger_deep
 " colorscheme deep-space
 " colorscheme mountaineer
-let g:airline_theme = "jellybeans"
+" let g:airline_theme = "jellybeans"
+let g:airline_theme = "base16_google"
 
 
 "" "" transparent
-"" hi Normal guibg=NONE ctermbg=NONE
-"" let t:is_transparent = 1
+hi Normal guibg=NONE ctermbg=NONE
+let t:is_transparent = 1
 
 
 

@@ -3,6 +3,7 @@
 
 
 
+
 [colors]
 alert          = #ed404c
 background     = #ee151826
@@ -20,31 +21,39 @@ tertiary       = #d07ef2
 # wm-restack = i3
 #modules-right = backlight audio wlan battery date powermenu
 background          = ${colors.background}
-border-size = 5
+border-size = 0
+dim-value = 0.8
+
 # bottom              = false
 top = true
 cursor-click        = pointer
 cursor-scroll       = ns-resize
-fixed-center        = true
+fixed-center        = false
 font-0              = Hack Nerd Font:pixelsize=13:antialias=true;2.5
 font-1              = Hack Nerd Font:style=Regular:pixelsize=17:antialias=true;3
 foreground          = ${colors.foreground}
-height              = 44
-module-margin-left  = 3
-module-margin-right = 3
+height              = 36
+module-margin-left  = 2
+module-margin-right = 0
 modules-center      = kcontext
 modules-left        = i3
-modules-right       = cpufreq backlight audio cpu wlan battery date 
-offset-x            = 0
-offset-y            = 0
+modules-right       = cpufreq backlight audio cpu wlan battery date
+; offset-x            = 0
+; offset-y            = 0
 override-redirect   = false
 padding-left        = 0
-padding-right       = 2
-radius              = 5
+padding-right       = 0
+radius              = 0
+
+; line-size = 4
+; line-color = #37EFAD
+
+; tray-offset-x = 3 
 ; tray-offset-x = ${self.radius}
 
-; tray-position = left
-# tray-padding = 10
+tray-position = right
+tray-padding = 4
+tray-maxsize = 20
 # tray-background = ${colors.alt.background}
 wm-restack = i3
 
@@ -56,18 +65,17 @@ scroll-up   = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 
-[bar/bump]
-background = none
-width = 15%
-modules-left = audio
-tray-position = right
-# tray-padding = 10
-# tray-background = ${colors.alt.background}
-height = 44  #56
-
-; bottom = false
-override-direct = true
-wm-restack = i3
+; [bar/bump]
+; background = none
+; width = 15%
+; modules-left = audio
+; tray-position = right
+; # tray-padding = 10
+; # tray-background = ${colors.alt.background}
+; height = 44  #56
+; ; bottom = false
+; override-direct = true
+; wm-restack = i3
 
 
 [module/kcontext]

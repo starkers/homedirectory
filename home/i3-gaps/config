@@ -22,18 +22,19 @@ bindsym $mod+Return exec /home/starkers/.bin/tmux-term
 
 # Kill focused window
 bindsym $mod+w kill
+bindsym $mod+Shift+w exec nitrogen --random ~/.config/i3/wallpapers
 
-# Bind to rofi wmenu
-bindsym $mod+Shift+w exec rofi -show -theme clean -icon-theme candy-icons
+# # Bind to rofi wmenu
+# bindsym $mod+Shift+w exec rofi -show -theme clean -icon-theme candy-icons
 
 # Start rofi drun menu
 bindsym $mod+d exec ~/.bin/rof
 
 # Bind to suckless lockscreen
-bindsym --release $mod+l exec betterlockscreen -l
+bindsym --release $mod+l exec betterlockscreen -l dim -t "u No GO here\!"
 
 # Set up screenshots and partial screenshots
-bindsym --release Print exec maim flameshot gui
+bindsym --release Print exec flameshot gui
 
 # Bind audio keys to pactl volume control
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
@@ -162,7 +163,9 @@ exec_always --no-startup-id dunst
 # exec_always xinput set-prop 12 284 1 > /dev/null 2>&1
 #
 exec_always xinput set-prop 12 318 1 > /dev/null 2>&1
-exec_always sh -c "feh --bg-fill ~/.config/i3/wallpapers/default"
+# exec_always sh -c "feh --bg-fill ~/.config/i3/wallpapers/default"
+exec_always --no-startup-id "nitrogen --restore"
+# sh -c "feh --bg-fill ~/.config/i3/wallpapers/default"
 
 # # Startup daemons for compositor and status bar
 exec_always --no-startup-id "pkill picom; picom --no-use-damage"
