@@ -10,3 +10,6 @@
 [submodule "home/awesome/lain"]
 	path = home/awesome/lain
 	url = https://github.com/lcpz/lain.git
+[submodule "home/awesome/freedesktop"]
+	path = home/awesome/freedesktop
+	url = git@github.com:lcpz/awesome-freedesktop.git

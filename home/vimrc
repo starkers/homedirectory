@@ -20,6 +20,9 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'xolox/vim-lua-ftplugin'
+Plug 'DougBeney/pickachu'
+" Plug 'chrisbra/Colorizer'
+Plug 'ap/vim-css-color'
 
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
@@ -38,7 +41,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 " Plug 'fatih/molokai'
 Plug 'fatih/vim-go'
-
+Plug 'chrisbra/unicode.vim'
 " Plug 'hashivim/vim-terraform', { 'commit': '3d9561d6df7b6c204d24d673756a6f098d96064c' }
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
@@ -472,7 +475,8 @@ nnoremap <S-right> :vertical resize +3<cr>
 
 
 "" always highlight any trailing whitespce
-set listchars=extends:❯,precedes:❮,trail:·,nbsp:·
+set listchars=extends:❯,precedes:❮,trail:·
+" set listchars=extends:❯,precedes:❮,trail:·,nbsp:·
 highlight TermCursor ctermfg=red guifg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -851,3 +855,7 @@ augroup go
 
 augroup END
 
+
+
+let g:colorizer_auto_color = 1
+let g:colorizer_skip_comments = 1

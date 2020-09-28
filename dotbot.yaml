@@ -24,8 +24,9 @@
     ~/.config/i3blocks: 'i3blocks'
     ~/.config/nvim/init.vim: 'vimrc'
     ~/.config/omf: 'config-omf'
-    # ~/.config/polybar: 'polybar'
+    ~/.config/polybar: 'polybar'
     ~/.config/sway: 'sway'
+    ~/.config/picom.conf: 'picom.conf'
     ~/.config/terminator: 'terminator'
     ~/.config/waybar: 'waybar'
     ~/.config/yamllint/config: 'yamllint.yaml'
@@ -40,7 +41,6 @@
     ~/.muttrc: '/keybase/private/starkers/home/muttrc'
     ~/.password-store: '/keybase/private/starkers/home/pass'
     ~/.profile: 'profile'
-    ~/.screenlayout: 'screenlayout'
     ~/.screenrc: 'screenrc'
     ~/.shell: '/keybase/private/starkers/home/shell'
     ~/.shell_functions: 'shell_functions'
@@ -48,8 +48,8 @@
     ~/.urxvt: 'urxvt'
     ~/.vimrc: 'vimrc'
     ~/.weechat: '/keybase/private/starkers/home/weechat'
-    ~/.xinitrc: 'xinitrc'
     ~/.xsettingsd: 'xsettingsd'
+    ~/.xinitrc: 'xinitrc'
     ~/.zshrc: 'zshrc'
 - shell:
   - mkdir -p ~/.config/mc

@@ -2,7 +2,7 @@
 [user]
   name = David Stark
   email = david@starkers.org
-  signingKey = 765C54AD2F5620FBC3DAD3CD5A3F8B96B5B044F9
+  ; signingKey = 765C54AD2F5620FBC3DAD3CD5A3F8B96B5B044F9
 
 [includeIf "gitdir:~/src/github.com/doddle/"]
   path = ~/.gitconfig-doddle
@@ -67,8 +67,8 @@
   insteadOf = https://github.com/
 [gpg]
   program = gpg
-[commit]
-  gpgSign = true
+;[commit]
+;  gpgSign = true
 [tag]
   forceSignAnnotated = false
 [pull]
