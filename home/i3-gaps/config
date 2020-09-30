@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # Turn borders off
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 3
 
 # Change gap size
 gaps outer 4
@@ -24,6 +24,8 @@ bindsym $mod+Return exec /home/starkers/.bin/tmux-term
 bindsym $mod+w kill
 bindsym $mod+Shift+w exec nitrogen --random ~/.config/i3/wallpapers
 
+focus_wrapping no
+
 # # Bind to rofi wmenu
 # bindsym $mod+Shift+w exec rofi -show -theme clean -icon-theme candy-icons
 
@@ -34,7 +36,9 @@ bindsym $mod+d exec ~/.bin/rof
 bindsym --release $mod+l exec betterlockscreen -l dim -t "u No GO here\!"
 
 # Set up screenshots and partial screenshots
+bindsym --release Shift+Print exec flameshot full -c
 bindsym --release Print exec flameshot gui
+bindsym $mod+space exec copyq show
 
 # Bind audio keys to pactl volume control
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
@@ -114,7 +118,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Exit i3
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-msg exit"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#
 
 # Add resize keybindings in place of mode
 bindsym $mod+Control+Left resize shrink width 10 px or 10
@@ -143,7 +149,12 @@ bindsym $mod+Shift+minus exec $controller vol -10
 bindsym $mod+Shift+equal exec $controller vol 10
 
 # Always float certain windows
-for_window [class="mpv"] floating enable
+
+for_window [class="blueman-manager"] floating enable
+for_window [class="copyq"]           floating enable
+for_window [class="flameshot"]       floating enable
+for_window [class="mpv"]             floating enable
+for_window [class="zoom"]            floating enable
 
 # # Make sure fonts are loaded right
 # exec_always xset +fp /home/kai/.fonts/
@@ -164,17 +175,23 @@ exec_always --no-startup-id dunst
 #
 exec_always xinput set-prop 12 318 1 > /dev/null 2>&1
 # exec_always sh -c "feh --bg-fill ~/.config/i3/wallpapers/default"
-exec_always --no-startup-id "nitrogen --restore"
+# exec_always --no-startup-id "nitrogen --restore"
 # sh -c "feh --bg-fill ~/.config/i3/wallpapers/default"
 
 # # Startup daemons for compositor and status bar
-exec_always --no-startup-id "pkill picom; picom --no-use-damage"
-exec_always --no-startup-id sh -c "sleep 2 ; ${HOME}/.config/polybar/launch.sh"
-bindsym $mod+p exec "${HOME}/.config/polybar/launch.sh"
-exec_always --no-startup-id sh -c "sleep 2 ; ${HOME}/.screenlayout/default"
+exec_always --no-startup-id sh -c "sleep 2 ; pkill picom; picom --no-use-damage"
+# exec_always --no-startup-id sh -c "sleep 2 ; ${HOME}/.config/polybar/launch.sh"
+exec_always --no-startup-id sh -c "sleep 1 ; ${HOME}/.screenlayout/default"
 exec_always --no-startup-id "nm-applet"
 exec_always --no-startup-id "blueman-applet"
+exec_always --no-startup-id "copyq"
 
+# clear capslock
+exec_always --no-startup-id xmodmap -e "clear lock"
+# set CapsLock -> Esc
+exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+
+bindsym $mod+p exec "${HOME}/.config/polybar/launch.sh"
 # # Increase screen contrast (disable for better displays)
 # exec_always --no-startup-id xrandr --output eDP --gamma 0.8:0.8:0.8
 
@@ -183,27 +200,27 @@ exec_always --no-startup-id "blueman-applet"
 
 bindsym $mod+Tab exec perl /home/starkers/.config/i3/scripts/cyclewindows.pl
 
-bindsym XF86MonBrightnessDown exec --no-startup-id /home/starkers/.config/i3/scripts/backlight.sh -dec 3
-bindsym XF86MonBrightnessUp   exec --no-startup-id /home/starkers/.config/i3/scripts/backlight.sh -inc 3
+bindsym XF86MonBrightnessDown exec --no-startup-id /home/starkers/.config/i3/scripts/backlight.sh -dec 2
+bindsym XF86MonBrightnessUp   exec --no-startup-id /home/starkers/.config/i3/scripts/backlight.sh -inc 2
 
 
-bindsym $mod+period      gaps inner current plus  5
-bindsym $mod+comma       gaps inner current minus 5
+bindsym $mod+period      gaps inner current plus  3
+bindsym $mod+comma       gaps inner current minus 3
 
 
 
 set $mode_resize resize
 bindsym $mod+r mode "$mode_resize"
 mode "$mode_resize" {
-    bindsym Left  resize shrink width  2 px or 2 ppt
-    bindsym Down  resize grow   height 2 px or 2 ppt
-    bindsym Up    resize shrink height 2 px or 2 ppt
-    bindsym Right resize grow   width  2 px or 2 ppt
+    bindsym Left  resize shrink width  4 px or 2 ppt
+    bindsym Down  resize grow   height 4 px or 2 ppt
+    bindsym Up    resize shrink height 4 px or 2 ppt
+    bindsym Right resize grow   width  4 px or 2 ppt
 
-    bindsym Shift+Left  resize shrink width  4 px or 2 ppt
-    bindsym Shift+Down  resize grow   height 4 px or 2 ppt
-    bindsym Shift+Up    resize shrink height 4 px or 2 ppt
-    bindsym Shift+Right resize grow   width  4 px or 2 ppt
+    bindsym Shift+Left  resize shrink width  8 px or 4 ppt
+    bindsym Shift+Down  resize grow   height 8 px or 4 ppt
+    bindsym Shift+Up    resize shrink height 8 px or 4 ppt
+    bindsym Shift+Right resize grow   width  8 px or 4 ppt
 
     bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/scripts/slopsize.sh
 

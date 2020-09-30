@@ -15,6 +15,7 @@ alias cdh="cd ~/src/github.com/starkers/homedirectory/home"
 alias cds="cd ~/Seafile"
 alias cdt="cd ~/Torrents"
 alias cdw="cd ~/work"
+alias code="flatpak run com.visualstudio.code"
 alias d="docker"
 alias dc='docker-compose'
 alias df="df -x squashfs" #flapak master race
@@ -82,9 +83,9 @@ alias kru='kubectl rollout undo'
 alias ksd='kubectl scale deployment'
 alias ku=kubectl
 alias lg="lazygit"
-alias ll="ls -l"
-alias lla="ls -la"
-alias ls="ls --color"
+alias ll="dols -l"
+alias lla="dols -la"
+alias ls="dols"
 alias ltr="ls -ltr"
 alias lxc="sudo lxc"
 alias lxd="sudo lxd"
@@ -104,6 +105,15 @@ alias tree="tree -I '*.pyc'"
 alias vim="nvim"
 
 
+function dols(){
+  # go get github.com/Yash-Handa/logo-ls
+  if hash logo-ls 2>/dev/null; then
+    logo-ls $@
+  else
+    /bin/ls --color $@
+  fi
+
+}
 
 function ggg(){
   local store="${HOME}/src"

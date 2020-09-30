@@ -178,8 +178,10 @@ set termguicolors
 " colorscheme ayu
 " colorscheme OceanicNext
 
+" colorscheme challenger_deep
+colorscheme materialbox
+
 " colorscheme oceanic_material
-colorscheme challenger_deep
 " colorscheme carbonized-dark
 "" colorscheme deep-space
 "" colorscheme dracula
@@ -216,7 +218,8 @@ colorscheme challenger_deep
 " colorscheme deep-space
 " colorscheme mountaineer
 " let g:airline_theme = "jellybeans"
-let g:airline_theme = "base16_google"
+" let g:airline_theme = "base16_google"
+let g:airline_theme = "kalisi"
 
 
 "" "" transparent
@@ -262,6 +265,8 @@ nmap ga <Plug>(EasyAlign)
 
 "" Close all the buffers
 "map <leader>ba :bufdo bd<cr>
+
+
 
 "map <C-n> :cnext<CR>
 ""map <C-m> :cprevious<CR>
@@ -384,11 +389,12 @@ map <leader>f :NERDTreeToggle<CR>
 " opens the directory of current file in nerd tree
 map <c-o> :NERDTreeFind<CR>
 
-let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=35
-let NERDTreeShowBookmarks=1  " show bookmarks on default
+let NERDTreeIgnore        = ['\.pyc$', '__pycache__']
+let NERDTreeShowBookmarks = 1  " show bookmarks on default
+let NERDTreeShowHidden    = 1
+let g:NERDTreeWinPos      = "right"
+let g:NERDTreeWinSize     = 35
+
 "map <leader>nn :NERDTreeToggle<cr>
 "map <leader>nb :NERDTreeFromBookmark<Space>
 "map <leader>nf :NERDTreeFind<cr>
@@ -744,9 +750,10 @@ let g:colorscheme_switcher_exclude_builtins = 1
 
 
 
-
-let g:indentLine_leadingSpaceEnabled='1'
-nnoremap <leader>t :IndentLinesToggle<cr>
+" disable indent on default
+let g:indentLine_enabled = 0
+" let g:indentLine_leadingSpaceEnabled='0'
+nnoremap <leader>i :IndentLinesToggle<cr>
 
 " " disable indentLines for nerdtree
 autocmd BufEnter NERD_tree* :LeadingSpaceDisable
@@ -883,3 +890,18 @@ augroup END
 
 let g:colorizer_auto_color = 1
 let g:colorizer_skip_comments = 1
+
+
+
+""" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+
+" set splitbelow
+" new splits on the right please
+set splitright
+
+
+" having to press SHIFT+; all the time is just WTF
+nnoremap ; :
