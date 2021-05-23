@@ -10,3 +10,6 @@
 [submodule "home/awesome/lain"]
 	path = home/awesome/lain
 	url = https://github.com/lcpz/lain.git
+[submodule "home/omf"]
+	path = home/omf
+	url = https://github.com/oh-my-fish/oh-my-fish

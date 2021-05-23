@@ -4,11 +4,8 @@
       relink: true
   clean: ['~']
 - link:
-    # ~/.Xresources: 'Xresources'
     ~/.aliases: 'aliases'
     ~/.antigen.zsh: 'antigen.zsh'
-    ~/.config/awesome: 'awesome'
-    ~/.local/share/fonts: 'fonts'
     ~/.aws: '/keybase/private/starkers/home/aws'
     ~/.bashrc: 'bashrc'
     ~/.bashrc_git: 'git-prompt.sh'
@@ -16,6 +13,7 @@
     ~/.cheat: '/keybase/private/starkers/home/cheats'
     ~/.completions_bash: 'completions_bash'
     ~/.config/alacritty: 'alacritty'
+    ~/.config/awesome: 'awesome'
     ~/.config/compton.conf: 'compton.conf'
     ~/.config/dunst: 'dunst'
     ~/.config/fish: 'config-fish'
@@ -24,7 +22,6 @@
     ~/.config/i3blocks: 'i3blocks'
     ~/.config/nvim/init.vim: 'vimrc'
     ~/.config/omf: 'config-omf'
-    # ~/.config/polybar: 'polybar'
     ~/.config/sway: 'sway'
     ~/.config/terminator: 'terminator'
     ~/.config/waybar: 'waybar'
@@ -35,7 +32,9 @@
     ~/.gitconfig-doddle: 'gitconfig-doddle'
     ~/.gitconfig: 'gitconfig'
     ~/.jabba: 'jabba'
+    ~/.local/share/fonts: 'fonts'
     ~/.local/share/mc/skins: 'mc-skins'
+    ~/.local/share/omf: 'omf'
     ~/.mutt: '/keybase/private/starkers/home/mutt'
     ~/.muttrc: '/keybase/private/starkers/home/muttrc'
     ~/.password-store: '/keybase/private/starkers/home/pass'

@@ -33,6 +33,22 @@ generic_binary(){
 }
 
 ##############################################
+#: k9s
+install_k9s(){
+  name=k9s
+  ver="${1:-0.24.6}"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="k9s_${os}_${arch}-${ver}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c https://github.com/derailed/k9s/releases/download/v${ver}/k9s_${os}_${arch}.tar.gz
+  try tar xf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
 #: octant
 install_octant(){
   name=octant
@@ -65,6 +81,38 @@ install_golangci-lint(){
 }
 
 ##############################################
+#: kubectl-fzf
+install_kubectl-fzf(){
+  name=cache_builder
+  ver="1.0.13"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="${name}-${ver}.tgz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c https://github.com/bonnefoa/kubectl-fzf/releases/download/v${ver}/kubectl-fzf_linux_amd64.tar.gz
+  try wget -O ~/.zsh_kubect_fzf.sh https://raw.githubusercontent.com/bonnefoa/kubectl-fzf/master/kubectl_fzf.plugin.zsh
+  try tar xf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+}
+
+##############################################
+#: starship
+install_starship(){
+  name=starship
+  ver="0.48.0"
+  out_dir="${software}/${name}-v${ver}"
+  out_file="${name}-${ver}.tgz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c https://github.com/starship/starship/releases/download/v${ver}/starship-x86_64-unknown-linux-musl.tar.gz
+  try tar xf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/${name}" "${name}"
+}
+##############################################
 #: eksctl
 install_eksctl(){
   name=eksctl
@@ -84,13 +132,13 @@ install_eksctl(){
 #: krew
 install_krew(){
   name=krew
-  ver="0.2.1"
+  ver="0.4.0"
   out_dir="${software}/${name}-v${ver}"
   out_file="${name}-${ver}.tgz"
   try mkdir -p "${out_dir}"
   try cd "${out_dir}"
-  try wget -O "${out_file}" https://storage.googleapis.com/krew/v${ver}/krew.tar.gz -c
-  try wget -O krew.yaml https://storage.googleapis.com/krew/v${ver}/krew.yaml -c
+  try wget -O "${out_file}" https://github.com/kubernetes-sigs/krew/releases/download/v${ver}/krew.tar.gz -c
+  try wget -O krew.yaml https://github.com/kubernetes-sigs/krew/releases/download/v${ver}/krew.yaml
   try tar xf "${out_file}"
   try mkdir -p "${software}/bin"
   try cd "${software}/bin"
@@ -406,7 +454,7 @@ install_gotop(){
 #: topgrade
 install_topgrade(){
   name=topgrade
-  ver="${1:-4.5.0}"
+  ver="${1:-6.8.0}"
   out_dir="${software}/${name}-${ver}"
   out_file="${name}-${ver}.tar.gz"
   try mkdir -p "${out_dir}"
@@ -543,16 +591,16 @@ install_onessl(){
 #: fnm
 install_fnm(){
   name=fnm
-  ver="${1:-1.21.0}"
+  ver="${1:-1.22.2}"
   local zip=fnm-${ver}.zip
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
   try wget -c https://github.com/Schniz/fnm/releases/download/v${ver}/fnm-linux.zip -O "${zip}"
   try unzip -o ${zip}
+  try chmod +x fnm
   try mkdir -p "${software}/bin"
   try cd "${software}/bin"
-  try chmod +x  "${software}/${name}-${ver}/${name}-linux/fnm"
-  try ln -sf "${software}/${name}-${ver}/${name}-linux/fnm" ${name}
+  try ln -sf "${software}/${name}-${ver}/fnm" ${name}
 }
 
 ##############################################
@@ -676,6 +724,8 @@ install_psmem(){
 }
 
 
+arch="$(uname -i)"
+os="$(uname)"
 software="${HOME}/.software"
 bin="${HOME}/.bin"
 try mkdir -p "${bin}"

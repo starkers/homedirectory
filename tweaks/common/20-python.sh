@@ -22,7 +22,13 @@ function jedi(){
   fi
   source ${DIR}/bin/activate
   pip install --upgrade pip
-  pip install neovim flake8 yapf autoflake isort jedi
+  pip install \
+    autoflake \
+    black \
+    cheat \
+    flake8 \
+    jedi \
+    neovim
   deactivate
 }
 

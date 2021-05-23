@@ -1,6 +1,6 @@
 [user]
-	name = David Stark
-	email = david.stark@doddle.com
+  name = David Stark
+  email = david.stark@doddle.com
   signingKey = 849A6BF620D953BB666EA57AFD06B2B1CFD743B7
 
 [push]
@@ -13,12 +13,12 @@
 [credential]
   helper = cache --timeout=86400
 [core]
-	excludesfile = /home/starkers/.git_global_ignore
+  excludesfile = /home/starkers/.git_global_ignore
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 [gpg]
-	program = gpg
+  program = gpg
 [commit]
-	gpgSign = true
+  gpgSign = true
 [tag]
-	forceSignAnnotated = false
+  forceSignAnnotated = false

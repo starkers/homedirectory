@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-
-function is_arch(){
-  if [ -f /etc/pacman.conf ]; then
-    return 0
-  else
-    return 1
-  fi
-}
-
 function is_fedora(){
   if [ -f /etc/fedora-release ]; then
     return 0
@@ -19,8 +10,9 @@ function is_fedora(){
 }
 
 if is_fedora; then
-  for a in ./fedora/* ; do
-    echo $a
+  echo is fedora
+  for a in ./common/fedora/* ; do
+    $a
   done
 fi
 

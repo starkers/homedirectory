@@ -11,11 +11,11 @@ $ ln -s ../fish-kubectl-completions/completions/kubectl.fish completions/
 
 ### Install using [Fisher](https://github.com/jorgebucaran/fisher)
 
-`fisher add evanlucas/fish-kubectl-completions`
+`fisher install evanlucas/fish-kubectl-completions`
 
 ## Building
 
-This was tested using go 1.11.1 on macOS.
+This was tested using go 1.15.7 on macOS 11.1 "Big Sur".
 
 ```console
 $ make build

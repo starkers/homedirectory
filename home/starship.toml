@@ -1,0 +1,115 @@
+# RTFM:
+# - https://starship.rs/config/#prompt
+# - https://starship.rs/
+
+# Which is equivalent to
+format = """
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$lua\
+$jobs\
+$battery\
+$status\
+$line_break\
+$character"""
+
+[aws]
+disabled = true
+
+[python]
+disabled = true
+
+[golang]
+disabled = true
+
+[time]
+disabled = true
+
+[date]
+disabled = true
+
+# [directory]
+# trancate_to_repo = false
+
+[kubernetes]
+format = '[☸ $context ](blue)'
+disabled = true
+
+[kubernetes.context_aliases]
+"main.play"         = "play"
+"main.tooling"      = "tooling"
+"main.eu-staging"   = "eu-staging"
+"main.eu-preprod"   = "eu-preprod"
+"main.apac-preprod" = "apac-preprod"
+"main.eu-prod"      = "eu-prod"
+"main.apac-prod"    = "apac-prod"
+
+[gcloud]
+disabled = true
+
+
+
+[git_branch]
+symbol = "🌱 "
+# truncation_length = 4
+truncation_symbol = ""
+
+# [git_commit]
+# tag_disabled = false
+# tag_symbol = "🏷 "
+
+
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = "🔖 "
+
+
+
+
+[nodejs]
+# format = "via [🤖 $version](bold green) "
+format = "[$symbol($version )]($style)"
+
