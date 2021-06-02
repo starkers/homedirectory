@@ -7,11 +7,10 @@ function fish_right_prompt
 end
 
 
-if command -s direnv > /dev/null
-  eval (direnv hook fish)
-else
-  echo 'WARN: direnv not installed'
+function fish_greeting
+  # fortune
 end
+
 
 
 if command -s starship > /dev/null
@@ -19,4 +18,6 @@ if command -s starship > /dev/null
 else
   echo 'WARN: starship not installed'
 end
+
+
 

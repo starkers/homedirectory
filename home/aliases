@@ -19,6 +19,7 @@ alias d="docker"
 alias dc='docker-compose'
 alias df="df -x squashfs" #flapak master race
 alias dnf="sudo dnf"
+alias docker-compose='sudo docker-compose'
 alias fastboot="sudo fastboot"
 alias g="egrep"
 alias ga="git add --all ."

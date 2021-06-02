@@ -815,7 +815,7 @@ augroup go
 "	" :GoRun
 "	autocmd FileType go nmap <leader>r  <Plug>(go-run)
 "	" :GoDoc
-"	autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+autocmd FileType go nmap <Leader>d <Plug>(go-doc)
 "	" :GoCoverageToggle
 "	autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 "	" :GoInfo
