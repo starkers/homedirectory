@@ -11,8 +11,8 @@ function is_installed_rpm(){
 
 if ! is_installed_rpm gitflow ; then
 
-sudo dnf copr enable -y elegos/gitflow
-sudo dnf install -y gitflow
+sudo dnf copr enable elegos/gitflow
+sudo dnf install gitflow -y
 
 else
   echo gitflow already installed

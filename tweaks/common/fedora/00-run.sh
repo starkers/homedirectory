@@ -3,66 +3,80 @@ set -e
 
 
 declare -a packages_fedora=(
-
-  # themes n stuff
   adapta-backgrounds
   adwaita-icon-theme
+  android-tools
+  atop
+  awscli
   bluecurve-icon-theme
-  faience-icon-theme
-  gnome-colors-icon-theme
-  moka-icon-theme
-  numix-icon-theme-circle
-  numix-icon-theme-square
-
-  gnome-shell-theme-flat-remix
-  gnome-shell-theme-selene
-  gnome-shell-theme-yaru
-
-  gnome-shell-extension-do-not-disturb-button
-
-
-
   chromium
   cmake
+  code
   copyq
   ctags
   direnv
-  # docker-ce
-  # docker-compose
+  docker-compose
   evolution-ews
   expect
+  expect
+  faience-icon-theme
   figlet
+  fish
   flameshot
   flatpak
   flatpak-builder
+  fortune-mod
   fzf
   gcc
   gcc-c++
   git
+  gitflow
+  glances
+  gnome-colors-icon-theme
+  gnome-shell-extension-do-not-disturb-button
+  gnome-shell-theme-flat-remix
+  gnome-shell-theme-selene
+  gnome-shell-theme-yaru
   gnome-tweaks
   golang
-  # guake
+  google-cloud-sdk
+  htop
   jq
   libcurl
   libcurl-devel
+  links
   make
+  meld
   mlocate
-  openssl-devel
+  moka-icon-theme
   mpv
+  neovim
   nodejs
+  ntpdate
+  numix-icon-theme-circle
+  numix-icon-theme-square
+  obs-studio
+  openssl-devel
+  pavucontrol
+  podman-docker
   pwgen
   python3-devel
   python3-virtualenv
   redhat-lsb-core
   rofi
+  rofi
   rofi-themes
   seafile-client
+  snapd
   the_silver_searcher
   tig
   tilix
+  tlp
   transmission
+  v4l2loopback
   virt-manager
   xclip
+  youtube-dl
   zsh
 )
 
