@@ -24,6 +24,7 @@
     ~/.config/omf: 'config-omf'
     ~/.config/sway: 'sway'
     ~/.config/terminator: 'terminator'
+    ~/.config/topgrade.toml: 'topgrade.toml'
     ~/.config/waybar: 'waybar'
     ~/.config/yamllint/config: 'yamllint.yaml'
     ~/.digrc: 'digrc'
