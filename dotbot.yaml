@@ -22,6 +22,7 @@
     ~/.config/i3blocks: 'i3blocks'
     ~/.config/nvim/init.vim: 'vimrc'
     ~/.config/omf: 'config-omf'
+    ~/.config/starship.toml: 'starship.toml'
     ~/.config/sway: 'sway'
     ~/.config/terminator: 'terminator'
     ~/.config/topgrade.toml: 'topgrade.toml'

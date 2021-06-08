@@ -75,7 +75,7 @@ disabled = true
 
 [kubernetes]
 format = '[☸ $context ](blue)'
-disabled = true
+disabled = false
 
 [kubernetes.context_aliases]
 "main.play"         = "play"
