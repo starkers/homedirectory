@@ -3,11 +3,13 @@ set -e
 
 
 declare -a packages_fedora=(
+  ImageMagick
   adapta-backgrounds
   adwaita-icon-theme
   android-tools
   atop
   awscli
+  bat
   bluecurve-icon-theme
   chromium
   cmake
@@ -40,6 +42,7 @@ declare -a packages_fedora=(
   gnome-tweaks
   golang
   google-cloud-sdk
+  gstreamer1-libav
   htop
   jq
   libcurl
