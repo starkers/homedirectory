@@ -37,6 +37,7 @@ declare -a packages_fedora=(
   gnome-colors-icon-theme
   gnome-shell-extension-do-not-disturb-button
   gnome-shell-theme-flat-remix
+  lm_sensors
   gnome-shell-theme-selene
   gnome-shell-theme-yaru
   gnome-tweaks

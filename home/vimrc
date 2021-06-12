@@ -154,23 +154,23 @@ set termguicolors
 "" colorscheme jellybeans
 "" colorscheme molokai
 
-"" colorscheme OceanicNext
-"" colorscheme challenger_deep
-"" colorscheme deep-space
-"" colorscheme dracula
-"" colorscheme nord
-"" colorscheme onedark
-"" colorscheme onehalfdark
-"" colorscheme purify
-"" colorscheme purify
-"" colorscheme rdark-terminal2
-"" colorscheme ron
-"" colorscheme tender
-"" colorscheme vim-monokai-tasty
-"" colorscheme wombat256mod
-"" colorscheme PaperColor
-"" colorscheme challenger_deep
-"" colorscheme deus
+" colorscheme OceanicNext
+colorscheme challenger_deep
+" colorscheme deep-space
+" colorscheme dracula
+" colorscheme nord
+" colorscheme onedark
+" colorscheme onehalfdark
+" colorscheme purify
+" colorscheme purify
+" colorscheme rdark-terminal2
+" colorscheme ron
+" colorscheme tender
+" colorscheme vim-monokai-tasty
+" colorscheme wombat256mod
+" colorscheme PaperColor
+" colorscheme challenger_deep
+" colorscheme deus
 
 "" use a slightly darker background, like GitHub inline code blocks
 "let g:github_colors_soft = 1
@@ -182,7 +182,8 @@ set background=dark
 "" more blocky diff markers in signcolumn (e.g. GitGutter)
 "let g:github_colors_block_diffmark = 0
 
-colorscheme materialbox
+" colorscheme materialbox
+" colorscheme purify
 " let g:airline_theme = "oceanicnext"
 
 " colorscheme oceanic_material
@@ -267,7 +268,7 @@ nnoremap <C-P> :bprev<CR>
 
 
 "set gcr=a:blinkon0 " Disable the blinking cursor.
-"set scrolloff=3 " Disable the blinking cursor.
+set scrolloff=5 " always show some lines below the cursor
 "set laststatus=2 " Always show the status line
 
 
@@ -531,6 +532,7 @@ function! NumberToggle()
   endif
 endfunction
 nnoremap <leader>` :call NumberToggle()<cr>
+call NumberToggle()
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -727,7 +729,7 @@ autocmd BufEnter NERD_tree* :LeadingSpaceDisable
 
 
 "LANG:hcl
-" autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
+autocmd BufNewFile,BufRead *.hcl set syntax=terraform filetype=terraform
 
 "LANG:terraform
 
@@ -809,7 +811,7 @@ augroup go
 	autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 "	" :GoBuild and :GoTestCompile
-"	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 "	" :GoTest
 "	autocmd FileType go nmap <leader>t  <Plug>(go-test)
 "	" :GoRun
@@ -819,16 +821,16 @@ autocmd FileType go nmap <Leader>d <Plug>(go-doc)
 "	" :GoCoverageToggle
 "	autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 "	" :GoInfo
-"	autocmd FileType go nmap <Leader>i <Plug>(go-info)
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
 "	" :GoMetaLinter
-"	autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
 "	" :GoDef but opens in a vertical split
-"	autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
 "	" :GoDef but opens in a horizontal split
-"	autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
 "	" Open :GoDeclsDir with ctrl-g
-"	nmap <C-g> :GoDeclsDir<cr>
-"	imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
+nmap <C-g> :GoDeclsDir<cr>
+imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 "	autocmd FileType go nmap <leader>b  <Plug>(go-build)
 "	autocmd FileType go nmap <leader>r  <Plug>(go-run)
 

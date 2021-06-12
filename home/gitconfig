@@ -1,7 +1,7 @@
 #git config
 [user]
   name = David Stark
-	email = david@starkers.org
+	email = david.stark@doddle.com
 	signingKey = 849A6BF620D953BB666EA57AFD06B2B1CFD743B7
 
 [includeIf "gitdir:~/src/github.com/doddle/"]

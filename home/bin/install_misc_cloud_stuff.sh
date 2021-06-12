@@ -532,7 +532,7 @@ install_stern(){
 #: dive
 install_dive(){
   name=dive
-  ver="${1:-0.8.1}"
+  ver="${1:-0.10.0}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
   fname=dive_${ver}_linux_amd64.tar.gz
@@ -654,7 +654,7 @@ install_packer(){
 #: terraform
 install_terraform(){
   name=terraform
-  ver="${1:-0.11.13}"
+  ver="${1:-0.13.7}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
   try wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip -c

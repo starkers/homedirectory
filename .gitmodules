@@ -13,3 +13,6 @@
 [submodule "home/omf"]
 	path = home/omf
 	url = https://github.com/oh-my-fish/oh-my-fish
+[submodule "home/Tilix-Themes"]
+	path = home/Tilix-Themes
+	url = https://github.com/storm119/Tilix-Themes.git

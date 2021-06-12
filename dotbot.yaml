@@ -25,6 +25,7 @@
     ~/.config/starship.toml: 'starship.toml'
     ~/.config/sway: 'sway'
     ~/.config/terminator: 'terminator'
+    ~/.config/tilix/schemes: 'Tilix-Themes/Themes'
     ~/.config/topgrade.toml: 'topgrade.toml'
     ~/.config/waybar: 'waybar'
     ~/.config/yamllint/config: 'yamllint.yaml'
@@ -53,9 +54,12 @@
     ~/.xsettingsd: 'xsettingsd'
     ~/.zshrc: 'zshrc'
 - shell:
-  - mkdir -p ~/.config/mc
+  - mkdir -p ~/.config/autostart
+  - rsync -va autostart/ ~/.config/autostart/ --inplace
+
   - mkdir -p ~/.config/mc
   - cp -rvp mc/* ~/.config/mc/.
+
   - mkdir -p ~/.ssh
   - rsync -va /keybase/private/starkers/home/ssh/ ~/.ssh/ --exclude=known_hosts --exclude=google_compute_known_hosts
     --inplace

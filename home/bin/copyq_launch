@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+BIN="$(which copyq)"
+
+CMD="${BIN} --start-server"
+
+
+
+if grep -q wayland <<<${XDG_SESSION_TYPE}; then
+  # echo wayland
+  QT_QPA_PLATFORM=xcb ${CMD} &
+else
+  # echo not wayland
+  ${CMD} &
+fi
