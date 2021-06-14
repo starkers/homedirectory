@@ -591,7 +591,7 @@ install_onessl(){
 #: fnm
 install_fnm(){
   name=fnm
-  ver="${1:-1.22.2}"
+  ver="${1:-1.25.0}"
   local zip=fnm-${ver}.zip
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"

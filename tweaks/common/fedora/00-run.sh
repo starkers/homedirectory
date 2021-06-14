@@ -35,7 +35,6 @@ declare -a packages_fedora=(
   gitflow
   glances
   gnome-colors-icon-theme
-  gnome-shell-extension-do-not-disturb-button
   gnome-shell-theme-flat-remix
   lm_sensors
   gnome-shell-theme-selene
