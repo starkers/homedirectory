@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+#
+#
+#             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+#                     Version 2, December 2004
+#
+#  Copyright (C) 2021 David Stark <david@starkers.org>
+#
+#  Everyone is permitted to copy and distribute verbatim or modified
+#  copies of this license document, and changing it is allowed as long
+#  as the name is changed.
+#
+#             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+#    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+#
+#   0. You just DO WHAT THE FUCK YOU WANT TO.
+
+
+######## OK legal over..
+#
+# Q: What does this do?
+# A: it creates a new context in the format: "$CLUSTER/$NAMESPACE" and sets it as current
+#
+# Q: why not "krew change-ns/kubectx/other things"
+# A: I don't like the complex name schemas EG: $NAMESPACE/$CLUSTER/$EMAIL
+#    - 1. this makes terribly LONG context names
+#    - 2. I don't need to know my email address thanks (and when I Impersonate I act like a grown up)
+#    - 3. the heirarchy in my brain is "THE CLUSTER" contains "THE NAMESPACE".. ergo:
+#
+#         $CLUSTER/$NAMESPACE
+#
+# Q: can I buy you beer?
+# A: yes please
+#
+# Usage:
+# kcns <namespace-you-want>
+
+set -e
+
+
+function usage(){
+  fname="$(sed "s+.*\/++" <<<$0)"
+cat <<-EOF
+Hello and welcome to the official
+
+ "Kube Change NS" docs:
+
+---
+Usage:
+$ $fname <namespace-you-want>
+---
+
+🙃 <-- obligitory emoji.. now this project is cool
+
+Have a nice day
+EOF
+}
+
+function get_current_user(){
+  local NAME="$(kubectl config view -o jsonpath='{.users[0].name}' 2>/dev/null)"
+  if [ $? -gt 0 ]; then
+    echo nil
+  else
+    echo ${NAME}
+  fi
+}
+
+function get_current_cluster(){
+  local STRING="$(kubectl config current-context)"
+
+  if grep -q "/" <<<${STRING} ; then
+    # "/" chars detected, lets assume the cluster/root context is the LEFT
+    local CLUSTER="$(cut -d "/" -f 1 <<<${STRING})"
+  else
+    local CLUSTER=$STRING
+  fi
+  echo $CLUSTER
+}
+
+
+
+function config_set_context(){
+  kubectl \
+    config set-context \
+    "${3}" \
+    --cluster=${1} \
+    --namespace=${2}
+}
+
+
+function config_set_context_with_user(){
+  kubectl \
+    config set-context \
+    "${3}" \
+    --cluster=${1} \
+    --namespace=${2} \
+    --user=${4}
+}
+
+
+function config_use_context(){
+  kubectl config use-context "${1}"
+}
+
+###################
+if [ ! X$1 == X ]; then
+  NAMESPACE="${1}"
+else
+  usage
+  exit 0
+fi
+
+
+CLUSTER=$(get_current_cluster)
+USERNAME="$(get_current_user)"
+
+echo c=${CLUSTER},u=${USERNAME}
+
+if [ X${USERNAME} == Xnil ]; then
+  # no username.. ok lets roll without it.. (tsk tsk)
+  NEW_CONTEXT="${CLUSTER}/${NAMESPACE}"
+  config_set_context "${CLUSTER}" "${NAMESPACE}" "${NEW_CONTEXT}"
+else
+  # you are a good person with a username
+  NEW_CONTEXT="${CLUSTER}/${NAMESPACE}"
+  config_set_context_with_user "${CLUSTER}" "${NAMESPACE}" "${NEW_CONTEXT}" "${USERNAME}"
+fi
+
+# use it
+config_use_context "${NEW_CONTEXT}"
