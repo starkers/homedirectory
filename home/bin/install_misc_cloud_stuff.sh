@@ -247,8 +247,8 @@ install_yq(){
 #: lens
 install_lens(){
   name=lens
-  ver="${1:-3.5.0-beta.1}"
-  url=https://github.com/lensapp/lens/releases/download/v${ver}/Lens-${ver}.AppImage
+  ver="${1:-4.2.2}"
+  url=https://github.com/lensapp/lens/releases/download/v${ver}/Lens-${ver}.x86_64.AppImage
   generic_binary "${name}" "${ver}" "${url}" -c
 }
 
@@ -301,7 +301,7 @@ install_kompose(){
 #: kops
 install_kops(){
   name=kops
-  ver="${1:-1.17.1}"
+  ver="${1:-1.18.2}"
   url=https://github.com/kubernetes/kops/releases/download/v${ver}/kops-linux-amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
@@ -684,8 +684,9 @@ install_vault(){
 #: cfssljson
 install_cfssljson(){
   name=cfssljson
-  ver="${1:-1.2}"
-  url=https://pkg.cfssl.org/R${ver}/cfssljson_linux-amd64
+  ver="${1:-1.6.0}"
+  url=https://github.com/cloudflare/cfssl/releases/download/v${ver}/cfssl_${ver}_linux_amd64
+  # url=https://pkg.cfssl.org/R${ver}/cfssljson_linux-amd64
   generic_binary "${name}" "${ver}" "${url}"
 }
 
