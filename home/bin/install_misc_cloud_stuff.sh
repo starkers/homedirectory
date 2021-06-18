@@ -362,6 +362,24 @@ install_minikube(){
 }
 
 ##############################################
+#: velero
+install_velero(){
+  name=velero
+  ver="${1:-1.6.0}"
+  out_dir="${software}/${name}-${ver}"
+  out_file="${name}-${ver}-${osLower}-${cpuType}.tar.gz"
+  src="https://github.com/vmware-tanzu/velero/releases/download/v${ver}/velero-v${ver}-${osLower}-${cpuType}.tar.gz"
+  try mkdir -p "${out_dir}"
+  try cd "${out_dir}"
+  try wget -O "${out_file}" -c -v ${src}
+  try delete_if_exists "${name}"
+  try tar xvf "${out_file}"
+  try mkdir -p "${software}/bin"
+  try cd "${software}/bin"
+  try ln -sf "${out_dir}/velero-v${ver}-${osLower}-${cpuType}/${name}" "${name}"
+}
+
+##############################################
 #: kubeval
 install_kubeval(){
   name=kubeval
@@ -725,8 +743,19 @@ install_psmem(){
 }
 
 
-arch="$(uname -i)"
+arch="$(uname -m)"
+
+if [ "${arch}" == "x86_64" ]; then
+  export cpuType=amd64
+else
+# elif [ "${arch}" == "arm64" ]; then
+  export cpuType=${arch}
+fi
+
+
+
 os="$(uname)"
+osLower="$(echo "${os}" | tr '[:upper:]' '[:lower:]')"
 software="${HOME}/.software"
 bin="${HOME}/.bin"
 try mkdir -p "${bin}"
