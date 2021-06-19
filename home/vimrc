@@ -19,6 +19,14 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
 
+
+" telescope https://github.com/nvim-telescope/telescope.nvim
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+
+"LUA
 Plug 'xolox/vim-lua-ftplugin'
 
 " Plug 'SirVer/ultisnips'
@@ -67,8 +75,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 " Plug 'jjo/vim-cue'
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'psf/black', { 'tag': '19.10b0' }
-
+Plug 'psf/black', { 'tag': '19.10b0', 'as':'psf_black' }
+Plug 'ambv/black', {'as': 'ambv_black'}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
 "
@@ -77,6 +85,9 @@ Plug 'google/vim-jsonnet'
 
 Plug 'cappyzawa/starlark.vim'
 Plug 'Yggdroot/indentLine'  " show indentation guides
+
+
+Plug 'dag/vim-fish'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -99,7 +110,7 @@ filetype plugin on
 filetype indent on
 
 
-let mapleader = ","
+let mapleader = " "
 "nmap <leader>w :w!<cr>
 
 
@@ -320,6 +331,10 @@ if executable('ag')
 endif
 
 
+if executable('rg')
+  let g:rg_derive_root='true'
+endif
+
 "" When you press gv you Ack after the selected text
 "vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
@@ -503,7 +518,8 @@ call EnsureDirExists($HOME . '/.vim/undo')
 
 
 
-nnoremap <C-m> :FZFMru<CR>
+" most recently used files
+nnoremap <C-m> :FZFFreshMru<cr>
 
 
 
@@ -533,6 +549,8 @@ function! NumberToggle()
 endfunction
 nnoremap <leader>` :call NumberToggle()<cr>
 call NumberToggle()
+
+
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -719,7 +737,7 @@ let g:colorscheme_switcher_exclude_builtins = 1
 
 
 
-let g:indentLine_leadingSpaceEnabled='1'
+let g:indentLine_leadingSpaceEnabled='0'
 nnoremap <leader>t :IndentLinesToggle<cr>
 
 " " disable indentLines for nerdtree
@@ -778,7 +796,7 @@ autocmd BufWritePre *.py set tabstop=2 sw=2 softtabstop=2
 "" autocmd BufWritePre *.yml execute ':%!yamlfmt'
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
 "" install with:  go get -u github.com/wangkuiyi/yamlfmt
-nnoremap <leader>y :%!~/go/bin/yamlfmt<CR>
+nnoremap <leader>yf :%!yamlfmt<CR>
 
 
 "LANG:starlark
@@ -853,3 +871,16 @@ imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 
 augroup END
 
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+
+augroup highlight_yank
+  autocmd!
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+augroup END

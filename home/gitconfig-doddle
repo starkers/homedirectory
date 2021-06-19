@@ -1,3 +1,4 @@
+# vi: ft=gitconfig
 [user]
   name = David Stark
   email = david.stark@doddle.com

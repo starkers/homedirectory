@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-
 function is_arch(){
   if [ -f /etc/pacman.conf ]; then
     return 0
@@ -19,8 +18,9 @@ function is_fedora(){
 }
 
 if is_fedora; then
+  echo is fedora
   for a in ./fedora/* ; do
-    echo $a
+    $a
   done
 fi
 

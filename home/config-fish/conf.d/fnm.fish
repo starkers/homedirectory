@@ -1,7 +1,7 @@
-# fnm
+# vi: ft=fish
 
 
-if command -s fnm > /dev/null
+if command -s ~/.software/bin/fnm > /dev/null
   set PATH /home/starkers/.fnm $PATH
 
 
@@ -27,7 +27,7 @@ if command -s fnm > /dev/null
     set current (string replace "v" "" (fnm current))
     set target (string replace "v" "" $argv[1])
     if test $current != $target
-      fnm use $argv[1] --log-level=quiet
+      ~/.software/bin/fnm use $argv[1] --log-level=quiet
     end
   end
 

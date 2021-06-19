@@ -53,7 +53,6 @@ declare -a packages_fedora=(
   mlocate
   moka-icon-theme
   mpv
-  neovim
   nodejs
   ntpdate
   numix-icon-theme-circle
@@ -66,6 +65,7 @@ declare -a packages_fedora=(
   python3-devel
   python3-virtualenv
   redhat-lsb-core
+  ripgrep
   rofi
   rofi
   rofi-themes

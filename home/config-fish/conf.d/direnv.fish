@@ -1,4 +1,4 @@
-# direnv
+# vi: ft=fish
 
 if command -s direnv > /dev/null
   eval (direnv hook fish)
