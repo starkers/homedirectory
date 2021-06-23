@@ -7,6 +7,16 @@ unsetopt share_history
 export EDITOR=vim
 export LS_COLORS
 
+function my_load_ggg(){
+  if [[ -o interactive ]]; then
+    if hash ggg 2>/dev/null; then
+      eval "$(ggg hook zsh)"
+    else
+      echo 'WARN: "ggg" binary not found in your PATH'
+    fi
+  fi
+}
+
 function my_load_profile(){
   source ~/.profile
 }
@@ -210,6 +220,7 @@ if [[ -o interactive ]]; then
   my_load_shell_functions
   my_load_vte
   my_load_z_and_fzf
+  my_load_ggg
 fi
 
 
@@ -223,6 +234,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export KUBECONFIG="${HOME}/.kube/config"
 
 my_load_direnv
+
 
 hash jenv 2>/dev/null
 rc=$?
@@ -245,4 +257,3 @@ hash fnm 2>/dev/null && eval `fnm env --multi`
 #     fi
 #   fi
 # fi
-
