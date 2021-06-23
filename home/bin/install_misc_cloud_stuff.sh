@@ -672,7 +672,7 @@ install_packer(){
 #: terraform
 install_terraform(){
   name=terraform
-  ver="${1:-0.13.7}"
+  ver="${1:-1.0.0}"
   try mkdir -p "${software}/${name}-${ver}"
   try cd "${software}/${name}-${ver}"
   try wget https://releases.hashicorp.com/terraform/${ver}/terraform_${ver}_linux_amd64.zip -c
