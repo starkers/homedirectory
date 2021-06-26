@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+declare -a groups=(
+  X_Software_Development
+)
 
 declare -a packages_fedora=(
   ImageMagick
@@ -115,7 +118,15 @@ function deps_fedora(){
 
 # TODO: remove: 'whois-mkpasswd'
 
-if is_fedora; then
-  echo is fedora
-  deps_fedora
-fi
+
+# if is_fedora; then
+#   echo is fedora
+#   deps_fedora
+# fi
+
+
+for x in "${groups[@]}" ; do
+  actualGroupName="$(sed 's+_+ +g' <<<"$x")"
+  echo "dnf group install -y ${actualGroupName}"
+  sudo dnf group install -y "$actualGroupName"
+done
