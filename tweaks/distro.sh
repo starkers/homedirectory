@@ -24,3 +24,9 @@ if is_fedora; then
   done
 fi
 
+if is_arch; then
+  echo "is arch (based)"
+  for a in ./arch/* ; do
+    $a
+  done
+fi
