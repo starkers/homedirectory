@@ -36,7 +36,6 @@ declare -a packages_fedora=(
   glances
   gnome-colors-icon-theme
   gnome-shell-theme-flat-remix
-  lm_sensors
   gnome-shell-theme-selene
   gnome-shell-theme-yaru
   gnome-tweaks
@@ -48,18 +47,21 @@ declare -a packages_fedora=(
   libcurl
   libcurl-devel
   links
+  lm_sensors
   make
   meld
   mlocate
   moka-icon-theme
   mpv
+  ncdu
   nodejs
-  ntpdate
+  ntpsec
   numix-icon-theme-circle
   numix-icon-theme-square
   obs-studio
   openssl-devel
   pavucontrol
+  podman-compose
   podman-docker
   pwgen
   python3-devel
