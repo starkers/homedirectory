@@ -26,6 +26,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 
+Plug 'mhinz/vim-startify'
+
+
 "LUA
 Plug 'xolox/vim-lua-ftplugin'
 
@@ -61,7 +64,12 @@ Plug 'majutsushi/tagbar'
 " Plug 'nsf/gocode'
 " Plug 'patstockwell/vim-monokai-tasty'       " theme
 Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+
+"ranger integration
+Plug 'iberianpig/ranger-explorer.vim'
+Plug 'rbgrouleff/bclose.vim'
+
 "
 " " Plug 'Yggdroot/LeaderF'
 " " Plug 'tamago324/LeaderF-filer'
@@ -116,6 +124,7 @@ let mapleader = " "
 
 
 
+set path+=~/.software/bin
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -213,7 +222,7 @@ let g:airline_theme = "jellybeans"
 "" most colourschemes utterly suck in vimdiff mode
 "" use a specific one that doesn't when vimdiff == true
 if &diff
-    colorscheme PaperColor
+  colorscheme PaperColor
 endif
 
 
@@ -285,7 +294,10 @@ set scrolloff=5 " always show some lines below the cursor
 
 
 
-
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 
 
@@ -314,11 +326,17 @@ map <leader>pp :setlocal paste!<cr>
 
 
 
+"" Split
+noremap <Leader>h :<C-u>split<CR>
+noremap <Leader>v :<C-u>vsplit<CR>
 
 
 
 
-
+"" fzf.vim
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
 
 
@@ -327,7 +345,9 @@ map <leader>pp :setlocal paste!<cr>
 
 " Use the the_silver_searcher if possible
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
+  " let g:ackprg = 'ag --vimgrep --smart-case'
+  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 
@@ -367,20 +387,20 @@ vmap > >gv
 
 
 "" normal open nerd Tree
-map <leader>f :NERDTreeToggle<CR>
+" starting to "unwind" my nerdtree habit
+" map <leader>f :NERDTreeToggle<CR>
 
-"" Ctrl+o top Open files in same dir as current file
-" opens the directory of current file in nerd tree
-map <c-o> :NERDTreeFind<CR>
-
-let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=35
-let NERDTreeShowBookmarks=1  " show bookmarks on default
-"map <leader>nn :NERDTreeToggle<cr>
-"map <leader>nb :NERDTreeFromBookmark<Space>
-"map <leader>nf :NERDTreeFind<cr>
+""" Ctrl+o top Open files in same dir as current file
+"" opens the directory of current file in nerd tree
+"map <c-o> :NERDTreeFind<CR>
+"let g:NERDTreeWinPos = "right"
+"let NERDTreeShowHidden=1
+"let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+"let g:NERDTreeWinSize=35
+"let NERDTreeShowBookmarks=1  " show bookmarks on default
+""map <leader>nn :NERDTreeToggle<cr>
+""map <leader>nb :NERDTreeFromBookmark<Space>
+""map <leader>nf :NERDTreeFind<cr>
 
 
 
@@ -527,8 +547,8 @@ nnoremap <C-m> :FZFFreshMru<cr>
 
 
 
-map <leader>q :q!<cr>
-map <leader>qq :qa!<cr>
+map <silent><leader>q :q!<cr>
+map <silent><leader>qq :qa!<cr>
 
 
 function! NumberToggle()
@@ -547,7 +567,8 @@ function! NumberToggle()
     set number
   endif
 endfunction
-nnoremap <leader>` :call NumberToggle()<cr>
+"leader n for number toggle is easier to recall than `
+nnoremap <leader>n :call NumberToggle()<cr>
 call NumberToggle()
 
 
@@ -740,8 +761,8 @@ let g:colorscheme_switcher_exclude_builtins = 1
 let g:indentLine_leadingSpaceEnabled='0'
 nnoremap <leader>t :IndentLinesToggle<cr>
 
-" " disable indentLines for nerdtree
-autocmd BufEnter NERD_tree* :LeadingSpaceDisable
+" " " disable indentLines for nerdtree
+" autocmd BufEnter NERD_tree* :LeadingSpaceDisable
 
 
 
@@ -880,7 +901,28 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
 
+" highlight recently yankyed sections
 augroup highlight_yank
   autocmd!
-  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 1000})
 augroup END
+
+
+
+
+" Disable Arrow keys in Normal mode
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" Disable Arrow keys in Insert mode
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
+
+" nnoremap <silent><Leader>n :RangerOpenCurrentFile<CR>
+" nnoremap <silent><Leader>c :RangerOpenCurrentDir<CR>
+" nnoremap <silent><Leader>f :RangerOpenProjectRootDir<CR>
