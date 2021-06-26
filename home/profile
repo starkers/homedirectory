@@ -117,3 +117,6 @@ export TF_PLUGIN_CACHE_DIR="${HOME}/.tf_cache"
 export TERRAGRUNT_DOWNLOAD="${HOME}/.terragrunt_download"
 
 export AWS_SDK_LOAD_CONFIG=1
+
+# gomod athens
+export GOPROXY=http://localhost:3000
