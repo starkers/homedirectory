@@ -8,8 +8,8 @@ set -e
 # let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
 
 
-# for golang.. should probably make this its own init script when I can be bothered to tidy up
-go get -u github.com/mdempsky/gocode
+# # for golang.. should probably make this its own init script when I can be bothered to tidy up
+# go get -u github.com/mdempsky/gocode
 
 function jedi(){
   local VER=${1}
@@ -31,7 +31,23 @@ function jedi(){
     neovim
   deactivate
 }
+# jedi 2
+# jedi 3
 
+pip install --upgrade pip --user
+declare -a pipthings=(
+  autoflake
+  black
+  cheat
+  flake8
+  jedi
+  neovim
+  neovim-remote
+  pynvim
+  ueberzug
+)
 
-jedi 2
-jedi 3
+for x in "${pipthings[@]}"; do
+  echo pip install ${x}
+  pip install ${x}
+done
