@@ -4,6 +4,11 @@ load_aliases(){
     source ~/.aliases
   fi
 }
+load_profile(){
+  if [ -f ~/.profile ] ; then
+    source ~/.profile
+  fi
+}
 
 
 load_ps1(){
@@ -153,8 +158,19 @@ HISTSIZE= HISTFILESIZE= # Infinite history.
 # export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\$(parse_git_branch)\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
 
-export PATH="${HOME}/.bin:${PATH}"
-export PATH="${HOME}/.software/bin:${PATH}"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
+# export PATH="${HOME}/.bin:${PATH}"
+# export PATH="${HOME}/.software/bin:${PATH}"
+
+# my_load_fnm(){
+#   if [ -e $HOME/.fnm ]; then
+#     export PATH=$HOME/.fnm:$PATH
+#     eval "`fnm env --multi`"
+#   fi
+# }                               
+# my_load_fnm
+
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+load_profile
