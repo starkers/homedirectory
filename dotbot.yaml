@@ -48,7 +48,7 @@
     ~/.shell_functions: 'shell_functions'
     ~/.tmux.conf: 'tmux'
     ~/.urxvt: 'urxvt'
-    ~/.vimrc: 'nvim/init.vim'
+    ~/.vimrc: 'vimrc'
     ~/.weechat: '/keybase/private/starkers/home/weechat'
     ~/.xinitrc: 'xinitrc'
     ~/.xsettingsd: 'xsettingsd'

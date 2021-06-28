@@ -41,7 +41,7 @@ if command -s ~/.software/bin/fnm > /dev/null
     end
   end
 
-  fnm env | source
+  ~/.software/bin/fnm env | source
 
 # VSCode open integrated terminal does not trigger PWD hook
   if test "$TERM_PROGRAM" = "vscode"
