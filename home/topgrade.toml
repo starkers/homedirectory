@@ -12,6 +12,7 @@ disable = [
   "shell",
   "git_repos",
   "gcloud",
+  "vim",
   ]
 
 # Run specific steps - same options as the command line flag
