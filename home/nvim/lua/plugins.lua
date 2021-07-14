@@ -76,6 +76,39 @@ return require("packer").startup(function(use)
     use {"terrortylor/nvim-comment", opt = true}
     use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
 
+
+    -- Golang
+    use { "fatih/vim-go", run = ":GoUpdateBinaries",
+          cmd = {
+            "GoAddTags",
+            "GoAlternate",
+            "GoBuild",
+            "GoCallees",
+            "GoCoverage",
+            "GoDebugStart",
+            "GoDef",
+            "GoDoc",
+            "GoDocBrowser",
+            "GoDrop",
+            "GoErrCheck",
+            "GoImplements",
+            "GoImport",
+            "GoInstall",
+            "GoInstallBinaries",
+            "GoLint",
+            "GoMetaLinter",
+            "GoPath",
+            "GoPlay",
+            "GoReferrers",
+            "GoRemoveTags",
+            "GoRename",
+            "GoTest",
+            "GoTestFunc",
+            "GoUpdateBinaries",
+            "GoVet",
+          },
+        }
+
     -- Color
     use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
 
@@ -124,6 +157,7 @@ return require("packer").startup(function(use)
     require_plugin('lsp-rooter.nvim')
     require_plugin("TrueZen.nvim")
     require_plugin("nvim-ts-context-commentstring")
+
 
     -- Extras
     if O.extras then
